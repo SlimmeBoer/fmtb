@@ -1,0 +1,7 @@
+{
+    "login": {
+        "email_field": "Email address",
+        "password_field": "Password",
+        "submit_button": "Inloggen"
+    }
+}

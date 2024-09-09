@@ -1,0 +1,181 @@
+
+
+* {
+    box-sizing: border-box;
+}
+html, body, #root, #defaultLayout, #guestLayout {
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #212121;
+    background-color: #f6f6f6;
+}
+
+.text-center {
+    text-align: center;
+}
+.loading-circle {
+    display: table;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+.cardWide {
+    background-color: #FFF;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+.cardWide {
+    width: 100%;
+}
+
+.notification {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 100;
+    padding: 1rem 1.5rem;
+    background-color: #00a762;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.login-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#defaultLayout {
+    display: flex;
+}
+
+#defaultLayout aside {
+    width: 240px;
+    background-color: #1c427a;
+    padding: 1rem;
+    font-size: 16px;
+}
+#defaultLayout aside > .main_logo {
+    display: block;
+    padding: 0 0 3rem 0;
+    color: white;
+    font-size: 90px;
+    text-align: center;
+}
+#defaultLayout aside > .menu_header {
+    display: block;
+    padding: 2rem 0.75rem 0.75rem 1rem;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+#defaultLayout aside > a {
+    display: block;
+    padding: 0.75rem 0 0.75rem 0;
+    border-radius: 6px;
+    color: #FF8E00;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+#defaultLayout aside > a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#defaultLayout aside > .icon {
+    display: block;
+    float: left;
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    color: white;
+}
+
+
+#defaultLayout .content {
+    flex: 1;
+}
+
+#defaultLayout .content_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#defaultLayout .content_header h1 {
+    font-family: 'Carter One', sans-serif;
+    color: #1c427a;
+    font-size: 28px;
+}
+#defaultLayout .content_header a {
+    text-decoration: none;
+    color: #1c427a;
+}
+.content_header_icon {
+    padding: 0 1rem 0 0;
+}
+ header {
+    height: 100px;
+    padding: 0rem 3rem;
+    background-color: white;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.header_user_info {
+    display: block;
+    float: left;
+    font-weight: bold;
+    padding: 2.5rem 1rem;
+}
+ .header_avatar {
+    display: block;
+    padding: 1rem 0;
+    float: left;
+
+}
+
+.header_logout {
+    display: block;
+    float: right;
+    padding: 2rem 1rem;
+}
+#defaultLayout main {
+    padding: 2rem;
+}
+
+.animated {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,93 @@
+{
+    "general": {
+        "logout": "Uitloggen",
+        "company_name": "UMDL Calculatietool (demoversie)",
+        "back": "Vorige",
+        "next": "Volgende",
+        "process": "Afhandelen aanvraag UMDL-subsidie",
+        "finish": "Afronden en verzenden",
+        "step1": "Start",
+        "step2": "Uploaden Kringloopwijzer",
+        "step3": "Uploaden BBM-pakketten",
+        "step4": "Aanvullende BBM-pakketten",
+        "step5": "Overige KPI's",
+        "step6": "Overzicht / Insturen"
+    },
+    "login": {
+        "email_field": "E-mailadres",
+        "password_field": "Wachtwoord",
+        "submit_button": "Inloggen",
+        "title": "Inloggen"
+    },
+    "start": {
+        "title": "Invulprocedure UMDL",
+        "explanation": "Welkom bij de UMDL-invulprocedure! Via deze tool helpen we u stap voor stap met het berekenen van de juiste score. Klik op \"Volgende\" om te starten met de procedure."
+    },
+    "kringloopwijzer": {
+        "title": "Uploaden kringloopwijzer",
+        "explanation": "Gebruik onderstaande knoppen om de kringloopwijzers te uploaden van de diverse jaargangen. Het gaat om de outputs van de krinloopwijzer (in .xml-formaat)."
+    },
+    "bbm": {
+        "title": "Uploaden BBM-pakketten",
+        "explanation": "Gebruik dit formulier om de BBM-pakketten up te loaden (deze moeten in Excel-formaat zijn). "
+    },
+    "aanvullendbbm": {
+         "explanation": "Vul hieronder eventueel aanvullende BBM-pakketten in (pakketnummer, aantal hectare en wegingsfactor)",
+        "an": "Agrarisch Natuurbeheer",
+        "kg": "Kruidenrijk Grasland",
+        "gbd": "Groen-blauwe Dooradering",
+        "package1": "Aanvullend pakket #1",
+        "package2": "Aanvullend pakket #2",
+        "package3": "Aanvullend pakket #3",
+        "bbmcode": "BBM-code",
+        "size": "Grootte (in ha)",
+        "weight": "Wegingsfactor"
+    },
+    "aanvullendevragen": {
+        "title": "Aanvullende vragen",
+        "explanation": "Vul hieronder een aantal aanvullende vragen in voor het bepalen van de scores van KPI's 8 en 15.",
+        "vraag1": "8. Welke wijze van gewasbeschermingsmiddelen past u toe?",
+        "v1_a1": "Geen middelen",
+        "v1_a2": "Volvelds",
+        "v1_a3": "Pleksgewijs",
+        "vraag2": "15. Welke van de volgende sociaal-maatschappelijke hulpmiddelen zet u in?",
+        "v2_a1": "Website",
+        "v2_a2": "Facebook",
+        "v2_a3": "Open vergaderingen",
+        "v2_a4": "Open dagen",
+        "v2_a5": "Boerderijwinkel"
+    },
+    "overzicht": {
+        "title": "Overzicht",
+        "explanation": "Hieronder volgt het overzicht op basis van de geüploade bestanden, de (aanvullende) BBM-pakketten en de aanvullende vragen.",
+        "kpi": "Key Performance Indicator (KPI)",
+        "year1": "2020",
+        "year2": "2021",
+        "year3": "2022",
+        "mean": "Gemiddelde",
+        "score": "UMDL-score",
+        "kpi1": "1. Stikstofbalans bodemoverschot (kg N-totaal per ha)",
+        "kpi2": "2. Fosfaatbalansbodemoverschot (kg P2O5 per ha)",
+        "kpi3": "3. Ammoniakuitstoot (in kg NH3/ha)",
+        "kpi4": "4. Weidegang (uur/jaar)",
+        "kpi5": "5. Tankmelkureum  (mg/100g)",
+        "kpi6": "6. Broeikasgasemissie (in CO2eq. per ha)",
+        "kpi7": "7. Eiwit van eigen land",
+        "kpi8": "8. Gewasbeschermingsmiddelen",
+        "kpi9": "9. Blijvend grasland",
+        "kpi10": "10. Kruidenrijk grasland",
+        "kpi11": "11. Natuur en Landschap",
+        "kpi12": "12. Groenblauwe dooradering",
+        "kpi13": "13. Energieverbruik verlagen",
+        "kpi14": "14. Levensduur (maanden)",
+        "kpi15": "15. Sociaal-maatschappelijk",
+        "totaal": "Totaalscore"
+    },
+    "finished": {
+        "title": "Inzenden voltooid",
+        "explanation": "Bedankt voor het invullen van de vragen! De informatie is doorgestuurd richting de Provincie Utrecht. Een CC is verstuurd richting uw mailbox ter bevestiging."
+    },
+    "copyright": {
+        "message": " Precondition / Terug Naar De Basis Advies"
+    }
+}

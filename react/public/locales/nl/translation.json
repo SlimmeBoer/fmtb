@@ -1,0 +1,49 @@
+{
+    "general": {
+        "edit": "Bewerken",
+        "delete": "Verwijderen",
+        "new": "Nieuw",
+        "logout": "Uitloggen",
+        "loading": "Laden...",
+        "save": "Opslaan"
+    },
+    "login": {
+        "email_field": "E-mailadres",
+        "password_field": "Wachtwoord",
+        "submit_button": "Inloggen"
+    },
+    "default_layout": {
+        "title": "Pubquiz Builder",
+        "link_dashboard": "Dashboard",
+        "link_categories": "Categorieën",
+        "link_blocks": "Blokken",
+        "link_questions": "Vragen",
+        "link_quizzes": "Quiz-templates",
+        "link_images": "Afbeeldingen",
+        "link_video": "Videofragmenten",
+        "link_audio": "Audiofragmenten",
+        "link_powerpoint": "Powerpoint-templates",
+        "link_users": "Gebruikers",
+        "link_sales": "Verkopen"
+    },
+    "users": {
+        "title": "Gebruikers",
+        "header_id": "ID",
+        "header_image": "Avatar",
+        "header_full_name": "Volledige naam",
+        "header_email": "E-mailadres",
+        "header_actions": "Acties",
+        "update_title": "Gebruiker bijwerken",
+        "new_title": "Nieuwe gebruiker"
+    },
+    "user_form": {
+        "first_name": "Voornaam",
+        "middle_name": "Tussenvoegsel",
+        "last_name": "Achternaam",
+        "image": "Avatar",
+        "email": "E-mailadres",
+        "password": "Wachtwoord",
+        "password_confirmation": "Bevestig Wachtwoord",
+        "upload_avatar": "Upload een avatar"
+    }
+}
