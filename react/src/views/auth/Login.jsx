@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from 'react-i18next';
 import {setErrorData} from "../../helpers/ErrorData.js";
 import Copyright from "../elements/Copyright.jsx";
+import * as React from "react";
 
 export default function Login() {
 
@@ -55,7 +56,7 @@ export default function Login() {
                 sm={4}
                 md={7}
                 sx={{
-                    backgroundImage: 'url(images/backdrop.jpg)',
+                    backgroundImage: 'url(images/backdrop2.jpg)',
                     backgroundRepeat: 'no-repeat',
                     backgroundColor: (t) =>
                         t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -78,7 +79,16 @@ export default function Login() {
                     <div className="login-center">
                         <form onSubmit={onSubmit}>
                             <div>
-                                <img src="images/utrecht.png" width={300} />
+                                <Box
+                                    component="img"
+                                    sx={{
+                                        height: 120,
+                                        width: 400,
+                                        marginBottom: 10
+                                    }}
+                                    alt="Agriviewer Logo"
+                                    src="/images/logo.png"
+                                />
                                 <h1>{t('login.title')}</h1>
                                 <br/>
                             </div>
