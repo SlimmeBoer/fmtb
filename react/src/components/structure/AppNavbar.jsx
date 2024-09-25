@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from './SideMenuMobile.jsx';
-import MenuButton from './MenuButton.jsx';
+import MenuButton from '../visuals/MenuButton.jsx';
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',

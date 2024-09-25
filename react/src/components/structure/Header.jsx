@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-import CustomDatePicker from './CustomDatePicker.jsx';
+import CustomDatePicker from '../forms/CustomDatePicker.jsx';
 import NavbarBreadcrumbs from './NavbarBreadcrumbs.jsx';
-import MenuButton from './MenuButton.jsx';
-import ColorModeIconDropdown from '../theme/ColorModeIconDropdown';
+import MenuButton from '../visuals/MenuButton.jsx';
+import ColorModeIconDropdown from '../../theme/ColorModeIconDropdown.jsx';
 
 import Search from './Search.jsx';
 

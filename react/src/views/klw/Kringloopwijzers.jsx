@@ -1,5 +1,5 @@
 
-import MultiFileUploader from "../../components/MultiFileUploader.jsx";
+import MultiFileUploader from "../../components/forms/MultiFileUploader.jsx";
 
 export default function Kringloopwijzers() {
 

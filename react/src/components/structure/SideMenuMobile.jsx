@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 
-import MenuButton from './MenuButton.jsx';
+import MenuButton from '../visuals/MenuButton.jsx';
 import MenuContent from './MenuContent.jsx';
-import CardAlert from './CardAlert.jsx';
+import CardAlert from '../visuals/CardAlert.jsx';
 
 function SideMenuMobile({ open, toggleDrawer }) {
   return (

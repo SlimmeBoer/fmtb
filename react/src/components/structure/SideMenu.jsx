@@ -6,16 +6,16 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import SelectContent from './SelectContent.jsx';
+import SelectContent from '../visuals/SelectContent.jsx';
 import MenuContent from './MenuContent.jsx';
-import CardAlert from './CardAlert.jsx';
+import CardAlert from '../visuals/CardAlert.jsx';
 import OptionsMenu from './OptionsMenu.jsx';
-import {showFullName} from "../helpers/FullName.js";
+import {showFullName} from "../../helpers/FullName.js";
 
-import {useStateContext} from "../contexts/ContextProvider.jsx";
+import {useStateContext} from "../visuals/contexts/ContextProvider.jsx";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import axiosClient from "../axios_client.js";
+import axiosClient from "../../axios_client.js";
 import {Navigate} from "react-router-dom";
 
 const drawerWidth = 300;

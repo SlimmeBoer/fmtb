@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
-import MenuButton from './MenuButton.jsx';
+import MenuButton from './visuals/MenuButton.jsx';
 
 function ToggleColorMode({ mode, toggleColorMode, ...props }) {
   return (

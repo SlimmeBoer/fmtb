@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @method static firstOrCreate(string[] $array)
+ * @method static firstOrNew(array $array)
+ */
 class Company extends Model
 {
     use HasFactory;

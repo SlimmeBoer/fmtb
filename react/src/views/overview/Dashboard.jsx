@@ -1,4 +1,4 @@
-import DummyDashboard from "../../components/DummyDashboard.jsx";
+import DummyDashboard from "./DummyDashboard.jsx";
 
 export default function Dashboard() {
 

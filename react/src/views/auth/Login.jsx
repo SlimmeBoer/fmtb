@@ -1,12 +1,12 @@
 import {useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {useStateContext} from "../../contexts/ContextProvider.jsx";
+import {useStateContext} from "../../components/visuals/contexts/ContextProvider.jsx";
 import {Box, Button, Grid, Paper, TextField} from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from 'react-i18next';
 import {setErrorData} from "../../helpers/ErrorData.js";
-import Copyright from "../elements/Copyright.jsx";
 import * as React from "react";
+import Copyright from "../../components/Copyright.jsx";
 
 export default function Login() {
 

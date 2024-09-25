@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useStateContext} from "../contexts/ContextProvider.jsx";
+import {useStateContext} from "../visuals/contexts/ContextProvider.jsx";
 import {useTranslation} from "react-i18next";
-import axiosClient from "../axios_client.js";
+import axiosClient from "../../axios_client.js";
 import {Navigate, Outlet} from "react-router-dom";
 import {Box, CssBaseline, Stack} from "@mui/material";
 import {alpha, createTheme} from '@mui/material/styles';
-import AppNavbar from "./AppNavbar.jsx";
-import Header from './Header.jsx';
-import SideMenu from './SideMenu.jsx';
-import AppTheme from '../theme/AppTheme';
+import AppNavbar from "../structure/AppNavbar.jsx";
+import Header from '../structure/Header.jsx';
+import SideMenu from '../structure/SideMenu.jsx';
+import AppTheme from '../../theme/AppTheme.jsx';
 
 import {
     chartsCustomizations,
     dataGridCustomizations,
     datePickersCustomizations,
     treeViewCustomizations,
-} from '../theme/customizations';
+} from '../../theme/customizations/index.js';
 
 
 export default function UserLayout(props) {

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
-import axios from "axios";
+import axiosClient from "../../axios_client.js";
+import {useTranslation} from "react-i18next";
 
 const MultiFileUploader = () => {
     const [files, setFiles] = useState([]);
     const [feedback, setFeedback] = useState({});
+    const {t} = useTranslation();
 
     const handleFileChange = (event) => {
         const selectedFiles = Array.from(event.target.files);
@@ -28,10 +30,11 @@ const MultiFileUploader = () => {
         filesToUpload.forEach((file) => {
             const formData = new FormData();
             formData.append("file", file);
+            formData.append("_method", "put");
 
             // Assuming the Laravel backend accepts file upload via /api/upload
-            axios
-                .post("http://your-laravel-backend-url/api/upload", formData, {
+            axiosClient
+                .post("/klwdump/upload", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
