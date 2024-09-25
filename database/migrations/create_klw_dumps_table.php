@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer("workspace_id");
             $table->string('company_id');
             $table->string('year');
+            $table->string('filename');
             $table->timestamps();
         });
     }

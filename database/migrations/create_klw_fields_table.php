@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer("workspace_id");
             $table->string('fieldname');
-            $table->integer('section');
-            $table->integer('subsection');
+            $table->string('section');
+            $table->string('subsection');
             $table->timestamps();
         });
     }

@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kvk_codes', function (Blueprint $table) {
+        Schema::create('kvk_numbers', function (Blueprint $table) {
             $table->id();
-            $table->string('kvk');
+            $table->integer('kvk');
             $table->integer('company_id');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kvk_codes');
+        Schema::dropIfExists('kvk_numbers');
     }
 };

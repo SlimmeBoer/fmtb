@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('dump_id');
             $table->integer('field_id');
-            $table->integer('value');
+            $table->string('value');
             $table->timestamps();
         });
     }
