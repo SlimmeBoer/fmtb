@@ -75,18 +75,22 @@ class KLWParser
                 foreach ($section_values as $subsection_key => $subsection_values) {
                     foreach ($subsection_values as $field_key => $field_value) {
 
-                        $klwField = KlwField::firstOrCreate(array(
+                        $field_key = str_replace('dzh_','dzhm_',$field_key);
+
+                        $klwField = KlwField::firstOrNew(array(
                             'workspace_id' => 1,
                             'fieldname' => $field_key,
                             'section' => $section_key,
                             'subsection' => $subsection_key,
                         ));
+                        $klwField->save();
 
-                        $klwValue = KlwValue::firstOrCreate(array(
+                        $klwValue = KlwValue::firstOrNew(array(
                             'dump_id' => $dump_id,
                             'field_id' => $klwField->id,
-                            'value' => $field_value,
                         ));
+                        $klwValue->value = $field_value;
+                        $klwValue->save();
 
                         ++$totalParsed;
                     }

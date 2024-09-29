@@ -10,7 +10,7 @@ import ListItemIcon, {listItemIconClasses} from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from '../visuals/MenuButton.jsx';
-import {useStateContext} from "../visuals/contexts/ContextProvider.jsx";
+import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import axiosClient from "../../axios_client.js";
 
 const MenuItem = styled(MuiMenuItem)({

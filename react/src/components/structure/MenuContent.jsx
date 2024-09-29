@@ -62,8 +62,7 @@ export default function MenuContent() {
                 ))}
             </List>
 
-            <Divider/>
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
+            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600, mt: 3 }}>
                 Kringloopwijzers
             </Typography>
             <List dense>
@@ -77,8 +76,7 @@ export default function MenuContent() {
                 ))}
             </List>
 
-            <Divider/>
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
+            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600, mt: 3  }}>
                 ScanGIS-data
              </Typography>
             <List dense>
@@ -91,7 +89,7 @@ export default function MenuContent() {
                 </ListItem>
             ))}
         </List>
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
+            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600, mt: 3  }}>
                 Overige
             </Typography>
             <List dense>

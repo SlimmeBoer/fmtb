@@ -4,7 +4,15 @@ import NotFound from "./views/admin/NotFound.jsx";
 import UserLayout from "./components/layouts/UserLayout.jsx";
 import GuestLayout from "./components/layouts/GuestLayout.jsx";
 import Dashboard from "./views/overview/Dashboard.jsx";
-import Kringloopwijzers from "./views/klw/Kringloopwijzers.jsx";
+import KLWImporteren from "./views/klw/KLWImporteren.jsx";
+import OverzichtTotaal from "./views/overview/OverzichtTotaal.jsx";
+import OverzichtCollectief from "./views/overview/OverzichtCollectief.jsx";
+import OverzichtIndividueel from "./views/overview/OverzichtIndividueel.jsx";
+import KLWData from "./views/klw/KLWData.jsx";
+import GISImporteren from "./views/gis/GISImporteren.jsx";
+import GISData from "./views/gis/GISData.jsx";
+import Settings from "./views/admin/Settings.jsx";
+import About from "./views/admin/About.jsx";
 
 const router = createBrowserRouter([
     {
@@ -20,8 +28,40 @@ const router = createBrowserRouter([
                 element: <Dashboard/>
             },
             {
-                path: '/kringloopwijzers',
-                element: <Kringloopwijzers/>
+                path: '/overzicht/totaal',
+                element: <OverzichtTotaal/>
+            },
+            {
+                path: '/overzicht/collectief',
+                element: <OverzichtCollectief/>
+            },
+            {
+                path: '/overzicht/individueel',
+                element: <OverzichtIndividueel/>
+            },
+            {
+                path: '/klw/importeren',
+                element: <KLWImporteren/>
+            },
+            {
+                path: '/klw/data',
+                element: <KLWData/>
+            },
+            {
+                path: '/gis/importeren',
+                element: <GISImporteren/>
+            },
+            {
+                path: '/gis/data',
+                element: <GISData/>
+            },
+            {
+                path: '/settings',
+                element: <Settings/>
+            },
+            {
+                path: '/about',
+                element: <About/>
             },
         ]
     },

@@ -12,7 +12,7 @@ import CardAlert from '../visuals/CardAlert.jsx';
 import OptionsMenu from './OptionsMenu.jsx';
 import {showFullName} from "../../helpers/FullName.js";
 
-import {useStateContext} from "../visuals/contexts/ContextProvider.jsx";
+import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import axiosClient from "../../axios_client.js";

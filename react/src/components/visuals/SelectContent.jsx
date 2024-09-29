@@ -32,6 +32,7 @@ export default function SelectContent() {
 
   const handleChange = (event) => {
     setCompany(event.target.value);
+    console.log(event.target.value)
   };
 
   return (

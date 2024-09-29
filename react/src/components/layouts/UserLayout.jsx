@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useStateContext} from "../visuals/contexts/ContextProvider.jsx";
+import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {useTranslation} from "react-i18next";
 import axiosClient from "../../axios_client.js";
 import {Navigate, Outlet} from "react-router-dom";

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static firstOrCreate(array $array)
+ * @method static firstOrNew(array $array)
  */
 class KlwField extends Model
 {
