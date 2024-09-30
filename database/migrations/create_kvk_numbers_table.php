@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('kvk_numbers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id');
             $table->integer('kvk');
-            $table->integer('company_id');
             $table->timestamps();
         });
     }

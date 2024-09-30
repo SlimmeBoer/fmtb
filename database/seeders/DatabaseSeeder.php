@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory()->create([
-             'first_name' => 'Niels',
-             'last_name' => 'Colijn',
-             'email' => 'nielscolijn@gmail.com',
-             'password' => Hash::make('ncmedia')
-         ]);
+        $this->call([
+            UmdlCollectiveSeeder::class,
+            UmdlCollectivePostalcodeSeeder::class
+        ]);
+
+
 
 
     }

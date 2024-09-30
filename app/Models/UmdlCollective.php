@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @method static firstOrCreate(string[] $array)
- * @method static firstOrNew(array $array)
- */
-class Company extends Model
+class UmdlCollective extends Model
 {
     use HasFactory;
 
@@ -21,16 +17,6 @@ class Company extends Model
     protected $fillable = [
         'workspace_id',
         'name',
-        'address',
-        'postal_code',
-        'city',
-        'province',
-        'brs',
-        'ubn',
-        'phone',
-        'bank_account',
-        'email',
-        'type',
-        'bio',
+        'description',
     ];
 }

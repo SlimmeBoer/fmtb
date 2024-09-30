@@ -22,6 +22,7 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'workspace_id' => 'required|integer',
             'name' => 'required|string|max:100',
             'address' => 'required|string|max:100',
             'postal_code' => 'required|string|max:10',
@@ -29,6 +30,10 @@ class StoreCompanyRequest extends FormRequest
             'province' => 'required|string|max:50',
             'brs' => 'required|string|max:15',
             'ubn' => 'required|string|max:15',
+            'phone' => 'string|max:15',
+            'bank_account' => 'string|max:25',
+            'bank_account_name' => 'string|max:50',
+            'email' => 'string|max:50',
             'type' =>  'required|string|max:50',
             'bio' => 'required|boolean'
         ];

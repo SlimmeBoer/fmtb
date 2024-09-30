@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('klw_dumps', function (Blueprint $table) {
             $table->id();
-            $table->integer("workspace_id");
+            $table->foreignId("workspace_id");
             $table->string('company_id');
             $table->string('year');
             $table->string('filename');
