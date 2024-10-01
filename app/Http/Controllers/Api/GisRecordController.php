@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\GisRecord;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGisRecordRequest;
 use App\Http\Requests\UpdateGisRecordRequest;
+use App\Models\GisRecord;
 
 class GisRecordController extends Controller
 {

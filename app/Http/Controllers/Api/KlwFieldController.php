@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Libraries\UMDL\UMDLKPI;
+use App\Libraries\UMDL\UMDLKPICollector;
 use App\Models\KlwField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -65,10 +65,6 @@ class KlwFieldController extends Controller
     {
         //
     }
-    public function getkpi($kpi, $company) : array
-    {
-        $umdl_kpi = new UMDLKPI();
-        return $umdl_kpi->getKPI($kpi, $company);
-    }
+
 
 }

@@ -113,10 +113,9 @@ class KlwDumpController extends Controller
                 'year' => $klwParser->getYear($file),
             ));
 
-            $fieldsParsed = $klwParser->importFields($file, $klwDump->id);
+            $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id);
 
         }
-
 
         return response(201);
     }

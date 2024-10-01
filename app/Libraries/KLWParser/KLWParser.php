@@ -2,8 +2,10 @@
 
 namespace App\Libraries\KLWParser;
 
+use App\Libraries\UMDL\UMDLKPICollector;
 use App\Models\KlwField;
 use App\Models\KlwValue;
+use App\Models\UmdlKpiValues;
 use Illuminate\Support\Facades\Log;
 use Saloon\XmlWrangler\Exceptions\MissingNodeException;
 use Saloon\XmlWrangler\Exceptions\MultipleNodesFoundException;
@@ -62,12 +64,14 @@ class KLWParser
      * @throws \Throwable
      * @throws XmlReaderException
      */
-    public function importFields($xml_file, $dump_id) : int
+    public function importFields($xml_file, $dump_id, $year, $company_id) : int
     {
         $totalParsed = 0;
 
+        // Get all fields
         $reader = XmlReader::fromFile($xml_file);
         $all_elements = $reader->value('KW_Output.PLAN')->sole();
+        $collector = new UMDLKPICollector();
 
         foreach ($all_elements as $section_key => $section_values) {
 
@@ -92,11 +96,20 @@ class KLWParser
                         $klwValue->value = $field_value;
                         $klwValue->save();
 
+                        // Set vars of UMDL calculator
+                        if (array_key_exists($field_key, $collector->vars))
+                        {
+                            $collector->vars[$field_key] = $field_value;
+                        }
+
                         ++$totalParsed;
                     }
                 }
             }
         }
+
+        // Calc KPI values
+        $collector->saveKPIs($company_id, $year);
 
         return $totalParsed;
     }

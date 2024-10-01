@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KlwFieldController;
+use App\Http\Controllers\Api\UmdlKpiValuesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
 
-    Route::get('/klwfield/getkpi/kpi/{kpi}/company/{company}/', [KlwFieldController::class, 'getkpi']);
+    Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
 
 
     Route::apiResource('/companies', CompanyController::class);

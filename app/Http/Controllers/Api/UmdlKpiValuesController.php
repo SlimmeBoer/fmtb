@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUmdlKpiValuesRequest;
 use App\Http\Requests\UpdateUmdlKpiValuesRequest;
+use App\Libraries\UMDL\UMDLKPICollector;
+use App\Libraries\UMDL\UMDLKPIScores;
 use App\Models\UmdlKpiValues;
 
 class UmdlKpiValuesController extends Controller
@@ -63,5 +65,11 @@ class UmdlKpiValuesController extends Controller
     public function destroy(UmdlKpiValues $umdlKpiValues)
     {
         //
+    }
+
+    public function getscores($company) : array
+    {
+        $umdlscores = new UMDLKPIScores();
+        return $umdlscores->getScores($company);
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\GisDump;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGisDumpRequest;
 use App\Http\Requests\UpdateGisDumpRequest;
+use App\Models\GisDump;
 
 class GisDumpController extends Controller
 {

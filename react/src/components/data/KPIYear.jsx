@@ -20,7 +20,7 @@ export default function KPIYear(props) {
 
     const getKPI = () => {
         setLoading(true);
-        axiosClient.get(`/klwfield/getkpi/kpi/${props.kpi}/company/${props.company}/`)
+        axiosClient.get(`/klwfield/getscores/${props.company}/`)
             .then(({data}) => {
                 setLoading(false);
                 setKPI(data);
@@ -35,13 +35,13 @@ export default function KPIYear(props) {
             key={1}
         >
             <TableCell component="th" scope="row">
-                {kpi.text}
+                TEXT
             </TableCell>
             <TableCell align="center">
                 <Card variant="outlined" >
                 <CardContent>
                     <Typography gutterBottom sx={{fontWeight: 600}}>
-                        {kpi.value2021}
+                        A
                     </Typography>
                 </CardContent>
             </Card>
@@ -50,7 +50,7 @@ export default function KPIYear(props) {
                 <Card variant="outlined" >
                 <CardContent>
                     <Typography gutterBottom sx={{fontWeight: 600}}>
-                        {kpi.value2022}
+                        B
                     </Typography>
                 </CardContent>
             </Card>
@@ -59,7 +59,7 @@ export default function KPIYear(props) {
                 <Card variant="outlined">
                 <CardContent>
                     <Typography gutterBottom sx={{fontWeight: 600}}>
-                        {kpi.value2023}
+                        C
                     </Typography>
                 </CardContent>
             </Card>
@@ -68,7 +68,7 @@ export default function KPIYear(props) {
                 <Card variant="outlined">
                 <CardContent>
                     <Typography gutterBottom sx={{fontWeight: 600}}>
-                        {kpi.avg}
+                        D
                     </Typography>
                 </CardContent>
             </Card>
@@ -77,7 +77,7 @@ export default function KPIYear(props) {
                 <Card variant="outlined"    >
                 <CardContent>
                     <Typography gutterBottom sx={{fontWeight: 600}}>
-                        {kpi.score}
+                        E
                     </Typography>
                 </CardContent>
             </Card>
