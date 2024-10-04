@@ -87,7 +87,7 @@ export default function Login() {
                                         marginBottom: 10
                                     }}
                                     alt="Agriviewer Logo"
-                                    src="/images/logo.png"
+                                    src="/images/logo2.png"
                                 />
                                 <h1>{t('login.title')}</h1>
                                 <br/>

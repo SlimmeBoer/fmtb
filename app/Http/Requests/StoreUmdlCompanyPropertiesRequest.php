@@ -33,6 +33,19 @@ class StoreUmdlCompanyPropertiesRequest extends FormRequest
             'wandelpad' => 'required|boolean',
             'erkend_demobedrijf' => 'required|boolean',
             'bed_and_breakfast' => 'required|boolean',
+            'opp_totaal' => 'float',
+            'melkkoeien' => 'float',
+            'meetmelk_per_koe' => 'float',
+            'meetmelk_per_ha' => 'float',
+            'jongvee_per_10mk' => 'float',
+            'gve_per_ha' => 'float',
+            'kunstmest_per_ha' => 'float',
+            'opbrengst_grasland_per_ha' => 'float',
+            're_kvem' => 'float',
+            'krachtvoer_per_100kg_melk' => 'float',
+            'veebenutting_n' => 'string',
+            'bodembenutting_n' => 'string',
+            'bedrijfsbenutting_n' => 'string',
         ];
     }
 }

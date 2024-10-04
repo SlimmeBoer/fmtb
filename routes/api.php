@@ -30,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/companies/index', [CompanyController::class, 'index']);
 
+    Route::get('/companies/getcompany/{company}', [CompanyController::class, 'getcompany']);
+    Route::get('/companies/getproperties/{company}', [CompanyController::class, 'getproperties']);
+
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
 
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));

@@ -23,10 +23,10 @@ return new class extends Migration
             $table->string('province');
             $table->string('brs');
             $table->string('ubn');
-            $table->string('phone');
-            $table->string('bank_account');
-            $table->string('bank_account_name');
-            $table->string('email');
+            $table->string('phone')->nullable();
+            $table->string('bank_account')->nullable();
+            $table->string('bank_account_name')->nullable();
+            $table->string('email')->nullable();
             $table->string('type');
             $table->boolean('bio');
             $table->timestamps();

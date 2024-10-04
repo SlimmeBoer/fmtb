@@ -2,6 +2,7 @@
 
 namespace App\Libraries\KLWParser;
 
+use App\Libraries\UMDL\UMDLCompanyPropertiesWriter;
 use App\Libraries\UMDL\UMDLKPICollector;
 use App\Models\KlwField;
 use App\Models\KlwValue;
@@ -71,7 +72,9 @@ class KLWParser
         // Get all fields
         $reader = XmlReader::fromFile($xml_file);
         $all_elements = $reader->value('KW_Output.PLAN')->sole();
+
         $collector = new UMDLKPICollector();
+        $company_properties = new UMDLCompanyPropertiesWriter();
 
         foreach ($all_elements as $section_key => $section_values) {
 
@@ -80,6 +83,7 @@ class KLWParser
                     foreach ($subsection_values as $field_key => $field_value) {
 
                         $field_key = str_replace('dzh_','dzhm_',$field_key);
+                        $field_value = str_replace(',','.',$field_value);
 
                         $klwField = KlwField::firstOrNew(array(
                             'workspace_id' => 1,
@@ -101,6 +105,11 @@ class KLWParser
                         {
                             $collector->vars[$field_key] = $field_value;
                         }
+                        // Set vars of UMDL calculator
+                        if (array_key_exists($field_key, $company_properties->vars))
+                        {
+                            $company_properties->vars[$field_key] = $field_value;
+                        }
 
                         ++$totalParsed;
                     }
@@ -109,7 +118,8 @@ class KLWParser
         }
 
         // Calc KPI values
-        $collector->saveKPIs($company_id, $year);
+        $collector_record = $collector->saveKPIs($company_id, $year);
+        $properties_record = $company_properties->saveProperties($company_id);
 
         return $totalParsed;
     }

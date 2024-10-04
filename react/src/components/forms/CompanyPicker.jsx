@@ -51,7 +51,6 @@ export default function CompanyPicker(props) {
             onChange={(e) => props.changeHandler(e)}
             inputProps={{'aria-label': 'Select company'}}
 
-            displayEmpty
             fullWidth
             sx={{
                 maxHeight: 56,
@@ -66,9 +65,9 @@ export default function CompanyPicker(props) {
                     pl: 1,
                 },
             }}
-        > {loading && <Typography variant="body1" sx={{ mb: 2 }}>
-            Laden...
-            </Typography>}
+        > {loading &&  <MenuItem value={0} key={0}>
+                    <ListItemText primary={"Laden"} />
+            </MenuItem>}
             {!loading && companies.map(c => (
             <MenuItem value={c.id} key={c.id}>
                 <ListItemAvatar>

@@ -24,6 +24,19 @@ return new class extends Migration
             $table->boolean('wandelpad');
             $table->boolean('erkend_demobedrijf');
             $table->boolean('bed_and_breakfast');
+            $table->float('opp_totaal');
+            $table->float('melkkoeien');
+            $table->float('meetmelk_per_koe');
+            $table->float('meetmelk_per_ha');
+            $table->float('jongvee_per_10mk');
+            $table->float('gve_per_ha');
+            $table->float('kunstmest_per_ha');
+            $table->float('opbrengst_grasland_per_ha');
+            $table->float('re_kvem');
+            $table->float('krachtvoer_per_100kg_melk');
+            $table->float('veebenutting_n');
+            $table->float('bodembenutting_n');
+            $table->float('bedrijfsbenutting_n');
             $table->timestamps();
         });
     }

@@ -65,9 +65,9 @@ export default function SideMenu() {
             <Box
                 component="img"
                 sx={{
-                    height: 90,
-                    width: 300,
-
+                    height: 200,
+                    width: 200,
+                    ml: 6,
                 }}
                 alt="Agriviewer Logo"
                 src="/images/logo.png"

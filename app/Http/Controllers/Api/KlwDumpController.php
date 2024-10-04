@@ -10,6 +10,8 @@ use App\Models\Audio;
 use App\Models\Company;
 use App\Models\KlwDump;
 use App\Models\KvkNumber;
+use App\Models\UmdlCollectiveCompany;
+use App\Models\UmdlCollectivePostalcode;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -73,7 +75,7 @@ class KlwDumpController extends Controller
     }
 
     /**
-     * Upload an array of images via bulk-upload
+     * Upload an array of dumps via bulk-upload
      *
      * @param Request $request
      * @return Response
@@ -87,6 +89,7 @@ class KlwDumpController extends Controller
            $klwParser = new KLWParser();
            $companyData = $klwParser->getCompany($file);
 
+           // 1. Store the company as a new one (if it not exists yet)
            $company = Company::firstOrNew(array(
                'workspace_id' => 1,
                'name' => $companyData['name'],
@@ -101,11 +104,20 @@ class KlwDumpController extends Controller
             $company->brs = $companyData['brs'];
             $company->save();
 
+            // 2. Connect the company to an existing collective
+            $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
+            $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
+                'company_id' => $company->id,
+                'collective_id' => $ucpc->collective_id,
+            ));
+
+            // 3. Save KVK-number as separate record
             $kvkNr = KvkNumber::firstOrCreate(array(
                 'kvk' => $klwParser->getKVK($file),
                 'company_id' => $company->id,
             ));
 
+            // 4. Store the dump metadata
             $klwDump = KlwDump::firstOrCreate(array(
                 'filename' => $file->getClientOriginalName(),
                 'workspace_id' => 1,
@@ -113,8 +125,8 @@ class KlwDumpController extends Controller
                 'year' => $klwParser->getYear($file),
             ));
 
+            // 5. Store all fields and their values into the database.
             $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id);
-
         }
 
         return response(201);

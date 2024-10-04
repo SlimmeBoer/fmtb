@@ -54,7 +54,7 @@ export default function MenuContent() {
             <List dense>
                 {mainItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                        <ListItemButton selected={index === 0} component={Link} to={item.link}>
+                        <ListItemButton component={Link} to={item.link}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text}/>
                         </ListItemButton>
@@ -68,7 +68,7 @@ export default function MenuContent() {
             <List dense>
                 {klwItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                        <ListItemButton selected={index === 0} component={Link} to={item.link}>
+                        <ListItemButton component={Link} to={item.link}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text}/>
                         </ListItemButton>
@@ -82,7 +82,7 @@ export default function MenuContent() {
             <List dense>
             {gisItems.map((item, index) => (
                 <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                    <ListItemButton selected={index === 0} component={Link} to={item.link}>
+                    <ListItemButton component={Link} to={item.link}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.text}/>
                     </ListItemButton>
