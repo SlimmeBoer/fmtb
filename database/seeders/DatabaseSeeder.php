@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             UmdlCollectiveSeeder::class,
-            UmdlCollectivePostalcodeSeeder::class
+            UmdlCollectivePostalcodeSeeder::class,
+            BbmCodeSeeder::class,
+            BbmAnlbPackageSeeder::class,
+            BbmGisPackagesSeeder::class,
+            BbmKpiSeeder::class,
         ]);
 
 
