@@ -14,7 +14,6 @@ class UMDLKPIScores
 
         $scoresArray = array();
         $settings = parse_ini_file('config/UMDL.ini', true);
-        Log::info(print_r($settings,true));
 
         $scores = UmdlKpiValues::where('company_id', $company_id)
             ->orderByDesc('year')
@@ -105,6 +104,18 @@ class UMDLKPIScores
 
             $scoresArray = array_merge($scoresArray, $yearArray);
         }
+
+        // Add empty years if not found
+        if (count($scores) == 1)
+        {
+            $scoresArray = array_merge($scoresArray, $this->emptyYear("year1"));
+            $scoresArray = array_merge($scoresArray, $this->emptyYear("year2"));
+        }
+        if (count($scores) == 2)
+        {
+            $scoresArray = array_merge($scoresArray, $this->emptyYear("year1"));
+        }
+
          // Add averages
         $avgArray = array("avg" => array (
             'kpi1a' => round($total_kpi1a / count($scores)),
@@ -183,7 +194,6 @@ class UMDLKPIScores
 
         foreach ($settings as $setting_key => $setting_value)
         {
-            Log::info(print_r($settings,true));
 
             if ($value >= $setting_key)
             {
@@ -205,7 +215,7 @@ class UMDLKPIScores
             2 => "Ingevulde MBP",
             3 => "Ingevulde Milieumaatlat",
             4 => "Pleksgewijs grasland, volvelds maisland",
-            5 => "Geen Pleksgewijs hele bedrijf",
+            5 => "Pleksgewijs hele bedrijf",
             6 => "On the way to Planet Proof / AH programma",
             7 => "Beterlevnen Keurmerk",
             8 => "Biologisch",
@@ -214,6 +224,10 @@ class UMDLKPIScores
         };
     }
 
+    /**
+     * @param $properties
+     * @return string
+     */
     public function getSMAstring($properties) : string
     {
         $smastring = "";
@@ -236,6 +250,33 @@ class UMDLKPIScores
         }
 
         return $smastring;
+    }
+
+    private function emptyYear($year)
+    {
+        return array($year => array (
+            'year' => '-',
+            'kpi1a' => "-",
+            'kpi1b' => "-",
+            'kpi2' => "-",
+            'kpi3' => "-",
+            'kpi4' => "-",
+            'kpi5' => "-",
+            'kpi6a' => "-",
+            'kpi6b' => "-",
+            'kpi6c' => "-",
+            'kpi6d' => "-",
+            'kpi7' => "-",
+            'kpi8' => "-",
+            'kpi9' => "-",
+            'kpi10' => "-",
+            'kpi11' => "-",
+            'kpi12' => "-",
+            'kpi13a' => "-",
+            'kpi13b' => "-",
+            'kpi14' => "-",
+            'kpi15' => "-",
+        ));
     }
 
 }

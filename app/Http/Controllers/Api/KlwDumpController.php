@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKlwDumpRequest;
 use App\Http\Requests\UpdateKlwDumpRequest;
+use App\Libraries\ExcelParser\ExcelParser;
 use App\Libraries\KLWParser\KLWParser;
 use App\Models\Audio;
 use App\Models\Company;
@@ -90,18 +91,17 @@ class KlwDumpController extends Controller
            $companyData = $klwParser->getCompany($file);
 
            // 1. Store the company as a new one (if it not exists yet)
-           $company = Company::firstOrNew(array(
-               'workspace_id' => 1,
-               'name' => $companyData['name'],
-               'address' => $companyData['address'],
-               'postal_code' => $companyData['postal_code'],
-               'city' => $companyData['city'],
-               'province' => $companyData['province'],
-               'ubn' => $companyData['ubn'],
-               'type' => $companyData['type'],
-               'bio' => $companyData['bio']));
+           $company = Company::firstOrNew(['ubn' => $companyData['ubn']]);
 
+            $company->workspace_id = 1;
+            $company->name = $companyData['name'];
+            $company->address = $companyData['address'];
+            $company->postal_code = $companyData['postal_code'];
+            $company->city = $companyData['city'];
+            $company->province = $companyData['province'];
             $company->brs = $companyData['brs'];
+            $company->type = $companyData['type'];
+            $company->bio = $companyData['bio'];
             $company->save();
 
             // 2. Connect the company to an existing collective
@@ -130,5 +130,44 @@ class KlwDumpController extends Controller
         }
 
         return response(201);
+    }
+
+    /**
+     * Upload an array of Excel-files to add to company data
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function uploadexcel(Request $request): Response
+    {
+        if ($request->hasFile('file'))
+        {
+            $file = $request->file('file');
+
+            // 1. Get the company ID based on the KVK-number
+            $excelParser = new ExcelParser();
+            $kvk_number = $excelParser->getKVK($file);
+
+            $kvk = KvkNumber::where('kvk', $kvk_number)->first();
+            if ($kvk != null) {
+                $company_id = $kvk->company_id;
+
+                // 2, Write all the properties to the database
+                $success = $excelParser->writeCompanyData($file, $company_id);
+                return response('Data ingevuld voor bedrijf met KVK '.$kvk_number, 201);
+            }
+            else {
+
+                return response('Geen bedrijf gevonden met KVK-nummer '.$kvk_number, 500);
+            }
+
+
+        }
+        else {
+            return response('Geen bestand geupload', 500);
+        }
+
+
+
     }
 }

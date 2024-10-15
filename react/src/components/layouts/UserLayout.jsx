@@ -75,7 +75,7 @@ export default function UserLayout(props) {
     const drawerWidth = '300px';
 
     return (
-        <AppTheme {...props} themeComponents={xThemeComponents}>
+        <AppTheme {...props}  themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
             <Box sx={{ display: 'flex' }}>
                 <SideMenu />

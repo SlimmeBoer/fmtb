@@ -21,12 +21,9 @@ class CompanyController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-
         return CompanyResource::collection(
             Company::query()->orderBy('name')->get()
         );
-
-
     }
 
     /**

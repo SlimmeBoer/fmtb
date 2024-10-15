@@ -4,7 +4,7 @@ import { CloudUpload } from "@mui/icons-material";
 import axiosClient from "../../axios_client.js";
 import {useTranslation} from "react-i18next";
 
-const MultiFileUploader = () => {
+const ExcelUploader = () => {
     const [files, setFiles] = useState([]);
     const [feedback, setFeedback] = useState({});
     const {t} = useTranslation();
@@ -34,7 +34,7 @@ const MultiFileUploader = () => {
 
             // Assuming the Laravel backend accepts file upload via /api/upload
             axiosClient
-                .post("/klwdump/upload", formData, {
+                .post("/klwdump/uploadexcel", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
@@ -46,18 +46,19 @@ const MultiFileUploader = () => {
                         [file.name]: {
                             status: "Uploaded",
                             error: false,
-                            message: "Upload successful!",
+                            message: response.data
                         },
                     }));
                 })
                 .catch((error) => {
                     // Handle error
+                    console.log(error);
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
                             status: "Failed",
                             error: true,
-                            message: "Upload failed. Please try again.",
+                            message: error.response.data,
                         },
                     }));
                 });
@@ -79,6 +80,7 @@ const MultiFileUploader = () => {
                 Select Files
                 <input
                     type="file"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excelhp "
                     multiple
                     hidden
                     onChange={handleFileChange}
@@ -112,4 +114,4 @@ const MultiFileUploader = () => {
     );
 };
 
-export default MultiFileUploader;
+export default ExcelUploader;

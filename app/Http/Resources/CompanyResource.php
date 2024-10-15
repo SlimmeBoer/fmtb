@@ -25,6 +25,10 @@ class CompanyResource extends JsonResource
             'province' => $this->province,
             'brs' => $this->brs,
             'ubn' => $this->ubn,
+            'phone' => $this->phone,
+            'bank_account' => $this->bank_account,
+            'bank_account_name' => $this->bank_account_name,
+            'email' => $this->email,
             'type' => $this->type,
             'bio' => $this->bio,
         ];

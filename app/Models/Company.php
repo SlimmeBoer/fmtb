@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static firstOrCreate(string[] $array)
  * @method static firstOrNew(array $array)
+ * @method static where(array $array)
  */
 class Company extends Model
 {
@@ -29,8 +30,15 @@ class Company extends Model
         'ubn',
         'phone',
         'bank_account',
+        'bank_account_name',
         'email',
         'type',
         'bio',
     ];
+
+    public function collectives()
+    {
+        return $this->belongsToMany(UmdlCollective::class, 'umdl_collective_companies', 'company_id','collective_id');
+    }
+
 }

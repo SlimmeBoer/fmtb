@@ -1,5 +1,5 @@
 
-import MultiFileUploader from "../../components/forms/MultiFileUploader.jsx";
+import KLWUploader from "../../components/forms/KLWUploader.jsx";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -12,7 +12,7 @@ export default function KLWImporteren() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 Kringloopwijzer - Importeren
             </Typography>
-            <MultiFileUploader />
+            <KLWUploader />
         </Box>
     )
 

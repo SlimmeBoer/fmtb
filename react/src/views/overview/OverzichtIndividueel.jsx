@@ -3,21 +3,27 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid2';
 import CompanyPicker from "../../components/forms/CompanyPicker.jsx";
-import {useState} from "react";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {useEffect, useState} from "react";
 import KPITable from "../../components/data/KPITable.jsx";
-import Card from "@mui/material/Card";
-import HighlightedCard from "../../components/visuals/HighlightedCard.jsx";
 import CompanyInfoTable from "../../components/data/CompanyInfoTable.jsx";
 import CompanyPropertyTable from "../../components/data/CompanyPropertyTable.jsx";
+import {useParams} from "react-router-dom";
 
 export default function OverzichtIndividueel() {
 
-    const [companyNr, setCompanyNr] = useState('');
+    const { id: paramId } = useParams();
+    const [id, setId] = useState(paramId || '');
 
-    const changeCompany = (e) => {
-        setCompanyNr(e.target.value);
+    useEffect(() => {
+        if (paramId !== id) {
+            setId(paramId); // Sync state if URL param changes
+        }
+
+    }, [paramId]);
+    const handleChange = (e) => {
+        setId(e.target.value); // Change `id` state based on user input or actions
     };
+
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
@@ -25,30 +31,31 @@ export default function OverzichtIndividueel() {
             <Typography component="h2" variant="h6" sx={{mb: 2}}>
                 Overzicht - Individueel
             </Typography>
-            <CompanyPicker company={companyNr} changeHandler={changeCompany}/>
-            {companyNr !== '' && <Box>
+            <CompanyPicker company={id} changeHandler={handleChange}/>
+            {id !== '' && id !== undefined && <Box>
                 <Grid
                     container
                     spacing={2}
                     columns={12}
                     sx={{mb: (theme) => theme.spacing(2), mt: 2}}
                 >
-                    <Grid size={{xs: 12, lg: 4}}>
-                        <CompanyInfoTable company={companyNr}/>
-                        <CompanyPropertyTable company={companyNr}/>
+                    <Grid size={{xs: 12, lg: 4}} key="indiv-grid-1">
+                        <CompanyInfoTable company={id}/>
+                        <CompanyPropertyTable company={id}/>
                     </Grid>
-                    <Grid  size={{xs: 12, lg: 8}}>
-                        <KPITable company={companyNr} />
+                    <Grid  size={{xs: 12, lg: 8}} key="indiv-grid-2">
+                        <KPITable company={id} key="kpitable"/>
                     </Grid>
                 </Grid>
             </Box>
             }
-            {companyNr === '' && <Box>
+            {id === undefined && <Box>
                 <Typography component="h2" variant="body2" sx={{mb: 2, mt: 2}}>
                     Kies een bedrijf met bovenstaande selectiebox.
                 </Typography>
             </Box>
             }
+
         </Box>
     )
 

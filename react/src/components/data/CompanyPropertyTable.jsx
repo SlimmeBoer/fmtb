@@ -85,7 +85,7 @@ export default function CompanyPropertyTable(props) {
         { value: 2, title: "Ingevulde MBP",},
         { value: 3, title: "Ingevulde Milieumaatlat",},
         { value: 4, title: "Pleksgewijs grasland, volvelds maisland",},
-        { value: 5, title: "Geen Pleksgewijs hele bedrijf",},
+        { value: 5, title: "Pleksgewijs hele bedrijf",},
         { value: 6, title: "On the way to Planet Proof / AH programma",},
         { value: 7, title: "Beterlevnen Keurmerk",},
         { value: 8, title: "Biologisch",},
@@ -151,9 +151,9 @@ export default function CompanyPropertyTable(props) {
                 {loading && <CircularProgress/>}
                 {!loading && company.id != null &&
                 <FormGroup>
-                    {mbp.map(m => {
+                    {mbp.map((m, index) => {
                         return (
-                            <FormControlLabel control={<Checkbox checked={m.value} />} label={m.title} />
+                            <FormControlLabel key={index} control={<Checkbox checked={!!m.value} />} label={m.title} />
                         )
                     })}
                 </FormGroup>}

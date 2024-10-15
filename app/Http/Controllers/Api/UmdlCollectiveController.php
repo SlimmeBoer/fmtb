@@ -5,16 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUmdlCollectiveRequest;
 use App\Http\Requests\UpdateUmdlCollectiveRequest;
+use App\Http\Resources\UmdlCollectiveResource;
 use App\Models\UmdlCollective;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class UmdlCollectiveController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        //
+        return UmdlCollectiveResource::collection(
+            UmdlCollective::query()->orderBy('name')->get()
+        );
     }
 
     /**

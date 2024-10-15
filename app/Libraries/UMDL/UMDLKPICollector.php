@@ -42,7 +42,6 @@ class UMDLKPICollector
      */
     public function saveKPIs($company_id, $year) : int
     {
-
         $opp_totaal  =
             $this->vars["opp_prgras"] + $this->vars["opp_mais"] + $this->vars["opp_natuur"] + $this->vars["opp_overig"];
 

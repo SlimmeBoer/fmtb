@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Select, {selectClasses} from '@mui/material/Select';
 import {styled} from '@mui/material/styles';
-import AgricultureIcon from '@mui/icons-material/Agriculture';
+import GroupsIcon from '@mui/icons-material/Groups';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 
@@ -22,20 +22,20 @@ const ListItemAvatar = styled(MuiListItemAvatar)({
     marginRight: 12,
 });
 
-export default function CompanyPicker(props) {
-    const [companies, setCompanies] = useState([]);
+export default function CollectivePicker(props) {
+    const [collectives, setCollectives] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getCompanies();
+        getCollectives();
     }, [])
 
-    const getCompanies = () => {
+    const getCollectives = () => {
         setLoading(true);
-        axiosClient.get('/companies/index/')
+        axiosClient.get('/collectives/index/')
             .then(({data}) => {
                 setLoading(false);
-                setCompanies(data.data);
+                setCollectives(data.data);
             })
             .catch(() => {
                 setLoading(false);
@@ -44,11 +44,11 @@ export default function CompanyPicker(props) {
 
     return (
         <Select
-            labelId="company-select"
-            id="company-simple-select"
-            value={props.company || ''}
+            labelId="collective-select"
+            id="collective-simple-select"
+            value={''}
             onChange={(e) => props.changeHandler(e)}
-            inputProps={{'aria-label': 'Select company'}}
+            inputProps={{'aria-label': 'Select collective'}}
 
             fullWidth
             sx={{
@@ -64,15 +64,14 @@ export default function CompanyPicker(props) {
                     pl: 1,
                 },
             }}
-        >
-            {!loading &&  companies.map(c => (
+        >  {!loading && collectives.map(c => (
             <MenuItem value={c.id} key={c.id}>
                 <ListItemAvatar>
                     <Avatar alt={c.name}>
-                        <AgricultureIcon sx={{fontSize: '1rem'}}/>
+                        <GroupsIcon sx={{fontSize: '1rem'}}/>
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={c.name} secondary={c.address+ ', ' +c.postal_code+', '+c.city}/>
+                <ListItemText primary={c.name} secondary={c.description}/>
             </MenuItem>))}
 
         </Select>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static where(string $string, mixed $collectief_id)
+ * @method static find($collective_id)
  */
 class UmdlCollective extends Model
 {
@@ -22,4 +23,11 @@ class UmdlCollective extends Model
         'name',
         'description',
     ];
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'umdl_collective_companies','collective_id','company_id');
+    }
+
+
 }

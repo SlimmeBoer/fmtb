@@ -5,16 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBbmCodeRequest;
 use App\Http\Requests\UpdateBbmCodeRequest;
+use App\Http\Resources\BbmCodeResource;
 use App\Models\BbmCode;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BbmCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        //
+        return BbmCodeResource::collection(
+            BbmCode::query()->orderBy('code')->get()
+        );
     }
 
     /**

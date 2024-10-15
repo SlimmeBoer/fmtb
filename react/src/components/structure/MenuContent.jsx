@@ -28,6 +28,7 @@ const mainItems = [
 
 const klwItems = [
     {text: 'Importeren', icon: <ImportExportIcon/>, link: '/klw/importeren'},
+    {text: 'Importeren MBP/SMA', icon: <ImportExportIcon/>, link: '/klw/importeermbpsma'},
     {text: 'Databeheer', icon: <DatasetIcon/>, link: '/klw/data'},
 ];
 
@@ -95,7 +96,7 @@ export default function MenuContent() {
             <List dense>
                 {settingItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                        <ListItemButton>
+                        <ListItemButton component={Link} to={item.link}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text}/>
                         </ListItemButton>

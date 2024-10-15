@@ -13,6 +13,7 @@ import GISImporteren from "./views/gis/GISImporteren.jsx";
 import GISData from "./views/gis/GISData.jsx";
 import Settings from "./views/admin/Settings.jsx";
 import About from "./views/admin/About.jsx";
+import ImporteerMBPSMA from "./views/klw/ImporteerMBPSMA.jsx";
 
 const router = createBrowserRouter([
     {
@@ -36,12 +37,24 @@ const router = createBrowserRouter([
                 element: <OverzichtCollectief/>
             },
             {
+                path: '/overzicht/collectief/:id',
+                element: <OverzichtCollectief/>
+            },
+            {
                 path: '/overzicht/individueel',
-                element: <OverzichtIndividueel/>
+                element: <OverzichtIndividueel />
+            },
+            {
+                path: '/overzicht/individueel/:id',
+                element: <OverzichtIndividueel />
             },
             {
                 path: '/klw/importeren',
                 element: <KLWImporteren/>
+            },
+            {
+                path: '/klw/importeermbpsma',
+                element: <ImporteerMBPSMA/>
             },
             {
                 path: '/klw/data',
