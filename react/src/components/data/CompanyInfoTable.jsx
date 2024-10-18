@@ -45,7 +45,7 @@ export default function CompanyInfoTable(props) {
         { title: "Bankrekening naam.:", value: data.bank_account_name, },
     ];
     return (
-        <Card>
+        <Card variant="outlined" >
             <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
                 <InfoOutlinedIcon/>
                 <Typography component="h6" variant="h6" >

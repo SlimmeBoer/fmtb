@@ -94,7 +94,7 @@ export default function CompanyPropertyTable(props) {
 
     return (
         <Box>
-            <Card sx={{mt: 2}}>
+            <Card variant="outlined"  sx={{mt: 2}}>
                 <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
                     <AssessmentOutlinedIcon/>
                     <Typography component="h6" variant="h6" >
@@ -118,7 +118,7 @@ export default function CompanyPropertyTable(props) {
                         </Table>}
                 </TableContainer>
             </Card>
-            <Card sx={{mt: 2}}>
+            <Card  variant="outlined" sx={{mt: 2}}>
                 <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
                     <SpaOutlinedIcon/>
                     <Typography component="h6" variant="h6" >
@@ -141,7 +141,7 @@ export default function CompanyPropertyTable(props) {
                         })}
                     </TextField>}
             </Card>
-            <Card sx={{mt: 2}}>
+            <Card variant="outlined"  sx={{mt: 2}}>
                 <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
                     <Diversity3OutlinedIcon/>
                     <Typography component="h6" variant="h6" >

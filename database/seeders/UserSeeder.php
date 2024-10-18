@@ -20,5 +20,12 @@ class UserSeeder extends Seeder
             'email' => 'nielscolijn@gmail.com',
             'password' => Hash::make('ncmedia')
         ]);
+
+        User::factory()->create([
+            'first_name' => 'Harm',
+            'last_name' => 'Rijneveld',
+            'email' => 'info@terugnaardebasisadvies.nl',
+            'password' => Hash::make('Agriviewer2024!')
+        ]);
     }
 }

@@ -30,7 +30,7 @@ export default function ScoresTableTotaal() {
     }
 
     return (
-        <Card>
+        <Card variant="outlined" >
             <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                 <TimelineOutlinedIcon/>
                 <Typography component="h6" variant="h6">

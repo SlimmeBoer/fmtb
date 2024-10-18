@@ -12,11 +12,12 @@ import KLWData from "./views/klw/KLWData.jsx";
 import GISImporteren from "./views/gis/GISImporteren.jsx";
 import GISData from "./views/gis/GISData.jsx";
 import BBMCodeSettings from "./views/settings/BBMCodeSettings.jsx";
-import About from "./views/admin/About.jsx";
 import ImporteerMBPSMA from "./views/klw/ImporteerMBPSMA.jsx";
 import BBMKPISettings from "./views/settings/BBMKPISettings.jsx";
 import BBMGISSettings from "./views/settings/BBMGISSettings.jsx";
 import BBMANLbSettings from "./views/settings/BBMANLbSettings.jsx";
+import Users from "./views/users/Users.jsx";
+import Roles from "./views/users/Roles.jsx";
 
 const router = createBrowserRouter([
     {
@@ -88,8 +89,12 @@ const router = createBrowserRouter([
                 element: <BBMANLbSettings/>
             },
             {
-                path: '/about',
-                element: <About/>
+                path: '/users',
+                element: <Users/>
+            },
+            {
+                path: '/roles',
+                element: <Roles/>
             },
         ]
     },

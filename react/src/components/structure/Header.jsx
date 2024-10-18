@@ -23,7 +23,7 @@ export default function Header() {
             }}
             spacing={2}
         >
-            <NavbarBreadcrumbs/>
+            <div></div>
             <Stack direction="row" sx={{gap: 1}}>
                 <ColorModeIconDropdown/>
                 <AboutScreen/>

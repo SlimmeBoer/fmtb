@@ -164,7 +164,7 @@ export default function TotaalKPIs(props) {
     ];
 
     return (
-        <Card>
+        <Card variant="outlined" >
             {loading && <CircularProgress/>}
             {!loading && !isObjectEmpty(scores) &&
                 <Grid container  size={{xs: 12, lg: 12}}>

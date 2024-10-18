@@ -222,7 +222,7 @@ export default function KPITable(props) {
     return (
         <Grid container spacing={2} size={{xs: 12, lg: 12}}>
             <Grid size={{xs: 12, lg: 6}} key="kpi-grid-1">
-                <Card key="card-1">
+                <Card variant="outlined" key="card-1">
                     <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                         <ScoreboardIcon/>
                         <Typography component="h6" variant="h6">
@@ -236,7 +236,7 @@ export default function KPITable(props) {
                 </Card>
             </Grid>
             <Grid size={{xs: 12, lg: 6}} key="kpi-grid-2">
-                <Card key="card-2">
+                <Card variant="outlined" key="card-2">
                     <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                         <EuroOutlinedIcon/>
                         <Typography component="h6" variant="h6">
@@ -250,7 +250,7 @@ export default function KPITable(props) {
                 </Card>
             </Grid>
             <Grid size={{xs: 12, lg: 12}} key="kpi-grid-3">
-                <Card key="card-3">
+                <Card variant="outlined" key="card-3">
                     <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                         <TimelineOutlinedIcon/>
                         <Typography component="h6" variant="h6">

@@ -4,7 +4,7 @@ import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {Box, Button, Grid, Paper, TextField} from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from 'react-i18next';
-import {setErrorData} from "../../helpers/ErrorData.js";
+import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import * as React from "react";
 import Copyright from "../../components/Copyright.jsx";
 
@@ -14,37 +14,33 @@ export default function Login() {
         email: '',
         password: '',
     })
-    const [EmailInvalid, setEmailInvalid] = useState({});
-    const [PasswordInvalid, setPasswordInvalid] = useState({});
+
+    const [formErrors, setFormErrors] = useState({
+        email: {errorstatus: false, helperText: ''},
+        password: {errorstatus: false, helperText: ''},
+    });
+
     const {t} = useTranslation();
 
     const {setUser, setToken} = useStateContext();
 
     const onSubmit = (ev) => {
         ev.preventDefault()
-        setEmailInvalid({state: false, message: ''});
-        setPasswordInvalid({state: false, message: ''});
+        resetErrorData(formErrors, setFormErrors);
 
         axiosClient.post('/login', credentials)
             .then(({data}) => {
                 setUser(data.user)
                 setToken(data.token)
             })
-            .catch(err => {
-                    const response = err.response;
-                    if (response && response.status === 422) {
-                        if (response.data.errors) {
-                            setErrorData(response.data.errors,
-                                {
-                                    email: setEmailInvalid,
-                                    password: setPasswordInvalid,
-                                })
-                        } else {
-                            setEmailInvalid({state: true, message: response.data.message})
-                        }
+            .catch(error => {
+                const response = error.response;
+                if (response && response.status === 422) {
+                    if (response.data.errors) {
+                        setErrorData(response.data.errors, formErrors, setFormErrors)
                     }
                 }
-            )
+            })
     }
 
     return (
@@ -96,15 +92,15 @@ export default function Login() {
                                        value={credentials.email}
                                        onChange={ev => setCredentials({...credentials, email: ev.target.value})}
                                        label={t('login.email_field')} variant="outlined" margin="dense"
-                                       error={EmailInvalid.state}
-                                       helperText={EmailInvalid.state && EmailInvalid.message}/>
+                                       error={formErrors.email.errorstatus}
+                                       helperText={formErrors.email.helperText} />
                             <TextField fullWidth
                                        value={credentials.password}
                                        onChange={ev => setCredentials({...credentials, password: ev.target.value})}
                                        label={t('login.password_field')} type="password"
                                        variant="outlined" margin="dense"
-                                       error={PasswordInvalid.state}
-                                       helperText={PasswordInvalid.state && PasswordInvalid.message}/>
+                                       error={formErrors.password.errorstatus}
+                                       helperText={formErrors.password.helperText} />
                             <br/>&nbsp;<br/>
                             <Button type="submit" fullWidth variant="outlined" size="large"
                                     startIcon={<LoginIcon/>}>

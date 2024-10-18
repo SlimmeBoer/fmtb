@@ -3,13 +3,9 @@ import {styled} from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import MuiDrawer, {drawerClasses} from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import SelectContent from '../visuals/SelectContent.jsx';
 import MenuContent from './MenuContent.jsx';
-import CardAlert from '../visuals/CardAlert.jsx';
-import OptionsMenu from './OptionsMenu.jsx';
 import {showFullName} from "../../helpers/FullName.js";
 
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
@@ -17,6 +13,8 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import axiosClient from "../../axios_client.js";
 import {Navigate} from "react-router-dom";
+import MenuButton from "../visuals/MenuButton.jsx";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 const drawerWidth = 300;
 
@@ -48,6 +46,16 @@ export default function SideMenu() {
                 setLoading(false)
             })
     }, [])
+
+    const onLogout = (ev) => {
+        ev.preventDefault()
+
+        axiosClient.post('/logout')
+            .then(() => {
+                setUser({})
+                setToken(null)
+            })
+    }
 
     if (!token) {
         return <Navigate to="/login"/>
@@ -87,7 +95,7 @@ export default function SideMenu() {
                 <Avatar
                     sizes="small"
                     alt={showFullName(user.first_name, user.middle_name, user.last_name)}
-                    src="/static/images/avatar/7.jpg"
+                    src={import.meta.env.VITE_API_BASE_URL + '/' + user.image}
                     sx={{width: 36, height: 36}}
                 />
                 <Box sx={{mr: 'auto'}}>
@@ -98,7 +106,13 @@ export default function SideMenu() {
                         {user.email}
                     </Typography>
                 </Box>
-                <OptionsMenu/>
+                <MenuButton
+                    aria-label="Open menu"
+                    onClick={onLogout}
+                    sx={{borderColor: 'transparent'}}
+                >
+                    <LogoutRoundedIcon/>
+                </MenuButton>
             </Stack>
         </Drawer>
     );

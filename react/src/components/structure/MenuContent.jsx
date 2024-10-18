@@ -43,7 +43,7 @@ const settingItems = [
 
 const userItems = [
     {text: 'Gebruikersbeheer', icon: <PersonIcon/>, link: '/users/'},
-    {text: 'Rollenbeheer', icon: <BadgeIcon/>, link: '/users/roles'},
+    {text: 'Rollenbeheer', icon: <BadgeIcon/>, link: '/roles'},
 ];
 
 export default function MenuContent() {

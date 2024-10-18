@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KlwFieldController;
 use App\Http\Controllers\Api\UmdlCollectiveController;
 use App\Http\Controllers\Api\UmdlKpiValuesController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/bbmkpi', BbmKpiController::class);
     Route::apiResource('/bbmgispackages', BbmGisPackageController::class);
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
+    Route::apiResource('/users', UserController::class);
     /*
 
     Route::apiResource('/categories', CategoryController::class);

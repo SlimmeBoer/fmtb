@@ -80,7 +80,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                    sx={{
                        pt: 1.5, pb: 2,
                    }}>
-                <Card sx={{width: '50%' }}>
+                <Card variant="outlined"  sx={{width: '50%' }}>
                     <Typography variant="body2">
                         In KPI:
                     </Typography>
@@ -97,7 +97,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                         })}
                     </Box>}
                 </Card>
-                <Card sx={{width: '50%' }}>
+                <Card variant="outlined" sx={{width: '50%' }}>
                     <Typography variant="body2">
                         Niet in KPI:
                     </Typography>
