@@ -32,7 +32,7 @@ export default function CompanyPicker(props) {
 
     const getCompanies = () => {
         setLoading(true);
-        axiosClient.get('/companies/index/')
+        axiosClient.get('/companies/index')
             .then(({data}) => {
                 setLoading(false);
                 setCompanies(data.data);

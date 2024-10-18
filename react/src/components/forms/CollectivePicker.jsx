@@ -32,7 +32,7 @@ export default function CollectivePicker(props) {
 
     const getCollectives = () => {
         setLoading(true);
-        axiosClient.get('/collectives/index/')
+        axiosClient.get('/collectives/index')
             .then(({data}) => {
                 setLoading(false);
                 setCollectives(data.data);

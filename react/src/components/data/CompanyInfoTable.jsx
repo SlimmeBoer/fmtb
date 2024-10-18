@@ -20,7 +20,7 @@ export default function CompanyInfoTable(props) {
     const getCompany = () => {
         if (props.company !== '') {
             setLoading(true);
-            axiosClient.get(`/companies/getcompany/${props.company}/`)
+            axiosClient.get(`/companies/getcompany/${props.company}`)
                 .then(({data}) => {
                     setLoading(false);
                     setCompany(data);

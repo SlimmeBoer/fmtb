@@ -39,7 +39,7 @@ export default function CompanyPropertyTable(props) {
     const getProperties = () => {
         if (props.company !== '') {
             setLoading(true);
-            axiosClient.get(`/companies/getproperties/${props.company}/`)
+            axiosClient.get(`/companies/getproperties/${props.company}`)
                 .then(({data}) => {
                     setLoading(false);
                     setCompany(data);
