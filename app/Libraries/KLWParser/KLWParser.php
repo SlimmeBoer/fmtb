@@ -85,7 +85,6 @@ class KLWParser
                         $field_key = str_replace('dzh_','dzhm_',$field_key);
                         $field_value = str_replace(',','.',$field_value);
 
-                        /*
                         $klwField = KlwField::firstOrNew(array(
                             'workspace_id' => 1,
                             'fieldname' => $field_key,
@@ -100,7 +99,6 @@ class KLWParser
                         ));
                         $klwValue->value = $field_value;
                         $klwValue->save();
-                        */
 
                         // Set vars of UMDL calculator
                         if (array_key_exists($field_key, $collector->vars))
