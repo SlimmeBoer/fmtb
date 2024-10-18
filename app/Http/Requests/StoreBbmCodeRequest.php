@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $id
+ */
 class StoreBbmCodeRequest extends FormRequest
 {
     /**
@@ -22,9 +25,9 @@ class StoreBbmCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|integer',
+            'code' => 'required|string|unique:bbm_codes,code,'.$this->id,
             'description' => 'required|string',
-            'weight' => 'required|float',
+            'weight' => 'required|numeric',
             'unit' => 'required|string|max:10',
         ];
     }

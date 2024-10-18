@@ -1,48 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import EditableField from './EditableField';
-import {CircularProgress, Paper, TableCell, TableRow} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from "@mui/material/Stack";
-import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import axiosClient from "../../axios_client.js";
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import LinearProgress from "@mui/material/LinearProgress";
+import EditableBBMSelect from "./EditableBBMSelect.jsx";
 
-const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
+const GisPackageForm = ({gispackage, bbmcodes, index, onAddorDelete, onCancelNew}) => {
+
 
     const [formData, setFormData] = useState({
         id: null,
-        code: '',
-        description: '',
-        weight: '',
-        unit: '',
+        code_id: '',
+        package: '',
     });
 
     const [tempformData, setTempFormData] = useState({
         id: null,
-        code: '',
-        description: '',
-        weight: '',
-        unit: '',
+        code_id: '',
+        package: '',
     });
 
     const [formErrors, setFormErrors] = useState({
-        code: {errorstatus: false, helperText: ''},
-        description: {errorstatus: false, helperText: ''},
-        weight: {errorstatus: false, helperText: ''},
-        unit: {errorstatus: false, helperText: ''},
+        code_id: {errorstatus: false, helperText: ''},
+        package: {errorstatus: false, helperText: ''},
     });
 
     useEffect(() => {
-        if (bbmcode) {
-            setFormData(bbmcode)
-            setTempFormData(bbmcode)
+        if (gispackage) {
+            setFormData(gispackage)
+            setTempFormData(gispackage)
         }
         else {
             setIsEditing(true)
@@ -71,7 +65,7 @@ const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
         setSubmitting(true);
         setFormData(tempformData);
         if (tempformData.id !== null) {
-            axiosClient.put(`/bbmcodes/${tempformData.id}`, tempformData)
+            axiosClient.put(`/bbmgispackages/${tempformData.id}`, tempformData)
                 .then(response => {
                     setNotification('Record updated successfully');
                     setIsEditing(false);
@@ -87,7 +81,7 @@ const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
                     setSubmitting(false);
                 })
         } else {
-            axiosClient.post(`/bbmcodes`, tempformData)
+            axiosClient.post(`/bbmgispackages`, tempformData)
                 .then(response => {
                     setNotification('Record added successfully');
                     setIsEditing(false);
@@ -120,7 +114,7 @@ const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
             return
         }
 
-        axiosClient.delete(`/bbmcodes/${bbmcode.id}`)
+        axiosClient.delete(`/bbmgispackages/${gispackage.id}`)
             .then(() => {
                 onAddorDelete();
             })
@@ -131,26 +125,17 @@ const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
             {submitting && <LinearProgress color="inherit"  sx={{height: 20 }} />}
             {!submitting &&
                 <Stack key={"stack" + index} direction="row" gap={1} sx={{mb: 1, mt: 1}}>
-                    <Box key={"item-code" + index} sx={{width: '15%'}}><EditableField key={"code" + index}
-                                                                                    onChange={(value) => handleFieldChange('code', value)}
-                                                                                    value={tempformData.code}
-                                                                                    error={formErrors.code}
+                    <Box key={"item-bbmcode-" + index} sx={{width: '30%'}}><EditableBBMSelect key={"bbmcode-" + index}
+                                                                                    onChange={(value) => handleFieldChange('code_id', value)}
+                                                                                    value={tempformData.code_id}
+                                                                                         displayvalues={bbmcodes}
+                                                                                    error={formErrors.code_id}
                                                                                     isEditing={isEditing}/></Box>
-                    <Box key={"item-description" + index} sx={{width: '55%'}}><EditableField key={"description" + index}
-                                                                                           onChange={(value) => handleFieldChange('description', value)}
-                                                                                           value={tempformData.description}
-                                                                                           error={formErrors.description}
+                    <Box key={"item-package-" + index} sx={{width: '70%'}}><EditableField key={"package-" + index}
+                                                                                           onChange={(value) => handleFieldChange('package', value)}
+                                                                                           value={tempformData.package}
+                                                                                           error={formErrors.package}
                                                                                            isEditing={isEditing}/></Box>
-                    <Box key={"item-weight" + index} sx={{width: '15%'}}><EditableField key={"weight" + index}
-                                                                                      onChange={(value) => handleFieldChange('weight', value)}
-                                                                                      value={tempformData.weight}
-                                                                                      error={formErrors.weight}
-                                                                                      isEditing={isEditing}/></Box>
-                    <Box key={"item-unit" + index} sx={{width: '15%'}}><EditableField key={"unit" + index}
-                                                                                    onChange={(value) => handleFieldChange('unit', value)}
-                                                                                    value={tempformData.unit}
-                                                                                    error={formErrors.unit}
-                                                                                    isEditing={isEditing}/></Box>
                     {isEditing ? (
                         <Box key={"buttons" + index} sx={{width: 100}}>
                             <IconButton sx={{p: 0}} onClick={handleSubmit} size="small">
@@ -175,4 +160,4 @@ const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
     );
 };
 
-export default BBMCodeForm;
+export default GisPackageForm;

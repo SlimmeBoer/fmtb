@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateBbmCodeRequest;
 use App\Http\Resources\BbmCodeResource;
 use App\Models\BbmCode;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class BbmCodeController extends Controller
 {
@@ -34,21 +36,23 @@ class BbmCodeController extends Controller
      */
     public function store(StoreBbmCodeRequest $request)
     {
-        //
+        $data = $request->validated();
+        $bbmCode = BbmCode::create($data);
+        return response(new BbmCodeResource($bbmCode), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BbmCode $bbmCode)
+    public function show(BbmCode $bbmcode): BbmCodeResource
     {
-        //
+        return new BbmCodeResource($bbmcode);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BbmCode $bbmCode)
+    public function edit(BbmCode $bbmcode)
     {
         //
     }
@@ -56,16 +60,20 @@ class BbmCodeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBbmCodeRequest $request, BbmCode $bbmCode)
+    public function update(UpdateBbmCodeRequest $request, BbmCode $bbmcode): BbmCodeResource
     {
-        //
+        Log::info($bbmcode);
+        $data = $request->validated();
+        $bbmcode->update($data);
+        return new BbmCodeResource($bbmcode);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BbmCode $bbmCode)
+    public function destroy(BbmCode $bbmcode) : Response
     {
-        //
+        $bbmcode->delete();
+        return response("", 204);
     }
 }

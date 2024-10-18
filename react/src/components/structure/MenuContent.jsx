@@ -8,16 +8,13 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
-import AnalyticsRoundedIcon from '@mui/icons-material/AnalyticsRounded';
 import DatasetIcon from '@mui/icons-material/Dataset';
-import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
+import PersonIcon from '@mui/icons-material/Person';
+import BadgeIcon from '@mui/icons-material/Badge';
 import {useTranslation} from "react-i18next";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import {showFullName} from "../../helpers/FullName.js";
 
 const mainItems = [
     {text: 'Dashboard', icon: <HomeRoundedIcon/>, link: '/dashboard'},
@@ -37,10 +34,16 @@ const gisItems = [
     {text: 'Databeheer', icon: <DatasetIcon/>, link: '/gis/data'},
 ];
 
-
 const settingItems = [
-    {text: 'Instellingen', icon: <SettingsRoundedIcon/>, link: '/settings'},
-    {text: 'Over', icon: <InfoRoundedIcon/>, link: '/about'},
+    {text: 'BBM-codes', icon: <SettingsRoundedIcon/>, link: '/settings/bbmcodes'},
+    {text: 'BBM aan KPI\'s', icon: <SettingsRoundedIcon/>, link: '/settings/bbmkpis'},
+    {text: 'ScanGIS-pakketten', icon: <SettingsRoundedIcon/>, link: '/settings/scangis'},
+    {text: 'ANLb-pakketten', icon: <SettingsRoundedIcon/>, link: '/settings/anlb'},
+];
+
+const userItems = [
+    {text: 'Gebruikersbeheer', icon: <PersonIcon/>, link: '/users/'},
+    {text: 'Rollenbeheer', icon: <BadgeIcon/>, link: '/users/roles'},
 ];
 
 export default function MenuContent() {
@@ -48,9 +51,9 @@ export default function MenuContent() {
     const {t} = useTranslation();
     return (
 
-        <Stack sx={{flexGrow: 1, p: 1, }}>
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
-               Overzichten
+        <Stack sx={{flexGrow: 1, p: 4,}}>
+            <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600}}>
+                Overzichten
             </Typography>
             <List dense>
                 {mainItems.map((item, index) => (
@@ -63,7 +66,7 @@ export default function MenuContent() {
                 ))}
             </List>
 
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600, mt: 3 }}>
+            <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
                 Kringloopwijzers
             </Typography>
             <List dense>
@@ -77,24 +80,38 @@ export default function MenuContent() {
                 ))}
             </List>
 
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600, mt: 3  }}>
+            <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
                 ScanGIS-data
-             </Typography>
+            </Typography>
             <List dense>
-            {gisItems.map((item, index) => (
-                <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                    <ListItemButton component={Link} to={item.link}>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.text}/>
-                    </ListItemButton>
-                </ListItem>
-            ))}
-        </List>
-            <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600, mt: 3  }}>
-                Overige
+                {gisItems.map((item, index) => (
+                    <ListItem key={index} disablePadding sx={{display: 'block'}}>
+                        <ListItemButton component={Link} to={item.link}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.text}/>
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
+                Instellingen
             </Typography>
             <List dense>
                 {settingItems.map((item, index) => (
+                    <ListItem key={index} disablePadding sx={{display: 'block'}}>
+                        <ListItemButton component={Link} to={item.link}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.text}/>
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+
+            <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
+                Gebruikers
+            </Typography>
+            <List dense>
+                {userItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{display: 'block'}}>
                         <ListItemButton component={Link} to={item.link}>
                             <ListItemIcon>{item.icon}</ListItemIcon>

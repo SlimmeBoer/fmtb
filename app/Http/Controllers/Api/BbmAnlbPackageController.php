@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBbmAnlbPackageRequest;
 use App\Http\Requests\UpdateBbmAnlbPackageRequest;
+use App\Http\Resources\BbmAnlbPackageResource;
 use App\Models\BbmAnlbPackage;
 
 class BbmAnlbPackageController extends Controller
@@ -14,7 +15,9 @@ class BbmAnlbPackageController extends Controller
      */
     public function index()
     {
-        //
+        return BbmAnlbPackageResource::collection(
+            BbmAnlbPackage::query()->orderBy('anlb_number')->get()
+        );
     }
 
     /**
@@ -30,15 +33,17 @@ class BbmAnlbPackageController extends Controller
      */
     public function store(StoreBbmAnlbPackageRequest $request)
     {
-        //
+        $data = $request->validated();
+        $bbmAnlbPackage = BbmAnlbPackage::create($data);
+        return response(new BbmAnlbPackageResource($bbmAnlbPackage), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BbmAnlbPackage $bbmAnlbPackage)
+    public function show(BbmAnlbPackage $bbmanlbpackage)
     {
-        //
+        return new BbmAnlbPackageResource($bbmanlbpackage);
     }
 
     /**
@@ -52,16 +57,19 @@ class BbmAnlbPackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBbmAnlbPackageRequest $request, BbmAnlbPackage $bbmAnlbPackage)
+    public function update(UpdateBbmAnlbPackageRequest $request, BbmAnlbPackage $bbmanlbpackage)
     {
-        //
+        $data = $request->validated();
+        $bbmanlbpackage->update($data);
+        return new BbmAnlbPackageResource($bbmanlbpackage);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BbmAnlbPackage $bbmAnlbPackage)
+    public function destroy(BbmAnlbPackage $bbmanlbpackage)
     {
-        //
+        $bbmanlbpackage->delete();
+        return response('', 204);
     }
 }

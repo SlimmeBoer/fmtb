@@ -73,17 +73,6 @@ export default function SideMenu() {
                 src="/images/logo.png"
             />
 
-            <Divider/>
-            <Box
-                sx={{
-                    display: 'flex',
-                    mt: 'calc(var(--template-frame-height, 0px) + 4px)',
-                    p: 1.5,
-                }}
-            >
-                <SelectContent/>
-            </Box>
-            <Divider/>
             <MenuContent/>
             <Stack
                 direction="row"

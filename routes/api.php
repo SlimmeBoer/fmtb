@@ -3,7 +3,10 @@
 
 use App\Http\Controllers\Api\AuthController;
 
+use App\Http\Controllers\Api\BbmAnlbPackageController;
 use App\Http\Controllers\Api\BbmCodeController;
+use App\Http\Controllers\Api\BbmGisPackageController;
+use App\Http\Controllers\Api\BbmKpiController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KlwFieldController;
@@ -38,6 +41,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/bbm/getcodes', [BbmCodeController::class, 'index']);
     Route::get('/bbm/getkpis', [BbmCodeController::class, 'kpis']);
 
+    Route::get('/bbmkpi/getselected/{kpi}', [BbmKpiController::class, 'getselected']);
+    Route::get('/bbmkpi/getnotselected/{kpi}', [BbmKpiController::class, 'getnotselected']);
+    Route::post('/bbmkpi/{kpi}/{bbmcode}', [BbmKpiController::class, 'store']);
+
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
 
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
@@ -48,11 +55,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/umdlkpi/getallscores/', array(UmdlKpiValuesController::class, 'getallscores'));
     Route::get('/umdlkpi/totalsperkpi/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpi'));
 
-
-    Route::apiResource('/companies', CompanyController::class);
+    Route::apiResource('/bbmcodes', BbmCodeController::class);
+    Route::apiResource('/bbmkpi', BbmKpiController::class);
+    Route::apiResource('/bbmgispackages', BbmGisPackageController::class);
+    Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     /*
 
-    Route::apiResource('/users', UserController::class);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/blocks', BlockController::class);
     Route::apiResource('/icons', IconController::class);

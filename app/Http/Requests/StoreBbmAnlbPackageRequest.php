@@ -22,7 +22,7 @@ class StoreBbmAnlbPackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'anlb_number' => 'required|integer',
+            'anlb_number' => 'required|string',
             'anlb_letters' => 'required|string',
             'code_id' => 'required|integer',
         ];

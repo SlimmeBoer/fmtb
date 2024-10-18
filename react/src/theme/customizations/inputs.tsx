@@ -61,7 +61,7 @@ export const inputsCustomizations: Components<Theme> = {
               backgroundColor: gray[900],
               backgroundImage: `linear-gradient(to bottom, ${gray[700]}, ${gray[800]})`,
               boxShadow: `inset 0 1px 0 ${gray[600]}, inset 0 -1px 0 1px hsl(220, 0%, 0%)`,
-              border: `1px solid ${gray[700]}`,
+              border: `0px solid ${gray[700]}`,
               '&:hover': {
                 backgroundImage: 'none',
                 backgroundColor: gray[700],
@@ -257,8 +257,8 @@ export const inputsCustomizations: Components<Theme> = {
               size: 'small',
             },
             style: {
-              width: '2.25rem',
-              height: '2.25rem',
+              width: '1rem',
+              height: '1rem',
               padding: '0.25rem',
               [`& .${svgIconClasses.root}`]: { fontSize: '1rem' },
             },
@@ -268,8 +268,8 @@ export const inputsCustomizations: Components<Theme> = {
               size: 'medium',
             },
             style: {
-              width: '2.5rem',
-              height: '2.5rem',
+              width: '2rem',
+              height: '2rem',
             },
           },
         ],

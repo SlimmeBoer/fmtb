@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('anlb_number');
             $table->string('anlb_letters');
-            $table->string('code_id');
+            $table->foreignId('code_id');
             $table->timestamps();
         });
     }

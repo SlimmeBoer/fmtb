@@ -11,9 +11,12 @@ import OverzichtIndividueel from "./views/overview/OverzichtIndividueel.jsx";
 import KLWData from "./views/klw/KLWData.jsx";
 import GISImporteren from "./views/gis/GISImporteren.jsx";
 import GISData from "./views/gis/GISData.jsx";
-import Settings from "./views/admin/Settings.jsx";
+import BBMCodeSettings from "./views/settings/BBMCodeSettings.jsx";
 import About from "./views/admin/About.jsx";
 import ImporteerMBPSMA from "./views/klw/ImporteerMBPSMA.jsx";
+import BBMKPISettings from "./views/settings/BBMKPISettings.jsx";
+import BBMGISSettings from "./views/settings/BBMGISSettings.jsx";
+import BBMANLbSettings from "./views/settings/BBMANLbSettings.jsx";
 
 const router = createBrowserRouter([
     {
@@ -69,8 +72,20 @@ const router = createBrowserRouter([
                 element: <GISData/>
             },
             {
-                path: '/settings',
-                element: <Settings/>
+                path: '/settings/bbmcodes',
+                element: <BBMCodeSettings/>
+            },
+            {
+                path: '/settings/bbmkpis',
+                element: <BBMKPISettings/>
+            },
+            {
+                path: '/settings/scangis',
+                element: <BBMGISSettings/>
+            },
+            {
+                path: '/settings/anlb',
+                element: <BBMANLbSettings/>
             },
             {
                 path: '/about',

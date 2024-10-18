@@ -256,8 +256,8 @@ export const inputsCustomizations = {
               size: 'small',
             },
             style: {
-              width: '2.25rem',
-              height: '2.25rem',
+              width: '1.75rem',
+              height: '1.75rem',
               padding: '0.25rem',
               [`& .${svgIconClasses.root}`]: { fontSize: '1rem' },
             },

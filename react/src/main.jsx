@@ -23,10 +23,10 @@ const myTheme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={myTheme}>
-        <React.StrictMode>
+
             <ContextProvider>
                 <RouterProvider router={router}/>
             </ContextProvider>
-        </React.StrictMode>
+
     </ThemeProvider>,
 )

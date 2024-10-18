@@ -320,7 +320,7 @@ export const rows: GridRowsProp = [
   },
   {
     id: 14,
-    pageTitle: 'Account Settings - Preferences',
+    pageTitle: 'Account BBMCodeSettings - Preferences',
     status: 'Online',
     eventCount: 7853,
     users: 18240,
@@ -592,7 +592,7 @@ export const rows: GridRowsProp = [
   },
   {
     id: 33,
-    pageTitle: 'Settings - Privacy Controls',
+    pageTitle: 'BBMCodeSettings - Privacy Controls',
     status: 'Offline',
     eventCount: 6789,
     users: 27689,
