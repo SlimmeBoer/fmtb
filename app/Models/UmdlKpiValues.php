@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
- * @method static where(string $string, $company_id)
+ * @method static where(array $array)
  */
 class UmdlKpiValues extends Model
 {

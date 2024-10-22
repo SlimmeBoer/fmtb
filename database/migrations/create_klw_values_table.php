@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('klw_values', function (Blueprint $table) {
             $table->id();
-            $table->integer('dump_id');
-            $table->integer('field_id');
+            $table->foreignId('dump_id');
+            $table->foreignId('field_id');
             $table->string('value');
             $table->timestamps();
         });

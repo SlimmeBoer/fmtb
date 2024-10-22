@@ -24,4 +24,14 @@ class KlwValue extends Model
         'field_id',
         'value',
     ];
+
+    public function klwDump()
+    {
+        return $this->belongsTo(KlwDump::class, 'dump_id', 'id');
+    }
+
+    public function klwField()
+    {
+        return $this->belongsTo(KlwField::class, 'field_id');
+    }
 }

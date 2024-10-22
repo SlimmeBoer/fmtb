@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static firstOrCreate(string[] $array)
  * @method static firstOrNew(array $array)
  * @method static where(array $array)
+ * @method static select(string $string, string $string1)
  */
 class Company extends Model
 {
@@ -39,6 +40,11 @@ class Company extends Model
     public function collectives()
     {
         return $this->belongsToMany(UmdlCollective::class, 'umdl_collective_companies', 'company_id','collective_id');
+    }
+
+    public function klwDumps()
+    {
+        return $this->hasMany(KlwDump::class, 'company_id', 'id');
     }
 
 }

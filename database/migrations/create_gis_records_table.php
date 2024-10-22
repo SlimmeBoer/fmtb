@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('gis_records', function (Blueprint $table) {
             $table->id();
-            $table->integer('dump_id');
-            $table->integer('company_id');
+            $table->foreignId('dump_id');
+            $table->foreignId('company_id');
             $table->string('eenheid_code');
             $table->float('lengte');
             $table->float('breedte');

@@ -13,6 +13,7 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import PersonIcon from '@mui/icons-material/Person';
 import BadgeIcon from '@mui/icons-material/Badge';
+import TableChartIcon from '@mui/icons-material/TableChart';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 
@@ -21,6 +22,7 @@ const mainItems = [
     {text: 'Overzicht totaal', icon: <AnalyticsIcon/>, link: '/overzicht/totaal'},
     {text: 'Overzicht collectief', icon: <AnalyticsIcon/>, link: '/overzicht/collectief'},
     {text: 'Overzicht individueel', icon: <AnalyticsIcon/>, link: '/overzicht/individueel'},
+    {text: 'Managementdata', icon: <TableChartIcon/>, link: '/overzicht/managementdata'},
 ];
 
 const klwItems = [

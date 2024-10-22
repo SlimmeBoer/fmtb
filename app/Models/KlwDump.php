@@ -25,5 +25,17 @@ class KlwDump extends Model
         'filename',
     ];
 
+    // A dump belongs to a company
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
+    // A dump has many field values
+    public function klwValues()
+    {
+        return $this->hasMany(KlwValue::class, 'dump_id', 'id');
+    }
+
 
 }

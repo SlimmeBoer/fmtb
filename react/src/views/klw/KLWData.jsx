@@ -2,6 +2,7 @@
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
+import KLWOverview from "../../components/data/KLWOverview.jsx";
 
 export default function KLWData() {
 
@@ -11,6 +12,7 @@ export default function KLWData() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 Kringloopwijzer - Data
             </Typography>
+            <KLWOverview />
         </Box>
     )
 

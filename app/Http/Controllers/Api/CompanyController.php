@@ -7,10 +7,13 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+use App\Models\KlwField;
+use App\Models\KlwValue;
 use App\Models\KvkNumber;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCompanyProperties;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Log;
 
@@ -71,6 +74,53 @@ class CompanyController extends Controller
         return UmdlCompanyProperties::where('company_id', $id)->first();
     }
 
+    public function getCompanyFields(Request $request)
+    {
+        // Get the fieldnames from the request
+        $fieldNames = $request->input('fields');
+
+        // Fetch the fields by the provided fieldnames
+        $fields = KlwField::whereIn('fieldname', $fieldNames)->get();
+        $fieldIds = $fields->pluck('id')->toArray();
+
+        // Fetch companies with their related dumps
+        $companies = Company::select('companies.id', 'companies.name')
+            ->with('klwDumps')
+            ->get();
+
+        // Prepare the response data
+        $data = [];
+
+        foreach ($companies as $company) {
+            foreach ($company->klwDumps as $dump) {
+                $companyData = [
+                    'row_id' => $company->id . '-' . $dump->id,  // Unique identifier for the row
+                    'id' => $company->id,
+                    'name' => $company->name,
+                    'year' => $dump->year,  // Include the dump year
+                ];
+
+                // Fetch all values for this dump in a key-value format (field_id => value)
+                $klwValues = KlwValue::where('dump_id', $dump->id)
+                    ->whereIn('field_id', $fieldIds)
+                    ->get()
+                    ->keyBy('field_id');
+
+                // For each field, get the corresponding value from this dump
+                foreach ($fields as $field) {
+                    $companyData[$field->fieldname] = isset($klwValues[$field->id])
+                        ? $klwValues[$field->id]->value
+                        : null;
+                }
+
+                // Add this dump's data to the result
+                $data[] = $companyData;
+            }
+        }
+
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -78,6 +128,8 @@ class CompanyController extends Controller
     {
         //
     }
+
+
 
     /**
      * Store a newly created resource in storage.

@@ -18,6 +18,7 @@ import BBMGISSettings from "./views/settings/BBMGISSettings.jsx";
 import BBMANLbSettings from "./views/settings/BBMANLbSettings.jsx";
 import Users from "./views/users/Users.jsx";
 import Roles from "./views/users/Roles.jsx";
+import ManagementData from "./views/overview/ManagementData.jsx";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: '/overzicht/individueel',
                 element: <OverzichtIndividueel />
+            },
+            {
+                path: '/overzicht/managementdata',
+                element: <ManagementData/>
             },
             {
                 path: '/overzicht/individueel/:id',

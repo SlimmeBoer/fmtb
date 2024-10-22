@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static firstOrCreate(array $array)
  * @method static firstOrNew(array $array)
+ * @method static whereIn(string $string, $fieldNames)
  */
 class KlwField extends Model
 {

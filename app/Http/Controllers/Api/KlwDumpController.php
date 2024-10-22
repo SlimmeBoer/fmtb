@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKlwDumpRequest;
 use App\Http\Requests\UpdateKlwDumpRequest;
+use App\Http\Resources\KlwDumpResource;
 use App\Libraries\ExcelParser\ExcelParser;
 use App\Libraries\KLWParser\KLWParser;
 use App\Models\Audio;
@@ -13,6 +14,7 @@ use App\Models\KlwDump;
 use App\Models\KvkNumber;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCollectivePostalcode;
+use App\Models\UmdlKpiValues;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -24,7 +26,13 @@ class KlwDumpController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::all();
+        $klwDumps = KlwDump::all();
+
+        return response()->json([
+            'companies' => $companies,
+            'klwDumps' => KlwDumpResource::collection($klwDumps)
+        ]);
     }
 
     /**
@@ -72,7 +80,12 @@ class KlwDumpController extends Controller
      */
     public function destroy(KlwDump $klwDump)
     {
-        //
+        //1. Delete KPI-values for the corresponding company and year
+        $umdlKpiValues = UmdlKpiValues::where(['company_id' => $klwDump->company_id, 'year' => $klwDump->year])->first();
+        $umdlKpiValues->delete();
+
+        $klwDump->delete();
+        return response()->json(['success' => true]);
     }
 
     /**

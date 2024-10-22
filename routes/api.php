@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/companies/index', [CompanyController::class, 'index']);
     Route::get('/companies/getcompany/{company}', [CompanyController::class, 'getcompany']);
     Route::get('/companies/getproperties/{company}', [CompanyController::class, 'getproperties']);
-
+    Route::get('/companies/fields', [CompanyController::class, 'getCompanyFields']);
 
     Route::get('/bbm/getcodes', [BbmCodeController::class, 'index']);
     Route::get('/bbm/getkpis', [BbmCodeController::class, 'kpis']);
@@ -50,6 +50,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
     Route::put('/klwdump/uploadexcel', [KlwDumpController::class, 'uploadexcel']);
+    Route::get('/klwdump', [KlwDumpController::class, 'index']);
+    Route::delete('/klwdump/{klwDump}', [KlwDumpController::class, 'destroy']);
 
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
     Route::get('/umdlkpi/getcollectivescores/{collective}/', array(UmdlKpiValuesController::class, 'getcollectivescores'));
