@@ -1,13 +1,21 @@
 import React, { useState } from "react";
-import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
+import {Box, Button, Typography, CircularProgress, Alert, FormGroup} from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 import axiosClient from "../../axios_client.js";
 import {useTranslation} from "react-i18next";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const KLWUploader = () => {
     const [files, setFiles] = useState([]);
     const [feedback, setFeedback] = useState({});
+    const [saveFields, setSaveFields] = useState(false);
     const {t} = useTranslation();
+
+    const changeSaveFields = () => {
+        setSaveFields(!saveFields)
+        console.log(saveFields)
+    };
 
     const handleFileChange = (event) => {
         const selectedFiles = Array.from(event.target.files);
@@ -19,6 +27,7 @@ const KLWUploader = () => {
                 error: false,
                 message: "",
             };
+
         });
         setFeedback(newFeedback);
 
@@ -30,6 +39,7 @@ const KLWUploader = () => {
         filesToUpload.forEach((file) => {
             const formData = new FormData();
             formData.append("file", file);
+            formData.append("saveFields", saveFields);
             formData.append("_method", "put");
 
             // Assuming the Laravel backend accepts file upload via /api/upload
@@ -66,10 +76,13 @@ const KLWUploader = () => {
 
     return (
         <Box sx={{ width: "80%", padding: 3, border: "1px solid #ccc", borderRadius: 4 }}>
-            <Typography variant="h6" gutterBottom>
-                Multi-file Uploader
-            </Typography>
-
+            <FormGroup>
+                <FormControlLabel control={<Checkbox
+                    checked={saveFields}
+                    onChange={changeSaveFields}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />} label="Sla alle KLW-velden op in de database (volledige upload)" />
+            </FormGroup><br /><br />
             <Button
                 variant="contained"
                 component="label"

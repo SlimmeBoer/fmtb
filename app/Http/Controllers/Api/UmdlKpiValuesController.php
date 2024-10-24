@@ -74,8 +74,13 @@ class UmdlKpiValuesController extends Controller
 
     public function getscores($company) : array
     {
+        //1./ Get individual scores
         $umdlscores = new UMDLKPIScores();
-        return $umdlscores->getScores($company);
+        return array_merge($umdlscores->getScores($company),
+            $umdlscores->collectiveAverages($company),
+            $umdlscores->totalAverages());
+
+
     }
 
     public function getcollectivescores($collective_id) : array
@@ -89,7 +94,6 @@ class UmdlKpiValuesController extends Controller
 
             foreach ($collective_companies as $collective_company)
             {
-                Log::info($collective_company->company_id);
                 $company = Company::where('id', $collective_company->company_id)->first();
 
                 $company_scores = $umdl_scores->getScores($collective_company->company_id);

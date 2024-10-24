@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static firstOrNew(array $array)
+ * @method static where(string $string, $dump_id)
+ * @method static insert(array $gisRecords)
+ */
 class GisRecord extends Model
 {
     use HasFactory;
@@ -23,4 +28,10 @@ class GisRecord extends Model
         'oppervlakte',
         'eenheden',
     ];
+
+    // Define the inverse of the relationship with GisDump
+    public function gisDump()
+    {
+        return $this->belongsTo(GisDump::class, 'dump_id');
+    }
 }

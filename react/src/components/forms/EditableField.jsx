@@ -19,7 +19,6 @@ const EditableField = ({ label, type, value, isEditing, onChange, required, erro
                     error={error.errorstatus}
                     helperText={error.helperText}
                     variant="outlined"
-                    fullWidth
                     align="center"
                 />
             ) : (

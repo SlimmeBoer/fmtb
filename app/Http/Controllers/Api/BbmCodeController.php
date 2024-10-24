@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBbmCodeRequest;
 use App\Http\Requests\UpdateBbmCodeRequest;
 use App\Http\Resources\BbmCodeResource;
+use App\Models\BbmAnlbPackage;
 use App\Models\BbmCode;
+use App\Models\BbmGisPackage;
+use App\Models\BbmKpi;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -73,6 +76,16 @@ class BbmCodeController extends Controller
      */
     public function destroy(BbmCode $bbmcode) : Response
     {
+        // 1. Remove all the associated BBM-KPI-connections
+        BbmKpi::where('code_id',$bbmcode->id)->delete();
+
+        // 2. Remove all the associated GIS packages
+        BbmGisPackage::where('code_id',$bbmcode->id)->delete();
+
+        // 3. Remove all the associated ANLb packages
+        BbmAnlbPackage::where('code_id',$bbmcode->id)->delete();
+
+        // 4. Lastly, remove the code itself.
         $bbmcode->delete();
         return response("", 204);
     }

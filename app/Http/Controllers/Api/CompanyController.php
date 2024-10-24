@@ -7,12 +7,14 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
+use App\Models\KlwDump;
 use App\Models\KlwField;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCompanyProperties;
+use App\Models\UmdlKpiValues;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Log;
@@ -34,9 +36,10 @@ class CompanyController extends Controller
      */
     public function getcompany($id): Company
     {
+        // 1. Get all data
         $company = Company::where('id', $id)->first();
 
-        // Add KVK-numbers
+        // 2. Add KVK-numbers
         $kvk_string = "";
         $kvks = KvkNumber::where('company_id', $id)->get();
 
@@ -49,19 +52,19 @@ class CompanyController extends Controller
         }
         $company->kvks = $kvk_string;
 
-        // Add collectieven
-        $collectief_string = "";
+        // 3. Add collectieven
         $collectief_companies = UmdlCollectiveCompany::where('company_id', $id)->get();
-
+        $collectieven_data = array();
         foreach ($collectief_companies as $collectief_company) {
+
             $collectief = UmdlCollective::where('id', $collectief_company->collective_id)->first();
-            $collectief_string .= $collectief->name . ", ";
+            $collectieven_data[] = array(
+                'id' => $collectief->id,
+                'name'=> $collectief->name,
+            );
         }
 
-        if ($collectief_string != "") {
-            $collectief_string = substr($collectief_string, 0, -2);
-        }
-        $company->collectieven = $collectief_string;
+        $company->collectieven = $collectieven_data;
 
         return $company;
     }
@@ -72,6 +75,16 @@ class CompanyController extends Controller
     public function getproperties($id): UmdlCompanyProperties
     {
         return UmdlCompanyProperties::where('company_id', $id)->first();
+    }
+
+    public function saveproperties(Request $request)
+    {
+        $properties = UmdlCompanyProperties::where('company_id', $request['id'])->first();
+
+        $properties->name = $request['name'];
+        $properties->save();
+
+        return response()->json(['success' => true]);
     }
 
     public function getCompanyFields(Request $request)
@@ -160,7 +173,9 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $data = $request->validated();
+        $company->update($data);
+        return new CompanyResource($company);
     }
 
     /**
@@ -168,6 +183,33 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        //1. Delete KPI-values for the corresponding company
+        UmdlKpiValues::where('company_id', $company->id)->delete();
+
+        // 2. Remove all connections to collectives
+        UmdlCollectiveCompany::where('company_id', $company->id)->delete();
+
+        // 3. Remove all KVK-numbers associated to this company
+        KvkNumber::where('company_id', $company->id)->delete();
+
+        // 4. Delete company properties for the corresponding company
+        UmdlCompanyProperties::where('company_id', $company->id)->delete();
+
+        // 5. Get all dumps for this company
+        $dumps = KlwDump::where('company_id', $company->id)->get();
+
+        foreach ($dumps as $dump)
+        {
+            // 6. Delete all Klw values associated with this dump
+            KlwValue::where('dump_id', $dump->id)->delete();
+        }
+
+        //7. Remove the dumps themselves.
+        KlwDump::where('company_id', $company->id)->delete();
+
+        // 8. Finally, remove the company itself.
+        $company->delete();
+
+        return response()->json(['success' => true]);
     }
 }

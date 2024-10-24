@@ -19,6 +19,9 @@ import BBMANLbSettings from "./views/settings/BBMANLbSettings.jsx";
 import Users from "./views/users/Users.jsx";
 import Roles from "./views/users/Roles.jsx";
 import ManagementData from "./views/overview/ManagementData.jsx";
+import Dashboard2 from "./views/overview/Dashboard2.jsx";
+import PrintPDF from "./components/data/PrintPageButton.jsx";
+import PrintPageButton from "./components/data/PrintPageButton.jsx";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <Dashboard/>
+            },
+            {
+                path: '/dashboard2',
+                element: <Dashboard2/>
             },
             {
                 path: '/overzicht/totaal',

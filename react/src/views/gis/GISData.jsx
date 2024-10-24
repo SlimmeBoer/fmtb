@@ -2,6 +2,7 @@
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
+import GisOverview from "../../components/data/GisOverview.jsx";
 
 export default function GISData() {
 
@@ -11,6 +12,7 @@ export default function GISData() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 ScanGIS - Data
             </Typography>
+            <GisOverview />
         </Box>
     )
 

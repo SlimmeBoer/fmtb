@@ -8,9 +8,11 @@ use App\Http\Controllers\Api\BbmCodeController;
 use App\Http\Controllers\Api\BbmGisPackageController;
 use App\Http\Controllers\Api\BbmKpiController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KlwFieldController;
 use App\Http\Controllers\Api\UmdlCollectiveController;
+use App\Http\Controllers\Api\UmdlCompanyPropertiesController;
 use App\Http\Controllers\Api\UmdlKpiValuesController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -37,7 +39,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/companies/index', [CompanyController::class, 'index']);
     Route::get('/companies/getcompany/{company}', [CompanyController::class, 'getcompany']);
     Route::get('/companies/getproperties/{company}', [CompanyController::class, 'getproperties']);
+    Route::put('/companies/update/{company}', [CompanyController::class, 'update']);
     Route::get('/companies/fields', [CompanyController::class, 'getCompanyFields']);
+
+    Route::put('/companyproperties/update/{umdlcompanyproperties}', [UmdlCompanyPropertiesController::class, 'update']);
 
     Route::get('/bbm/getcodes', [BbmCodeController::class, 'index']);
     Route::get('/bbm/getkpis', [BbmCodeController::class, 'kpis']);
@@ -47,6 +52,11 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/bbmkpi/{kpi}/{bbmcode}', [BbmKpiController::class, 'store']);
 
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
+
+    Route::put('/gisdump/uploadexcel', [GisDumpController::class, 'uploadexcel']);
+    Route::get('/gisdump', [GisDumpController::class, 'index']);
+    Route::get('/gisdump/{id}', [GisDumpController::class, 'show']);
+    Route::delete('/gisdump/{id}', [GisDumpController::class, 'destroy']);
 
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
     Route::put('/klwdump/uploadexcel', [KlwDumpController::class, 'uploadexcel']);
@@ -63,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/bbmgispackages', BbmGisPackageController::class);
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     Route::apiResource('/users', UserController::class);
+    Route::apiResource('/companies', CompanyController::class);
     /*
 
     Route::apiResource('/categories', CategoryController::class);

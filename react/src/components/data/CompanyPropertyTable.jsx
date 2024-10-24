@@ -6,31 +6,67 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
     TableRow,
     CircularProgress,
-    TextField, FormGroup
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
-import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Select, {selectClasses} from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
-import AgricultureIcon from "@mui/icons-material/Agriculture.js";
-import {IndiaFlag} from "../../internals/components/CustomIcons.jsx";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
+import IconButton from "@mui/material/IconButton";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
+import EditIcon from "@mui/icons-material/Edit";
+import EditableField from "../forms/EditableField.jsx";
+
 
 export default function CompanyPropertyTable(props) {
     const [properties, setProperties] = useState({});
     const [company, setCompany] = useState({});
-    const [mbp, setMbp] = useState({});
     const [loading, setLoading] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+
+    const initialFormState = {
+        id: props.company,
+        melkkoeien: '',
+        meetmelk_per_koe: '',
+        meetmelk_per_ha: '',
+        jongvee_per_10mk: '',
+        gve_per_ha: '',
+        kunstmest_per_ha: '',
+        opbrengst_grasland_per_ha: '',
+        re_kvem: '',
+        krachtvoer_per_100kg_melk: '',
+        veebenutting_n: '',
+        bodembenutting_n: '',
+        bedrijfsbenutting_n: '',
+    };
+
+    const fieldLabels = {
+        melkkoeien: 'Melkkoeien',
+        meetmelk_per_koe: 'Meetmelk per koe',
+        meetmelk_per_ha: 'Meetmelk per hectare',
+        jongvee_per_10mk: 'Jongvee per 10 melkkoeien',
+        gve_per_ha: 'GVE per hectare',
+        kunstmest_per_ha: 'Kunstmest per hectare',
+        opbrengst_grasland_per_ha: 'Opbnrengst grasland per ha',
+        re_kvem: 'RE / KVEM',
+        krachtvoer_per_100kg_melk: 'Krachtvoer per 100kg melk',
+        veebenutting_n: 'Veebenutting N',
+        bodembenutting_n: 'Bodembenutting N',
+        bedrijfsbenutting_n: 'Bedrijfsbenutting N',
+    };
+
+    const initialErrorState = Object.keys(initialFormState).reduce((acc, key) => {
+        acc[key] = { errorstatus: false, helperText: '' };
+        return acc;
+    }, {});
+
+    const [formData, setFormData] = useState(initialFormState);
+    const [tempformData, setTempFormData] = useState(initialFormState);
+    const [formErrors, setFormErrors] = useState(initialErrorState);
 
     useEffect(() => {
         getProperties();
@@ -43,8 +79,8 @@ export default function CompanyPropertyTable(props) {
                 .then(({data}) => {
                     setLoading(false);
                     setCompany(data);
-                    setProperties(makeProperties(data));
-                    setMbp(makeMbp(data));
+                    setFormData(data);
+                    setTempFormData(data);
                 })
                 .catch(() => {
                     setLoading(false);
@@ -52,112 +88,102 @@ export default function CompanyPropertyTable(props) {
         }
     }
 
-    const makeProperties = (data) => [
-        { title: "Hectares totaal:", value: parseFloat(data.opp_totaal).toFixed(1), },
-        { title: "Melkkoeien:", value: data.melkkoeien, },
-        { title: "Meetmelk per koe:", value: data.meetmelk_per_koe, },
-        { title: "Meetmelk per hectare:", value: parseFloat(data.meetmelk_per_ha).toFixed(0), },
-        { title: "Jongvee per 10 mk:", value: data.jongvee_per_10mk, },
-        { title: "GVE bezetting per hectare:", value: parseFloat(data.gve_per_ha).toFixed(2), },
-        { title: "Kg N kunstmest per hectare:", value: data.kunstmest_per_ha, },
-        { title: "Opbrengst grasland per hectare:", value: data.opbrengst_grasland_per_ha, },
-        { title: "Re/KVEM:", value: data.re_kvem, },
-        { title: "Kg krachtvoer per 100 kg melk:", value: data.krachtvoer_per_100kg_melk, },
-        { title: "Veebenutting N:", value: data.veebenutting_n + "%", },
-        { title: "Bodembenutting N:", value: data.bodembenutting_n + "%", },
-        { title: "Bedrijfsbenutting N:", value: data.bedrijfsbenutting_n + "%", },
-    ];
-    const makeMbp = (data) => [
-        { title: "Website", value: data.website, },
-        { title: "Ontvangstruimte", value: data.ontvangstruimte, },
-        { title: "Winkel", value: data.winkel, },
-        { title: "Educatie", value: data.educatie, },
-        { title: "Meerjarige monitoring", value: data.meerjarige_monitoring, },
-        { title: "Open dagen", value: data.open_dagen, },
-        { title: "Wandelpad", value: data.wandelpad, },
-        { title: "Erkend demobedrijf", value: data.erkend_demobedrijf, },
-        { title: "Bed & Breakfast", value: data.bed_and_breakfast, },
-    ];
+    const handleFieldChange = (name, value) => {
+        setTempFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
-    const menuItems = [
-        { value: 0, title: "Onbekend", },
-        { value: 1, title: "Volvelds gewasbeschermingsmiddelen",},
-        { value: 2, title: "Ingevulde MBP",},
-        { value: 3, title: "Ingevulde Milieumaatlat",},
-        { value: 4, title: "Pleksgewijs grasland, volvelds maisland",},
-        { value: 5, title: "Pleksgewijs hele bedrijf",},
-        { value: 6, title: "On the way to Planet Proof / AH programma",},
-        { value: 7, title: "Beterlevnen Keurmerk",},
-        { value: 8, title: "Biologisch",},
-        { value: 9, title: "Geen middelen",},
-    ];
+    const toggleEditMode = () => {
+        setIsEditing(!isEditing);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        resetErrorData(formErrors, setFormErrors)
+        setSubmitting(true);
+        setFormData(tempformData);
+        axiosClient.put(`/companyproperties/update/${tempformData.id}`, tempformData)
+            .then(response => {
+                setIsEditing(false);
+                setSubmitting(false);
+            })
+            .catch(error => {
+                const response = error.response;
+                if (response && response.status === 422) {
+                    if (response.data.errors) {
+                        setErrorData(response.data.errors, formErrors, setFormErrors)
+                    }
+                }
+                setSubmitting(false);
+            })
+    };
+
+    const cancelSubmit = (e) => {
+        e.preventDefault();
+        setTempFormData(formData);
+        setIsEditing(false);
+    };
 
     return (
-        <Box>
-            <Card variant="outlined"  sx={{mt: 2}}>
-                <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
+        <Card variant="outlined">
+            <Stack direction="row" gap={2}
+                   sx={{
+                       display: {xs: 'none', md: 'flex'},
+                       width: '100%',
+                       alignItems: {xs: 'flex-start', md: 'center'},
+                       justifyContent: 'space-between',
+                       maxWidth: {sm: '100%'},
+                       pt: 1.5, pb: 4,
+                   }}>
+                <Stack direction="row" gap={2}>
                     <AssessmentOutlinedIcon/>
-                    <Typography component="h6" variant="h6" >
+                    <Typography component="h6" variant="h6">
                         Managementinformatie
                     </Typography>
                 </Stack>
-                <TableContainer sx={{minHeight: 100}}>
-                    {loading && <CircularProgress/>}
-                    {!loading && company.id != null &&
-                        <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
-                            <TableBody>
-                                {properties.map((p, index) => {
-                                    return (
-                                        <TableRow key={index}>
-                                            <TableCell sx={{width: 100}}>{p.title}</TableCell>
-                                            <TableCell sx={{width: 100, fontWeight: 'bold'}}>{p.value}</TableCell>
-                                        </TableRow>
-                                    )
-                                })}
-                            </TableBody>
-                        </Table>}
-                </TableContainer>
-            </Card>
-            <Card  variant="outlined" sx={{mt: 2}}>
-                <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
-                    <SpaOutlinedIcon/>
-                    <Typography component="h6" variant="h6" >
-                        Gewasbeschermingsmiddelen
-                    </Typography>
+                <Stack direction="row" gap={2}>
+                    {isEditing ? (
+                        <>
+                            <IconButton variant="outlined" onClick={handleSubmit}>
+                                <SaveIcon/>
+                            </IconButton>
+                            <IconButton variant="outlined" onClick={cancelSubmit}>
+                                <CancelIcon/>
+                            </IconButton>
+                        </>
+                    ) : (
+                        <IconButton variant="outlined" onClick={toggleEditMode}>
+                            <EditIcon/>
+                        </IconButton>)}
                 </Stack>
-                {loading && <CircularProgress/>}
-                {!loading && company.id != null &&
-                    <TextField select
-                        value={company.mbp}
-                        onChange={(e) => props.changeHandler(e)}
-                        fullWidth
-                    >
-                        {menuItems.map(mi => {
-                            return (
-                                <MenuItem value={mi.value} key={mi.value}>
-                                    <ListItemText primary={mi.title} />
-                                </MenuItem>
-                            )
-                        })}
-                    </TextField>}
-            </Card>
-            <Card variant="outlined"  sx={{mt: 2}}>
-                <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
-                    <Diversity3OutlinedIcon/>
-                    <Typography component="h6" variant="h6" >
-                        Sociaal-maatschappelijke activiteiten
-                    </Typography>
-                </Stack>
-                {loading && <CircularProgress/>}
-                {!loading && company.id != null &&
-                <FormGroup>
-                    {mbp.map((m, index) => {
-                        return (
-                            <FormControlLabel key={index} control={<Checkbox checked={!!m.value} />} label={m.title} />
-                        )
-                    })}
-                </FormGroup>}
-            </Card>
-        </Box>
+            </Stack>
+            <TableContainer sx={{minHeight: 100}}>
+                {(loading || submitting) && <CircularProgress/>}
+                {!loading && !submitting && company.id != null &&
+                    <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
+                        <TableBody>
+                            {Object.keys(initialFormState).map((key, index) => (
+                                fieldLabels[key] && (
+                                    <TableRow key={"property-" + index}>
+                                        <TableCell sx={{ width: 50 }}>{fieldLabels[key]}:</TableCell>
+                                        <TableCell sx={{ width: 150, fontWeight: 'bold' }}>
+                                            <EditableField
+                                                key={key}
+                                                onChange={(value) => handleFieldChange(key, value)}
+                                                value={tempformData[key]}
+                                                error={formErrors[key]}
+                                                isEditing={isEditing}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            ))
+                            }
+                        </TableBody>
+                    </Table>}
+            </TableContainer>
+        </Card>
     );
 }

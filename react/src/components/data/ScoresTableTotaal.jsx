@@ -9,7 +9,7 @@ import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import Link from "@mui/material/Link";
 
-export default function ScoresTableTotaal() {
+export default function ScoresTableTotaal(props) {
     const [scores, setScores] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -52,6 +52,7 @@ export default function ScoresTableTotaal() {
                         </TableHead>
                         <TableBody>
                             {scores.map((s, index) => {
+                                if (index <= props.limit)
                                 return (
                                     <TableRow key={index} sx={{margin: 0}}>
                                         <TableCell component="th" scope="row">

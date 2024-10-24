@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUmdlCompanyPropertiesRequest;
 use App\Http\Requests\UpdateUmdlCompanyPropertiesRequest;
+use App\Http\Resources\UmdlCompanyPropertiesResource;
 use App\Models\UmdlCompanyProperties;
 
 class UmdlCompanyPropertiesController extends Controller
@@ -36,7 +37,7 @@ class UmdlCompanyPropertiesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UmdlCompanyProperties $umdlCompanyProperties)
+    public function show(UmdlCompanyProperties $umdlcompanyproperties)
     {
         //
     }
@@ -44,7 +45,7 @@ class UmdlCompanyPropertiesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UmdlCompanyProperties $umdlCompanyProperties)
+    public function edit(UmdlCompanyProperties $umdlcompanyproperties)
     {
         //
     }
@@ -52,15 +53,17 @@ class UmdlCompanyPropertiesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUmdlCompanyPropertiesRequest $request, UmdlCompanyProperties $umdlCompanyProperties)
+    public function update(UpdateUmdlCompanyPropertiesRequest $request, UmdlCompanyProperties $umdlcompanyproperties)
     {
-        //
+        $data = $request->validated();
+        $umdlcompanyproperties->update($data);
+        return new UmdlCompanyPropertiesResource($umdlcompanyproperties);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UmdlCompanyProperties $umdlCompanyProperties)
+    public function destroy(UmdlCompanyProperties $umdlcompanyproperties)
     {
         //
     }

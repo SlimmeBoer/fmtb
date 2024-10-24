@@ -30,10 +30,10 @@ class UpdateCompanyRequest extends FormRequest
             'province' => 'required|string|max:50',
             'brs' => 'required|string|max:15',
             'ubn' => 'required|string|max:15',
-            'phone' => 'string|max:15',
-            'bank_account' => 'string|max:25',
-            'bank_account_name' => 'string|max:50',
-            'email' => 'string|max:50',
+            'phone' => 'max:15',
+            'bank_account' => 'max:25',
+            'bank_account_name' => 'max:50',
+            'email' => 'max:50',
             'type' =>  'required|string|max:50',
             'bio' => 'required|boolean'
         ];

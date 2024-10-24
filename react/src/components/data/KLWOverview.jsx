@@ -22,9 +22,11 @@ import axiosClient from "../../axios_client.js";
 const KLWOverview = () => {
     const [companies, setCompanies] = useState([]);
     const [klwDumps, setKlwDumps] = useState([]);
-    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogDumpOpen, setDialogDumpOpen] = useState(false);
+    const [dialogCompanyOpen, setDialogCompanyOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [selectedDumpId, setSelectedDumpId] = useState(null);
+    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
     useEffect(() => {
         setLoading(true);
@@ -40,19 +42,37 @@ const KLWOverview = () => {
             });
     }, []);
 
-    const handleDeleteClick = (dumpId) => {
+    const handleDeleteDumpClick = (dumpId) => {
         setSelectedDumpId(dumpId);
-        setDialogOpen(true);
+        setDialogDumpOpen(true);
     };
 
-    const confirmDelete = () => {
+    const confirmDumpDelete = () => {
         axiosClient.delete(`/klwdump/${selectedDumpId}`)
             .then(() => {
                 setKlwDumps(klwDumps.filter(dump => dump.id !== selectedDumpId));
-                setDialogOpen(false);
+                setDialogDumpOpen(false);
             })
             .catch(error => {
                 console.error("There was an error deleting the dump!", error);
+
+
+            });
+    };
+
+    const handleDeleteCompanyClick = (companyId) => {
+        setSelectedCompanyId(companyId);
+        setDialogCompanyOpen(true);
+    };
+
+    const confirmCompanyDelete = () => {
+        axiosClient.delete(`/companies/${selectedCompanyId}`)
+            .then(() => {
+                setCompanies(companies.filter(company => company.id !== selectedCompanyId));
+                setDialogCompanyOpen(false);
+            })
+            .catch(error => {
+                console.error("There was an error deleting the company!", error);
             });
     };
 
@@ -62,7 +82,7 @@ const KLWOverview = () => {
             return (
                 <Chip
                     label={year}
-                    onDelete={() => handleDeleteClick(dump.id)}
+                    onDelete={() => handleDeleteDumpClick(dump.id)}
                     deleteIcon={<DeleteIcon />}
                     variant="outlined"
                 />
@@ -80,6 +100,7 @@ const KLWOverview = () => {
                 <Table size="small" >
                     <TableHead>
                         <TableRow>
+                            <TableCell style={{ width: '5%' }}></TableCell>
                             <TableCell style={{ width: '60%' }}>Bedrijfsnaam</TableCell>
                             <TableCell>2021</TableCell>
                             <TableCell>2022</TableCell>
@@ -90,6 +111,9 @@ const KLWOverview = () => {
                     <TableBody>
                         {companies.map((company) => (
                             <TableRow key={company.id}>
+                                <TableCell><IconButton  onClick={() => handleDeleteCompanyClick(company.id)} aria-label="delete">
+                                    <DeleteIcon />
+                                </IconButton></TableCell>
                                 <TableCell>{company.name}</TableCell>
                                 <TableCell>{renderYearChip(company.id, '2021')}</TableCell>
                                 <TableCell>{renderYearChip(company.id, '2022')}</TableCell>
@@ -101,14 +125,25 @@ const KLWOverview = () => {
                 </Table>
             </TableContainer>}
 
-            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <Dialog open={dialogDumpOpen} onClose={() => setDialogDumpOpen(false)}>
                 <DialogTitle>Weet je het zeker?</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Weet je zeker dat je dit wilt verwijderen?</DialogContentText>
+                    <DialogContentText>Weet je zeker dat je deze dump wilt verwijderen?</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setDialogOpen(false)} color="primary">Annuleren</Button>
-                    <Button onClick={confirmDelete} color="primary">Verwijderen</Button>
+                    <Button onClick={() => setDialogDumpOpen(false)} color="primary">Annuleren</Button>
+                    <Button onClick={confirmDumpDelete} color="primary">Verwijderen</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog open={dialogCompanyOpen} onClose={() => setDialogCompanyOpen(false)}>
+                <DialogTitle>Weet je het zeker?</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Weet je zeker dat je dit bedrijf wilt verwijderen? Alle dumps, KPI-data en links met collectieven worden dan ook verwijderd voor dit bedrijf.</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDialogCompanyOpen(false)} color="primary">Annuleren</Button>
+                    <Button onClick={confirmCompanyDelete} color="primary">Verwijderen</Button>
                 </DialogActions>
             </Dialog>
         </>

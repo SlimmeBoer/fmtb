@@ -7,10 +7,12 @@ use App\Http\Requests\StoreKlwDumpRequest;
 use App\Http\Requests\UpdateKlwDumpRequest;
 use App\Http\Resources\KlwDumpResource;
 use App\Libraries\ExcelParser\ExcelParser;
+use App\Libraries\ExcelParser\GisParser;
 use App\Libraries\KLWParser\KLWParser;
 use App\Models\Audio;
 use App\Models\Company;
 use App\Models\KlwDump;
+use App\Models\KlwValue;
 use App\Models\KvkNumber;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCollectivePostalcode;
@@ -84,6 +86,10 @@ class KlwDumpController extends Controller
         $umdlKpiValues = UmdlKpiValues::where(['company_id' => $klwDump->company_id, 'year' => $klwDump->year])->first();
         $umdlKpiValues->delete();
 
+        //2. Delete all Klw values associated with this dump
+        KlwValue::where('dump_id', $klwDump->id)->delete();
+
+        //3. Remove the dump itself.
         $klwDump->delete();
         return response()->json(['success' => true]);
     }
@@ -139,7 +145,7 @@ class KlwDumpController extends Controller
             ));
 
             // 5. Store all fields and their values into the database.
-            $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id);
+            $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, $request['saveFields']);
         }
 
         return response(201);

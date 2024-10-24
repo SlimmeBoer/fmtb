@@ -3,6 +3,7 @@ import KLWUploader from "../../components/forms/KLWUploader.jsx";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
+import GisUploader from "../../components/forms/GisUploader.jsx";
 
 export default function GISImporteren() {
 
@@ -12,7 +13,7 @@ export default function GISImporteren() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 ScanGIS - Importeren
             </Typography>
-            <KLWUploader />
+           <GisUploader />
         </Box>
     )
 

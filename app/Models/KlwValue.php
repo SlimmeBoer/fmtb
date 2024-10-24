@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static firstOrCreate(array $array)
  * @method static select(string $string)
  * @method static firstOrNew(array $array)
+ * @method static insert(array $klwValueData)
  */
 class KlwValue extends Model
 {

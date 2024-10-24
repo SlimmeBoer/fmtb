@@ -1,13 +1,33 @@
 import React, { useState } from "react";
-import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
+import {Box, Button, Typography, CircularProgress, Alert, TextField} from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 import axiosClient from "../../axios_client.js";
 import {useTranslation} from "react-i18next";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
 
-const ExcelUploader = () => {
+const GisUploader = () => {
     const [files, setFiles] = useState([]);
+    const [year, setYear] = useState(2021);
     const [feedback, setFeedback] = useState({});
     const {t} = useTranslation();
+
+    const years = [
+        { value: 2020, title: "2020", },
+        { value: 2021, title: "2021",},
+        { value: 2022, title: "2022",},
+        { value: 2023, title: "2023",},
+        { value: 2024, title: "2024",},
+        { value: 2025, title: "2025",},
+        { value: 2026, title: "2026",},
+        { value: 2027, title: "2027",},
+        { value: 2028, title: "2028",},
+        { value: 2029, title: "2029",},
+    ];
+
+    const changeYear = (event) => {
+        setYear(event.target.value)
+    };
 
     const handleFileChange = (event) => {
         const selectedFiles = Array.from(event.target.files);
@@ -26,15 +46,18 @@ const ExcelUploader = () => {
         uploadFilesToBackend(selectedFiles);
     };
 
+
+
     const uploadFilesToBackend = async (filesToUpload) => {
         filesToUpload.forEach((file) => {
             const formData = new FormData();
             formData.append("file", file);
+            formData.append("year", year);
             formData.append("_method", "put");
 
             // Assuming the Laravel backend accepts file upload via /api/upload
             axiosClient
-                .post("/klwdump/uploadexcel", formData, {
+                .post("/gisdump/uploadexcel", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
@@ -52,7 +75,6 @@ const ExcelUploader = () => {
                 })
                 .catch((error) => {
                     // Handle error
-                    console.log(error);
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
@@ -67,6 +89,19 @@ const ExcelUploader = () => {
 
     return (
         <Box sx={{ width: "80%", padding: 3, border: "1px solid #ccc", borderRadius: 4 }}>
+
+            <TextField select
+                       value={year}
+                       onChange={(e) => changeYear(e)}
+            >
+                {years.map(y => {
+                    return (
+                        <MenuItem value={y.value} key={y.value}>
+                            <ListItemText primary={y.title} />
+                        </MenuItem>
+                    )
+                })}
+            </TextField>
 
             <Button
                 variant="contained"
@@ -111,4 +146,4 @@ const ExcelUploader = () => {
     );
 };
 
-export default ExcelUploader;
+export default GisUploader;

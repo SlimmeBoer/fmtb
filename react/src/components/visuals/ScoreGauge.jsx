@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {useEffect} from "react";
+import PercentageChip from "./PercentageChip.jsx";
 
 function GaugePointer() {
     const {valueAngle, outerRadius, cx, cy} = useGaugeState();
@@ -46,14 +47,16 @@ export default function ScoreGauge(props) {
     return (
         <Stack direction="row" gap={3}>
             <Box sx={{mt: 2, ml: 5}}>
-                <Typography  component="h1" variant="h1">
+                <Typography  variant="h1">
                     {props.text}
                 </Typography>
-                <Typography sx={{mt: 2}} component="h1" variant="body2">
-                   Gem. collectief:
+                <Typography sx={{mt: 2}} variant="body2">
+                   Gem. collectief: <strong>{props.score_col}</strong>&nbsp;
+                    <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_col} />
                 </Typography>
                 <Typography  component="h1" variant="body2">
-                    Gem. totaal:
+                    Gem. totaal: <strong>{props.score_tot}</strong>&nbsp;
+                    <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_tot} />
                 </Typography>
             </Box>
             <Gauge
@@ -74,7 +77,7 @@ export default function ScoreGauge(props) {
                     }
                 })}
                 height={150}
-                width={300}
+                width={250}
             >
                 <GaugeReferenceArc/>
                 <GaugePointer/>

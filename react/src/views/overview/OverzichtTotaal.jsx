@@ -20,7 +20,7 @@ export default function OverzichtCollectief() {
                     sx={{mb: (theme) => theme.spacing(2), mt: 2}}
                 >
                     <Grid size={{xs: 12, lg: 4}}>
-                        <ScoresTableTotaal />
+                        <ScoresTableTotaal limit={1000}/>
                     </Grid>
                     <Grid  size={{xs: 12, lg: 8}}>
                         <TotaalKPIs collective={0} />

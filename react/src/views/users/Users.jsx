@@ -123,7 +123,7 @@ export default function Users() {
                                         {u.id}
                                     </TableCell>
                                     <TableCell width="10%">
-                                        <Avatar src={import.meta.env.VITE_API_BASE_URL + '/' + u.image} alt={u.image} sx={{ width: 60, height: 60 }}/>
+                                        <Avatar src={import.meta.env.VITE_API_BASE_URL + '/' + u.image} alt={u.image} sx={{ width: 40, height: 40 }}/>
                                         </TableCell>
                                     <TableCell width="40%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
                                     <TableCell width="20%">{u.email}</TableCell>
