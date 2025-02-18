@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import BBMKPIDragger from "../../components/data/BBMKPIDragger.jsx";
 import Stack from "@mui/material/Stack";
-import LayersIcon from "@mui/icons-material/Layers.js";
+import LayersIcon from "@mui/icons-material/Layers";
 
 export default function BBMKPISettings() {
 

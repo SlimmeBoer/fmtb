@@ -11,7 +11,7 @@ import {CircularProgress} from "@mui/material";
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import AnlbPackageForm from "../../components/forms/AnlbPackageForm.jsx";
 import Card from "@mui/material/Card";
-import InfoIcon from "@mui/icons-material/Info.js";
+import InfoIcon from "@mui/icons-material/Info";
 import Grid from "@mui/material/Grid2";
 
 export default function BBMANLbSettings() {

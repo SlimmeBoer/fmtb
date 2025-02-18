@@ -20,9 +20,7 @@ import UserForm from "../../components/forms/UserForm.jsx";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import GroupIcon from '@mui/icons-material/Group';
-import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
-import LayersIcon from "@mui/icons-material/Layers.js";
 
 export default function Users() {
 
