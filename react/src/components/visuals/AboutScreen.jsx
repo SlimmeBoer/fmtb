@@ -7,6 +7,7 @@ import {useState} from "react";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {useTranslation} from "react-i18next";
 
 export default function AboutScreen() {
 
@@ -15,6 +16,7 @@ export default function AboutScreen() {
         setOpen(!open);
     };
 
+    const {t} = useTranslation();
 
     return (
         <React.Fragment>
@@ -60,22 +62,18 @@ export default function AboutScreen() {
                                 src="/images/logo2.png"
                             />
                             <Typography component="h2" variant="body2" sx={{pt: 5}}>
-                                <strong>Versie 0.1.100</strong>
+                                {t("about.version")}
                             </Typography>
                             <Typography component="h2" variant="body2">
-                                Deze versie is bedoeld voor demonstratie-doeleinden.<br/><br/> Alle getoonde data is
-                                niet berust op werkelijk
-                                bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle
-                                rechten voorbehouden.
+                                {t("about.description")}
                             </Typography>
                             <Typography component="h2" variant="body2" sx={{pt: 5}}>
-                                &copy;2024 Terug naar de Basis Advies / Precondition
+                                {t("about.copyright")}
                             </Typography>
                         </Grid>
                         <Grid size={{xs: 1, lg: 1}} key="about-grid-4">
                             <IconButton
                                 onClick={toggleOpen}
-
                             >
                                 <CloseIcon/>
                             </IconButton>

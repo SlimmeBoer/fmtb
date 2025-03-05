@@ -1,7 +1,5 @@
 import * as React from "react";
 import {
-    GaugeContainer,
-    GaugeValueArc,
     GaugeReferenceArc,
     useGaugeState,
     gaugeClasses,
@@ -12,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {useEffect} from "react";
 import PercentageChip from "./PercentageChip.jsx";
+import {useTranslation} from "react-i18next";
 
 function GaugePointer() {
     const {valueAngle, outerRadius, cx, cy} = useGaugeState();
@@ -20,6 +19,7 @@ function GaugePointer() {
         // No value to display
         return null;
     }
+
 
     const target = {
         x: cx + outerRadius * Math.sin(valueAngle),
@@ -39,6 +39,7 @@ function GaugePointer() {
 
 export default function ScoreGauge(props) {
     const [value, setValue] = React.useState(50);
+    const {t} = useTranslation();
 
     useEffect(() => {
         setValue(props.score);
@@ -51,11 +52,11 @@ export default function ScoreGauge(props) {
                     {props.text}
                 </Typography>
                 <Typography sx={{mt: 2}} variant="body2">
-                   Gem. collectief: <strong>{props.score_col}</strong>&nbsp;
+                    {t("score_gauge.avg_collective")}: <strong>{props.score_col}</strong>&nbsp;
                     <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_col} />
                 </Typography>
                 <Typography  component="h1" variant="body2">
-                    Gem. totaal: <strong>{props.score_tot}</strong>&nbsp;
+                    {t("score_gauge.avg_total")}: <strong>{props.score_tot}</strong>&nbsp;
                     <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_tot} />
                 </Typography>
             </Box>

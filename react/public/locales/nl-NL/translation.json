@@ -1,93 +1,245 @@
 {
     "general": {
         "logout": "Uitloggen",
-        "company_name": "UMDL Calculatietool (demoversie)",
         "back": "Vorige",
         "next": "Volgende",
-        "process": "Afhandelen aanvraag UMDL-subsidie",
-        "finish": "Afronden en verzenden",
-        "step1": "Start",
-        "step2": "Uploaden Kringloopwijzer",
-        "step3": "Uploaden BBM-pakketten",
-        "step4": "Aanvullende BBM-pakketten",
-        "step5": "Overige KPI's",
-        "step6": "Overzicht / Insturen"
+        "delete": "Verwijderen",
+        "edit": "Bewerken",
+        "new": "Nieuw",
+        "add": "Toevoegen",
+        "close": "Close",
+        "cancel": "Annuleren",
+        "avg": "Gemiddelde",
+        "save": "Opslaan",
+        "are_you_sure": "Weet je het zeker?",
+        "record_added_succesfully": "Record succesvol toegevoegd.",
+        "record_updated_succesfully": "Record succesvol bijgewerkt.",
+        "record_deleted_succesfully": "Record succesvol verwijderd.",
+        "uploaded": "Geüpload",
+        "uploaded_message": "Bestand successvol geüpload.",
+        "failed": "Mislukt",
+        "failed_message": "Upload mislukt. Probeer het opnieuw.",
+        "uploading": "Aan het uploaden...",
+        "instructions": "Instructies"
     },
-    "login": {
-        "email_field": "E-mailadres",
-        "password_field": "Wachtwoord",
-        "submit_button": "Inloggen",
-        "title": "Inloggen"
+    "pages_admin":
+    {
+        "scangis_data": "ScanGIS - data",
+        "scangis_import": "ScanGIS - Importeren",
+        "mbp_sma_import": "UMDL-Bedrijfsgegevens - Importeren",
+        "klw_data": "Kringloopwijzer - Data",
+        "klw_import": "Kringloopwijzer - Importeren",
+        "dashboard": "Dashboard",
+        "management_data": "Managementdata",
+        "overview_collective": "Overzicht - Collectief",
+        "overview_individual": "Overzicht - Individueel",
+        "overview_total": "Overzicht - Totaal",
+        "anlb_settings": "ANLb-pakketten aan BBM-codes koppelen",
+        "code_settings": "BBM-codes (voor importeren ScanGIS-pakketten)",
+        "gis_settings": "ScanGIS-pakketten toekennen aan BBM-codes",
+        "kpi_settings": "BBM-codes aan natuur-KPI's koppelen",
+        "kpi_settings_explain": "Klik op de BBM-codes hieronder om ze aan respectievelijk uit de KPI weg te halen of aan de KPI toe te voegen.",
+        "users": "Gebruikers"
     },
-    "start": {
-        "title": "Invulprocedure UMDL",
-        "explanation": "Welkom bij de UMDL-invulprocedure! Via deze tool helpen we u stap voor stap met het berekenen van de juiste score. Klik op \"Volgende\" om te starten met de procedure."
+    "kpis": {
+        "1a": "KPI 1a: Stikstofbalans bodemoverschot (kg N-totaal per ha)",
+        "1b": "KPI 1b: Stikstofbalans bodemoverschot (kg N-totaal per ha) incl. correctie veen",
+        "2": "KPI 2: Fosfaatbalansbodemoverschot (kg P2O5 per ha)",
+        "3": "KPI 3: Ammoniakuitstoot (in kg NH3/ha)",
+        "4": "KPI 4: Weidegang (uur/jaar)",
+        "5": "KPI 5: Tankmelkureum  (mg/100g)",
+        "6a": "KPI 6a: Broeikasgasemissie (in CO2eq. per ha)",
+        "6b": "KPI 6b: Broeikasgasemissie (in CO2eq. per ha)  incl. correctie veen",
+        "6c": "KPI 6c: Broeikasgasemissie (in CO2eq. per kg fcpm)",
+        "6d": "KPI 6d: Broeikasgasemissie (in CO2eq. per kg fcpm) incl. correctie veen",
+        "7": "KPI 7: Eiwit van eigen land",
+        "8": "KPI 8: Gewasbeschermingsmiddelen",
+        "9": "KPI 9: Blijvend grasland",
+        "10": "KPI 10: Extensief kruidenrijk grasland",
+        "11": "KPI 11: Natuur en Landschap",
+        "12": "KPI 12: Groenblauwe dooradering",
+        "13a": "KPI 13a: Energiebalans (opgewekt/verbruikt)*",
+        "13b": "KPI 13b: Energiebalans (KWH per koe per jaar)*",
+        "14": "KPI 14: Levensduur (maanden)",
+        "15": "KPI 15: Sociaal-maatschappelijk"
     },
-    "kringloopwijzer": {
-        "title": "Uploaden kringloopwijzer",
-        "explanation": "Gebruik onderstaande knoppen om de kringloopwijzers te uploaden van de diverse jaargangen. Het gaat om de outputs van de krinloopwijzer (in .xml-formaat)."
+    "kpi_table": {
+        "total_score_points": "",
+        "total_score_money": "",
+        "kpis": "",
+        "average": "",
+        "comparison": "",
+        "points": "",
+        "collective_letter": "C",
+        "total_letter": "T",
+        "total_score": "",
+        "payout_money": ""
     },
-    "bbm": {
-        "title": "Uploaden BBM-pakketten",
-        "explanation": "Gebruik dit formulier om de BBM-pakketten up te loaden (deze moeten in Excel-formaat zijn). "
+    "bbm_kpi_dragger": {
+        "in_kpi": "In KPI",
+        "not_in_kpi": "Niet in KPI"
     },
-    "aanvullendbbm": {
-         "explanation": "Vul hieronder eventueel aanvullende BBM-pakketten in (pakketnummer, aantal hectare en wegingsfactor)",
-        "an": "Agrarisch Natuurbeheer",
-        "kg": "Kruidenrijk Grasland",
-        "gbd": "Groen-blauwe Dooradering",
-        "package1": "Aanvullend pakket #1",
-        "package2": "Aanvullend pakket #2",
-        "package3": "Aanvullend pakket #3",
-        "bbmcode": "BBM-code",
-        "size": "Grootte (in ha)",
-        "weight": "Wegingsfactor"
+    "company_data_grid": {
+        "row_id": "Rij ID",
+        "id": "ID",
+        "company_name": "Bedrijf",
+        "year": "Jaar",
+        "error": "Fout bij ophalen data",
+        "count": "Aantal",
+        "avg": "Gemiddelde",
+        "stdDev": "Standaarddeviatie",
+        "percentile25": "25% Percentiel",
+        "percentile75": "75% Percentiel",
+        "min": "Minimum",
+        "max": "Maximum",
+        "statistic": "Statistiek"
     },
-    "aanvullendevragen": {
-        "title": "Aanvullende vragen",
-        "explanation": "Vul hieronder een aantal aanvullende vragen in voor het bepalen van de scores van KPI's 8 en 15.",
-        "vraag1": "8. Welke wijze van gewasbeschermingsmiddelen past u toe?",
-        "v1_a1": "Geen middelen",
-        "v1_a2": "Volvelds",
-        "v1_a3": "Pleksgewijs",
-        "vraag2": "15. Welke van de volgende sociaal-maatschappelijke hulpmiddelen zet u in?",
-        "v2_a1": "Website",
-        "v2_a2": "Facebook",
-        "v2_a3": "Open vergaderingen",
-        "v2_a4": "Open dagen",
-        "v2_a5": "Boerderijwinkel"
+    "mbp": {
+        "title": "Gewasbeschermingsmiddelen",
+        "0": "Onbekend",
+        "1": "Volvelds gewasbeschermingsmiddelen",
+        "2": "Ingevulde MBP",
+        "3": "Ingevulde Milieumaatlat",
+        "4": "Pleksgewijs grasland, volvelds maisland",
+        "5": "Pleksgewijs hele bedrijf",
+        "6": "On the way to Planet Proof / AH programma",
+        "7": "Beterleven Keurmerk",
+        "8": "Biologisch",
+        "9": "een middelen",
+        "updated": "Warde succesvol bijgewerkt:",
+        "error": "Fout met bijwerken waarde:"
     },
-    "overzicht": {
-        "title": "Overzicht",
-        "explanation": "Hieronder volgt het overzicht op basis van de geüploade bestanden, de (aanvullende) BBM-pakketten en de aanvullende vragen.",
-        "kpi": "Key Performance Indicator (KPI)",
-        "year1": "2020",
-        "year2": "2021",
-        "year3": "2022",
-        "mean": "Gemiddelde",
-        "score": "UMDL-score",
-        "kpi1": "1. Stikstofbalans bodemoverschot (kg N-totaal per ha)",
-        "kpi2": "2. Fosfaatbalansbodemoverschot (kg P2O5 per ha)",
-        "kpi3": "3. Ammoniakuitstoot (in kg NH3/ha)",
-        "kpi4": "4. Weidegang (uur/jaar)",
-        "kpi5": "5. Tankmelkureum  (mg/100g)",
-        "kpi6": "6. Broeikasgasemissie (in CO2eq. per ha)",
-        "kpi7": "7. Eiwit van eigen land",
-        "kpi8": "8. Gewasbeschermingsmiddelen",
-        "kpi9": "9. Blijvend grasland",
-        "kpi10": "10. Kruidenrijk grasland",
-        "kpi11": "11. Natuur en Landschap",
-        "kpi12": "12. Groenblauwe dooradering",
-        "kpi13": "13. Energieverbruik verlagen",
-        "kpi14": "14. Levensduur (maanden)",
-        "kpi15": "15. Sociaal-maatschappelijk",
-        "totaal": "Totaalscore"
+    "sma": {
+        "title": "Sociaal-maatschappelijke activiteiten",
+        "website": "Website",
+        "ontvangstruimte": "Ontvangstruimte",
+        "winkel": "Winkel",
+        "educatie": "Educatie",
+        "meerjarige_monitoring": "Meerjarige monitoring",
+        "open_dagen": "Open dagen",
+        "wandelpad": "Wandelpad",
+        "erkend_demobedrijf": "Erkend demobedrijf",
+        "bed_and_breakfast": "Bed & Breakfast",
+        "updated": "Warde succesvol bijgewerkt:",
+        "error": "Fout met bijwerken waarde:"
     },
-    "finished": {
-        "title": "Inzenden voltooid",
-        "explanation": "Bedankt voor het invullen van de vragen! De informatie is doorgestuurd richting de Provincie Utrecht. Een CC is verstuurd richting uw mailbox ter bevestiging."
+    "company_property_table": {
+        "title": "Managementinformatie",
+        "melkkoeien": "Melkkoeien",
+        "meetmelk_per_koe": "Meetmelk per koe",
+        "meetmelk_per_ha": "Meetmelk per hectare",
+        "jongvee_per_10mk": "Jongvee per 10 melkkoeien",
+        "gve_per_ha": "GVE per hectare",
+        "kunstmest_per_ha": "Kunstmest per hectare",
+        "opbrengst_grasland_per_ha": "Opbrengst grasland per ha",
+        "re_kvem": "RE / KVEM",
+        "krachtvoer_per_100kg_melk": "Krachtvoer per 100kg melk",
+        "veebenutting_n": "Veebenutting N",
+        "bodembenutting_n": "Bodembenutting N",
+        "bedrijfsbenutting_n": "Bedrijfsbenutting N"
     },
-    "copyright": {
-        "message": " Precondition / Terug Naar De Basis Advies"
+    "gis_dumps_overview": {
+        "none_uploaded": "Er zijn nog geen ScanGis-dumpfiles geüpload",
+        "error_fetch": "Fout bij ophalen dumps: ",
+        "error_delete": "Fout bij verwijderen dump: ",
+        "dump_id": "Dump ID",
+        "dump_filename": "Dump bestandsnaam",
+        "dump_year": "Dump jaar",
+        "dump_time_created": "Dump tijdstip",
+        "dump_records": "Aantal GIS-records"
+    },
+    "gis_records": {
+        "title": "GIS records",
+        "error_fetch": "Fout bij ophalen GIS records: ",
+        "kvk": "KVK",
+        "code": "Eenheid code",
+        "length": "Lengte",
+        "width": "Breedte",
+        "surface": "Oppervlakte",
+        "units": "Eenheden"
+    },
+    "klw_overview": {
+        "no_companies_in_db": "Geen bedrijven in de database",
+        "error_fetch": "Fout bij het ophalen van de bedrijven: ",
+        "error_delete_dump": "Fout bij verwijderen dump: ",
+        "error_delete_company": "Fout bij verwijderen bedrijf: ",
+        "company_name": "Bedrijfsnaam",
+        "delete_confirm_dump": "Weet je zeker dat je deze dump wilt verwijderen?",
+        "delete_confirm_company": "Weet je zeker dat je dit bedrijf wilt verwijderen? Alle dumps, KPI-data en links met collectieven worden dan ook verwijderd voor dit bedrijf."
+    },
+    "scores_table": {
+        "title_collective": "Scores Bedrijven Collectief",
+        "title_total": "Scores Bedrijven Totaal",
+        "company_name": "Bedrijfsnaam",
+        "score": "Score",
+        "money": "Bedrag"
+    },
+    "total_kpis": {
+        "boxplot_averages": "Boxplot gemiddelden",
+        "diagram_scores": " Staafdiagram scores"
+    },
+    "klw_upload": {
+        "full_save": "Sla alle KLW-velden op in de database (volledige upload)",
+        "diagram_scores": " Staafdiagram scores"
+    },
+    "user_form": {
+        "update_success": "Gebruiker succesvol bijgewerkt",
+        "add_success": "Gebruiker succesvol toegevoegd",
+        "add_user": "Gebruiker toevoegen",
+        "edit_user": "Gebruiker aanpassen",
+        "first_name": "Voornaam",
+        "middle_name": "Tussenvoegsel",
+        "last_name": "Achternaam",
+        "email": "E-mailadres",
+        "password": "Wachtwoord",
+        "password_confirmation": "Wachtwoord bevestigen",
+        "upload_avatar": "Avatar uploaden"
+    },
+    "users": {
+        "header_id": "ID",
+        "header_image": "Avatar",
+        "header_full_name": "Volledige naam",
+        "header_email": "E-mailadres",
+        "header_actions": "Acties"
+    },
+    "menu": {
+        "dashboard": "Dashboard",
+        "overview_total": "Overzicht totaal",
+        "overview_collective": "Overzicht collectief",
+        "overview_individual": "Overzicht individueel",
+        "management_data": "Managementdata",
+        "klw_import": "Importeren KLW",
+        "mbp_sma_import": "Importeren MP/SMA",
+        "klw_data_management": "Databeheer KLW",
+        "gis_import": "Importeren GIS",
+        "gis_data_management": "Databeheer GIS",
+        "bbm_codes": "BBM-codes",
+        "bbm_kpis": "BBM aan KPI's",
+        "scangis_packages": "ScanGIS-pakketten",
+        "anlb_packages": "ANLb-pakketten",
+        "user_management": "Gebruikersbeheer",
+        "overviews": "Overzichten",
+        "klw": "Kringloopwijzers",
+        "scangis": "ScanGIS-data",
+        "settings": "Instellingen",
+        "users": "Gebruikers"
+    },
+    "about": {
+        "version": "Versie 0.2.100",
+        "copyright": "&copy;2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
+        "description_test": "Deze versie is bedoeld voor demonstratie-doeleinden.<br/><br/> Alle getoonde data isniet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
+    },
+    "collective_dashboard": {
+        "open_actions": "Openstaande acties"
+    },
+    "score_gauge": {
+        "avg_collective": "Gem. collectief",
+        "avg_total": "Gem. totaal"
+    },
+    "color_mode": {
+        "system": "Systeem",
+        "light": "Licht",
+        "dark": "Donker"
     }
 }
+

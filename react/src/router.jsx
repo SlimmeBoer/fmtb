@@ -1,131 +1,151 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
-import Login from "./views/auth/Login.jsx";
-import NotFound from "./views/admin/NotFound.jsx";
-import UserLayout from "./components/layouts/UserLayout.jsx";
-import GuestLayout from "./components/layouts/GuestLayout.jsx";
-import Dashboard from "./views/overview/Dashboard.jsx";
-import KLWImporteren from "./views/klw/KLWImporteren.jsx";
-import OverzichtTotaal from "./views/overview/OverzichtTotaal.jsx";
-import OverzichtCollectief from "./views/overview/OverzichtCollectief.jsx";
-import OverzichtIndividueel from "./views/overview/OverzichtIndividueel.jsx";
-import KLWData from "./views/klw/KLWData.jsx";
-import GISImporteren from "./views/gis/GISImporteren.jsx";
-import GISData from "./views/gis/GISData.jsx";
-import BBMCodeSettings from "./views/settings/BBMCodeSettings.jsx";
-import ImporteerMBPSMA from "./views/klw/ImporteerMBPSMA.jsx";
-import BBMKPISettings from "./views/settings/BBMKPISettings.jsx";
-import BBMGISSettings from "./views/settings/BBMGISSettings.jsx";
-import BBMANLbSettings from "./views/settings/BBMANLbSettings.jsx";
-import Users from "./views/users/Users.jsx";
-import Roles from "./views/users/Roles.jsx";
-import ManagementData from "./views/overview/ManagementData.jsx";
-import Dashboard2 from "./views/overview/Dashboard2.jsx";
-import PrintPDF from "./components/data/PrintPageButton.jsx";
-import PrintPageButton from "./components/data/PrintPageButton.jsx";
+import Login from "./views/guest/auth/Login.jsx";
+import NotFound from "./views/guest/NotFound.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import GuestLayout from "./layouts/GuestLayout.jsx";
+import Dashboard from "./views/admin/overview/Dashboard.jsx";
+import KLWImporteren from "./views/admin/klw/KLWImporteren.jsx";
+import OverzichtTotaal from "./views/admin/overview/OverzichtTotaal.jsx";
+import OverzichtCollectief from "./views/admin/overview/OverzichtCollectief.jsx";
+import OverzichtIndividueel from "./views/admin/overview/OverzichtIndividueel.jsx";
+import KLWData from "./views/admin/klw/KLWData.jsx";
+import GISImporteren from "./views/admin/gis/GISImporteren.jsx";
+import GISData from "./views/admin/gis/GISData.jsx";
+import BBMCodeSettings from "./views/admin/settings/BBMCodeSettings.jsx";
+import ImporteerMBPSMA from "./views/admin/klw/ImporteerMBPSMA.jsx";
+import BBMKPISettings from "./views/admin/settings/BBMKPISettings.jsx";
+import BBMGISSettings from "./views/admin/settings/BBMGISSettings.jsx";
+import BBMANLbSettings from "./views/admin/settings/BBMANLbSettings.jsx";
+import Users from "./views/admin/users/Users.jsx";
+import ManagementData from "./views/admin/overview/ManagementData.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import BedrijfLayout from "./layouts/BedrijfLayout.jsx";
+import BedrijfDashboard from "./views/bedrijf/BedrijfDashboard.jsx";
+import Unauthorized from "./views/guest/Unauthorized.jsx";
 
 const router = createBrowserRouter([
     {
-        path: '/',
-        element: <UserLayout/>,
+
+        element: <ProtectedRoute userRole="admin"/>,
+        children: [
+            {
+                element: <AdminLayout/>,
+                children: [
+                    {
+                        path: '/admin/',
+                        element: <Navigate to="/admin/dashboard"/>
+                    },
+                    {
+                        path: '/admin/dashboard',
+                        element: <Dashboard/>
+                    },
+                    {
+                        path: '/admin/overzicht/totaal',
+                        element: <OverzichtTotaal/>
+                    },
+                    {
+                        path: '/admin/overzicht/collectief',
+                        element: <OverzichtCollectief/>
+                    },
+                    {
+                        path: '/admin/overzicht/collectief/:id',
+                        element: <OverzichtCollectief/>
+                    },
+                    {
+                        path: '/admin/overzicht/individueel',
+                        element: <OverzichtIndividueel/>
+                    },
+                    {
+                        path: '/admin/overzicht/managementdata',
+                        element: <ManagementData/>
+                    },
+                    {
+                        path: '/admin/overzicht/individueel/:id',
+                        element: <OverzichtIndividueel/>
+                    },
+                    {
+                        path: '/admin/klw/importeren',
+                        element: <KLWImporteren/>
+                    },
+                    {
+                        path: '/admin/klw/importeermbpsma',
+                        element: <ImporteerMBPSMA/>
+                    },
+                    {
+                        path: '/admin/klw/data',
+                        element: <KLWData/>
+                    },
+                    {
+                        path: '/admin/gis/importeren',
+                        element: <GISImporteren/>
+                    },
+                    {
+                        path: '/admin/gis/data',
+                        element: <GISData/>
+                    },
+                    {
+                        path: '/admin/settings/bbmcodes',
+                        element: <BBMCodeSettings/>
+                    },
+                    {
+                        path: '/admin/settings/bbmkpis',
+                        element: <BBMKPISettings/>
+                    },
+                    {
+                        path: '/admin/settings/scangis',
+                        element: <BBMGISSettings/>
+                    },
+                    {
+                        path: '/admin/settings/anlb',
+                        element: <BBMANLbSettings/>
+                    },
+                    {
+                        path: '/admin/users',
+                        element: <Users/>
+                    },
+                ]
+            },
+        ],
+    },
+    {
+        element: <ProtectedRoute userRole="bedrijf"/>,
+        children: [
+            {
+                element: <BedrijfLayout/>,
+                children: [
+                    {
+                        path: '/bedrijf',
+                        element: <BedrijfDashboard/>,
+                    },
+                    // Voeg hier meer user-routes toe
+                ],
+            },
+        ],
+    },
+    {
+        element: <GuestLayout/>,
         children: [
             {
                 path: '/',
-                element: <Navigate to="/dashboard"/>
+                element: <Login/>
             },
-            {
-                path: '/dashboard',
-                element: <Dashboard/>
-            },
-            {
-                path: '/dashboard2',
-                element: <Dashboard2/>
-            },
-            {
-                path: '/overzicht/totaal',
-                element: <OverzichtTotaal/>
-            },
-            {
-                path: '/overzicht/collectief',
-                element: <OverzichtCollectief/>
-            },
-            {
-                path: '/overzicht/collectief/:id',
-                element: <OverzichtCollectief/>
-            },
-            {
-                path: '/overzicht/individueel',
-                element: <OverzichtIndividueel />
-            },
-            {
-                path: '/overzicht/managementdata',
-                element: <ManagementData/>
-            },
-            {
-                path: '/overzicht/individueel/:id',
-                element: <OverzichtIndividueel />
-            },
-            {
-                path: '/klw/importeren',
-                element: <KLWImporteren/>
-            },
-            {
-                path: '/klw/importeermbpsma',
-                element: <ImporteerMBPSMA/>
-            },
-            {
-                path: '/klw/data',
-                element: <KLWData/>
-            },
-            {
-                path: '/gis/importeren',
-                element: <GISImporteren/>
-            },
-            {
-                path: '/gis/data',
-                element: <GISData/>
-            },
-            {
-                path: '/settings/bbmcodes',
-                element: <BBMCodeSettings/>
-            },
-            {
-                path: '/settings/bbmkpis',
-                element: <BBMKPISettings/>
-            },
-            {
-                path: '/settings/scangis',
-                element: <BBMGISSettings/>
-            },
-            {
-                path: '/settings/anlb',
-                element: <BBMANLbSettings/>
-            },
-            {
-                path: '/users',
-                element: <Users/>
-            },
-            {
-                path: '/roles',
-                element: <Roles/>
-            },
-        ]
-    },
-    {
-        path: '/',
-        element: <GuestLayout/>,
-        children: [
             {
                 path: '/login',
                 element: <Login/>
             },
+
         ]
     },
     {
         path: '*',
         element: <NotFound/>
     },
+    {
+        path: '/unauthorized',
+        element: <Unauthorized/>,
+    },
 
 
-])
+]);
 
 export default router;

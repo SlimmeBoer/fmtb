@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axiosClient from "../../axios_client.js";
+import {useTranslation} from "react-i18next";
 
 const KLWOverview = () => {
     const [companies, setCompanies] = useState([]);
@@ -28,6 +29,8 @@ const KLWOverview = () => {
     const [selectedDumpId, setSelectedDumpId] = useState(null);
     const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
+    const {t} = useTranslation();
+
     useEffect(() => {
         setLoading(true);
         axiosClient.get('/klwdump')
@@ -37,7 +40,7 @@ const KLWOverview = () => {
                 setLoading(false);
             })
             .catch(error => {
-                console.error("There was an error fetching the companies!", error);
+                console.error(t("klw_overview.error_fetch"), error);
                 setLoading(false);
             });
     }, []);
@@ -54,7 +57,7 @@ const KLWOverview = () => {
                 setDialogDumpOpen(false);
             })
             .catch(error => {
-                console.error("There was an error deleting the dump!", error);
+                console.error(t("klw_overview.error_delete_dump"), error);
 
 
             });
@@ -72,7 +75,7 @@ const KLWOverview = () => {
                 setDialogCompanyOpen(false);
             })
             .catch(error => {
-                console.error("There was an error deleting the company!", error);
+                console.error(t("klw_overview.error_delete_company"), error);
             });
     };
 
@@ -94,14 +97,14 @@ const KLWOverview = () => {
     return (
         <>
             {loading && <CircularProgress/>}
-            {!loading && companies.length === 0 && <p>Geen bedrijven in de database</p>}
+            {!loading && companies.length === 0 && <p>{t("klw_overview.no_companies_in_db")}</p>}
             {!loading && companies.length !== 0 &&
             <TableContainer>
                 <Table size="small" >
                     <TableHead>
                         <TableRow>
                             <TableCell style={{ width: '5%' }}></TableCell>
-                            <TableCell style={{ width: '60%' }}>Bedrijfsnaam</TableCell>
+                            <TableCell style={{ width: '60%' }}>{t("klw_overview.company_name")}</TableCell>
                             <TableCell>2021</TableCell>
                             <TableCell>2022</TableCell>
                             <TableCell>2023</TableCell>
@@ -126,24 +129,24 @@ const KLWOverview = () => {
             </TableContainer>}
 
             <Dialog open={dialogDumpOpen} onClose={() => setDialogDumpOpen(false)}>
-                <DialogTitle>Weet je het zeker?</DialogTitle>
+                <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Weet je zeker dat je deze dump wilt verwijderen?</DialogContentText>
+                    <DialogContentText>{t("klw_overview.delete_confirm_dump")}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setDialogDumpOpen(false)} color="primary">Annuleren</Button>
-                    <Button onClick={confirmDumpDelete} color="primary">Verwijderen</Button>
+                    <Button onClick={() => setDialogDumpOpen(false)} color="primary">{t("general.cancel")}</Button>
+                    <Button onClick={confirmDumpDelete} color="primary">{t("general.delete")}</Button>
                 </DialogActions>
             </Dialog>
 
             <Dialog open={dialogCompanyOpen} onClose={() => setDialogCompanyOpen(false)}>
-                <DialogTitle>Weet je het zeker?</DialogTitle>
+                <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>Weet je zeker dat je dit bedrijf wilt verwijderen? Alle dumps, KPI-data en links met collectieven worden dan ook verwijderd voor dit bedrijf.</DialogContentText>
+                    <DialogContentText>{t("klw_overview.delete_confirm_company")}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setDialogCompanyOpen(false)} color="primary">Annuleren</Button>
-                    <Button onClick={confirmCompanyDelete} color="primary">Verwijderen</Button>
+                    <Button onClick={() => setDialogCompanyOpen(false)} color="primary">{t("general.cancel")}</Button>
+                    <Button onClick={confirmCompanyDelete} color="primary">{t("general.delete")}</Button>
                 </DialogActions>
             </Dialog>
         </>

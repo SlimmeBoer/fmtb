@@ -1,12 +1,6 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-import CustomDatePicker from '../forms/CustomDatePicker.jsx';
-import NavbarBreadcrumbs from './NavbarBreadcrumbs.jsx';
-import MenuButton from '../visuals/MenuButton.jsx';
 import ColorModeIconDropdown from '../../theme/ColorModeIconDropdown.jsx';
-
-import Search from './Search.jsx';
 import AboutScreen from "../visuals/AboutScreen.jsx";
 
 export default function Header() {

@@ -9,6 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -19,6 +20,8 @@ class UserController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
+
+        Log::info('bla');
         return UserResource::collection(
             User::query()->orderBy('id')->get()
         );

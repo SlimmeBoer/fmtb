@@ -1,19 +1,6 @@
 import * as React from "react";
-import {
-    GaugeContainer,
-    GaugeValueArc,
-    GaugeReferenceArc,
-    useGaugeState,
-    gaugeClasses,
-} from "@mui/x-charts/Gauge";
-import {Gauge} from "@mui/x-charts";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import {useEffect} from "react";
 import Chip from "@mui/material/Chip";
 import PropTypes from "prop-types";
-import StatCard from "./StatCard.jsx";
 
 function PercentageChip({ownvalue, refvalue, lowerBetter}) {
 

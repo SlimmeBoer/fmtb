@@ -1,13 +1,17 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import {useTranslation} from "react-i18next";
 
 const HorizontalBoxPlotSingle = ({ data}) => {
+
+    const {t} = useTranslation();
+
     return (
         <Plot
             data={[
                 {
                     x: Object.values(data),
-                    name: 'Gemiddelde',
+                    name: t("general.avg"),
                     type: 'box',
                     boxpoints: 'all',
                     jitter: 0.8,

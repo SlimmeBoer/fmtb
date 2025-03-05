@@ -54,9 +54,9 @@ const KLWUploader = () => {
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
-                            status: "Uploaded",
+                            status: t("general.uploaded"),
                             error: false,
-                            message: "Upload successful!",
+                            message: t("general.uploaded_message"),
                         },
                     }));
                 })
@@ -65,9 +65,9 @@ const KLWUploader = () => {
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
-                            status: "Failed",
+                            status: t("general.failed"),
                             error: true,
-                            message: "Upload failed. Please try again.",
+                            message: t("general.failed_message"),
                         },
                     }));
                 });
@@ -81,7 +81,7 @@ const KLWUploader = () => {
                     checked={saveFields}
                     onChange={changeSaveFields}
                     inputProps={{ 'aria-label': 'controlled' }}
-                />} label="Sla alle KLW-velden op in de database (volledige upload)" />
+                />} label={t("klw_upload.full_save")} />
             </FormGroup><br /><br />
             <Button
                 variant="contained"
@@ -109,7 +109,7 @@ const KLWUploader = () => {
                             {feedback[file.name]?.status === "Uploading" && (
                                 <Box display="flex" alignItems="center">
                                     <CircularProgress size={20} sx={{ marginRight: 1 }} />
-                                    <Typography variant="body2">Uploading...</Typography>
+                                    <Typography variant="body2">{t("general.uploading")}</Typography>
                                 </Box>
                             )}
                             {feedback[file.name]?.status === "Uploaded" && (

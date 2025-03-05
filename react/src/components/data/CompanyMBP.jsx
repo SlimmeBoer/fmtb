@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import {
     CircularProgress,
-    TextField,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -12,10 +11,13 @@ import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import {useTranslation} from "react-i18next";
 
 export default function CompanyMBP(props) {
     const [properties, setProperties] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         getMbp();
@@ -45,25 +47,25 @@ export default function CompanyMBP(props) {
             mbp: newValue
         })
             .then(response => {
-                console.log('Value updated successfully:', response.data);
+                console.log(t("mbp.updated"), response.data);
                 props.notifyParent()
             })
             .catch(error => {
-                console.error('Error updating value:', error);
+                console.error(t("mbp.error"), error);
             });
     };
 
     const menuItems = [
-        {value: 0, title: "Onbekend",},
-        {value: 1, title: "Volvelds gewasbeschermingsmiddelen",},
-        {value: 2, title: "Ingevulde MBP",},
-        {value: 3, title: "Ingevulde Milieumaatlat",},
-        {value: 4, title: "Pleksgewijs grasland, volvelds maisland",},
-        {value: 5, title: "Pleksgewijs hele bedrijf",},
-        {value: 6, title: "On the way to Planet Proof / AH programma",},
-        {value: 7, title: "Beterleven Keurmerk",},
-        {value: 8, title: "Biologisch",},
-        {value: 9, title: "Geen middelen",},
+        {value: 0, title: t("mbp.0")},
+        {value: 1, title: t("mbp.1"),},
+        {value: 2, title: t("mbp.2"),},
+        {value: 3, title: t("mbp.3"),},
+        {value: 4, title: t("mbp.4"),},
+        {value: 5, title: t("mbp.5"),},
+        {value: 6, title: t("mbp.6"),},
+        {value: 7, title: t("mbp.7"),},
+        {value: 8, title: t("mbp.8"),},
+        {value: 9, title: t("mbp.9"),},
     ];
 
     return (
@@ -71,7 +73,7 @@ export default function CompanyMBP(props) {
             <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                 <SpaOutlinedIcon/>
                 <Typography component="h6" variant="h6">
-                    Gewasbeschermingsmiddelen
+                    {t("mbp.title")}
                 </Typography>
             </Stack>
             {loading && <CircularProgress/>}

@@ -3,7 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import axiosClient from "../../axios_client.js"; // Updated axios import
 import { makeStyles } from '@mui/styles';
 import { mean, std, quantileSeq, min, max } from 'mathjs'; // Import mathjs functions
-import { CircularProgress, Box } from '@mui/material'; // Import CircularProgress and Box
+import { CircularProgress, Box } from '@mui/material';
+import {useTranslation} from "react-i18next"; // Import CircularProgress and Box
 
 // Styles
 const useStyles = makeStyles({
@@ -33,6 +34,8 @@ const CompanyDataGrid = ({ fields }) => {
 
     const classes = useStyles();
 
+    const {t} = useTranslation();
+
     useEffect(() => {
         const fieldNames = fields.map(field => field.fieldname);
 
@@ -45,24 +48,24 @@ const CompanyDataGrid = ({ fields }) => {
                 const generatedColumns = [
                     {
                         field: 'row_id',
-                        headerName: 'Row ID',
+                        headerName: t("company_data_grid.row_id"),
                         width: 90,  // Set a width of 90 for mapped fields
                     },
                     {
                         field: 'id',
-                        headerName: 'ID',
+                        headerName: t("company_data_grid.id"),
                         width: 90,
                         filterable: true
                     },
                     {
                         field: 'name',
-                        headerName: 'Bedrijf',
+                        headerName: t("company_data_grid.company_name"),
                         width: 200,
                         filterable: true
                     },
                     {
                         field: 'year',
-                        headerName: 'Jaar',
+                        headerName: t("company_data_grid.year"),
                         width: 100,
                         filterable: true
                     },
@@ -79,7 +82,7 @@ const CompanyDataGrid = ({ fields }) => {
                 calculateStatistics(data, fieldNames); // Calculate stats after fetching data
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
+                console.error(t("company_data_grid.error"), error);
             })
             .finally(() => {
                 setLoading(false); // Set loading to false when data fetching is done
@@ -130,18 +133,18 @@ const CompanyDataGrid = ({ fields }) => {
 
     // Prepare the stats rows for the statistics DataGrid only if stats are ready
     const statsRows = stats.count ? [
-        { id: 'count', statistic: 'Aantal', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.count[field.fieldname] || 0])) },
-        { id: 'avg', statistic: 'Gemiddelde', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.avg[field.fieldname] ? stats.avg[field.fieldname].toFixed(2) : 'N/A'])) },
-        { id: 'stdDev', statistic: 'Standaarddeviatie', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.stdDev[field.fieldname] ? stats.stdDev[field.fieldname].toFixed(2) : 'N/A'])) },
-        { id: 'percentile25', statistic: '25% Percentiel', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.percentile25[field.fieldname] ? stats.percentile25[field.fieldname].toFixed(2) : 'N/A'])) },
-        { id: 'percentile75', statistic: '75% Percentiel', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.percentile75[field.fieldname] ? stats.percentile75[field.fieldname].toFixed(2) : 'N/A'])) },
-        { id: 'min', statistic: 'Minimum', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.min[field.fieldname] ? stats.min[field.fieldname].toFixed(2) : 'N/A'])) },
-        { id: 'max', statistic: 'Maximum', ...Object.fromEntries(fields.map(field => [field.fieldname, stats.max[field.fieldname] ? stats.max[field.fieldname].toFixed(2) : 'N/A'])) }
+        { id: 'count', statistic: t("company_data_grid.count"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.count[field.fieldname] || 0])) },
+        { id: 'avg', statistic: t("company_data_grid.avg"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.avg[field.fieldname] ? stats.avg[field.fieldname].toFixed(2) : 'N/A'])) },
+        { id: 'stdDev', statistic: t("company_data_grid.stdDev"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.stdDev[field.fieldname] ? stats.stdDev[field.fieldname].toFixed(2) : 'N/A'])) },
+        { id: 'percentile25', statistic: t("company_data_grid.percentile25"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.percentile25[field.fieldname] ? stats.percentile25[field.fieldname].toFixed(2) : 'N/A'])) },
+        { id: 'percentile75', statistic: t("company_data_grid.percentile75"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.percentile75[field.fieldname] ? stats.percentile75[field.fieldname].toFixed(2) : 'N/A'])) },
+        { id: 'min', statistic: t("company_data_grid.min"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.min[field.fieldname] ? stats.min[field.fieldname].toFixed(2) : 'N/A'])) },
+        { id: 'max', statistic: t("company_data_grid.max"), ...Object.fromEntries(fields.map(field => [field.fieldname, stats.max[field.fieldname] ? stats.max[field.fieldname].toFixed(2) : 'N/A'])) }
     ] : []; // Return an empty array if stats are not ready
 
     // Define columns for the statistics DataGrid
     const statsColumns = [
-        { field: 'statistic', headerName: 'Statistic', width: 400 },
+        { field: 'statistic', headerName: t("company_data_grid.statistic"), width: 400 },
         ...fields.map(field => ({
             field: field.fieldname,
             headerName: field.headerName || field.fieldname.charAt(0).toUpperCase() + field.fieldname.slice(1),

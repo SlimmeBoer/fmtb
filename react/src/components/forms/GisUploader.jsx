@@ -67,7 +67,7 @@ const GisUploader = () => {
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
-                            status: "Uploaded",
+                            status: t("general.uploaded"),
                             error: false,
                             message: response.data
                         },
@@ -78,7 +78,7 @@ const GisUploader = () => {
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
-                            status: "Failed",
+                            status: t("general.failed"),
                             error: true,
                             message: error.response.data,
                         },
@@ -129,7 +129,7 @@ const GisUploader = () => {
                             {feedback[file.name]?.status === "Uploading" && (
                                 <Box display="flex" alignItems="center">
                                     <CircularProgress size={20} sx={{ marginRight: 1 }} />
-                                    <Typography variant="body2">Uploading...</Typography>
+                                    <Typography variant="body2">{t("general.uploading")}</Typography>
                                 </Box>
                             )}
                             {feedback[file.name]?.status === "Uploaded" && (

@@ -1,23 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import EditableField from './EditableField';
-import {CircularProgress, Paper, TableCell, TableRow} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from "@mui/material/Stack";
-import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import axiosClient from "../../axios_client.js";
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import LinearProgress from "@mui/material/LinearProgress";
 import EditableBBMSelect from "./EditableBBMSelect.jsx";
+import {useTranslation} from "react-i18next";
 
 const AnlbPackageForm = ({anlbpackage, bbmcodes, index, onAddorDelete, onCancelNew}) => {
 
-
+    const {t} = useTranslation();
 
     const [formData, setFormData] = useState({
         id: null,
@@ -38,6 +37,8 @@ const AnlbPackageForm = ({anlbpackage, bbmcodes, index, onAddorDelete, onCancelN
         anlb_number: {errorstatus: false, helperText: ''},
         anlb_letters: {errorstatus: false, helperText: ''},
     });
+
+
 
     useEffect(() => {
         if (anlbpackage) {
@@ -73,7 +74,7 @@ const AnlbPackageForm = ({anlbpackage, bbmcodes, index, onAddorDelete, onCancelN
         if (tempformData.id !== null) {
             axiosClient.put(`/bbmanlbpackages/${tempformData.id}`, tempformData)
                 .then(response => {
-                    setNotification('Record updated successfully');
+                    setNotification(t("general.record_updated_succesfully"));
                     setIsEditing(false);
                     setSubmitting(false);
                 })
@@ -89,7 +90,7 @@ const AnlbPackageForm = ({anlbpackage, bbmcodes, index, onAddorDelete, onCancelN
         } else {
             axiosClient.post(`/bbmanlbpackages`, tempformData)
                 .then(response => {
-                    setNotification('Record added successfully');
+                    setNotification(t("general.record_added_succesfully"));
                     setIsEditing(false);
                     setSubmitting(false);
                     onAddorDelete();
@@ -116,7 +117,7 @@ const AnlbPackageForm = ({anlbpackage, bbmcodes, index, onAddorDelete, onCancelN
     };
 
     const handleDelete = () => {
-        if (!window.confirm('Weet je het zeker?')) {
+        if (!window.confirm(t("general.are_you_sure"))) {
             return
         }
 

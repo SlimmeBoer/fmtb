@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {RouterProvider} from "react-router-dom";
 import router from "./router.jsx";
-import {ContextProvider} from "./contexts/ContextProvider.jsx";
+import {ContextProvider, useStateContext} from "./contexts/ContextProvider.jsx";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -20,6 +20,8 @@ library.add(fas)
 const myTheme = createTheme({
 
 })
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={myTheme}>

@@ -5,9 +5,12 @@ import Stack from "@mui/material/Stack";
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import Box from "@mui/material/Box";
+import {useTranslation} from "react-i18next";
 
 
 export default function ActionOverview() {
+
+    const {t} = useTranslation();
 
     const actions = [
         {company: 'A. Janssen', action: 'Bankgegevens zijn nog niet ingevuld'},
@@ -21,7 +24,7 @@ export default function ActionOverview() {
             <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                 <PendingActionsIcon/>
                 <Typography sx={{mb: 2}}  variant="h6">
-                    Openstaande Acties
+                    {t("collective_dashboard.open_actions")}
                 </Typography>
             </Stack>
             {actions.map((a, index) => (

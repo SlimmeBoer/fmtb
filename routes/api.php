@@ -31,7 +31,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        $user = $request->user();
+        $user = $user->load('roles');
+        return $user;
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -74,20 +76,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/companies', CompanyController::class);
-    /*
-
-    Route::apiResource('/categories', CategoryController::class);
-    Route::apiResource('/blocks', BlockController::class);
-    Route::apiResource('/icons', IconController::class);
-    Route::apiResource('/images', ImageController::class);
-    Route::apiResource('/questions', QuestionController::class);
-    Route::apiResource('/questiontypes', QuestionTypeController::class);
-    Route::apiResource('/folders', FolderController::class);
-    Route::apiResource('/audio', AudioController::class);
-    Route::apiResource('/video', VideoController::class);
-    Route::apiResource('/config', ConfigController::class);
-    Route::apiResource('/quiz', QuizController::class);
-    */
 
 });
 

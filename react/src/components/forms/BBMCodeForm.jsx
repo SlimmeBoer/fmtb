@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import EditableField from './EditableField';
-import {CircularProgress, Paper, TableCell, TableRow} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from "@mui/material/Stack";
-import {styled} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import axiosClient from "../../axios_client.js";
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import LinearProgress from "@mui/material/LinearProgress";
+import {useTranslation} from "react-i18next";
 
 const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
+
+    const {t} = useTranslation();
 
     const [formData, setFormData] = useState({
         id: null,

@@ -11,6 +11,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class  AuthController extends Controller
 {
@@ -57,6 +58,8 @@ class  AuthController extends Controller
         }
         /** @var User $user */
         $user = Auth::user();
+        $user = $user->load('roles');
+
         $token = $user->createToken('main')->plainTextToken;
         return response(compact('user', 'token'));
     }

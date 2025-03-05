@@ -15,7 +15,7 @@ export default function Copyright() {
             <Typography sx={{pt: 10}} variant="body2" color="text.secondary" align="center">
                 {'© '}
                 {new Date().getFullYear()}
-                {t('copyright.message')}
+                {t('about.copyright')}
             </Typography>
         </React.Fragment>
     );

@@ -11,7 +11,6 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 
-
 export default function UserForm(props) {
     const [loading, setLoading] = useState(false);
     const {setNotification} = useStateContext();

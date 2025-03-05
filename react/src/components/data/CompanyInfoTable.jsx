@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress} from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableRow, CircularProgress} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import IconButton from "@mui/material/IconButton";

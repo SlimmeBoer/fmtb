@@ -19,6 +19,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
 import EditableField from "../forms/EditableField.jsx";
+import {useTranslation} from "react-i18next";
 
 
 export default function CompanyPropertyTable(props) {
@@ -27,6 +28,8 @@ export default function CompanyPropertyTable(props) {
     const [loading, setLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+
+    const {t} = useTranslation();
 
     const initialFormState = {
         id: props.company,
@@ -45,18 +48,18 @@ export default function CompanyPropertyTable(props) {
     };
 
     const fieldLabels = {
-        melkkoeien: 'Melkkoeien',
-        meetmelk_per_koe: 'Meetmelk per koe',
-        meetmelk_per_ha: 'Meetmelk per hectare',
-        jongvee_per_10mk: 'Jongvee per 10 melkkoeien',
-        gve_per_ha: 'GVE per hectare',
-        kunstmest_per_ha: 'Kunstmest per hectare',
-        opbrengst_grasland_per_ha: 'Opbnrengst grasland per ha',
-        re_kvem: 'RE / KVEM',
-        krachtvoer_per_100kg_melk: 'Krachtvoer per 100kg melk',
-        veebenutting_n: 'Veebenutting N',
-        bodembenutting_n: 'Bodembenutting N',
-        bedrijfsbenutting_n: 'Bedrijfsbenutting N',
+        melkkoeien: t("company_property_table.melkkoeien"),
+        meetmelk_per_koe: t("company_property_table.meetmelk_per_koe"),
+        meetmelk_per_ha: t("company_property_table.meetmelk_per_ha"),
+        jongvee_per_10mk: t("company_property_table.jongvee_per_10mk"),
+        gve_per_ha: t("company_property_table.gve_per_ha"),
+        kunstmest_per_ha: t("company_property_table.kunstmest_per_ha"),
+        opbrengst_grasland_per_ha: t("company_property_table.opbrengst_grasland_per_ha"),
+        re_kvem: t("company_property_table.re_kvem"),
+        krachtvoer_per_100kg_melk: t("company_property_table.krachtvoer_per_100kg_melk"),
+        veebenutting_n: t("company_property_table.veebenutting_n"),
+        bodembenutting_n: t("company_property_table.bodembenutting_n"),
+        bedrijfsbenutting_n: t("company_property_table.bedrijfsbenutting_n"),
     };
 
     const initialErrorState = Object.keys(initialFormState).reduce((acc, key) => {
@@ -140,7 +143,7 @@ export default function CompanyPropertyTable(props) {
                 <Stack direction="row" gap={2}>
                     <AssessmentOutlinedIcon/>
                     <Typography component="h6" variant="h6">
-                        Managementinformatie
+                        {t("company_property_table.title")}
                     </Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>

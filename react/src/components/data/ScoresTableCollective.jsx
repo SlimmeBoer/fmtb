@@ -8,10 +8,13 @@ import Stack from "@mui/material/Stack";
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import Link from "@mui/material/Link";
+import {useTranslation} from "react-i18next";
 
 export default function ScoresTableCollective(props) {
     const [scores, setScores] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         getScores();
@@ -36,7 +39,7 @@ export default function ScoresTableCollective(props) {
             <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                 <TimelineOutlinedIcon/>
                 <Typography component="h6" variant="h6">
-                    Scores Bedrijven Collectief
+                    {t("scores_table.title_collective")}
                 </Typography>
             </Stack>
             <TableContainer sx={{minHeight: 100,}}>
@@ -45,11 +48,12 @@ export default function ScoresTableCollective(props) {
                     <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{width: 300}}>Bedrijfsnaam: </TableCell>
+                                <TableCell sx={{width: 300}}>
+                                    {t("scores_table.company_name")}: </TableCell>
                                 <TableCell sx={{width: 75}}
-                                           align="center">Score:</TableCell>
+                                           align="center">{t("scores_table.score")}:</TableCell>
                                 <TableCell sx={{width: 75}}
-                                           align="center">Bedrag:</TableCell>
+                                           align="center">{t("scores_table.money")}:</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

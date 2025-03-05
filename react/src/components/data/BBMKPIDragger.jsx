@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Chip from "@mui/material/Chip";
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
+import {useTranslation} from "react-i18next";
 
 const BBMKPIDragger = ({kpi, title}) => {
 
@@ -19,6 +20,8 @@ const BBMKPIDragger = ({kpi, title}) => {
     const [notselected, setNotSelected] = useState({});
     const [loadingSelected, setLoadingSelected] = useState(true);
     const [LoadingNotSelected, setLoadingNotSelected] = useState(true);
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (kpi !== null) {
@@ -82,7 +85,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                    }}>
                 <Card variant="outlined"  sx={{width: '50%' }}>
                     <Typography variant="body2">
-                        In KPI:
+                        {t("bbm_kpi_dragger.in_kpi")}
                     </Typography>
                     {loadingSelected && <CircularProgress/>}
                     {!loadingSelected && !isObjectEmpty(selected) && <Box>
@@ -99,7 +102,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                 </Card>
                 <Card variant="outlined" sx={{width: '50%' }}>
                     <Typography variant="body2">
-                        Niet in KPI:
+                        {t("bbm_kpi_dragger.not_in_kpi")}
                     </Typography>
 
                     {LoadingNotSelected && <CircularProgress/>}

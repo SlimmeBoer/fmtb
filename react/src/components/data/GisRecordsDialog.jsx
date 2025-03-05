@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, Table, TableHead, TableRow, TableCell, TableBody, DialogActions, Button, CircularProgress, TablePagination } from '@mui/material';
 import axiosClient from '../../axios_client';
+import {useTranslation} from "react-i18next";
 
 const GisRecordsDialog = ({ open, onClose, dumpId }) => {
     const [loading, setLoading] = useState(true);
@@ -9,6 +10,8 @@ const GisRecordsDialog = ({ open, onClose, dumpId }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(50); // Fixed rows per page to 50
     const [totalRecords, setTotalRecords] = useState(0);
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (open) {
@@ -29,7 +32,7 @@ const GisRecordsDialog = ({ open, onClose, dumpId }) => {
             setRecords(response.data.data); // The 'data' field contains the paginated records
             setTotalRecords(response.data.total); // The 'total' field contains total number of records
         } catch (error) {
-            console.error('Error fetching GIS records:', error);
+            console.error(t("gis_records.error_fetch"), error);
         } finally {
             setLoading(false);
         }
@@ -41,7 +44,7 @@ const GisRecordsDialog = ({ open, onClose, dumpId }) => {
 
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
-            <DialogTitle>GIS regels</DialogTitle>
+            <DialogTitle>{t("gis_records.title")}</DialogTitle>
             <DialogContent>
                 {loading ? (
                     <CircularProgress />
@@ -49,12 +52,12 @@ const GisRecordsDialog = ({ open, onClose, dumpId }) => {
                     <Table size="small">
                         <TableHead>
                             <TableRow>
-                                <TableCell>KVK</TableCell>
-                                <TableCell>Eenheid code</TableCell>
-                                <TableCell>Lengte</TableCell>
-                                <TableCell>Breedte</TableCell>
-                                <TableCell>Oppervlakte</TableCell>
-                                <TableCell>Eenheden</TableCell>
+                                <TableCell>{t("gis_records.kvk")}</TableCell>
+                                <TableCell>{t("gis_records.code")}</TableCell>
+                                <TableCell>{t("gis_records.length")}</TableCell>
+                                <TableCell>{t("gis_records.width")}</TableCell>
+                                <TableCell>{t("gis_records.surface")}</TableCell>
+                                <TableCell>{t("gis_records.units")}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

@@ -12,9 +12,11 @@ import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import LinearProgress from "@mui/material/LinearProgress";
 import EditableBBMSelect from "./EditableBBMSelect.jsx";
+import {useTranslation} from "react-i18next";
 
 const GisPackageForm = ({gispackage, bbmcodes, index, onAddorDelete, onCancelNew}) => {
 
+    const {t} = useTranslation();
 
     const [formData, setFormData] = useState({
         id: null,
@@ -67,7 +69,7 @@ const GisPackageForm = ({gispackage, bbmcodes, index, onAddorDelete, onCancelNew
         if (tempformData.id !== null) {
             axiosClient.put(`/bbmgispackages/${tempformData.id}`, tempformData)
                 .then(response => {
-                    setNotification('Record updated successfully');
+                    setNotification(t("general.record_updated_succesfully"));
                     setIsEditing(false);
                     setSubmitting(false);
                 })
@@ -83,7 +85,7 @@ const GisPackageForm = ({gispackage, bbmcodes, index, onAddorDelete, onCancelNew
         } else {
             axiosClient.post(`/bbmgispackages`, tempformData)
                 .then(response => {
-                    setNotification('Record added successfully');
+                    setNotification(t("general.record_added_succesfully"));
                     setIsEditing(false);
                     setSubmitting(false);
                     onAddorDelete();
@@ -110,7 +112,7 @@ const GisPackageForm = ({gispackage, bbmcodes, index, onAddorDelete, onCancelNew
     };
 
     const handleDelete = () => {
-        if (!window.confirm('Weet je het zeker?')) {
+        if (!window.confirm(t("general.are_you_sure"))) {
             return
         }
 

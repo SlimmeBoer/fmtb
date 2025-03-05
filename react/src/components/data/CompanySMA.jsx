@@ -11,22 +11,25 @@ import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
 import Stack from "@mui/material/Stack";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import {useTranslation} from "react-i18next";
 
 export default function CompanySMA(props) {
     const [checklistItems, setChecklistItems] = useState([]);
     const [company, setCompany] = useState({});
     const [loading, setLoading] = useState(false);
 
+    const {t} = useTranslation();
+
     const makeSma = (data) => [
-        { label: "Website", key: "website", value: !!data.website },
-        { label: "Ontvangstruimte", key: "ontvangstruimte", value: !!data.ontvangstruimte },
-        { label: "Winkel", key: "winkel", value: !!data.winkel },
-        { label: "Educatie", key: "educatie", value: !!data.educatie },
-        { label: "Meerjarige monitoring", key: "meerjarige_monitoring", value: !!data.meerjarige_monitoring },
-        { label: "Open dagen", key: "open_dagen", value: !!data.open_dagen },
-        { label: "Wandelpad", key: "wandelpad", value: !!data.wandelpad },
-        { label: "Erkend demobedrijf", key: "erkend_demobedrijf", value: !!data.erkend_demobedrijf },
-        { label: "Bed & Breakfast", key: "bed_and_breakfast", value: !!data.bed_and_breakfast },
+        { label: t("sma.website"), key: "website", value: !!data.website },
+        { label: t("sma.ontvangstruimte"), key: "ontvangstruimte", value: !!data.ontvangstruimte },
+        { label: t("sma.winkel"), key: "winkel", value: !!data.winkel },
+        { label: t("sma.educatie"), key: "educatie", value: !!data.educatie },
+        { label: t("sma.meerjarige_monitoring"), key: "meerjarige_monitoring", value: !!data.meerjarige_monitoring },
+        { label: t("sma.open_dagen"), key: "open_dagen", value: !!data.open_dagen },
+        { label: t("sma.wandelpad"), key: "wandelpad", value: !!data.wandelpad },
+        { label: t("sma.erkend_demobedrijf"), key: "erkend_demobedrijf", value: !!data.erkend_demobedrijf },
+        { label: t("sma.bed_and_breakfast"), key: "bed_and_breakfast", value: !!data.bed_and_breakfast },
     ];
 
 
@@ -79,7 +82,7 @@ export default function CompanySMA(props) {
                 <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}} >
                     <Diversity3OutlinedIcon/>
                     <Typography component="h6" variant="h6" >
-                        Sociaal-maatschappelijke activiteiten
+                        {t("sma.title")}
                     </Typography>
                 </Stack>
                 {loading && <CircularProgress/>}
