@@ -28,7 +28,7 @@ export default function ActionOverview() {
                 </Typography>
             </Stack>
             {actions.map((a, index) => (
-            <Box sx={{mb: 2, width: "100%", padding: 1, color: "#c00", border: "1px solid #c00", bgcolor: "#fff6f6", borderRadius: 4 }}>
+            <Box key={index} sx={{mb: 2, width: "100%", padding: 1, color: "#c00", border: "1px solid #c00", bgcolor: "#fff6f6", borderRadius: 4 }}>
                 <Stack direction="row" gap={2}>
                     <ErrorOutlineIcon/>
                     <Typography sx={{mt: 0.2}} variant="body2">

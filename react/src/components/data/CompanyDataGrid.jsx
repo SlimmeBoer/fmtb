@@ -171,7 +171,6 @@ const CompanyDataGrid = ({ fields }) => {
                             }}
                             density="compact" // Set density to compact
                             disableSelectionOnClick
-                            autoHeight // Make the height auto to fit content
                             hideFooter // Remove the footer, including column headers
                         />
                     </div>

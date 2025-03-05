@@ -83,7 +83,7 @@ export default function CompanyMBP(props) {
                         value={properties.mbp}
                         onChange={handleChange}
                         label="Select Value"
-                    >
+                        variant="standard">
                         {menuItems.map((item) => (
                             <MenuItem key={item.value} value={item.value}>
                                 {item.title}

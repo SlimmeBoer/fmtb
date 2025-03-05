@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
 import {useStateContext} from "../contexts/ContextProvider.jsx";
-import {useTranslation} from "react-i18next";
 import axiosClient from "../axios_client.js";
 import {Navigate, Outlet} from "react-router-dom";
 import {Box, CssBaseline, Stack} from "@mui/material";
@@ -19,10 +17,7 @@ import {
 
 
 export default function BedrijfLayout(props) {
-    const {user, token, setUser, setToken, notification} = useStateContext();
-    const [loading, setLoading] = useState(false);
-
-    const {t} = useTranslation();
+    const { token, setUser, setToken} = useStateContext();
 
     const xThemeComponents = {
         ...chartsCustomizations,

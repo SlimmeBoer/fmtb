@@ -1,7 +1,8 @@
 import {useState} from "react";
 import axiosClient from "../../../axios_client.js";
 import {useStateContext} from "../../../contexts/ContextProvider.jsx";
-import {Box, Button, Grid, Paper, TextField} from "@mui/material";
+import {Box, Button,Paper, TextField} from "@mui/material";
+import Grid from '@mui/material/Grid2';
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from 'react-i18next';
 import {resetErrorData, setErrorData} from "../../../helpers/ErrorData.js";

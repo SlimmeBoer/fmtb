@@ -8,7 +8,7 @@ const GisRecordsDialog = ({ open, onClose, dumpId }) => {
     const [loading, setLoading] = useState(true);
     const [records, setRecords] = useState([]);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(50); // Fixed rows per page to 50
+    const [rowsPerPage] = useState(50); // Fixed rows per page to 50
     const [totalRecords, setTotalRecords] = useState(0);
 
     const {t} = useTranslation();

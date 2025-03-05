@@ -6,7 +6,6 @@ import YearCard from "../../../components/visuals/YearCard.jsx";
 import ScoresTableTotaal from "../../../components/data/ScoresTableTotaal.jsx";
 import ActionOverview from "../../../components/visuals/ActionOverview.jsx";
 import Card from "@mui/material/Card";
-import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import InfoIcon from '@mui/icons-material/Info';
 import Stack from "@mui/material/Stack";
 import {useTranslation} from "react-i18next";

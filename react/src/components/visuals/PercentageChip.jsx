@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 function PercentageChip({ownvalue, refvalue, lowerBetter}) {
 
-    let displayColor = 'success';
-    let prefixString = '+';
+    let displayColor;
+    let prefixString;
     const calcValue = Math.round((((ownvalue / refvalue) * 100) - 100) * 10) / 10;
 
     if (ownvalue > refvalue) {

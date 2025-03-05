@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
 import {useStateContext} from "../contexts/ContextProvider.jsx";
-import {useTranslation} from "react-i18next";
 import axiosClient from "../axios_client.js";
-import {Navigate, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import {Box, CssBaseline, Stack} from "@mui/material";
 import {alpha, createTheme} from '@mui/material/styles';
 import Header from '../components/structure/Header.jsx';
@@ -20,8 +18,6 @@ import {
 
 export default function AdminLayout(props) {
     const {setUser, setToken} = useStateContext();
-
-    const {t} = useTranslation();
 
     const xThemeComponents = {
         ...chartsCustomizations,

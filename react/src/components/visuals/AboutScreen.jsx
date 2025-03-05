@@ -2,7 +2,7 @@ import * as React from 'react';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@mui/material/IconButton";
-import {Dialog, DialogContent, Stack} from "@mui/material";
+import {Dialog, DialogContent} from "@mui/material";
 import {useState} from "react";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";

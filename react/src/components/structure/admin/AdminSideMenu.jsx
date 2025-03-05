@@ -7,10 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import AdminMenuContent from './AdminMenuContent.jsx';
 import {showFullName} from "../../../helpers/FullName.js";
-
 import {useStateContext} from "../../../contexts/ContextProvider.jsx";
-import {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
 import axiosClient from "../../../axios_client.js";
 import {Navigate} from "react-router-dom";
 import MenuButton from "../../visuals/MenuButton.jsx";
@@ -30,22 +27,7 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function AdminSideMenu() {
-    const {user, token, setUser, setToken, notification} = useStateContext();
-    const [loading, setLoading] = useState(false);
-
-    const {t} = useTranslation();
-
-    useEffect(() => {
-        setLoading(true);
-        axiosClient.get('/user')
-            .then(({data}) => {
-                setLoading(false)
-                setUser(data)
-            })
-            .catch(() => {
-                setLoading(false)
-            })
-    }, [])
+    const {user, token, setUser, setToken} = useStateContext();
 
     const onLogout = (ev) => {
         ev.preventDefault()

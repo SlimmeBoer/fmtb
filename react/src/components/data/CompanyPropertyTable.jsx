@@ -23,7 +23,6 @@ import {useTranslation} from "react-i18next";
 
 
 export default function CompanyPropertyTable(props) {
-    const [properties, setProperties] = useState({});
     const [company, setCompany] = useState({});
     const [loading, setLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);

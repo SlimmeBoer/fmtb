@@ -11,11 +11,8 @@ import axiosClient from "../../axios_client.js";
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import LinearProgress from "@mui/material/LinearProgress";
-import {useTranslation} from "react-i18next";
 
 const BBMCodeForm = ({bbmcode, index, onAddorDelete, onCancelNew}) => {
-
-    const {t} = useTranslation();
 
     const [formData, setFormData] = useState({
         id: null,

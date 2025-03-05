@@ -3,7 +3,7 @@ import {useStateContext} from "../contexts/ContextProvider.jsx";
 import React from "react";
 
 export default function GuestLayout() {
-    const {loading, token, user} = useStateContext();
+    const {loading, user} = useStateContext();
 
     if (loading) {
         return <div>Laden...</div>; // Laadindicator tonen
