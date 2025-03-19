@@ -9,13 +9,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 const KLWUploader = () => {
     const [files, setFiles] = useState([]);
     const [feedback, setFeedback] = useState({});
-    const [saveFields, setSaveFields] = useState(false);
+    const [saveFields, setSaveFields] = useState(true);
     const {t} = useTranslation();
-
-    const changeSaveFields = () => {
-        setSaveFields(!saveFields)
-        console.log(saveFields)
-    };
 
     const handleFileChange = (event) => {
         const selectedFiles = Array.from(event.target.files);
@@ -75,21 +70,14 @@ const KLWUploader = () => {
     };
 
     return (
-        <Box sx={{ width: "80%", padding: 3, border: "1px solid #ccc", borderRadius: 4 }}>
-            <FormGroup>
-                <FormControlLabel control={<Checkbox
-                    checked={saveFields}
-                    onChange={changeSaveFields}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                />} label={t("klw_upload.full_save")} />
-            </FormGroup><br /><br />
+        <Box sx={{ width: "80%", padding: 0}}>
             <Button
                 variant="contained"
                 component="label"
                 startIcon={<CloudUpload />}
                 sx={{ marginBottom: 2 }}
             >
-                Select Files
+                {t("general.select_klw_files")}
                 <input
                     type="file"
                     accept="text/xml"

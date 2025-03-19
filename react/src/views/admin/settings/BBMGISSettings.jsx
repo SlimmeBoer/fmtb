@@ -1,9 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../../axios_client.js";
-import {
-    CircularProgress,
-} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import {isObjectEmpty} from "../../../helpers/EmptyObject.js";
@@ -13,6 +10,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import GisPackageForm from "../../../components/forms/GisPackageForm.jsx";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../../../components/visuals/CenteredLoading.jsx";
 
 export default function BBMGISSettings() {
 
@@ -85,7 +83,7 @@ export default function BBMGISSettings() {
                     </Button>
                 </Stack>
             </Stack>
-            {(loadingGIS || loadingBBM)  && <CircularProgress/>}
+            {(loadingGIS || loadingBBM)  && <CenteredLoading />}
             {!loadingGIS && !loadingBBM  && !isObjectEmpty(bbmcodes) && !isObjectEmpty(gisPackages) &&
                 <Box>
                     {addNew && <GisPackageForm key="new" bbmcodes={bbmcodes} onAddorDelete={updateParent}  onCancelNew={toggleNewMode} />}

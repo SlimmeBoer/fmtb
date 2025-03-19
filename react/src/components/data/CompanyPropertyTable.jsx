@@ -7,7 +7,6 @@ import {
     TableCell,
     TableContainer,
     TableRow,
-    CircularProgress,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -20,6 +19,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
 import EditableField from "../forms/EditableField.jsx";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 
 export default function CompanyPropertyTable(props) {
@@ -162,7 +162,7 @@ export default function CompanyPropertyTable(props) {
                 </Stack>
             </Stack>
             <TableContainer sx={{minHeight: 100}}>
-                {(loading || submitting) && <CircularProgress/>}
+                {(loading || submitting) && <CenteredLoading />}
                 {!loading && !submitting && company.id != null &&
                     <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                         <TableBody>

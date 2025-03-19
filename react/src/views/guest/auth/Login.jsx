@@ -48,12 +48,9 @@ export default function Login() {
 
         <Grid container component="main" sx={{height: '100vh'}}>
             <Grid
-                item
-                xs={false}
-                sm={4}
-                md={7}
+                size={{xs: 0, sm: 4, md: 7}}
                 sx={{
-                    backgroundImage: 'url(images/backdrop2.jpg)',
+                    backgroundImage: 'url(images/backdrop.jpg)',
                     backgroundRepeat: 'no-repeat',
                     backgroundColor: (t) =>
                         t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -61,10 +58,9 @@ export default function Login() {
                     backgroundPosition: 'center',
                 }}
             />
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{justifyContent: 'center'}}>
+            <Grid size={{xs: 12, sm: 8, md: 5}} component={Paper} elevation={8} square sx={{justifyContent: 'center'}}>
                 <Box
                     sx={{
-                        pt: 10,
                         my: 8,
                         mx: 4,
                         display: 'flex',
@@ -79,12 +75,13 @@ export default function Login() {
                                 <Box
                                     component="img"
                                     sx={{
-                                        height: 120,
-                                        width: 400,
+                                        mx: 10,
+                                        height: 300,
+                                        width: 300,
                                         marginBottom: 10
                                     }}
-                                    alt="Agriviewer Logo"
-                                    src="/images/logo2.png"
+                                    alt="UMDL Logo"
+                                    src="/images/logo.png"
                                 />
                                 <h1>{t('login.title')}</h1>
                                 <br/>
@@ -103,11 +100,10 @@ export default function Login() {
                                        error={formErrors.password.errorstatus}
                                        helperText={formErrors.password.helperText} />
                             <br/>&nbsp;<br/>
-                            <Button type="submit" fullWidth variant="outlined" size="large"
+                            <Button type="submit" fullWidth variant="contained" color="secondary" size="large"
                                     startIcon={<LoginIcon/>}>
                                 {t('login.submit_button')}
                             </Button>
-                            <Copyright />
 
                         </form>
                     </div>

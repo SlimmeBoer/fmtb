@@ -7,13 +7,13 @@ import Stack from "@mui/material/Stack";
 import LayersIcon from "@mui/icons-material/Layers";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import {CircularProgress} from "@mui/material";
 import {isObjectEmpty} from "../../../helpers/EmptyObject.js";
 import AnlbPackageForm from "../../../components/forms/AnlbPackageForm.jsx";
 import Card from "@mui/material/Card";
 import InfoIcon from "@mui/icons-material/Info";
 import Grid from "@mui/material/Grid2";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../../../components/visuals/CenteredLoading.jsx";
 
 export default function BBMANLbSettings() {
 
@@ -93,7 +93,7 @@ export default function BBMANLbSettings() {
                             </Button>
                         </Stack>
                     </Stack>
-                    {(loadingAnlb || loadingBBM) && <CircularProgress/>}
+                    {(loadingAnlb || loadingBBM) && <CenteredLoading />}
                     {!loadingAnlb && !loadingBBM && !isObjectEmpty(bbmcodes) && !isObjectEmpty(anlbPackages) &&
                         <Box>
                             {addNew && <AnlbPackageForm key="new" bbmcodes={bbmcodes} onAddorDelete={updateParent}

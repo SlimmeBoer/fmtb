@@ -25,7 +25,6 @@ const myTheme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={myTheme}>
-
             <ContextProvider>
                 <RouterProvider router={router}/>
             </ContextProvider>

@@ -29,5 +29,8 @@ class UmdlCollective extends Model
         return $this->belongsToMany(Company::class, 'umdl_collective_companies','collective_id','company_id');
     }
 
-
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'umdl_collective_users','collective_id','user_id');
+    }
 }

@@ -1,9 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {
-    CircularProgress,
-} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -13,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Chip from "@mui/material/Chip";
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 const BBMKPIDragger = ({kpi, title}) => {
 
@@ -87,7 +85,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                     <Typography variant="body2">
                         {t("bbm_kpi_dragger.in_kpi")}
                     </Typography>
-                    {loadingSelected && <CircularProgress/>}
+                    {loadingSelected && <CenteredLoading />}
                     {!loadingSelected && !isObjectEmpty(selected) && <Box>
                         {selected.map((s, index) => {
                             return (
@@ -105,7 +103,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                         {t("bbm_kpi_dragger.not_in_kpi")}
                     </Typography>
 
-                    {LoadingNotSelected && <CircularProgress/>}
+                    {LoadingNotSelected && <CenteredLoading />}
                     {!LoadingNotSelected && !isObjectEmpty(notselected) && <Box>
                         {notselected.map((ns, index) => {
                             return (

@@ -1,23 +1,18 @@
-import * as React from 'react';
-import {useStateContext} from "../contexts/ContextProvider.jsx";
-import axiosClient from "../axios_client.js";
 import {Navigate, Outlet} from "react-router-dom";
-import {Box, CssBaseline, Stack} from "@mui/material";
-import {alpha, createTheme} from '@mui/material/styles';
-import Header from '../components/structure/Header.jsx';
-import AdminSideMenu from '../components/structure/admin/AdminSideMenu.jsx';
-import AppTheme from '../theme/AppTheme.jsx';
-
+import {useStateContext} from "../contexts/ContextProvider.jsx";
+import React from "react";
+import CenteredLoading from "../components/visuals/CenteredLoading.jsx";
 import {
     chartsCustomizations,
     dataGridCustomizations,
-    datePickersCustomizations,
-    treeViewCustomizations,
-} from '../theme/customizations/index.js';
-
+    datePickersCustomizations, treeViewCustomizations
+} from "../theme/customizations/index.js";
+import {createTheme} from "@mui/material/styles";
+import {CssBaseline} from "@mui/material";
+import AppTheme from "../theme/AppTheme.js";
 
 export default function BedrijfLayout(props) {
-    const { token, setUser, setToken} = useStateContext();
+    const {loading, user} = useStateContext();
 
     const xThemeComponents = {
         ...chartsCustomizations,
@@ -39,55 +34,15 @@ export default function BedrijfLayout(props) {
         },
     });
 
-
-    const onLogout = (ev) => {
-        ev.preventDefault()
-
-        axiosClient.post('/logout')
-            .then(() => {
-                setUser({})
-                setToken(null)
-            })
+    if (loading) {
+        return <CenteredLoading/>; // Laadindicator tonen
     }
-
-    if (!token) {
-        return <Navigate to="/login"/>
-    }
-
-    const drawerWidth = '300px';
 
     return (
         <AppTheme {...props}  themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
-            <Box sx={{ display: 'flex' }}>
-                <AdminSideMenu />
-                {/* Main content */}
-                <Box
-                    component="main"
-                    sx={(theme) => ({
-                        flexGrow: 1,
-                        backgroundColor: theme.vars
-                            ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
-                            : alpha(theme.palette.background.default, 1),
-                        overflow: 'auto',
-                    })}
-                >
-                    <Stack
-                        spacing={2}
-                        sx={{
-                            alignItems: 'center',
-                            mx: 3,
-                            pb: 10,
-                            mt: { xs: 8, md: 0 },
-                        }}
-                    >
-                        <Header />
-                        <Outlet/>
-                    </Stack>
-                </Box>
-            </Box>
+            <Outlet/>
         </AppTheme>
-    );
+    )
+
 }
-
-

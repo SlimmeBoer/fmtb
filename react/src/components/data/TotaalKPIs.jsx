@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {CircularProgress} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -12,6 +11,7 @@ import Grid from "@mui/material/Grid2";
 import HorizontalBoxPlot from "./HorizontalBoxplot.jsx";
 import HorizontalBoxPlotSingle from "./HorizontalBoxplotSingle.jsx";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function TotaalKPIs(props) {
     const [scores, setScores] = useState({});
@@ -168,7 +168,7 @@ export default function TotaalKPIs(props) {
 
     return (
         <Card variant="outlined" >
-            {loading && <CircularProgress/>}
+            {loading && <CenteredLoading />}
             {!loading && !isObjectEmpty(scores) &&
                 <Grid container  size={{xs: 12, lg: 12}}>
                         {kpiData.map((k, index) => {

@@ -49,4 +49,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function collectives()
+    {
+        return $this->belongsToMany(UmdlCollective::class, 'umdl_collective_users', 'user_id','collective_id');
+    }
 }

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import {
-    CircularProgress,
     FormGroup
 } from "@mui/material";
 import Card from "@mui/material/Card";
@@ -12,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function CompanySMA(props) {
     const [checklistItems, setChecklistItems] = useState([]);
@@ -85,7 +85,7 @@ export default function CompanySMA(props) {
                         {t("sma.title")}
                     </Typography>
                 </Stack>
-                {loading && <CircularProgress/>}
+                {loading && <CenteredLoading />}
                 {!loading && company.id != null &&
                     <FormGroup>
                         {checklistItems.map((item) => (

@@ -14,11 +14,11 @@ import {
     DialogContentText,
     DialogTitle,
     Button,
-    CircularProgress
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axiosClient from "../../axios_client.js";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 const KLWOverview = () => {
     const [companies, setCompanies] = useState([]);
@@ -96,7 +96,7 @@ const KLWOverview = () => {
 
     return (
         <>
-            {loading && <CircularProgress/>}
+            {loading && <CenteredLoading />}
             {!loading && companies.length === 0 && <p>{t("klw_overview.no_companies_in_db")}</p>}
             {!loading && companies.length !== 0 &&
             <TableContainer>

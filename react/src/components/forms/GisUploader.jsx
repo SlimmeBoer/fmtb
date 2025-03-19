@@ -88,7 +88,7 @@ const GisUploader = () => {
     };
 
     return (
-        <Box sx={{ width: "80%", padding: 3, border: "1px solid #ccc", borderRadius: 4 }}>
+        <Box sx={{ width: "100%", padding: 3}}>
 
             <TextField select
                        value={year}
@@ -109,7 +109,7 @@ const GisUploader = () => {
                 startIcon={<CloudUpload />}
                 sx={{ marginBottom: 2 }}
             >
-                Select Files
+                {t("general.select_gis_files")}
                 <input
                     type="file"
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excelhp "

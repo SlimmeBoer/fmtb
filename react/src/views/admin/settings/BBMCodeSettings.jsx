@@ -1,9 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../../axios_client.js";
-import {
-    CircularProgress,
-} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import {isObjectEmpty} from "../../../helpers/EmptyObject.js";
@@ -13,6 +10,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import BBMCodeForm from "../../../components/forms/BBMCodeForm.jsx";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../../../components/visuals/CenteredLoading.jsx";
 export default function BBMCodeSettings() {
 
     const [bbmcodes, setBbmcodes] = useState({});
@@ -68,7 +66,7 @@ export default function BBMCodeSettings() {
                     </Button>
                 </Stack>
             </Stack>
-            {loading && <CircularProgress/>}
+            {loading && <CenteredLoading />}
             {!loading && !isObjectEmpty(bbmcodes) &&
                 <Box>
                     {addNew && <BBMCodeForm key="new" onAddorDelete={updateParent}  onCancelNew={toggleNewMode} />}

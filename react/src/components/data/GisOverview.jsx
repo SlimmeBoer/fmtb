@@ -1,9 +1,10 @@
 // src/components/GISOverview.jsx
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, CircularProgress, Typography, Link } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Typography, Link } from '@mui/material';
 import axiosClient from "../../axios_client.js";
 import GisRecordsDialog from "./GisRecordsDialog";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 const GisOverview = () => {
     const [dumps, setDumps] = useState([]);
@@ -48,7 +49,7 @@ const GisOverview = () => {
         setOpenDialog(false);
     };
 
-    if (loading) return <CircularProgress />;
+    if (loading) return <CenteredLoading />;
 
     if (!dumps.length) return <Typography variant="p">{t("gis_dumps_overview.none_uploaded")}</Typography>;
 

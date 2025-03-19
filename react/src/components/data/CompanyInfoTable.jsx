@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {Table, TableBody, TableCell, TableContainer, TableRow, CircularProgress} from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -13,6 +13,7 @@ import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditableField from "../forms/EditableField.jsx";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function CompanyInfoTable(props) {
     const [company, setCompany] = useState({});
@@ -150,7 +151,7 @@ export default function CompanyInfoTable(props) {
                 </Stack>
             </Stack>
             <TableContainer sx={{minHeight: 100}}>
-                {(loading || submitting) && <CircularProgress/>}
+                {(loading || submitting) && <CenteredLoading />}
                 {!loading && !submitting && company.id != null &&
                     <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                         <TableBody>

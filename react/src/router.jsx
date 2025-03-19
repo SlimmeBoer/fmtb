@@ -22,6 +22,12 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import BedrijfLayout from "./layouts/BedrijfLayout.jsx";
 import BedrijfDashboard from "./views/bedrijf/BedrijfDashboard.jsx";
 import Unauthorized from "./views/guest/Unauthorized.jsx";
+import ProvincieLayout from "./layouts/ProvincieLayout.jsx";
+import ProvincieDashboard from "./views/provincie/ProvincieDashboard.jsx";
+
+function CollectiefLayout() {
+    return null;
+}
 
 const router = createBrowserRouter([
     {
@@ -116,6 +122,36 @@ const router = createBrowserRouter([
                     {
                         path: '/bedrijf',
                         element: <BedrijfDashboard/>,
+                    },
+                    // Voeg hier meer user-routes toe
+                ],
+            },
+        ],
+    },
+    {
+        element: <ProtectedRoute userRole="provincie"/>,
+        children: [
+            {
+                element: <ProvincieLayout/>,
+                children: [
+                    {
+                        path: '/provincie',
+                        element: <ProvincieDashboard/>,
+                    },
+                    // Voeg hier meer user-routes toe
+                ],
+            },
+        ],
+    },
+    {
+        element: <ProtectedRoute userRole="collectief"/>,
+        children: [
+            {
+                element: <CollectiefLayout/>,
+                children: [
+                    {
+                        path: '/collectief',
+                        element: <ProvincieDashboard/>,
                     },
                     // Voeg hier meer user-routes toe
                 ],

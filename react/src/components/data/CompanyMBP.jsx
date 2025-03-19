@@ -1,9 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {
-    CircularProgress,
-} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
@@ -12,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function CompanyMBP(props) {
     const [properties, setProperties] = useState({});
@@ -76,7 +74,7 @@ export default function CompanyMBP(props) {
                     {t("mbp.title")}
                 </Typography>
             </Stack>
-            {loading && <CircularProgress/>}
+            {loading && <CenteredLoading />}
             {!loading && properties.mbp != null &&
                 <FormControl fullWidth>
                     <Select

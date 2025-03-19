@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress} from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -13,6 +13,7 @@ import ScoreGauge from "../visuals/ScoreGauge.jsx";
 import {showYearMonths} from "../../helpers/YearMonths.js";
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function KPITable(props) {
     const [kpi, setKPI] = useState({});
@@ -302,7 +303,7 @@ export default function KPITable(props) {
                             {t("kpi_table.total_score_points")}
                         </Typography>
                     </Stack>
-                    {loading && <CircularProgress/>}
+                    {loading && <CenteredLoading />}
                     {!loading && !isObjectEmpty(kpi)  &&
                         <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={2900} cat3={2399}
                                     cat2={1899} cat1={1399}
@@ -318,7 +319,7 @@ export default function KPITable(props) {
                             {t("kpi_table.total_score_money")}
                         </Typography>
                     </Stack>
-                    {loading && <CircularProgress/>}
+                    {loading && <CenteredLoading />}
                     {!loading && !isObjectEmpty(kpi) &&
                         <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={5000}
                                     cat3={3899} cat2={2399} cat1={1399}
@@ -336,7 +337,7 @@ export default function KPITable(props) {
                         </Typography>
                     </Stack>
                     <TableContainer sx={{minHeight: 100,}}>
-                        {loading && <CircularProgress/>}
+                        {loading && <CenteredLoading />}
                         {!loading && !isObjectEmpty(kpi) &&
                             <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                                 <TableHead>

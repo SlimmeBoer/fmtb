@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, CircularProgress} from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -9,6 +9,7 @@ import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import Link from "@mui/material/Link";
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function ScoresTableTotaal(props) {
     const [scores, setScores] = useState({});
@@ -42,7 +43,7 @@ export default function ScoresTableTotaal(props) {
                 </Typography>
             </Stack>
             <TableContainer sx={{minHeight: 100,}}>
-                {loading && <CircularProgress/>}
+                {loading && <CenteredLoading />}
                 {!loading && !isObjectEmpty(scores) &&
                     <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                         <TableHead>

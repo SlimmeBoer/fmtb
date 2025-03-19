@@ -8,11 +8,14 @@ import CollectivePicker from "../../../components/forms/CollectivePicker.jsx";
 import ScoresTableCollective from "../../../components/data/ScoresTableCollective.jsx";
 import TotaalKPIs from "../../../components/data/TotaalKPIs.jsx";
 import {useParams} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function OverzichtCollectief() {
 
     const { id: paramId } = useParams();
     const [id, setId] = useState(paramId || '');
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (paramId !== id) {

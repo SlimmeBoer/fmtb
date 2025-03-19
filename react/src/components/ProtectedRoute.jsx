@@ -2,13 +2,14 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import {useStateContext} from "../contexts/ContextProvider.jsx";
+import CenteredLoading from "./visuals/CenteredLoading.jsx";
 
 const ProtectedRoute = ({userRole }) => {
 
     const { user, loading ,token} = useStateContext();
 
     if (loading) {
-        return <div>Laden...</div>;
+        return <CenteredLoading />;
     }
 
     if (!user || !token) {

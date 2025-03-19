@@ -20,87 +20,107 @@ class UserSeeder extends Seeder
             'first_name' => 'Henk',
             'last_name' => 'Janssen',
             'email' => 'henk.janssen@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '2121365'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(1);
 
         $user = User::factory()->create([
             'first_name' => 'Theo',
             'middle_name' => 'van',
             'last_name' => 'Vliet',
             'email' => 'theo.van.vliet@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '377142'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(1);
 
         $user = User::factory()->create([
             'first_name' => 'Karin',
             'middle_name' => 'de',
             'last_name' => 'Laat',
             'email' => 'karen.de.laat@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '376765'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(1);
 
         $user = User::factory()->create([
             'first_name' => 'Joost',
             'last_name' => 'Kessel',
             'email' => 'joost.kessel@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '377173'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(1);
 
         $user = User::factory()->create([
             'first_name' => 'Bert',
             'middle_name' => 'de',
             'last_name' => 'Vries',
             'email' => 'bert.de.vries@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '379580'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(1);
 
         $user = User::factory()->create([
             'first_name' => 'Thea',
             'middle_name' => 'de',
             'last_name' => 'Stigter',
             'email' => 'thea.de.stigter@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '377324'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(2);
 
         $user = User::factory()->create([
             'first_name' => 'Fred',
             'last_name' => 'Westbroek',
             'email' => 'fred.westbroek@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '473716'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(2);
 
         $user = User::factory()->create([
             'first_name' => 'Roderick',
             'last_name' => 'Wessels',
             'email' => 'roderick.wessels@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '331267'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(2);
 
         $user = User::factory()->create([
             'first_name' => 'Piet',
             'middle_name' => 'van',
             'last_name' => 'Zetten',
             'email' => 'piet.van.zetten@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '327381'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(2);
 
         $user = User::factory()->create([
             'first_name' => 'Agnes',
             'middle_name' => 'van der',
             'last_name' => 'Steen',
             'email' => 'agnes.van.der.steen@umdl.nl',
-            'password' => Hash::make('UMDL2025!')
+            'password' => Hash::make('UMDL2025!'),
+            'ubn' => '343248'
         ]);
         $user->assignRole('bedrijf');
+        $user->collectives()->attach(2);
 
         // 2. Collectieven
         $user = User::factory()->create([
@@ -111,6 +131,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('UMDL2025!')
         ]);
         $user->assignRole('collectief');
+        $user->collectives()->attach(1);
 
         $user = User::factory()->create([
             'first_name' => 'Frits',
@@ -120,6 +141,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('UMDL2025!')
         ]);
         $user->assignRole('collectief');
+        $user->collectives()->attach(2);
 
         // 3. Projectleider UMDL
         $user = User::factory()->create([
@@ -131,7 +153,7 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole('programmaleider');
 
-        // 4. Pronvincie
+        // 4. Provincie
         $user = User::factory()->create([
             'first_name' => 'Carleen',
             'last_name' => 'Weebers',

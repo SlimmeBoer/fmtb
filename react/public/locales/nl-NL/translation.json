@@ -20,7 +20,13 @@
         "failed": "Mislukt",
         "failed_message": "Upload mislukt. Probeer het opnieuw.",
         "uploading": "Aan het uploaden...",
-        "instructions": "Instructies"
+        "instructions": "Instructies",
+        "select_klw_files": "Upload KLW-bestand(en)...",
+        "select_excel_files": "Upload Excel-bestand(en)...",
+        "select_gis_files": "Upload ScanGIS-bestand(en)..."
+    },
+    "company_dashboard": {
+        "finish_data": "Afronden gegevensindiening"
     },
     "pages_admin":
     {
@@ -202,6 +208,12 @@
         "header_email": "E-mailadres",
         "header_actions": "Acties"
     },
+    "login": {
+        "title": "Inloggen",
+        "email_field": "E-mailadres",
+        "password_field": "Wachtwoord",
+        "submit_button": "Inloggen"
+    },
     "menu": {
         "dashboard": "Dashboard",
         "overview_total": "Overzicht totaal",
@@ -226,7 +238,7 @@
     },
     "about": {
         "version": "Versie 0.2.100",
-        "copyright": "&copy;2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
+        "copyright": " Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description_test": "Deze versie is bedoeld voor demonstratie-doeleinden.<br/><br/> Alle getoonde data isniet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },
     "collective_dashboard": {

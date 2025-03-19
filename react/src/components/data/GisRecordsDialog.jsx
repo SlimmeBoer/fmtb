@@ -1,8 +1,9 @@
 // src/components/GisRecordsDialog.jsx
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, Table, TableHead, TableRow, TableCell, TableBody, DialogActions, Button, CircularProgress, TablePagination } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Table, TableHead, TableRow, TableCell, TableBody, DialogActions, Button, TablePagination } from '@mui/material';
 import axiosClient from '../../axios_client';
 import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 const GisRecordsDialog = ({ open, onClose, dumpId }) => {
     const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ const GisRecordsDialog = ({ open, onClose, dumpId }) => {
             <DialogTitle>{t("gis_records.title")}</DialogTitle>
             <DialogContent>
                 {loading ? (
-                    <CircularProgress />
+                    <CenteredLoading />
                 ) : (
                     <Table size="small">
                         <TableHead>

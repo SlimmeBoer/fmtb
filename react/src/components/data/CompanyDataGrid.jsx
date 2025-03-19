@@ -3,8 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import axiosClient from "../../axios_client.js"; // Updated axios import
 import { makeStyles } from '@mui/styles';
 import { mean, std, quantileSeq, min, max } from 'mathjs'; // Import mathjs functions
-import { CircularProgress, Box } from '@mui/material';
-import {useTranslation} from "react-i18next"; // Import CircularProgress and Box
+import {useTranslation} from "react-i18next";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 // Styles
 const useStyles = makeStyles({
@@ -154,10 +154,8 @@ const CompanyDataGrid = ({ fields }) => {
 
     return (
         <div>
-            {loading ? ( // Show CircularProgress when loading is true
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                    <CircularProgress />
-                </Box>
+            {loading ? (
+                <CenteredLoading />
             ) : (
                 <>
                     {/* Statistics DataGrid */}
