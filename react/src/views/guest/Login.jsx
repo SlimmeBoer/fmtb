@@ -1,13 +1,15 @@
 import {useState} from "react";
 import axiosClient from "../../axios_client.js";
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
-import {Box, Button,Paper, TextField} from "@mui/material";
+import {Box, Button, Paper, TextField} from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from 'react-i18next';
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import * as React from "react";
 import Copyright from "../../components/Copyright.jsx";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
 export default function Login() {
 
@@ -71,40 +73,42 @@ export default function Login() {
                 >
                     <div className="login-center">
                         <form onSubmit={onSubmit}>
-                            <div>
-                                <Box
-                                    component="img"
-                                    sx={{
-                                        mx: 10,
-                                        height: 300,
-                                        width: 300,
-                                        marginBottom: 10
-                                    }}
-                                    alt="UMDL Logo"
-                                    src="/images/logo.png"
-                                />
-                                <h1>{t('login.title')}</h1>
-                                <br/>
-                            </div>
+                            <Box
+                                component="img"
+                                sx={{
+                                    mx: 10,
+                                    height: 300,
+                                    width: 300,
+                                    marginBottom: 10
+                                }}
+                                alt="UMDL Logo"
+                                src="/images/logo.png"
+                            />
+                            <Typography component="h2" variant="h2" sx={{mb: 2}}>
+                                {t("login.title")}
+                            </Typography>
+
                             <TextField fullWidth
                                        value={credentials.email}
                                        onChange={ev => setCredentials({...credentials, email: ev.target.value})}
                                        label={t('login.email_field')} variant="outlined" margin="dense"
                                        error={formErrors.email.errorstatus}
-                                       helperText={formErrors.email.helperText} />
+                                       helperText={formErrors.email.helperText}/>
                             <TextField fullWidth
                                        value={credentials.password}
                                        onChange={ev => setCredentials({...credentials, password: ev.target.value})}
                                        label={t('login.password_field')} type="password"
                                        variant="outlined" margin="dense"
                                        error={formErrors.password.errorstatus}
-                                       helperText={formErrors.password.helperText} />
+                                       helperText={formErrors.password.helperText}/>
                             <br/>&nbsp;<br/>
-                            <Button type="submit" fullWidth variant="contained" color="secondary" size="large"
+                            <Button sx={{mb: 4}} type="submit" fullWidth variant="contained" color="secondary" size="large"
                                     startIcon={<LoginIcon/>}>
                                 {t('login.submit_button')}
                             </Button>
-
+                            <Typography component="body2" variant="body2" sx={{pt: 6}}>
+                                <Link href={'/wachtwoord-vergeten'}>{t('login.forgot_password')}</Link>
+                            </Typography>
                         </form>
                     </div>
 

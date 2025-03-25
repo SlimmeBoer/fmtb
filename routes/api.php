@@ -10,16 +10,21 @@ use App\Http\Controllers\Api\BbmKpiController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
-use App\Http\Controllers\Api\KlwFieldController;
 use App\Http\Controllers\Api\KpiScoreController;
+use App\Http\Controllers\Api\PdfController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SystemLogController;
 use App\Http\Controllers\Api\UmdlCollectiveController;
 use App\Http\Controllers\Api\UmdlCompanyPropertiesController;
 use App\Http\Controllers\Api\UmdlKpiValuesController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +74,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/bbmanlbpackages/overview', [BbmAnlbPackageController::class, 'getOverview']);
 
+    Route::get('/generate-pdf', [PdfController::class, 'generatePdf']);
+
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
     Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);
 
@@ -106,6 +113,46 @@ Route::middleware('auth:sanctum')->group(function(){
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/forgot-password', function (Request $request) {
+    Log::info($request);
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink($request->only('email'));
+
+    return response()->json([
+        'message' => $status === Password::RESET_LINK_SENT
+            ? 'De reset-link is verzonden naar je e-mailadres.'
+            : 'Het e-mailadres is niet gevonden in de database.'
+    ]);
+});
+
+Route::post('/reset-password', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:6|confirmed',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function (User $user, string $password) {
+            $user->forceFill([
+                'password' => Hash::make($password),
+            ])->save();
+        }
+    );
+
+    return response()->json([
+        'message' => $status === Password::PASSWORD_RESET
+            ? 'Het wachtwoord is succesvol gewijzigd.'
+            : 'Ongeldig token of e-mailadres.'
+    ]);
+});
 
 
 

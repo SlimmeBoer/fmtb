@@ -264,9 +264,27 @@
     },
     "login": {
         "title": "Inloggen",
+        "explanation": "Vul in het onderstaande formulier je gebruikersnaam (e-mailadres) en het wachtwoord in dat je via het UMDL-programma hebt ontvangen.",
         "email_field": "E-mailadres",
         "password_field": "Wachtwoord",
+        "forgot_password": "Klik hier als je je wachtwoord bent vergeten",
         "submit_button": "Inloggen"
+    },
+    "forgot_password": {
+        "title": "Wachtwoord vergeten",
+        "explanation": "Voer in het omderstaande veld je e-mailadres in. Als je bekend bent binnen het systeem ontvang je speodig een e-mail met daarin instructies over hoe je je wachtwoord kunt resetten. Geen mail gehad? Controleer dan voor de zekerheid ook even je spamfolder. Neem dan even contact met ons op.",
+        "enter_mail": "Voer e-mailadres in",
+        "submit_button": "Stuur resetlink",
+        "error_occured": "Er is een fout opgetreden."
+    },
+    "reset_password": {
+        "title": "Wachtwoord herstellen",
+        "explanation": "Vul hieronder je nieuwe wachtwoord in en bevestig dit vervolgens door het nogmaals in te voeren.",
+        "enter_mail": "Voer e-mailadres in",
+        "password": "Voer nieuw wachtwoord in",
+        "password_confirmation": "Bevestig nieuw wachtwoord",
+        "submit_button": "Reset wachtwoord",
+        "error_occured": "Er is een fout opgetreden."
     },
     "admin_menu": {
         "dashboard": "Dashboard",
@@ -355,9 +373,10 @@
         "created_at": "Gelogd op"
     },
     "about": {
-        "version": "Versie 0.3",
-        "copyright": " Terug naar de Basis Advies / Precondition / Provincie Utrecht",
-        "description_test": "Deze versie is bedoeld voor demonstratie-doeleinden.<br/><br/> Alle getoonde data isniet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
+        "title": "Webapplicatie UMDL",
+        "version": "Versie 0.3.2",
+        "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
+        "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },
     "collective_dashboard": {
         "open_actions": "Openstaande acties",

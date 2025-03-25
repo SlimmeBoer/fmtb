@@ -57,6 +57,8 @@ import Provincie_ScanGISANLb from "./views/provincie/Provincie_ScanGISANLb.jsx";
 import Provincie_Criteria from "./views/provincie/Provincie_Criteria.jsx";
 import Provincie_OverzichtTotaal from "./views/provincie/Provincie_OverzichtTotaal.jsx";
 import Provincie_OverzichtIndividueel from "./views/provincie/Provincie_OverzichtIndividueel.jsx";
+import ForgotPassword from "./views/guest/ForgotPassword.jsx";
+import ResetPassword from "./views/guest/ResetPassword.jsx";
 
 const router = createBrowserRouter([
     {
@@ -340,6 +342,14 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login/>
+            },
+            {
+                path: '/wachtwoord-vergeten',
+                element: <ForgotPassword/>
+            },
+            {
+                path: '/reset-wachtwoord',
+                element: <ResetPassword/>
             },
 
         ]

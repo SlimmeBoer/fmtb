@@ -16,6 +16,7 @@ import Stack from "@mui/material/Stack";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import {useTranslation} from "react-i18next";
+import PdfButton from "../../components/data/PdfButton.jsx";
 
 export default function Admin_OverzichtIndividueel() {
 
@@ -38,16 +39,6 @@ export default function Admin_OverzichtIndividueel() {
         setRenderTable((prev) => !prev);
     };
 
-    const exportPDF = () => {
-        const input = document.getElementById("pdf-content");
-        html2canvas(input).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF();
-
-            pdf.addImage(imgData, "PNG", 5, 5, 200, 200, '','FAST', 0);
-            pdf.save("download.pdf");
-        });
-    };
 
     const {t} = useTranslation();
 
@@ -68,9 +59,7 @@ export default function Admin_OverzichtIndividueel() {
                        pt: 1.5, pb: 4,
                    }}>
                 <CompanyPicker company={id} changeHandler={handleChange}/>
-                <IconButton variant="outlined" onClick={exportPDF}>
-                    <PictureAsPdfIcon/>
-                </IconButton>
+                <PdfButton />
             </Stack>
             {id !== '' && id !== undefined && <Box>
                 <div id="pdf-content">

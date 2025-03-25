@@ -52,22 +52,16 @@ export default function AboutScreen() {
                             />
                         </Grid>
                         <Grid size={{xs: 11, lg: 6}} key="about-grid-2">
-                            <Box
-                                component="img"
-                                sx={{
-                                    height: 125,
-                                    width: 375,
-                                }}
-                                alt="Agriviewer Logo"
-                                src="/images/logo2.png"
-                            />
-                            <Typography component="h2" variant="body2" sx={{pt: 5}}>
+                            <Typography component="h3" variant="h3" sx={{pt: 5}}>
+                                {t("about.title")}
+                            </Typography>
+                            <Typography component="h2" variant="body2" sx={{pt: 2}}>
                                 {t("about.version")}
                             </Typography>
-                            <Typography component="h2" variant="body2">
+                            <Typography component="h2" variant="body2" sx={{pt: 2}}>
                                 {t("about.description")}
                             </Typography>
-                            <Typography component="h2" variant="body2" sx={{pt: 5}}>
+                            <Typography component="h2" variant="body2" sx={{pt: 2}}>
                                 {t("about.copyright")}
                             </Typography>
                         </Grid>
