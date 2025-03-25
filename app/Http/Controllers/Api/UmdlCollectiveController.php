@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUmdlCollectiveRequest;
 use App\Http\Requests\UpdateUmdlCollectiveRequest;
 use App\Http\Resources\UmdlCollectiveResource;
+use App\Models\KlwDump;
 use App\Models\UmdlCollective;
+use App\Models\UmdlCompanyProperties;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 class UmdlCollectiveController extends Controller
 {
@@ -67,5 +71,60 @@ class UmdlCollectiveController extends Controller
     public function destroy(UmdlCollective $umdlCollective)
     {
         //
+    }
+
+    /**
+     * Returns an array for the completion gauges of a collective
+     * @return array[]|\Illuminate\Http\JsonResponse
+     */
+    public function getCompletion()
+    {
+        $user = User::where('id', Auth::id())->first();
+
+        if (!$user) {
+            return ['collective_data' => []];
+        }
+
+        $collective_data = array();
+
+        foreach ($user->collectives as $collective) {
+
+            $bedrijfUsers = $collective->users()->whereHas('roles', function ($query) {
+                $query->where('name', 'bedrijf');
+            })->get();
+
+            // TODO: Admin not counted. Needs elegant fix
+            $collective_data["total_klw"] = count($bedrijfUsers) * 3;
+            $collective_data["total_mbp"] = count($bedrijfUsers);
+            $collective_data["total_sma"] = count($bedrijfUsers);
+            $collective_data["total_klw_completed"] = 0;
+            $collective_data["total_mpb_completed"] = 0;
+            $collective_data["total_sma_completed"] = 0;
+
+            foreach ($collective->companies as $company)
+            {
+                $collective_data["total_klw_completed"] += count(KlwDump::where('company_id', $company->id)->get());
+
+                $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+
+                if ($company_properties->mbp != 0) {
+                    $collective_data["total_mpb_completed"] += 1;
+                }
+
+                // 3. SMA's zijn niet ingevuld
+                if ($company_properties->website == 1 || $company_properties->ontvangstruimte == 1 ||
+                    $company_properties->winkel == 1 || $company_properties->educatie == 1 ||
+                    $company_properties->meerjarige_monitoring == 1 || $company_properties->open_dagen == 1 ||
+                    $company_properties->wandelpad == 1 || $company_properties->erkend_demobedrijf == 1 ||
+                    $company_properties->bed_and_breakfast == 1)
+                {
+                    $collective_data["total_sma_completed"] += 1;
+                }
+
+            }
+        }
+        return response()->json([
+            'collective_data' => $collective_data,
+        ]);
     }
 }

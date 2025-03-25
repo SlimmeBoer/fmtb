@@ -17,7 +17,6 @@ class KlwDumpResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'workspace_id' => $this->workspace_id,
             'company_id' => $this->company_id,
             'year' => $this->year,
             'filename' => $this->filename,

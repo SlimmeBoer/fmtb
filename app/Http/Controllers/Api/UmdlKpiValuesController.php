@@ -12,6 +12,7 @@ use App\Models\Company;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlKpiValues;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UmdlKpiValuesController extends Controller
@@ -88,28 +89,31 @@ class UmdlKpiValuesController extends Controller
         $umdl_scores = new UMDLKPIScores();
         $collectiveTotals = array();
 
-        if ($collective_id != 0)
+        // Gets data for a specific collective by ID
+        if ($collective_id == 0) {
+            $collective_id = Auth::user()->collectives()->first()->id;
+        }
+
+        $collective_companies = UmdlCollectiveCompany::where('collective_id',$collective_id)->get();
+
+        foreach ($collective_companies as $collective_company)
         {
-            $collective_companies = UmdlCollectiveCompany::where('collective_id',$collective_id)->get();
+            $company = Company::where('id', $collective_company->company_id)->first();
 
-            foreach ($collective_companies as $collective_company)
-            {
-                $company = Company::where('id', $collective_company->company_id)->first();
-
-                $company_scores = $umdl_scores->getScores($collective_company->company_id);
-                $companyArray = array($collective_company->company_id => array (
-                    'company_id' => $company->id,
-                    'company_name' => $company->name,
-                    'points' => $company_scores['total']['score'],
-                    'money' => $company_scores['total']['money'],
-                ));
-                $collectiveTotals = array_merge($collectiveTotals, $companyArray);
-            }
+            $company_scores = $umdl_scores->getScores($collective_company->company_id);
+            $companyArray = array($collective_company->company_id => array (
+                'company_id' => $company->id,
+                'company_name' => $company->name,
+                'points' => $company_scores['total']['score'],
+                'money' => $company_scores['total']['money'],
+            ));
+            $collectiveTotals = array_merge($collectiveTotals, $companyArray);
         }
 
         $this->sortByPointsDesc($collectiveTotals);
         return $collectiveTotals;
     }
+
 
     public function getallscores() : array
     {
@@ -132,10 +136,21 @@ class UmdlKpiValuesController extends Controller
         return $allTotals;
     }
 
-    public function totalsperkpi($collective_id) : array
+    public function totalsperkpicollective($collective_id) : array
     {
         $totals = new UMDLKPITotals();
+
+        // Gets data for a specific collective by ID
+        if ($collective_id == 0) {
+            $collective_id = Auth::user()->collectives()->first()->id;
+        }
         return $totals->getTotals($collective_id);
+    }
+
+    public function totalsperkpi() : array
+    {
+        $totals = new UMDLKPITotals();
+        return $totals->getTotals(0);
     }
 
 

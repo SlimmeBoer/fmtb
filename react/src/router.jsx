@@ -1,37 +1,43 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
-import Login from "./views/guest/auth/Login.jsx";
+import Login from "./views/guest/Login.jsx";
 import NotFound from "./views/guest/NotFound.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import GuestLayout from "./layouts/GuestLayout.jsx";
-import Dashboard from "./views/admin/overview/Dashboard.jsx";
-import KLWImporteren from "./views/admin/klw/KLWImporteren.jsx";
-import OverzichtTotaal from "./views/admin/overview/OverzichtTotaal.jsx";
-import OverzichtCollectief from "./views/admin/overview/OverzichtCollectief.jsx";
-import OverzichtIndividueel from "./views/admin/overview/OverzichtIndividueel.jsx";
-import KLWData from "./views/admin/klw/KLWData.jsx";
-import GISImporteren from "./views/admin/gis/GISImporteren.jsx";
-import GISData from "./views/admin/gis/GISData.jsx";
-import BBMCodeSettings from "./views/admin/settings/BBMCodeSettings.jsx";
-import ImporteerMBPSMA from "./views/admin/klw/ImporteerMBPSMA.jsx";
-import BBMKPISettings from "./views/admin/settings/BBMKPISettings.jsx";
-import BBMGISSettings from "./views/admin/settings/BBMGISSettings.jsx";
-import BBMANLbSettings from "./views/admin/settings/BBMANLbSettings.jsx";
-import Users from "./views/admin/users/Users.jsx";
-import ManagementData from "./views/admin/overview/ManagementData.jsx";
+import Admin_Dashboard from "./views/admin/Admin_Dashboard.jsx";
+import Admin_KLWImporteren from "./views/admin/Admin_KLWImporteren.jsx";
+import Admin_OverzichtCollectief from "./views/admin/Admin_OverzichtCollectief.jsx";
+import Admin_OverzichtIndividueel from "./views/admin/Admin_OverzichtIndividueel.jsx";
+import Admin_KLWData from "./views/admin/Admin_KLWData.jsx";
+import Admin_GISImporteren from "./views/admin/Admin_GISImporteren.jsx";
+import GISData from "./views/admin/Admin_GISData.jsx";
+import Admin_BBMCodeSettings from "./views/admin/Admin_BBMCodeSettings.jsx";
+import Admin_ImporteerMBPSMA from "./views/admin/Admin_ImporteerMBPSMA.jsx";
+import Admin_BBMKPISettings from "./views/admin/Admin_BBMKPISettings.jsx";
+import Admin_BBMGISSettings from "./views/admin/Admin_BBMGISSettings.jsx";
+import Admin_BBMANLbSettings from "./views/admin/Admin_BBMANLbSettings.jsx";
+import Admin_Users from "./views/admin/Admin_Users.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import BedrijfLayout from "./layouts/BedrijfLayout.jsx";
-import BedrijfDashboard from "./views/bedrijf/BedrijfDashboard.jsx";
+import BedrijfDashboard from "./views/bedrijf/Bedrijf_Dashboard.jsx";
 import Unauthorized from "./views/guest/Unauthorized.jsx";
 import ProvincieLayout from "./layouts/ProvincieLayout.jsx";
-import ProvincieDashboard from "./views/provincie/ProvincieDashboard.jsx";
-
-function CollectiefLayout() {
-    return null;
-}
+import Provincie_Dashboard from "./views/provincie/Provincie_Dashboard.jsx";
+import Collectief_Dashboard from "./views/collectief/Collectief_Dashboard.jsx";
+import CollectiefLayout from "./layouts/CollectiefLayout.jsx";
+import Admin_OverzichtTotaal from "./views/admin/Admin_OverzichtTotaal.jsx";
+import Collectief_OverzichtCollectief from "./views/collectief/Collectief_OverzichtCollectief.jsx";
+import Collectief_OverzichtIndividueel from "./views/collectief/Collectief_OverzichtIndividueel.jsx";
+import Collectief_KLWImporteren from "./views/collectief/Collectief_KLWImporteren.jsx";
+import Collectief_GISImporteren from "./views/collectief/Collectief_GISImporteren.jsx";
+import Collectief_BBMKPI from "./views/collectief/Collectief_BBMKPI.jsx";
+import Collectief_ScanGISANLb from "./views/collectief/Collectief_ScanGISANLb.jsx";
+import Collectief_Criteria from "./views/collectief/Collectief_Criteria.jsx";
+import Collectief_Matrix from "./views/collectief/Collectief_Matrix.jsx";
+import Collectief_GISData from "./views/collectief/Collectief_GISData.jsx";
+import Collectief_KLWData from "./views/collectief/Collectief_KLWData.jsx";
 
 const router = createBrowserRouter([
     {
-
         element: <ProtectedRoute userRole="admin"/>,
         children: [
             {
@@ -43,47 +49,43 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/admin/dashboard',
-                        element: <Dashboard/>
+                        element: <Admin_Dashboard/>
                     },
                     {
                         path: '/admin/overzicht/totaal',
-                        element: <OverzichtTotaal/>
+                        element: <Admin_OverzichtTotaal/>
                     },
                     {
                         path: '/admin/overzicht/collectief',
-                        element: <OverzichtCollectief/>
+                        element: <Admin_OverzichtCollectief/>
                     },
                     {
                         path: '/admin/overzicht/collectief/:id',
-                        element: <OverzichtCollectief/>
+                        element: <Admin_OverzichtCollectief/>
                     },
                     {
                         path: '/admin/overzicht/individueel',
-                        element: <OverzichtIndividueel/>
-                    },
-                    {
-                        path: '/admin/overzicht/managementdata',
-                        element: <ManagementData/>
+                        element: <Admin_OverzichtIndividueel/>
                     },
                     {
                         path: '/admin/overzicht/individueel/:id',
-                        element: <OverzichtIndividueel/>
+                        element: <Admin_OverzichtIndividueel/>
                     },
                     {
                         path: '/admin/klw/importeren',
-                        element: <KLWImporteren/>
+                        element: <Admin_KLWImporteren/>
                     },
                     {
                         path: '/admin/klw/importeermbpsma',
-                        element: <ImporteerMBPSMA/>
+                        element: <Admin_ImporteerMBPSMA/>
                     },
                     {
                         path: '/admin/klw/data',
-                        element: <KLWData/>
+                        element: <Admin_KLWData/>
                     },
                     {
                         path: '/admin/gis/importeren',
-                        element: <GISImporteren/>
+                        element: <Admin_GISImporteren/>
                     },
                     {
                         path: '/admin/gis/data',
@@ -91,23 +93,23 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/admin/settings/bbmcodes',
-                        element: <BBMCodeSettings/>
+                        element: <Admin_BBMCodeSettings/>
                     },
                     {
                         path: '/admin/settings/bbmkpis',
-                        element: <BBMKPISettings/>
+                        element: <Admin_BBMKPISettings/>
                     },
                     {
                         path: '/admin/settings/scangis',
-                        element: <BBMGISSettings/>
+                        element: <Admin_BBMGISSettings/>
                     },
                     {
                         path: '/admin/settings/anlb',
-                        element: <BBMANLbSettings/>
+                        element: <Admin_BBMANLbSettings/>
                     },
                     {
                         path: '/admin/users',
-                        element: <Users/>
+                        element: <Admin_Users/>
                     },
                 ]
             },
@@ -136,9 +138,8 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: '/provincie',
-                        element: <ProvincieDashboard/>,
+                        element: <Provincie_Dashboard/>,
                     },
-                    // Voeg hier meer user-routes toe
                 ],
             },
         ],
@@ -151,9 +152,52 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: '/collectief',
-                        element: <ProvincieDashboard/>,
+                        element: <Collectief_Dashboard/>,
                     },
-                    // Voeg hier meer user-routes toe
+                    {
+                        path: '/collectief/dashboard',
+                        element: <Collectief_Dashboard/>,
+                    },
+                    {
+                        path: '/collectief/scores/collectief',
+                        element: <Collectief_OverzichtCollectief/>,
+                    },
+                    {
+                        path: '/collectief/scores/individueel',
+                        element: <Collectief_OverzichtIndividueel/>,
+                    },
+                    {
+                        path: '/collectief/matrix',
+                        element: <Collectief_Matrix/>,
+                    },
+                    {
+                        path: '/collectief/klw/importeren',
+                        element: <Collectief_KLWImporteren/>,
+                    },
+                    {
+                        path: '/collectief/klw/data',
+                        element: <Collectief_KLWData/>,
+                    },
+                    {
+                        path: '/collectief/gis/importeren',
+                        element: <Collectief_GISImporteren/>,
+                    },
+                    {
+                        path: '/collectief/gis/data',
+                        element: <Collectief_GISData/>,
+                    },
+                    {
+                        path: '/collectief/settings/bbmkpis',
+                        element: <Collectief_BBMKPI/>,
+                    },
+                    {
+                        path: '/collectief/settings/scangisanlb',
+                        element: <Collectief_ScanGISANLb/>,
+                    },
+                    {
+                        path: '/collectief/settings/criteria',
+                        element: <Collectief_Criteria/>,
+                    },
                 ],
             },
         ],

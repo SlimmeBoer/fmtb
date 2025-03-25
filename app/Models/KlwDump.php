@@ -19,7 +19,6 @@ class KlwDump extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'workspace_id',
         'company_id',
         'year',
         'filename',
@@ -35,6 +34,10 @@ class KlwDump extends Model
     public function klwValues()
     {
         return $this->hasMany(KlwValue::class, 'dump_id', 'id');
+    }
+    public function signals()
+    {
+        return $this->hasMany(Signal::class, 'dump_id', 'id');
     }
 
 

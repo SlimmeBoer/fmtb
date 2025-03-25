@@ -17,7 +17,6 @@ class GisDumpResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'workspace_id' => $this->workspace_id,
             'year' => $this->year,
             'filename' => $this->filename,
         ];

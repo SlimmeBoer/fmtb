@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('signals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dump_id');
-            $table->integer('item_nummer');
-            $table->integer('signaal_nummer');
+            $table->integer('item_nummer')->nullable();;
+            $table->integer('signaal_nummer')->nullable();;
             $table->string('signaal_code')->nullable();
             $table->string('categorie')->nullable();
             $table->string('onderwerp')->nullable();

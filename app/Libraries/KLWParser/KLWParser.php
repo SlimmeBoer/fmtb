@@ -6,6 +6,7 @@ use App\Libraries\UMDL\UMDLCompanyPropertiesWriter;
 use App\Libraries\UMDL\UMDLKPICollector;
 use App\Models\KlwField;
 use App\Models\KlwValue;
+use App\Models\Signal;
 use App\Models\UmdlKpiValues;
 use Illuminate\Support\Facades\Log;
 use Saloon\XmlWrangler\Exceptions\MissingNodeException;
@@ -13,6 +14,7 @@ use Saloon\XmlWrangler\Exceptions\MultipleNodesFoundException;
 use Saloon\XmlWrangler\Exceptions\QueryAlreadyReadException;
 use Saloon\XmlWrangler\Exceptions\XmlReaderException;
 use Saloon\XmlWrangler\XmlReader;
+use function VeeWee\Xml\Dom\Xpath\Locator\query;
 
 
 class KLWParser
@@ -82,6 +84,7 @@ class KLWParser
 
         foreach ($all_elements as $section_key => $section_values) {
 
+            // Get KLW-values
             if ($section_key == "DUMPFILES_JAAR0") {
                 foreach ($section_values as $subsection_key => $subsection_values) {
                     foreach ($subsection_values as $field_key => $field_value) {
@@ -104,7 +107,6 @@ class KLWParser
                             }
                             if (!$field_exists) {
                                 $klwField = KlwField::firstOrNew(array(
-                                    'workspace_id' => 1,
                                     'fieldname' => $field_key,
                                     'section' => $section_key,
                                     'subsection' => $subsection_key,
@@ -143,6 +145,46 @@ class KLWParser
         $collector_record = $collector->saveKPIs($company_id, $year);
         $properties_record = $company_properties->saveProperties($company_id);
 
+        return $totalParsed;
+    }
+
+    public function importSignals($xml_file, $dump_id, $year, $company_id): int
+    {
+        $totalParsed = 0;
+
+        // Get signals
+        $reader = XmlReader::fromFile($xml_file);
+        $all_elements = $reader->value('KW_Output.PLAN.SIGNALERINGEN')->sole();
+        $signalData = array();
+
+        foreach ($all_elements as $signal_types) {
+            foreach ($signal_types as $signal_type) {
+
+                if (is_array($signal_type)) {
+                    // Hotfix for missing item number
+                    if (array_key_exists('itemnr', $signal_type)) {
+                        $item_nr = $signal_type['itemnr'];
+                    } else {
+                        $item_nr = 0;
+                    }
+
+                    $signalData[] = array(
+                        'dump_id' => $dump_id,
+                        'item_nummer' => $item_nr,
+                        'signaal_nummer' => $signal_type['sign_num'],
+                        'signaal_code' => $signal_type['sign_cod'],
+                        'categorie' => $signal_type['categorie'],
+                        'onderwerp' => $signal_type['onderwerp'],
+                        'soort' => $signal_type['soort'],
+                        'kengetal' => $signal_type['kengetal'],
+                        'waarde' => $signal_type['waarde'],
+                        'kenmerk' => $signal_type['kenmerk'],
+                        'actie' => $signal_type['actie'],
+                    );
+                }
+            }
+        }
+        Signal::insert($signalData);
         return $totalParsed;
     }
 }

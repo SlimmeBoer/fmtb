@@ -38,6 +38,7 @@ class UMDLKPIScores
             $companyproperties->bed_and_breakfast;
         $sma_string = $this->getSMAstring($companyproperties);
 
+
         $total_kpi1a = 0;
         $total_kpi1b = 0;
         $total_kpi2 = 0;
@@ -243,7 +244,7 @@ class UMDLKPIScores
         if (count($companies) > 0) {
             // Add each indidivual company score to the grand total
             foreach ($companies as $company) {
-                $company_scores = $this->getScores($company->id);
+                $company_scores = $this->getScores($company->company_id);
 
                 foreach ($averageAveragesArray as $key => $value) {
                     $averageAveragesArray[$key] += $company_scores['avg'][$key];

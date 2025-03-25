@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('klw_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("workspace_id");
             $table->string('fieldname');
             $table->string('section');
             $table->string('subsection');

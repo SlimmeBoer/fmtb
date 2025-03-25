@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KlwFieldController;
+use App\Http\Controllers\Api\KpiScoreController;
 use App\Http\Controllers\Api\UmdlCollectiveController;
 use App\Http\Controllers\Api\UmdlCompanyPropertiesController;
 use App\Http\Controllers\Api\UmdlKpiValuesController;
@@ -39,21 +40,30 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/companies/index', [CompanyController::class, 'index']);
+    Route::get('/companies/currentcollective', [CompanyController::class, 'getcurrentcollective']);
     Route::get('/companies/getcompany/{company}', [CompanyController::class, 'getcompany']);
     Route::get('/companies/getproperties/{company}', [CompanyController::class, 'getproperties']);
     Route::put('/companies/update/{company}', [CompanyController::class, 'update']);
     Route::get('/companies/fields', [CompanyController::class, 'getCompanyFields']);
+    Route::get('/companies/actionscollective', [CompanyController::class, 'getCollectiveActions']);
+    Route::get('/companies/signalscollective', [CompanyController::class, 'getCollectiveSignals']);
 
     Route::put('/companyproperties/update/{umdlcompanyproperties}', [UmdlCompanyPropertiesController::class, 'update']);
 
     Route::get('/bbm/getcodes', [BbmCodeController::class, 'index']);
+    Route::get('/bbm/getbykpi/{kpi}', [BbmCodeController::class, 'getByKpi']);
     Route::get('/bbm/getkpis', [BbmCodeController::class, 'kpis']);
 
     Route::get('/bbmkpi/getselected/{kpi}', [BbmKpiController::class, 'getselected']);
     Route::get('/bbmkpi/getnotselected/{kpi}', [BbmKpiController::class, 'getnotselected']);
     Route::post('/bbmkpi/{kpi}/{bbmcode}', [BbmKpiController::class, 'store']);
 
+    Route::get('/bbmgispackages/overview', [BbmGisPackageController::class, 'getOverview']);
+
+    Route::get('/bbmanlbpackages/overview', [BbmAnlbPackageController::class, 'getOverview']);
+
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
+    Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);
 
     Route::put('/gisdump/uploadexcel', [GisDumpController::class, 'uploadexcel']);
     Route::get('/gisdump', [GisDumpController::class, 'index']);
@@ -61,6 +71,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::delete('/gisdump/{id}', [GisDumpController::class, 'destroy']);
 
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
+    Route::get('/klwdump/dumpscollective', [KlwDumpController::class, 'dumpscollective']);
+    Route::get('/klwdump/currentcollective', [KlwDumpController::class, 'currentcollective']);
     Route::put('/klwdump/uploadexcel', [KlwDumpController::class, 'uploadexcel']);
     Route::get('/klwdump', [KlwDumpController::class, 'index']);
     Route::delete('/klwdump/{klwDump}', [KlwDumpController::class, 'destroy']);
@@ -68,10 +80,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
     Route::get('/umdlkpi/getcollectivescores/{collective}/', array(UmdlKpiValuesController::class, 'getcollectivescores'));
     Route::get('/umdlkpi/getallscores/', array(UmdlKpiValuesController::class, 'getallscores'));
-    Route::get('/umdlkpi/totalsperkpi/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpi'));
+    Route::get('/umdlkpi/totalsperkpi/', array(UmdlKpiValuesController::class, 'totalsperkpi'));
+    Route::get('/umdlkpi/totalsperkpicollective/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpicollective'));
 
     Route::apiResource('/bbmcodes', BbmCodeController::class);
     Route::apiResource('/bbmkpi', BbmKpiController::class);
+    Route::apiResource('/kpiscores', KpiScoreController::class);
     Route::apiResource('/bbmgispackages', BbmGisPackageController::class);
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     Route::apiResource('/users', UserController::class);

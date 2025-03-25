@@ -5,7 +5,6 @@ import MuiDrawer, {drawerClasses} from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AdminMenuContent from './AdminMenuContent.jsx';
 import {showFullName} from "../../../helpers/FullName.js";
 import {useStateContext} from "../../../contexts/ContextProvider.jsx";
 import axiosClient from "../../../axios_client.js";

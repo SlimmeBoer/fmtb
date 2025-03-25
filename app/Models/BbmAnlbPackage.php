@@ -19,4 +19,9 @@ class BbmAnlbPackage extends Model
         'anlb_letters',
         'code_id',
     ];
+
+    public function code()
+    {
+        return $this->belongsTo(BbmCode::class, 'code_id');
+    }
 }

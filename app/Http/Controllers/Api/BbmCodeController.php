@@ -26,6 +26,15 @@ class BbmCodeController extends Controller
         );
     }
 
+    public function getByKpi($kpi)
+    {
+        $bbmCodes = BbmCode::whereHas('bbmKpis', function ($query) use ($kpi) {
+            $query->where('kpi', $kpi);
+        })->get();
+
+        return response()->json($bbmCodes);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

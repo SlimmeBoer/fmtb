@@ -23,4 +23,9 @@ class Signal extends Model
         'kenmerk',
         'actie',
     ];
+
+    public function klwDump()
+    {
+        return $this->belongsTo(KlwDump::class, 'dump_id', 'id');
+    }
 }

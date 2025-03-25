@@ -15,8 +15,10 @@ use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCompanyProperties;
 use App\Models\UmdlKpiValues;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
@@ -29,6 +31,17 @@ class CompanyController extends Controller
         return CompanyResource::collection(
             Company::query()->orderBy('name')->get()
         );
+    }
+
+    public function getcurrentcollective(): AnonymousResourceCollection
+    {
+        $collectiveId = Auth::user()->collectives()->first()->id;
+
+        $companies = Company::whereHas('collectives', function ($query) use ($collectiveId) {
+            $query->where('umdl_collectives.id', $collectiveId);
+        })->orderBy('name')->get();
+
+        return CompanyResource::collection($companies);
     }
 
     /**
@@ -135,6 +148,85 @@ class CompanyController extends Controller
     }
 
     /**
+     * Return all open actions for companies within a collective (in the collective dashboard)
+     * @return array[]|\Illuminate\Http\JsonResponse
+     */
+    public function getCollectiveActions()
+    {
+        $user = User::where('id', Auth::id())->first();
+
+        if (!$user) {
+            return ['$companies' => []];
+        }
+
+        foreach ($user->collectives as $collective) {
+            $companies = array();
+
+            foreach ($collective->companies as $company) {
+
+                $actions = array();
+
+                // 1. NatuurKPI's nog niet ingevuld
+                $umdlkpivalues = UmdlKpiValues::where('company_id', $company->id)->get();
+                $action_set = false;
+                foreach ($umdlkpivalues as $ukv)
+                {
+                    if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set)
+                    {
+                        $actions[] = "NatuurKPI's zijn niet ingevuld.";
+                        $action_set = true;
+                    }
+                }
+
+                // 2. Check MBP
+                $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+
+                if ($company_properties->mbp == 0) {
+                    $actions[] = "Milieubelasting is nog onbekend.";
+                }
+
+                // 3. SMA's zijn niet ingevuld
+                if ($company_properties->website == 0 && $company_properties->ontvangstruimte == 0 &&
+                    $company_properties->winkel == 0 && $company_properties->educatie == 0 &&
+                    $company_properties->meerjarige_monitoring == 0 && $company_properties->open_dagen == 0 &&
+                    $company_properties->wandelpad == 0 && $company_properties->erkend_demobedrijf == 0 &&
+                    $company_properties->bed_and_breakfast == 0) {
+
+                    $actions[] = "Sociaal-maatschappelijke activiteiten nog niet ingevuld.";
+                }
+
+                // 4. Bankgegevens nog niet ingevuld
+                if ($company->bank_account == "" || $company->bank_account_name == "") {
+
+
+                    $actions[] = "Bankgegevens nog niet ingevuld.";
+                }
+
+                $companies[] = array_merge($company->toArray(), [
+                    'actions' => $actions,
+                ]);
+
+            }
+        }
+
+        return response()->json([
+            'companies' => $companies,
+        ]);
+    }
+
+    /**
+     * Return all signals for companies within a collective (in the confrontation matrix)
+     * @return array[]|\Illuminate\Http\JsonResponse
+     */
+    public function getCollectiveSignals()
+    {
+        $user = Auth::user(); // Get the authenticated user
+        $user->load('collectives.companies.klwDumps.signals'); // Eager load related data
+
+        return response()->json($user);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -202,12 +294,14 @@ class CompanyController extends Controller
         {
             // 6. Delete all Klw values associated with this dump
             KlwValue::where('dump_id', $dump->id)->delete();
+
+            // 7. Remove all signals associated with this dumo
         }
 
-        //7. Remove the dumps themselves.
+        //8. Remove the dumps themselves.
         KlwDump::where('company_id', $company->id)->delete();
 
-        // 8. Finally, remove the company itself.
+        // 9. Finally, remove the company itself.
         $company->delete();
 
         return response()->json(['success' => true]);

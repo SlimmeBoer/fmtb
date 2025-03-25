@@ -14,11 +14,14 @@ use App\Models\Company;
 use App\Models\KlwDump;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
+use App\Models\Signal;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCollectivePostalcode;
 use App\Models\UmdlKpiValues;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class KlwDumpController extends Controller
@@ -34,6 +37,26 @@ class KlwDumpController extends Controller
         return response()->json([
             'companies' => $companies,
             'klwDumps' => KlwDumpResource::collection($klwDumps)
+        ]);
+    }
+
+    public function currentcollective()
+    {
+        $collective_id = Auth::user()->collectives()->first()->id;
+
+        $companies = Company::whereHas('collectives', function ($query) use ($collective_id) {
+            $query->where('umdl_collectives.id', $collective_id);
+        })->get();
+
+        $klwDumps = KlwDump::whereHas('company', function ($query) use ($collective_id) {
+            $query->whereHas('collectives', function ($subQuery) use ($collective_id) {
+                $subQuery->where('umdl_collectives.id', $collective_id);
+            });
+        })->get();
+
+        return response()->json([
+            'companies' => $companies,
+            'klwDumps' => $klwDumps
         ]);
     }
 
@@ -89,7 +112,10 @@ class KlwDumpController extends Controller
         //2. Delete all Klw values associated with this dump
         KlwValue::where('dump_id', $klwDump->id)->delete();
 
-        //3. Remove the dump itself.
+        //3. Delete all signals associated with this dump
+        Signal::where('dump_id', $klwDump->id)->delete();
+
+        //4. Remove the dump itself.
         $klwDump->delete();
         return response()->json(['success' => true]);
     }
@@ -112,7 +138,6 @@ class KlwDumpController extends Controller
            // 1. Store the company as a new one (if it not exists yet)
            $company = Company::firstOrNew(['ubn' => $companyData['ubn']]);
 
-            $company->workspace_id = 1;
             $company->name = $companyData['name'];
             $company->address = $companyData['address'];
             $company->postal_code = $companyData['postal_code'];
@@ -139,13 +164,16 @@ class KlwDumpController extends Controller
             // 4. Store the dump metadata
             $klwDump = KlwDump::firstOrCreate(array(
                 'filename' => $file->getClientOriginalName(),
-                'workspace_id' => 1,
                 'company_id' => $company->id,
                 'year' => $klwParser->getYear($file),
             ));
 
             // 5. Store all fields and their values into the database.
             $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, $request['saveFields']);
+
+            // 6. Import signals
+            $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
+
         }
 
         return response(201);
@@ -185,8 +213,44 @@ class KlwDumpController extends Controller
         else {
             return response('Geen bestand geupload', 500);
         }
+    }
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function dumpscollective()
+    {
+        $user = User::where('id', Auth::id())
+            ->with([
+                'collectives.companies.klwDumps' => function ($query) {
+                    $query->withCount('signals'); // Get only the count of signals
+                }
+            ])
+            ->first();
 
+        if (!$user) {
+            return ['companies' => [], 'klw_dumps' => []];
+        }
 
+        $companies = [];
+        $klwDumps = [];
+
+        foreach ($user->collectives as $collective) {
+            foreach ($collective->companies as $company) {
+                $companies[] = $company; // Collect company data
+
+                foreach ($company->klwDumps as $klwDump) {
+                    // Convert KlwDump to array and add only the signal count
+                    $klwDumps[] = array_merge($klwDump->toArray(), [
+                        'signal_count' => $klwDump->signals_count, // signals_count comes from withCount()
+                    ]);
+                }
+            }
+        }
+
+        return response()->json([
+            'companies' => $companies,
+            'klwDumps' => $klwDumps,
+        ]);
     }
 }

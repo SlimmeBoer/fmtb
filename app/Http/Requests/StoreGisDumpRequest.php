@@ -22,7 +22,6 @@ class StoreGisDumpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workspace_id' => 'required|integer',
             'year' => 'required|string|max:4',
             'filename' => 'required|string|max:200',
         ];

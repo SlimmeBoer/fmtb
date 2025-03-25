@@ -13,11 +13,11 @@ class UmdlCollectiveSeeder extends Seeder
      */
     public function run(): void
     {
-        UmdlCollective::factory()->create(['id' => 1, 'workspace_id' => 1, 'name' => 'Rijn, Vecht en Venen', 'description' => '']);
-        UmdlCollective::factory()->create(['id' => 2, 'workspace_id' => 1, 'name' => 'Lopikerwaard', 'description' => '']);
-        UmdlCollective::factory()->create(['id' => 3, 'workspace_id' => 1, 'name' => 'Utrecht-Oost', 'description' => '']);
-        UmdlCollective::factory()->create(['id' => 4, 'workspace_id' => 1, 'name' => 'Eemland', 'description' => '']);
-        UmdlCollective::factory()->create(['id' => 5, 'workspace_id' => 1, 'name' => 'Alblasserwaard-Vijfheerenlanden', 'description' => '']);
+        UmdlCollective::factory()->create(['id' => 1, 'name' => 'Rijn, Vecht en Venen', 'description' => '']);
+        UmdlCollective::factory()->create(['id' => 2, 'name' => 'Lopikerwaard', 'description' => '']);
+        UmdlCollective::factory()->create(['id' => 3, 'name' => 'Utrecht-Oost', 'description' => '']);
+        UmdlCollective::factory()->create(['id' => 4, 'name' => 'Eemland', 'description' => '']);
+        UmdlCollective::factory()->create(['id' => 5, 'name' => 'Alblasserwaard-Vijfheerenlanden', 'description' => '']);
 
     }
 }

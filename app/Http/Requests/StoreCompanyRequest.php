@@ -22,7 +22,6 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workspace_id' => 'required|integer',
             'name' => 'required|string|max:100',
             'address' => 'required|string|max:100',
             'postal_code' => 'required|string|max:10',

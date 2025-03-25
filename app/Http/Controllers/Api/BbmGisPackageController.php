@@ -32,6 +32,21 @@ class BbmGisPackageController extends Controller
     }
 
     /**
+     * Display a listing of the resource with the BBM-code written out
+     */
+    public function getOverview(): \Illuminate\Http\JsonResponse
+    {
+        $packages = BbmGisPackage::with('code:id,code')->get()->map(function ($package) {
+            return [
+                'id' => $package->id,
+                'package' => $package->package,
+                'code' => $package->code ? $package->code->code : null,
+            ];
+        });
+
+        return response()->json($packages);
+    }
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreBbmGisPackageRequest $request)

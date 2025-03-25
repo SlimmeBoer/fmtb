@@ -5,7 +5,6 @@ import {Outlet} from "react-router-dom";
 import {Box, CssBaseline, Stack} from "@mui/material";
 import {alpha, createTheme} from '@mui/material/styles';
 import Header from '../components/structure/Header.jsx';
-import AdminSideMenu from '../components/structure/admin/AdminSideMenu.jsx';
 import AppTheme from '../theme/AppTheme.jsx';
 
 import {
@@ -14,6 +13,7 @@ import {
     datePickersCustomizations,
     treeViewCustomizations,
 } from '../theme/customizations/index.js';
+import CollectiefSideMenu from "../components/structure/collectief/CollectiefSideMenu.jsx";
 
 
 export default function CollectiefLayout(props) {
@@ -56,7 +56,7 @@ export default function CollectiefLayout(props) {
         <AppTheme {...props}  themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
             <Box sx={{ display: 'flex' }}>
-                <ProvincieSideMenu />
+                <CollectiefSideMenu />
                 {/* Main content */}
                 <Box
                     component="main"

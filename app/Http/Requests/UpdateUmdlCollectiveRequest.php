@@ -22,7 +22,6 @@ class UpdateUmdlCollectiveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workspace_id' => 'required|integer',
             'name' => 'required|string|max:100',
             'description' => 'required|string',
         ];

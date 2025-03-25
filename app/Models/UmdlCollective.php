@@ -19,7 +19,6 @@ class UmdlCollective extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'workspace_id',
         'name',
         'description',
     ];

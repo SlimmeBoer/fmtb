@@ -75,7 +75,6 @@ class GisDumpController extends Controller
                     // First, create a new dump
                     $gisDump = GisDump::firstOrNew(array(
                         'filename' => $file->getClientOriginalName(),
-                        'workspace_id' => 1,
                         'year' => $request['year'],
                     ));
                     $gisDump->save();

@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 const GisUploader = () => {
     const [files, setFiles] = useState([]);
-    const [year, setYear] = useState(2021);
+    const [year, setYear] = useState(2024);
     const [feedback, setFeedback] = useState({});
     const {t} = useTranslation();
 

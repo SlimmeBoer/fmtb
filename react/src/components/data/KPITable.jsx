@@ -350,9 +350,9 @@ export default function KPITable(props) {
                                                    align="center">{kpi.year2.year}</TableCell>
                                         <TableCell sx={{width: 60, border: 1}}
                                                    align="center">{kpi.year3.year}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.kpis")}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.comparison")}</TableCell>
                                         <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.average")}</TableCell>
+                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.comparison")}</TableCell>
+                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.points")}</TableCell>
                                         <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.comparison")}</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -360,7 +360,7 @@ export default function KPITable(props) {
                                     {tableData.map((tab, index) => {
                                             if (tab.type === "normal") {
                                                 return (
-                                                    <TableRow key={index} sx={{margin: 0}}>
+                                                    <TableRow key={index} sx={{margin: 0, color: tab.color}}>
                                                         <TableCell component="th" scope="row">
                                                             {tab.text}
                                                         </TableCell>
@@ -392,23 +392,23 @@ export default function KPITable(props) {
                                             }
                                             if (tab.type === "double") {
                                                 return (<>
-                                                        <TableRow key={index + "01"}  sx={{margin: 0}}>
-                                                            <TableCell component="th" scope="row">
+                                                        <TableRow key={index + "01"}  sx={{margin: 0, color: tab.color_1}}>
+                                                            <TableCell component="th" scope="row" sx={{color: tab.color_1}}>
                                                                 {tab.text_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {tab.year1_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {tab.year2_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {tab.year3_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                            <TableCell sx={{border: 1, fontWeight: 'bold', color: tab.color_1}} align="center">
                                                                 {tab.avg_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {t("kpi_table.collective_letter")}: {tab.avg_col_1}<br />
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_1}
                                                             </TableCell>
@@ -422,7 +422,7 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.score_tot}
                                                         </TableCell>
                                                         </TableRow>
-                                                        <TableRow sx={{margin: 0}} key={index + "02"}>
+                                                        <TableRow sx={{margin: 0, color: tab.color_2}} key={index + "02"}>
                                                             <TableCell component="th" scope="row">
                                                                 {tab.text_2}
                                                             </TableCell>
@@ -449,22 +449,22 @@ export default function KPITable(props) {
                                             if (tab.type === "quad") {
                                                 return (<>
                                                         <TableRow key={(index * 100) + 1}  sx={{margin: 0}}>
-                                                            <TableCell component="th" scope="row">
+                                                            <TableCell sx={{color: tab.color_1}} component="th" scope="row">
                                                                 {tab.text_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {tab.year1_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {tab.year2_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {tab.year3_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1, fontWeight: 'bold'}} align="center">
                                                                 {tab.avg_1}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
                                                                 {t("kpi_table.collective_letter")}: {tab.avg_col_1}<br />
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_1}
                                                             </TableCell>
@@ -482,7 +482,7 @@ export default function KPITable(props) {
                                                             <TableCell component="th" scope="row">
                                                                 {tab.text_2}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color}} align="center">
+                                                            <TableCell sx={{border: 1}} align="center">
                                                                 {tab.year1_2}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
@@ -500,43 +500,43 @@ export default function KPITable(props) {
                                                             </TableCell>
                                                         </TableRow>
                                                         <TableRow key={(index * 100) + 3}  sx={{margin: 0}} >
-                                                            <TableCell component="th" scope="row">
+                                                            <TableCell component="th" scope="row" sx={{color: tab.color_3}}>
                                                                 {tab.text_3}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
                                                                 {tab.year1_3}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
                                                                 {tab.year2_3}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
                                                                 {tab.year3_3}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_3, fontWeight: 'bold'}} align="center">
                                                                 {tab.avg_3}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
                                                                 {t("kpi_table.collective_letter")}: {tab.avg_col_3}<br />
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_3}
                                                             </TableCell>
                                                         </TableRow>
                                                         <TableRow key={(index * 100) + 4}  sx={{margin: 0}} >
-                                                            <TableCell component="th" scope="row">
+                                                            <TableCell component="th" scope="row" sx={{color: tab.color_4}}>
                                                                 {tab.text_4}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
                                                                 {tab.year1_4}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
                                                                 {tab.year2_4}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
                                                                 {tab.year3_4}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_4, fontWeight: 'bold'}} align="center">
                                                                 {tab.avg_4}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
+                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
                                                                 {t("kpi_table.collective_letter")}: {tab.avg_col_4}<br />
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_4}
                                                             </TableCell>

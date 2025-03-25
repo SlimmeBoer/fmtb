@@ -106,7 +106,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Markdown Mail BBMCodeSettings
+    | Markdown Mail Admin_BBMCodeSettings
     |--------------------------------------------------------------------------
     |
     | If you are using Markdown based email rendering, you may configure your

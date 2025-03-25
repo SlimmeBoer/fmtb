@@ -18,4 +18,9 @@ class BbmGisPackage extends Model
         'code_id',
         'package',
     ];
+
+    public function code()
+    {
+        return $this->belongsTo(BbmCode::class, 'code_id');
+    }
 }

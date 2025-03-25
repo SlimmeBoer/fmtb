@@ -47,13 +47,32 @@
         "kpi_settings_explain": "Klik op de BBM-codes hieronder om ze aan respectievelijk uit de KPI weg te halen of aan de KPI toe te voegen.",
         "users": "Gebruikers"
     },
+    "pages_collectief":
+    {
+        "scangis_data": "ScanGIS - Data-overzicht",
+        "scangis_import": "ScanGIS - Importeren",
+        "klw_data": "Kringloopwijzer - Data-overzicht",
+        "klw_import": "Kringloopwijzer - Importeren",
+        "dashboard": "Dashboard voor Collectieven",
+        "overview_collective": "Overzicht - Collectief",
+        "overview_individual": "Overzicht - Individueel bedrijf",
+        "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
+        "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
+        "scangis_anlb_settings": "Overzicht van ScanGIS-data en ANLb-pakketten",
+        "scangis_anlb_settings_explanation1": "Onderstaande tabel geeft aan welke (Z-)pakketten ingelezen kunnen worden en aan welke BBM-code deze gekoppeld zijn.",
+        "scangis_anlb_settings_explanation2": "Onderstaande tabel geeft aan welke ANLb-pakketten (met codering) gekoppeld zijn aan welke KPI.",
+        "criteria": "Scoringstabel KPI's",
+        "matrix": "Confrontatiematrix"
+    },
     "kpis": {
+        "1": "KPI 1: Stikstofbalans bodemoverschot",
         "1a": "KPI 1a: Stikstofbalans bodemoverschot (kg N-totaal per ha)",
         "1b": "KPI 1b: Stikstofbalans bodemoverschot (kg N-totaal per ha) incl. correctie veen",
         "2": "KPI 2: Fosfaatbalansbodemoverschot (kg P2O5 per ha)",
         "3": "KPI 3: Ammoniakuitstoot (in kg NH3/ha)",
         "4": "KPI 4: Weidegang (uur/jaar)",
         "5": "KPI 5: Tankmelkureum  (mg/100g)",
+        "6": "KPI 6: Broeikasgasemissie",
         "6a": "KPI 6a: Broeikasgasemissie (in CO2eq. per ha)",
         "6b": "KPI 6b: Broeikasgasemissie (in CO2eq. per ha)  incl. correctie veen",
         "6c": "KPI 6c: Broeikasgasemissie (in CO2eq. per kg fcpm)",
@@ -70,16 +89,16 @@
         "15": "KPI 15: Sociaal-maatschappelijk"
     },
     "kpi_table": {
-        "total_score_points": "",
-        "total_score_money": "",
-        "kpis": "",
-        "average": "",
-        "comparison": "",
-        "points": "",
+        "total_score_points": "Totaalscore Punten",
+        "total_score_money": "Totaalscore Geld",
+        "kpis": "KPI's",
+        "average": "Gem.",
+        "comparison": "Vergelijk",
+        "points": "Punten",
         "collective_letter": "C",
         "total_letter": "T",
-        "total_score": "",
-        "payout_money": ""
+        "total_score": "Totaalscore",
+        "payout_money": "Uit te betalen"
     },
     "bbm_kpi_dragger": {
         "in_kpi": "In KPI",
@@ -111,7 +130,7 @@
         "6": "On the way to Planet Proof / AH programma",
         "7": "Beterleven Keurmerk",
         "8": "Biologisch",
-        "9": "een middelen",
+        "9": "Geen middelen",
         "updated": "Warde succesvol bijgewerkt:",
         "error": "Fout met bijwerken waarde:"
     },
@@ -186,7 +205,11 @@
     },
     "klw_upload": {
         "full_save": "Sla alle KLW-velden op in de database (volledige upload)",
+        "explanation": "Via deze pagina kun je zelf Kringloopwijzer-bestanden uploaden voor de verschillende bedrijven die aangesloten zijn bij je collectief/collectieven. Let er op dat je de KLW-outputs gebruikt.",
         "diagram_scores": " Staafdiagram scores"
+    },
+    "gis_upload": {
+        "explanation": "Via deze pagina kun je een Excel-bestand uploaden met daarin ScanGIS-records voor de bedrijven in je collectief. Zie ook de handleiding voor een prezie toelichting van het formaat van deze bestanden.<br />Kies voor het jaar altijd het laatste jaar van de drie jaren waarover de score wordt berekend."
     },
     "user_form": {
         "update_success": "Gebruiker succesvol bijgewerkt",
@@ -234,15 +257,37 @@
         "klw": "Kringloopwijzers",
         "scangis": "ScanGIS-data",
         "settings": "Instellingen",
-        "users": "Gebruikers"
+        "users": "Gebruikers",
+        "data": "Databeheer"
+    },
+    "collectief_menu": {
+        "dashboard": "Dashboard",
+        "overview_total": "Overzicht totaal",
+        "overview_collective": "Scores collectief",
+        "overview_individual": "Scores individueel",
+        "management_data": "Managementdata",
+        "klw_import": "Importeren KLW",
+        "klw_data": "Databeheer KLW",
+        "gis_import": "Importeren GIS",
+        "gis_data": "Databeheer GIS",
+        "bbm_codes_kpis": "BBM-codes / KPI's",
+        "scangis_anlb": "ScanGIS / ANLb",
+        "kpi_criteria": "Scoringscriteria KPI's",
+        "anlb_packages": "ANLb-pakketten",
+        "overviews": "Overzichten",
+        "klw": "Kringloopwijzers",
+        "scangis": "ScanGIS-data",
+        "settings": "Toon Instellingen",
+        "confrontation_matrix": "Confrontatiematrix"
     },
     "about": {
-        "version": "Versie 0.2.100",
+        "version": "Versie 0.2.3",
         "copyright": " Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description_test": "Deze versie is bedoeld voor demonstratie-doeleinden.<br/><br/> Alle getoonde data isniet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },
     "collective_dashboard": {
-        "open_actions": "Openstaande acties"
+        "open_actions": "Openstaande acties",
+        "status_klw": "Status van alle geüploade Kringloopwijzers ( + signaleringen)"
     },
     "score_gauge": {
         "avg_collective": "Gem. collectief",

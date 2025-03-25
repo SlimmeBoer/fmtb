@@ -22,7 +22,6 @@ class StoreKlwFieldRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workspace_id' => 'required|integer',
             'fieldname' => 'required|string|max:100',
             'section' => 'required|string|max:100',
             'subsection' => 'required|string|max:100',

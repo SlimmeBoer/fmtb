@@ -79,7 +79,6 @@ class BbmKpiController extends Controller
     {
         // Get selected
         $selected_records = BbmKpi::where('kpi', $kpi)->get();
-        Log::info($selected_records);
         $selectedArray = array();
 
         foreach ($selected_records as $record) {

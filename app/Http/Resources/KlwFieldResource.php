@@ -17,7 +17,6 @@ class KlwFieldResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'workspace_id' => $this->workspace_id,
             'fieldname' => $this->fieldname,
             'section' => $this->section,
             'subsection' => $this->subsection,
