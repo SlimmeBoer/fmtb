@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('gis_dumps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('collective_id');
             $table->string('year');
             $table->string('filename');
             $table->timestamps();

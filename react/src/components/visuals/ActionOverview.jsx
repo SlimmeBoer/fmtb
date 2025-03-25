@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import CenteredLoading from "./CenteredLoading.jsx";
 
 
 export default function ActionOverview() {
@@ -20,7 +21,7 @@ export default function ActionOverview() {
 
     useEffect(() => {
         setLoading(true);
-        axiosClient.get(`/companies/actionscollective`)
+        axiosClient.get(`/companies/actions`)
             .then(response => {
                 setCompanies(response.data.companies);
                 setLoading(false);
@@ -33,32 +34,43 @@ export default function ActionOverview() {
 
     return (
         <Card variant="outlined">
-            <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
-                <PendingActionsIcon/>
-                <Typography sx={{mb: 2}}  variant="h6">
-                    {t("collective_dashboard.open_actions")}
-                </Typography>
-            </Stack>
-            {companies.map((c, index) => (
-            <Box key={index} sx={{mb: 2, width: "100%", padding: 1, color: "#c00", border: "1px solid #c00", bgcolor: "#fff6f6", borderRadius: 4 }}>
-                <Stack direction="column">
-                    <Stack direction="row" gap={2}>
-                        <ErrorOutlineIcon/>
-                        <Typography sx={{mt: 0.2}} variant="body2">
-                            <strong>{c.name}:</strong>
-                        </Typography>
-                    </Stack>
-                    <List sx={{ ml: 2, listStyleType: 'disc', padding: 0 }}>
-                        {c.actions.map((a, index) => (
-                            <ListItem key={index} sx={{ display: 'list-item', padding: 0, margin: 0 }}>
-                                {a}
-                            </ListItem>
-                        ))}
-                    </List>
-
+            {loading && <CenteredLoading/>}
+            {!loading && <Box>
+                <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
+                    <PendingActionsIcon/>
+                    <Typography sx={{mb: 2}} variant="h6">
+                        {t("collective_dashboard.open_actions")}
+                    </Typography>
                 </Stack>
-            </Box>
-            ))}
+                {companies.map((c, index) => (
+                    <Box key={index} sx={{
+                        mb: 2,
+                        width: "100%",
+                        padding: 1,
+                        color: "#c00",
+                        border: "1px solid #c00",
+                        bgcolor: "#fff6f6",
+                        borderRadius: 4
+                    }}>
+                        <Stack direction="column">
+                            <Stack direction="row" gap={2}>
+                                <ErrorOutlineIcon/>
+                                <Typography sx={{mt: 0.2}} variant="body2">
+                                    <strong>{c.name}:</strong>
+                                </Typography>
+                            </Stack>
+                            <List sx={{ml: 2, listStyleType: 'disc', padding: 0}}>
+                                {c.actions.map((a, index) => (
+                                    <ListItem key={index} sx={{display: 'list-item', padding: 0, margin: 0}}>
+                                        {a}
+                                    </ListItem>
+                                ))}
+                            </List>
+
+                        </Stack>
+                    </Box>
+                ))}
+            </Box>}
         </Card>
     )
 

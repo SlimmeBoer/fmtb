@@ -2,10 +2,10 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
-import ActionOverview from "../../components/visuals/ActionOverview.jsx";
 import {useTranslation} from "react-i18next";
 import KLWOverviewCollectief from "../../components/data/KLWOverviewCollectief.jsx";
 import CollectiefGauges from "../../components/data/CollectiefGauges.jsx";
+import ActionOverviewCollectief from "../../components/visuals/ActionOverviewCollectief.jsx";
 
 export default function Collectief_Dashboard() {
 
@@ -46,7 +46,7 @@ export default function Collectief_Dashboard() {
 
                 {/* Right Column */}
                 <Grid item xs={12} sm={4} lg={4} sx={{ display: "flex", flexDirection: "column" }}>
-                    <ActionOverview />
+                    <ActionOverviewCollectief />
                 </Grid>
             </Grid>
         </Box>

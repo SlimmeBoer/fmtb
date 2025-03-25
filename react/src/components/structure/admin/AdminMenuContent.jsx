@@ -12,48 +12,50 @@ import DatasetIcon from '@mui/icons-material/Dataset';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import PersonIcon from '@mui/icons-material/Person';
-import TableChartIcon from '@mui/icons-material/TableChart';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
+import ReportIcon from "@mui/icons-material/Report";
 
 export default function AdminMenuContent() {
 
     const {t} = useTranslation();
 
     const mainItems = [
-        {text: t("menu.dashboard"), icon: <HomeRoundedIcon/>, link: '/admin/dashboard'},
-        {text: t("menu.overview_total"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/totaal'},
-        {text: t("menu.overview_collective"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/collectief'},
-        {text: t("menu.overview_individual"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/individueel'},
-        {text: t("menu.management_data"), icon: <TableChartIcon/>, link: '/admin/overzicht/managementdata'},
+        {text: t("admin_menu.dashboard"), icon: <HomeRoundedIcon/>, link: '/admin/dashboard'},
+        {text: t("admin_menu.overview_total"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/totaal'},
+        {text: t("admin_menu.overview_collective"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/collectief'},
+        {text: t("admin_menu.overview_individual"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/individueel'},
+        {text: t("admin_menu.confrontation_matrix"), icon: <ReportIcon/>, link: '/admin/matrix'},
     ];
 
     const klwItems = [
-        {text: t("menu.klw_import"), icon: <ImportExportIcon/>, link: '/admin/klw/importeren'},
-        {text: t("menu.mbp_sma_import"), icon: <ImportExportIcon/>, link: '/admin/klw/importeermbpsma'},
-        {text: t("menu.klw_data_management"), icon: <DatasetIcon/>, link: '/admin/klw/data'},
+        {text: t("admin_menu.klw_import"), icon: <ImportExportIcon/>, link: '/admin/klw/importeren'},
+        {text: t("admin_menu.klw_data_management"), icon: <DatasetIcon/>, link: '/admin/klw/data'},
     ];
 
     const gisItems = [
-        {text: t("menu.gis_import"), icon: <ImportExportIcon/>, link: '/admin/gis/importeren'},
-        {text: t("menu.gis_data_management"), icon: <DatasetIcon/>, link: '/admin/gis/data'},
+        {text: t("admin_menu.gis_import"), icon: <ImportExportIcon/>, link: '/admin/gis/importeren'},
+        {text: t("admin_menu.gis_data_management"), icon: <DatasetIcon/>, link: '/admin/gis/data'},
     ];
 
     const settingItems = [
-        {text: t("menu.bbm_codes"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmcodes'},
-        {text: t("menu.bbm_kpis"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmkpis'},
-        {text: t("menu.scangis_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/scangis'},
-        {text: t("menu.anlb_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/anlb'},
+        {text: t("admin_menu.general_settings"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/general'},
+        {text: t("admin_menu.bbm_codes"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmcodes'},
+        {text: t("admin_menu.bbm_kpis"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmkpis'},
+        {text: t("admin_menu.scangis_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/scangis'},
+        {text: t("admin_menu.anlb_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/anlb'},
+        {text: t("admin_menu.logs"), icon: <AssignmentIcon/>, link: '/admin/logs'},
     ];
 
     const userItems = [
-        {text: t("menu.user_management"), icon: <PersonIcon/>, link: '/admin/users/'},
+        {text: t("admin_menu.user_management"), icon: <PersonIcon/>, link: '/admin/users/'},
     ];
     return (
 
         <Stack sx={{flexGrow: 1, p: 4,}}>
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600}}>
-                {t("menu.overviews")}
+                {t("admin_menu.overviews")}
             </Typography>
             <List dense>
                 {mainItems.map((item, index) => (
@@ -67,7 +69,7 @@ export default function AdminMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.klw")}
+                {t("admin_menu.klw")}
             </Typography>
             <List dense>
                 {klwItems.map((item, index) => (
@@ -81,7 +83,7 @@ export default function AdminMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.scangis")}
+                {t("admin_menu.scangis")}
             </Typography>
             <List dense>
                 {gisItems.map((item, index) => (
@@ -94,7 +96,7 @@ export default function AdminMenuContent() {
                 ))}
             </List>
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.settings")}
+                {t("admin_menu.settings")}
             </Typography>
             <List dense>
                 {settingItems.map((item, index) => (
@@ -108,7 +110,7 @@ export default function AdminMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.users")}
+                {t("admin_menu.users")}
             </Typography>
             <List dense>
                 {userItems.map((item, index) => (

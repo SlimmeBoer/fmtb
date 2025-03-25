@@ -15,6 +15,7 @@ use App\Models\KlwDump;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
 use App\Models\Signal;
+use App\Models\SystemLog;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCollectivePostalcode;
 use App\Models\UmdlKpiValues;
@@ -40,6 +41,10 @@ class KlwDumpController extends Controller
         ]);
     }
 
+    /**
+     * Gets a list of all companies, dumps in the current collective
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function currentcollective()
     {
         $collective_id = Auth::user()->collectives()->first()->id;
@@ -115,7 +120,14 @@ class KlwDumpController extends Controller
         //3. Delete all signals associated with this dump
         Signal::where('dump_id', $klwDump->id)->delete();
 
-        //4. Remove the dump itself.
+        //4. Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'KLW-dump verwijderd: ' . $klwDump->filename,
+        ));
+
+        //5. Remove the dump itself.
         $klwDump->delete();
         return response()->json(['success' => true]);
     }
@@ -148,6 +160,13 @@ class KlwDumpController extends Controller
             $company->bio = $companyData['bio'];
             $company->save();
 
+            // Log
+            SystemLog::firstOrCreate(array(
+                'user_id' => Auth::user()->id,
+                'type' => 'CREATE',
+                'message' => 'Bedrijf toegevoegd: ' . $company->name,
+            ));
+
             // 2. Connect the company to an existing collective
             $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
             $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
@@ -166,6 +185,13 @@ class KlwDumpController extends Controller
                 'filename' => $file->getClientOriginalName(),
                 'company_id' => $company->id,
                 'year' => $klwParser->getYear($file),
+            ));
+
+            // Log
+            SystemLog::firstOrCreate(array(
+                'user_id' => Auth::user()->id,
+                'type' => 'CREATE',
+                'message' => 'KLW-dump geupload : ' . $company->name . ' (jaar '. $klwParser->getYear($file) . ')',
             ));
 
             // 5. Store all fields and their values into the database.
@@ -253,4 +279,35 @@ class KlwDumpController extends Controller
             'klwDumps' => $klwDumps,
         ]);
     }
+
+    /**
+     * Gets all dumps from all companies with all signals.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllDumps()
+    {
+        // Get all companies with their associated klwDumps and signal count
+        $companies = Company::with([
+            'klwDumps' => function ($query) {
+                $query->withCount('signals'); // Get only the count of signals for each dump
+            }
+        ])->get();
+
+        $klwDumps = [];
+
+        // Extract klwDumps and include signal count
+        foreach ($companies as $company) {
+            foreach ($company->klwDumps as $klwDump) {
+                $klwDumps[] = array_merge($klwDump->toArray(), [
+                    'signal_count' => $klwDump->signals_count, // signals_count comes from withCount()
+                ]);
+            }
+        }
+
+        return response()->json([
+            'companies' => $companies,
+            'klwDumps' => $klwDumps,
+        ]);
+    }
+
 }

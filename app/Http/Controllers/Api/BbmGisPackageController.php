@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateBbmGisPackageRequest;
 use App\Http\Resources\BbmCodeResource;
 use App\Http\Resources\BbmGisPackageResource;
 use App\Models\BbmGisPackage;
+use App\Models\SystemLog;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BbmGisPackageController extends Controller
@@ -53,6 +55,14 @@ class BbmGisPackageController extends Controller
     {
         $data = $request->validated();
         $bbmGisPackage = BbmGisPackage::create($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'CREATE',
+            'message' => 'Maakte een nieuw GIS-pakket aan: ' . $bbmGisPackage->package,
+        ));
+
         return response(new BbmGisPackageResource($bbmGisPackage), 201);
     }
 
@@ -79,6 +89,14 @@ class BbmGisPackageController extends Controller
     {
         $data = $request->validated();
         $bbmgispackage->update($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE',
+            'message' => 'Werkte een GIS-pakket bij: ' . $bbmgispackage->package,
+        ));
+
         return new BbmGisPackageResource($bbmgispackage);
     }
 
@@ -87,6 +105,13 @@ class BbmGisPackageController extends Controller
      */
     public function destroy(BbmGisPackage $bbmgispackage) : Response
     {
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'Verwijderde GIS-pakket: ' . $bbmgispackage->package,
+        ));
+
         $bbmgispackage->delete();
         return response('', 204);
     }

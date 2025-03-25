@@ -24,7 +24,7 @@ export default function Admin_OverzichtTotaal() {
                     sx={{mb: (theme) => theme.spacing(2), mt: 2}}
                 >
                     <Grid size={{xs: 12, lg: 4}}>
-                        <ScoresTableTotaal limit={1000}/>
+                        <ScoresTableTotaal limit={1000} link={"/admin/overzicht/individueel/"}/>
                     </Grid>
                     <Grid  size={{xs: 12, lg: 8}}>
                         <TotaalKPIs collective={0} />

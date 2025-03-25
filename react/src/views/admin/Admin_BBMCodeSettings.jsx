@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import BBMCodeForm from "../../components/forms/BBMCodeForm.jsx";
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 export default function Admin_BBMCodeSettings() {
 
     const [bbmcodes, setBbmcodes] = useState({});
@@ -55,7 +56,7 @@ export default function Admin_BBMCodeSettings() {
                        pt: 1.5, pb: 4,
                    }}>
                 <Stack direction="row" gap={2}>
-                    <LayersIcon/>
+                    <SettingsRoundedIcon/>
                     <Typography component="h6" variant="h6">
                         {t("pages_admin.code_settings")}
                     </Typography>

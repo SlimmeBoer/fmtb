@@ -52,7 +52,7 @@ export default function GuestLayout(props) {
             return <Navigate to="/collectief"/>;
         }
         if (user.roles[0].name === "programmaleider") {
-            return <Navigate to="/collectief"/>;
+            return <Navigate to="/beheerder"/>;
         }
     }
 

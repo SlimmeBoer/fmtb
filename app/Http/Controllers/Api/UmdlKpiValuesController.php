@@ -136,6 +136,27 @@ class UmdlKpiValuesController extends Controller
         return $allTotals;
     }
 
+    public function getallscoresanon() : array
+    {
+        $umdl_scores = new UMDLKPIScores();
+        $allTotals = array();
+        $companies = Company::all();
+
+        foreach ($companies as $company)
+        {
+            $company_scores = $umdl_scores->getScores($company->id);
+            $companyArray = array($company->id => array (
+                'company_id' => $company->id,
+                'company_name' => "...",
+                'points' => $company_scores['total']['score'],
+                'money' => $company_scores['total']['money'],
+            ));
+            $allTotals = array_merge($allTotals, $companyArray);
+        }
+        $this->sortByPointsDesc($allTotals);
+        return $allTotals;
+    }
+
     public function totalsperkpicollective($collective_id) : array
     {
         $totals = new UMDLKPITotals();

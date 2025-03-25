@@ -8,11 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
-import DatasetIcon from '@mui/icons-material/Dataset';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
-import PersonIcon from '@mui/icons-material/Person';
-import TableChartIcon from '@mui/icons-material/TableChart';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 
@@ -21,22 +17,22 @@ export default function ProvincieMenuContent() {
     const {t} = useTranslation();
 
     const mainItems = [
-        {text: t("menu.dashboard"), icon: <HomeRoundedIcon/>, link: '/provincie/dashboard'},
-        {text: t("menu.overview_total"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/totaal'},
+        {text: t("provincie_menu.dashboard"), icon: <HomeRoundedIcon/>, link: '/provincie/dashboard'},
+        {text: t("provincie_menu.overview_total"), icon: <AnalyticsIcon/>, link: '/provincie/scores/totaal'},
+        {text: t("provincie_menu.overview_individual"), icon: <AnalyticsIcon/>, link: '/provincie/scores/individueel'},
     ];
 
     const settingItems = [
-        {text: t("menu.bbm_codes"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmcodes'},
-        {text: t("menu.bbm_kpis"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmkpis'},
-        {text: t("menu.scangis_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/scangis'},
-        {text: t("menu.anlb_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/anlb'},
+        {text: t("provincie_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/provincie/settings/bbmkpis'},
+        {text: t("provincie_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/provincie/settings/scangisanlb'},
+        {text: t("provincie_menu.kpi_criteria"), icon: <SettingsRoundedIcon/>, link: '/provincie/settings/criteria'},
     ];
 
     return (
 
         <Stack sx={{flexGrow: 1, p: 4,}}>
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600}}>
-                {t("menu.overviews")}
+                {t("provincie_menu.overviews")}
             </Typography>
             <List dense>
                 {mainItems.map((item, index) => (
@@ -50,7 +46,7 @@ export default function ProvincieMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.settings")}
+                {t("provincie_menu.settings")}
             </Typography>
             <List dense>
                 {settingItems.map((item, index) => (

@@ -10,8 +10,10 @@ use App\Models\BbmAnlbPackage;
 use App\Models\BbmCode;
 use App\Models\BbmGisPackage;
 use App\Models\BbmKpi;
+use App\Models\SystemLog;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BbmCodeController extends Controller
@@ -50,6 +52,14 @@ class BbmCodeController extends Controller
     {
         $data = $request->validated();
         $bbmCode = BbmCode::create($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'CREATE',
+            'message' => 'Maakte een nieuwe BBM-code aan: ' . $bbmCode->code ,
+        ));
+
         return response(new BbmCodeResource($bbmCode), 201);
     }
 
@@ -74,10 +84,19 @@ class BbmCodeController extends Controller
      */
     public function update(UpdateBbmCodeRequest $request, BbmCode $bbmcode): BbmCodeResource
     {
-        Log::info($bbmcode);
         $data = $request->validated();
         $bbmcode->update($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE',
+            'message' => 'Werkte BBM-code bij: ' . $bbmcode->code ,
+        ));
+
         return new BbmCodeResource($bbmcode);
+
+
     }
 
     /**
@@ -94,8 +113,15 @@ class BbmCodeController extends Controller
         // 3. Remove all the associated ANLb packages
         BbmAnlbPackage::where('code_id',$bbmcode->id)->delete();
 
-        // 4. Lastly, remove the code itself.
+        // 4. Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'Verwijderde BBM-code: ' . $bbmcode->code ,
+        ));
+        // 5. Lastly, remove the code itself.
         $bbmcode->delete();
+
         return response("", 204);
     }
 }

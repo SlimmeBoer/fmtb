@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import GisPackageForm from "../../components/forms/GisPackageForm.jsx";
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 export default function Admin_BBMGISSettings() {
 
@@ -72,7 +73,7 @@ export default function Admin_BBMGISSettings() {
                        pt: 1.5, pb: 4,
                    }}>
                 <Stack direction="row" gap={2}>
-                    <LayersIcon/>
+                    <SettingsRoundedIcon/>
                     <Typography component="h6" variant="h6">
                         {t("pages_admin.gis_settings")}
                     </Typography>

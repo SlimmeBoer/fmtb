@@ -15,6 +15,9 @@ export default function Admin_KLWImporteren() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 {t("pages_admin.klw_import")}
             </Typography>
+            <Typography component="body2" variant="body2">
+                {t("klw_upload.explanation")}
+            </Typography>
             <KLWUploader />
         </Box>
     )

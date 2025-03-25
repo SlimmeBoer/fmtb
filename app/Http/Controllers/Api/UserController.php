@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\SystemLog;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -49,6 +51,12 @@ class UserController extends Controller
         }
 
         $user = User::create($data);
+
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'CREATE',
+            'message' => 'Gebruiker toegevoegd: ' . $data['email'],
+        ));
 
         return response(new UserResource($user),201);
     }
@@ -92,6 +100,14 @@ class UserController extends Controller
             }
         }
         $user->update($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE',
+            'message' => 'Gebruiker gewijzigd: ' . $data['email'],
+        ));
+
         return new UserResource($user);
 
     }
@@ -104,7 +120,17 @@ class UserController extends Controller
      */
     public function destroy(User $user): Response
     {
-        unlink(public_path($user->image));
+        if ($user->image !== null && file_exists(public_path($user->image))) {
+            unlink(public_path($user->image));
+        }
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'Gebruiker verwijderd: ' . $user->email,
+        ));
+
         $user->delete();
         return response("",204);
 

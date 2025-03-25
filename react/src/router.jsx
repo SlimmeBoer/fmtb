@@ -35,6 +35,28 @@ import Collectief_Criteria from "./views/collectief/Collectief_Criteria.jsx";
 import Collectief_Matrix from "./views/collectief/Collectief_Matrix.jsx";
 import Collectief_GISData from "./views/collectief/Collectief_GISData.jsx";
 import Collectief_KLWData from "./views/collectief/Collectief_KLWData.jsx";
+import Admin_GeneralSettings from "./views/admin/Admin_GeneralSettings.jsx";
+import Admin_Logs from "./views/admin/Admin_Logs.jsx";
+import Admin_Matrix from "./views/admin/Admin_Matrix.jsx";
+import Admin_GISData from "./views/admin/Admin_GISData.jsx";
+import BeheerderLayout from "./layouts/BeheerderLayout.jsx";
+import Beheerder_OverzichtCollectief from "./views/beheerder/Beheerder_OverzichtCollectief.jsx";
+import Beheerder_Dashboard from "./views/beheerder/Beheerder_Dashboard.jsx";
+import Beheerder_OverzichtIndividueel from "./views/beheerder/Beheerder_OverzichtIndividueel.jsx";
+import Beheerder_Matrix from "./views/beheerder/Beheerder_Matrix.jsx";
+import Beheerder_KLWImporteren from "./views/beheerder/Beheerder_KLWImporteren.jsx";
+import Beheerder_KLWData from "./views/beheerder/Beheerder_KLWData.jsx";
+import Beheerder_GISImporteren from "./views/beheerder/Beheerder_GISImporteren.jsx";
+import Beheerder_GISData from "./views/beheerder/Beheerder_GISData.jsx";
+import Beheerder_BBMKPI from "./views/beheerder/Beheerder_BBMKPI.jsx";
+import Beheerder_ScanGISANLb from "./views/beheerder/Beheerder_ScanGISANLb.jsx";
+import Beheerder_Criteria from "./views/beheerder/Beheerder_Criteria.jsx";
+import Beheerder_OverzichtTotaal from "./views/beheerder/Beheerder_OverzichtTotaal.jsx";
+import Provincie_BBMKPI from "./views/provincie/Provincie_BBMKPI.jsx";
+import Provincie_ScanGISANLb from "./views/provincie/Provincie_ScanGISANLb.jsx";
+import Provincie_Criteria from "./views/provincie/Provincie_Criteria.jsx";
+import Provincie_OverzichtTotaal from "./views/provincie/Provincie_OverzichtTotaal.jsx";
+import Provincie_OverzichtIndividueel from "./views/provincie/Provincie_OverzichtIndividueel.jsx";
 
 const router = createBrowserRouter([
     {
@@ -72,12 +94,12 @@ const router = createBrowserRouter([
                         element: <Admin_OverzichtIndividueel/>
                     },
                     {
-                        path: '/admin/klw/importeren',
-                        element: <Admin_KLWImporteren/>
+                        path: '/admin/matrix',
+                        element: <Admin_Matrix/>
                     },
                     {
-                        path: '/admin/klw/importeermbpsma',
-                        element: <Admin_ImporteerMBPSMA/>
+                        path: '/admin/klw/importeren',
+                        element: <Admin_KLWImporteren/>
                     },
                     {
                         path: '/admin/klw/data',
@@ -89,11 +111,15 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/admin/gis/data',
-                        element: <GISData/>
+                        element: <Admin_GISData />
                     },
                     {
                         path: '/admin/settings/bbmcodes',
                         element: <Admin_BBMCodeSettings/>
+                    },
+                    {
+                        path: '/admin/settings/general',
+                        element: <Admin_GeneralSettings/>
                     },
                     {
                         path: '/admin/settings/bbmkpis',
@@ -106,6 +132,10 @@ const router = createBrowserRouter([
                     {
                         path: '/admin/settings/anlb',
                         element: <Admin_BBMANLbSettings/>
+                    },
+                    {
+                        path: '/admin/logs',
+                        element: <Admin_Logs/>
                     },
                     {
                         path: '/admin/users',
@@ -140,6 +170,100 @@ const router = createBrowserRouter([
                         path: '/provincie',
                         element: <Provincie_Dashboard/>,
                     },
+                    {
+                        path: '/provincie/dashboard',
+                        element: <Provincie_Dashboard/>,
+                    },
+                    {
+                        path: '/provincie/scores/totaal',
+                        element: <Provincie_OverzichtTotaal/>,
+                    },
+                    {
+                        path: '/provincie/scores/individueel',
+                        element: <Provincie_OverzichtIndividueel/>,
+                    },
+                    {
+                        path: '/provincie/scores/individueel/:id',
+                        element: <Provincie_OverzichtIndividueel/>
+                    },
+                    {
+                        path: '/provincie/settings/bbmkpis',
+                        element: <Provincie_BBMKPI/>,
+                    },
+                    {
+                        path: '/provincie/settings/scangisanlb',
+                        element: <Provincie_ScanGISANLb/>,
+                    },
+                    {
+                        path: '/provincie/settings/criteria',
+                        element: <Provincie_Criteria/>,
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        element: <ProtectedRoute userRole="programmaleider"/>,
+        children: [
+            {
+                element: <BeheerderLayout/>,
+                children: [
+                    {
+                        path: '/beheerder',
+                        element: <Beheerder_Dashboard/>,
+                    },
+                    {
+                        path: '/beheerder/dashboard',
+                        element: <Beheerder_Dashboard/>,
+                    },
+                    {
+                        path: '/beheerder/scores/totaal',
+                        element: <Beheerder_OverzichtTotaal/>,
+                    },
+                    {
+                        path: '/beheerder/scores/collectief',
+                        element: <Beheerder_OverzichtCollectief/>,
+                    },
+                    {
+                        path: '/beheerder/scores/individueel',
+                        element: <Beheerder_OverzichtIndividueel/>,
+                    },
+                    {
+                        path: '/beheerder/scores/individueel/:id',
+                        element: <Beheerder_OverzichtIndividueel/>
+                    },
+                    {
+                        path: '/beheerder/matrix',
+                        element: <Beheerder_Matrix/>,
+                    },
+                    {
+                        path: '/beheerder/klw/importeren',
+                        element: <Beheerder_KLWImporteren/>,
+                    },
+                    {
+                        path: '/beheerder/klw/data',
+                        element: <Beheerder_KLWData/>,
+                    },
+                    {
+                        path: '/beheerder/gis/importeren',
+                        element: <Beheerder_GISImporteren/>,
+                    },
+                    {
+                        path: '/beheerder/gis/data',
+                        element: <Beheerder_GISData/>,
+                    },
+                    {
+                        path: '/beheerder/settings/bbmkpis',
+                        element: <Beheerder_BBMKPI/>,
+                    },
+                    {
+                        path: '/beheerder/settings/scangisanlb',
+                        element: <Beheerder_ScanGISANLb/>,
+                    },
+                    {
+                        path: '/beheerder/settings/criteria',
+                        element: <Beheerder_Criteria/>,
+                    },
                 ],
             },
         ],
@@ -165,6 +289,10 @@ const router = createBrowserRouter([
                     {
                         path: '/collectief/scores/individueel',
                         element: <Collectief_OverzichtIndividueel/>,
+                    },
+                    {
+                        path: '/collectief/scores/individueel/:id',
+                        element: <Beheerder_OverzichtIndividueel/>
                     },
                     {
                         path: '/collectief/matrix',

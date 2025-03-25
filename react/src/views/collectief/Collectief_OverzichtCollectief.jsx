@@ -30,7 +30,7 @@ export default function Collectief_OverzichtCollectief() {
                     sx={{mb: (theme) => theme.spacing(2), mt: 2}}
                 >
                     <Grid size={{xs: 12, lg: 4}}>
-                        <ScoresTableCollective collective={0}/>
+                        <ScoresTableCollective collective={0} link={"/collectief/scores/individueel/"}/>
                     </Grid>
                     <Grid  size={{xs: 12, lg: 8}}>
                         <TotaalKPIsCollectief collective={0} />

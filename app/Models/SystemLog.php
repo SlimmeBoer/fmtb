@@ -15,5 +15,10 @@ class SystemLog extends Model
         'type',
         'message',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 

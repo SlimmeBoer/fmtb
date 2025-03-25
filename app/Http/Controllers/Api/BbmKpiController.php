@@ -9,6 +9,8 @@ use App\Http\Resources\BbmCodeResource;
 use App\Http\Resources\BbmKpiResource;
 use App\Models\BbmCode;
 use App\Models\BbmKpi;
+use App\Models\SystemLog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BbmKpiController extends Controller
@@ -36,6 +38,14 @@ class BbmKpiController extends Controller
     {
         $bbm = BbmCode::where('code', $bbm_code)->first();
         $bbmkpi = BbmKpi::create(array('kpi' => $kpi, 'code_id' => $bbm->id));
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'CREATE',
+            'message' => 'BBM-code aan KPI toegekend: ' . $bbm_code . ' aan KPI#' . $kpi,
+        ));
+
         return response(new BbmKpiResource($bbmkpi), 201);
     }
 
@@ -68,6 +78,15 @@ class BbmKpiController extends Controller
      */
     public function destroy(BbmKpi $bbmkpi)
     {
+        $bbm = BbmCode::where('ID', $bbmkpi->code_id)->first();
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'BBM-code toekenning verwijderd: ' . $bbm->code . ' aan KPI#' . $bbmkpi->kpi,
+        ));
+
         $bbmkpi->delete();
         return response('', 204);
     }

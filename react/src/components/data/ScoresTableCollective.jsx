@@ -62,7 +62,7 @@ export default function ScoresTableCollective(props) {
                                 return (
                                     <TableRow key={index} sx={{margin: 0}}>
                                         <TableCell component="th" scope="row">
-                                            {index+1}. <Link href={"/overzicht/individueel/" + s.company_id}>{s.company_name}</Link>
+                                            {index+1}. <Link href={props.link + s.company_id}>{s.company_name}</Link>
                                         </TableCell>
                                         <TableCell align="center">
                                             {s.points}

@@ -28,11 +28,7 @@ const KLWOverviewCollectief = () => {
     const {user} = useStateContext();
     const [companies, setCompanies] = useState([]);
     const [klwDumps, setKlwDumps] = useState([]);
-    const [dialogDumpOpen, setDialogDumpOpen] = useState(false);
-    const [dialogCompanyOpen, setDialogCompanyOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [selectedDumpId, setSelectedDumpId] = useState(null);
-    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+    const [loading, setLoading] = useState(false)
 
     const {t} = useTranslation();
 
@@ -49,40 +45,6 @@ const KLWOverviewCollectief = () => {
                 setLoading(false);
             });
     }, []);
-
-    const handleDeleteDumpClick = (dumpId) => {
-        setSelectedDumpId(dumpId);
-        setDialogDumpOpen(true);
-    };
-
-    const confirmDumpDelete = () => {
-        axiosClient.delete(`/klwdump/${selectedDumpId}`)
-            .then(() => {
-                setKlwDumps(klwDumps.filter(dump => dump.id !== selectedDumpId));
-                setDialogDumpOpen(false);
-            })
-            .catch(error => {
-                console.error(t("klw_overview.error_delete_dump"), error);
-
-
-            });
-    };
-
-    const handleDeleteCompanyClick = (companyId) => {
-        setSelectedCompanyId(companyId);
-        setDialogCompanyOpen(true);
-    };
-
-    const confirmCompanyDelete = () => {
-        axiosClient.delete(`/companies/${selectedCompanyId}`)
-            .then(() => {
-                setCompanies(companies.filter(company => company.id !== selectedCompanyId));
-                setDialogCompanyOpen(false);
-            })
-            .catch(error => {
-                console.error(t("klw_overview.error_delete_company"), error);
-            });
-    };
 
     const renderTableCell = (companyId, year) => {
         const dump = klwDumps.find(dump => dump.company_id === companyId && dump.year === year);
@@ -154,27 +116,6 @@ const KLWOverviewCollectief = () => {
                 </Table>
             </TableContainer>}
 
-            <Dialog open={dialogDumpOpen} onClose={() => setDialogDumpOpen(false)}>
-                <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>{t("klw_overview.delete_confirm_dump")}</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setDialogDumpOpen(false)} color="primary">{t("general.cancel")}</Button>
-                    <Button onClick={confirmDumpDelete} color="primary">{t("general.delete")}</Button>
-                </DialogActions>
-            </Dialog>
-
-            <Dialog open={dialogCompanyOpen} onClose={() => setDialogCompanyOpen(false)}>
-                <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>{t("klw_overview.delete_confirm_company")}</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setDialogCompanyOpen(false)} color="primary">{t("general.cancel")}</Button>
-                    <Button onClick={confirmCompanyDelete} color="primary">{t("general.delete")}</Button>
-                </DialogActions>
-            </Dialog>
         </Card>
     );
 };

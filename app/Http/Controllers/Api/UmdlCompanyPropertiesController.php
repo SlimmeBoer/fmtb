@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUmdlCompanyPropertiesRequest;
 use App\Http\Requests\UpdateUmdlCompanyPropertiesRequest;
 use App\Http\Resources\UmdlCompanyPropertiesResource;
+use App\Models\Company;
+use App\Models\SystemLog;
 use App\Models\UmdlCompanyProperties;
+use Illuminate\Support\Facades\Auth;
 
 class UmdlCompanyPropertiesController extends Controller
 {
@@ -57,6 +60,17 @@ class UmdlCompanyPropertiesController extends Controller
     {
         $data = $request->validated();
         $umdlcompanyproperties->update($data);
+
+        $company = Company::where('id',$umdlcompanyproperties->company_id)->first();
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE',
+            'message' => 'Bedrijfsmanagementinformatie aangepast: ' . $company->name,
+        ));
+
+
         return new UmdlCompanyPropertiesResource($umdlcompanyproperties);
     }
 

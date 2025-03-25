@@ -2,9 +2,8 @@
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import GisOverview from "../../components/data/GisOverview.jsx";
 import {useTranslation} from "react-i18next";
-import ConfrontationMatrix from "../../components/data/ConfrontationMatrix.jsx";
+import ConfrontationMatrixCollective from "../../components/data/ConfrontationMatrixCollective.jsx";
 
 export default function Collectief_Matrix() {
 
@@ -16,7 +15,7 @@ export default function Collectief_Matrix() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 {t("pages_collectief.matrix")}
             </Typography>
-            <ConfrontationMatrix />
+            <ConfrontationMatrixCollective />
         </Box>
     )
 

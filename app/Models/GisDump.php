@@ -19,6 +19,7 @@ class GisDump extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'collective_id',
         'year',
         'filename',
     ];

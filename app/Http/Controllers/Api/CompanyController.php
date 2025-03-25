@@ -11,6 +11,7 @@ use App\Models\KlwDump;
 use App\Models\KlwField;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
+use App\Models\SystemLog;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCompanyProperties;
@@ -24,13 +25,41 @@ use Illuminate\Support\Facades\Log;
 class CompanyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all companies.
      */
     public function index(): AnonymousResourceCollection
     {
         return CompanyResource::collection(
             Company::query()->orderBy('name')->get()
         );
+    }
+
+    /**
+     * Display a listing of all companies with data anonymized.
+     */
+    public function anonymous(): AnonymousResourceCollection
+    {
+        $companies = Company::all();
+        $modified_companies = array();
+
+        foreach($companies as $company) {
+            $company->name = "...";
+            $company->address = "...";
+            $company->postal_code = "...";
+            $company->city = "...";
+            $company->province = "...";
+            $company->brs = "...";
+            $company->ubn = "...";
+            $company->phone = "...";
+            $company->bank_account = "...";
+            $company->bank_account_name = "...";
+            $company->email = "...";
+            $company->type = "...";
+            $company->bio = false;
+
+            $modified_companies[] = $company;
+        }
+        return CompanyResource::collection($modified_companies);
     }
 
     public function getcurrentcollective(): AnonymousResourceCollection
@@ -73,11 +102,42 @@ class CompanyController extends Controller
             $collectief = UmdlCollective::where('id', $collectief_company->collective_id)->first();
             $collectieven_data[] = array(
                 'id' => $collectief->id,
-                'name'=> $collectief->name,
+                'name' => $collectief->name,
             );
         }
 
         $company->collectieven = $collectieven_data;
+
+        return $company;
+    }
+
+    /**
+     * Get standard properties of a company, anonymized
+     */
+    public function getcompanyanon($id): Company
+    {
+        // 1. Get all data
+        $company = Company::where('id', $id)->first();
+        $company->name = "...";
+        $company->address = "...";
+        $company->postal_code = "...";
+        $company->city = "...";
+        $company->province = "...";
+        $company->brs = "...";
+        $company->ubn = "...";
+        $company->phone = "...";
+        $company->bank_account = "...";
+        $company->bank_account_name = "...";
+        $company->email = "...";
+        $company->type = "...";
+        $company->bio = false;
+
+        // 2. Add KVK-numbers
+        $kvk_string = "...";
+        $company->kvks = $kvk_string;
+
+        // 3. Add collectieven
+        $company->collectieven = "...";
 
         return $company;
     }
@@ -169,10 +229,8 @@ class CompanyController extends Controller
                 // 1. NatuurKPI's nog niet ingevuld
                 $umdlkpivalues = UmdlKpiValues::where('company_id', $company->id)->get();
                 $action_set = false;
-                foreach ($umdlkpivalues as $ukv)
-                {
-                    if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set)
-                    {
+                foreach ($umdlkpivalues as $ukv) {
+                    if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set) {
                         $actions[] = "NatuurKPI's zijn niet ingevuld.";
                         $action_set = true;
                     }
@@ -207,10 +265,67 @@ class CompanyController extends Controller
                 ]);
 
             }
+
+            return response()->json([
+                'companies' => $companies,
+            ]);
+        }
+    }
+
+    /**
+     * Return all open actions for companies within a collective (in the collective dashboard)
+     * @return array[]|\Illuminate\Http\JsonResponse
+     */
+    public function getAllActions()
+    {
+        $companies = Company::all();
+        $data_companies = array();
+
+        foreach ($companies as $company) {
+
+            $actions = array();
+
+            // 1. NatuurKPI's nog niet ingevuld
+            $umdlkpivalues = UmdlKpiValues::where('company_id', $company->id)->get();
+            $action_set = false;
+            foreach ($umdlkpivalues as $ukv) {
+                if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set) {
+                    $actions[] = "NatuurKPI's zijn niet ingevuld.";
+                    $action_set = true;
+                }
+            }
+
+            // 2. Check MBP
+            $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+
+            if ($company_properties->mbp == 0) {
+                $actions[] = "Milieubelasting is nog onbekend.";
+            }
+
+            // 3. SMA's zijn niet ingevuld
+            if ($company_properties->website == 0 && $company_properties->ontvangstruimte == 0 &&
+                $company_properties->winkel == 0 && $company_properties->educatie == 0 &&
+                $company_properties->meerjarige_monitoring == 0 && $company_properties->open_dagen == 0 &&
+                $company_properties->wandelpad == 0 && $company_properties->erkend_demobedrijf == 0 &&
+                $company_properties->bed_and_breakfast == 0) {
+
+                $actions[] = "Sociaal-maatschappelijke activiteiten nog niet ingevuld.";
+            }
+
+            // 4. Bankgegevens nog niet ingevuld
+            if ($company->bank_account == "" || $company->bank_account_name == "") {
+
+
+                $actions[] = "Bankgegevens nog niet ingevuld.";
+            }
+
+            $data_companies[] = array_merge($company->toArray(), [
+                'actions' => $actions,
+            ]);
         }
 
         return response()->json([
-            'companies' => $companies,
+            'companies' => $data_companies,
         ]);
     }
 
@@ -226,6 +341,60 @@ class CompanyController extends Controller
         return response()->json($user);
     }
 
+    public function getAllSignals()
+    {
+        // Get all companies with their associated dumps and signals
+        $companies = Company::with('klwDumps.signals')->get();
+
+        return response()->json($companies);
+    }
+
+    /**
+     * Returns an array for the completion gauges of a collective
+     * @return array[]|\Illuminate\Http\JsonResponse
+     */
+    public function getCompletion()
+    {
+        $company_data = array();
+
+        $bedrijfUsers = User::whereHas('roles', function ($query) {
+            $query->where('name', 'bedrijf');
+        })->get();
+
+        // TODO: Admin not counted. Needs elegant fix
+        $company_data["total_klw"] = count($bedrijfUsers) * 3;
+        $company_data["total_mbp"] = count($bedrijfUsers);
+        $company_data["total_sma"] = count($bedrijfUsers);
+        $company_data["total_klw_completed"] = 0;
+        $company_data["total_mpb_completed"] = 0;
+        $company_data["total_sma_completed"] = 0;
+
+        $companies = Company::all();
+
+        foreach ($companies as $company) {
+            $company_data["total_klw_completed"] += count(KlwDump::where('company_id', $company->id)->get());
+
+            $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+
+            if ($company_properties->mbp != 0) {
+                $company_data["total_mpb_completed"] += 1;
+            }
+
+            // 3. SMA's zijn niet ingevuld
+            if ($company_properties->website == 1 || $company_properties->ontvangstruimte == 1 ||
+                $company_properties->winkel == 1 || $company_properties->educatie == 1 ||
+                $company_properties->meerjarige_monitoring == 1 || $company_properties->open_dagen == 1 ||
+                $company_properties->wandelpad == 1 || $company_properties->erkend_demobedrijf == 1 ||
+                $company_properties->bed_and_breakfast == 1) {
+                $company_data["total_sma_completed"] += 1;
+            }
+
+        }
+        return response()->json([
+            'company_data' => $company_data,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -233,7 +402,6 @@ class CompanyController extends Controller
     {
         //
     }
-
 
 
     /**
@@ -267,6 +435,14 @@ class CompanyController extends Controller
     {
         $data = $request->validated();
         $company->update($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE',
+            'message' => 'Bedrijf aangepast: ' . $company->name,
+        ));
+
         return new CompanyResource($company);
     }
 
@@ -290,8 +466,7 @@ class CompanyController extends Controller
         // 5. Get all dumps for this company
         $dumps = KlwDump::where('company_id', $company->id)->get();
 
-        foreach ($dumps as $dump)
-        {
+        foreach ($dumps as $dump) {
             // 6. Delete all Klw values associated with this dump
             KlwValue::where('dump_id', $dump->id)->delete();
 
@@ -301,7 +476,14 @@ class CompanyController extends Controller
         //8. Remove the dumps themselves.
         KlwDump::where('company_id', $company->id)->delete();
 
-        // 9. Finally, remove the company itself.
+        // 9. Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'Bedrijf verwijderd: ' . $company->name,
+        ));
+
+        // 10. Finally, remove the company itself.
         $company->delete();
 
         return response()->json(['success' => true]);

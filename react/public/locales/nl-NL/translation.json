@@ -28,14 +28,15 @@
     "company_dashboard": {
         "finish_data": "Afronden gegevensindiening"
     },
-    "pages_admin":
-    {
+    "pages_admin": {
         "scangis_data": "ScanGIS - data",
         "scangis_import": "ScanGIS - Importeren",
         "mbp_sma_import": "UMDL-Bedrijfsgegevens - Importeren",
         "klw_data": "Kringloopwijzer - Data",
         "klw_import": "Kringloopwijzer - Importeren",
-        "dashboard": "Dashboard",
+        "dashboard": "Administratiedashboard",
+        "general_settings": "Algemene instellingen",
+        "general_settings_explained": "Via deze pagina kun je algemene systeeminstellingen aanpassen.",
         "management_data": "Managementdata",
         "overview_collective": "Overzicht - Collectief",
         "overview_individual": "Overzicht - Individueel",
@@ -45,10 +46,11 @@
         "gis_settings": "ScanGIS-pakketten toekennen aan BBM-codes",
         "kpi_settings": "BBM-codes aan natuur-KPI's koppelen",
         "kpi_settings_explain": "Klik op de BBM-codes hieronder om ze aan respectievelijk uit de KPI weg te halen of aan de KPI toe te voegen.",
-        "users": "Gebruikers"
+        "users": "Gebruikers",
+        "logs": "Systeemlogs",
+        "matrix": "Confrontatiematrix"
     },
-    "pages_collectief":
-    {
+    "pages_collectief": {
         "scangis_data": "ScanGIS - Data-overzicht",
         "scangis_import": "ScanGIS - Importeren",
         "klw_data": "Kringloopwijzer - Data-overzicht",
@@ -56,6 +58,35 @@
         "dashboard": "Dashboard voor Collectieven",
         "overview_collective": "Overzicht - Collectief",
         "overview_individual": "Overzicht - Individueel bedrijf",
+        "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
+        "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
+        "scangis_anlb_settings": "Overzicht van ScanGIS-data en ANLb-pakketten",
+        "scangis_anlb_settings_explanation1": "Onderstaande tabel geeft aan welke (Z-)pakketten ingelezen kunnen worden en aan welke BBM-code deze gekoppeld zijn.",
+        "scangis_anlb_settings_explanation2": "Onderstaande tabel geeft aan welke ANLb-pakketten (met codering) gekoppeld zijn aan welke KPI.",
+        "criteria": "Scoringstabel KPI's",
+        "matrix": "Confrontatiematrix"
+    },
+    "pages_beheerder": {
+        "scangis_data": "ScanGIS - Data-overzicht",
+        "scangis_import": "ScanGIS - Importeren",
+        "klw_data": "Kringloopwijzer - Data-overzicht",
+        "klw_import": "Kringloopwijzer - Importeren",
+        "dashboard": "Dashboard voor Programmaleider / Beheerder",
+        "overview_total": "Overzicht - Totaal",
+        "overview_collective": "Overzicht - Collectief",
+        "overview_individual": "Overzicht - Individueel bedrijf",
+        "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
+        "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
+        "scangis_anlb_settings": "Overzicht van ScanGIS-data en ANLb-pakketten",
+        "scangis_anlb_settings_explanation1": "Onderstaande tabel geeft aan welke (Z-)pakketten ingelezen kunnen worden en aan welke BBM-code deze gekoppeld zijn.",
+        "scangis_anlb_settings_explanation2": "Onderstaande tabel geeft aan welke ANLb-pakketten (met codering) gekoppeld zijn aan welke KPI.",
+        "criteria": "Scoringstabel KPI's",
+        "matrix": "Confrontatiematrix"
+    },
+    "pages_provincie": {
+        "dashboard": "Dashboard voor Provincie",
+        "overview_total": "Overzicht - Totaal",
+        "overview_individual": "Overzicht - Individueel bedrijf (geanonimiseerd)",
         "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
         "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
         "scangis_anlb_settings": "Overzicht van ScanGIS-data en ANLb-pakketten",
@@ -237,7 +268,7 @@
         "password_field": "Wachtwoord",
         "submit_button": "Inloggen"
     },
-    "menu": {
+    "admin_menu": {
         "dashboard": "Dashboard",
         "overview_total": "Overzicht totaal",
         "overview_collective": "Overzicht collectief",
@@ -258,7 +289,10 @@
         "scangis": "ScanGIS-data",
         "settings": "Instellingen",
         "users": "Gebruikers",
-        "data": "Databeheer"
+        "data": "Databeheer",
+        "general_settings": "Algemeen",
+        "logs": "Systeemlogs",
+        "confrontation_matrix": "Confrontatiematrix"
     },
     "collectief_menu": {
         "dashboard": "Dashboard",
@@ -275,13 +309,53 @@
         "kpi_criteria": "Scoringscriteria KPI's",
         "anlb_packages": "ANLb-pakketten",
         "overviews": "Overzichten",
+        "data": "Databeheer",
         "klw": "Kringloopwijzers",
         "scangis": "ScanGIS-data",
         "settings": "Toon Instellingen",
         "confrontation_matrix": "Confrontatiematrix"
     },
+    "beheerder_menu": {
+        "dashboard": "Dashboard",
+        "overview_total": "Scores totaal",
+        "overview_collective": "Scores collectief",
+        "overview_individual": "Scores individueel",
+        "klw_import": "Importeren KLW",
+        "klw_data": "Databeheer KLW",
+        "gis_import": "Importeren GIS",
+        "gis_data": "Databeheer GIS",
+        "bbm_codes_kpis": "BBM-codes / KPI's",
+        "scangis_anlb": "ScanGIS / ANLb",
+        "kpi_criteria": "Scoringscriteria KPI's",
+        "anlb_packages": "ANLb-pakketten",
+        "overviews": "Overzichten",
+        "data": "Databeheer",
+        "klw": "Kringloopwijzers",
+        "scangis": "ScanGIS-data",
+        "settings": "Toon Instellingen",
+        "confrontation_matrix": "Confrontatiematrix"
+    },
+    "provincie_menu": {
+        "dashboard": "Dashboard",
+        "overview_total": "Scores totaal",
+        "overview_individual": "Scores individueel",
+        "bbm_codes_kpis": "BBM-codes / KPI's",
+        "scangis_anlb": "ScanGIS / ANLb",
+        "kpi_criteria": "Scoringscriteria KPI's",
+        "anlb_packages": "ANLb-pakketten",
+        "settings": "Toon Instellingen",
+        "overviews": "Overzichten"
+    },
+    "system_logs":
+    {
+        "id": "ID",
+        "user_id": "Gebruiker",
+        "type": "Logtype",
+        "message": "Bericht",
+        "created_at": "Gelogd op"
+    },
     "about": {
-        "version": "Versie 0.2.3",
+        "version": "Versie 0.3",
         "copyright": " Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description_test": "Deze versie is bedoeld voor demonstratie-doeleinden.<br/><br/> Alle getoonde data isniet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },

@@ -42,7 +42,7 @@ export default function CollectiefMenuContent() {
 
         <Stack sx={{flexGrow: 1, p: 4,}}>
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600}}>
-                {t("menu.overviews")}
+                {t("collectief_menu.overviews")}
             </Typography>
             <List dense>
                 {mainItems.map((item, index) => (
@@ -56,7 +56,7 @@ export default function CollectiefMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.data")}
+                {t("collectief_menu.data")}
             </Typography>
             <List dense>
                 {dataItems.map((item, index) => (
@@ -70,7 +70,7 @@ export default function CollectiefMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("menu.settings")}
+                {t("collectief_menu.settings")}
             </Typography>
             <List dense>
                 {settingItems.map((item, index) => (

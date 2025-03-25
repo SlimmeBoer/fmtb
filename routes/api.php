@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KlwFieldController;
 use App\Http\Controllers\Api\KpiScoreController;
+use App\Http\Controllers\Api\SettingController;
+use App\Http\Controllers\Api\SystemLogController;
 use App\Http\Controllers\Api\UmdlCollectiveController;
 use App\Http\Controllers\Api\UmdlCompanyPropertiesController;
 use App\Http\Controllers\Api\UmdlKpiValuesController;
@@ -40,13 +42,18 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/companies/index', [CompanyController::class, 'index']);
+    Route::get('/companies/anonymous', [CompanyController::class, 'anonymous']);
     Route::get('/companies/currentcollective', [CompanyController::class, 'getcurrentcollective']);
     Route::get('/companies/getcompany/{company}', [CompanyController::class, 'getcompany']);
+    Route::get('/companies/getcompanyanon/{company}', [CompanyController::class, 'getcompanyanon']);
     Route::get('/companies/getproperties/{company}', [CompanyController::class, 'getproperties']);
     Route::put('/companies/update/{company}', [CompanyController::class, 'update']);
     Route::get('/companies/fields', [CompanyController::class, 'getCompanyFields']);
     Route::get('/companies/actionscollective', [CompanyController::class, 'getCollectiveActions']);
+    Route::get('/companies/actions', [CompanyController::class, 'getAllActions']);
     Route::get('/companies/signalscollective', [CompanyController::class, 'getCollectiveSignals']);
+    Route::get('/companies/signals', [CompanyController::class, 'getAllSignals']);
+    Route::get('/companies/completion', [CompanyController::class, 'getCompletion']);
 
     Route::put('/companyproperties/update/{umdlcompanyproperties}', [UmdlCompanyPropertiesController::class, 'update']);
 
@@ -72,6 +79,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::put('/klwdump/upload', [KlwDumpController::class, 'upload']);
     Route::get('/klwdump/dumpscollective', [KlwDumpController::class, 'dumpscollective']);
+    Route::get('/klwdump/alldumps', [KlwDumpController::class, 'getAllDumps']);
     Route::get('/klwdump/currentcollective', [KlwDumpController::class, 'currentcollective']);
     Route::put('/klwdump/uploadexcel', [KlwDumpController::class, 'uploadexcel']);
     Route::get('/klwdump', [KlwDumpController::class, 'index']);
@@ -80,6 +88,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
     Route::get('/umdlkpi/getcollectivescores/{collective}/', array(UmdlKpiValuesController::class, 'getcollectivescores'));
     Route::get('/umdlkpi/getallscores/', array(UmdlKpiValuesController::class, 'getallscores'));
+    Route::get('/umdlkpi/getallscoresanon/', array(UmdlKpiValuesController::class, 'getallscoresanon'));
     Route::get('/umdlkpi/totalsperkpi/', array(UmdlKpiValuesController::class, 'totalsperkpi'));
     Route::get('/umdlkpi/totalsperkpicollective/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpicollective'));
 
@@ -90,6 +99,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/companies', CompanyController::class);
+    Route::apiResource('/settings', SettingController::class);
+    Route::apiResource('/systemlogs', SystemLogController::class);
 
 });
 

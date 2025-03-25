@@ -6,6 +6,7 @@ import BBMKPIDragger from "../../components/data/BBMKPIDragger.jsx";
 import Stack from "@mui/material/Stack";
 import LayersIcon from "@mui/icons-material/Layers";
 import {useTranslation} from "react-i18next";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 export default function Admin_BBMKPISettings() {
 
@@ -17,7 +18,7 @@ export default function Admin_BBMKPISettings() {
                    sx={{
                        pt: 1.5, pb: 2,
                    }}>
-                <LayersIcon/>
+                <SettingsRoundedIcon/>
                 <Typography component="h6" variant="h6">
                     {t("pages_admin.kpi_settings")}
                 </Typography>

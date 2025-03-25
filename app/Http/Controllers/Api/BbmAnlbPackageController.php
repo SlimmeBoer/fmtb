@@ -7,6 +7,8 @@ use App\Http\Requests\StoreBbmAnlbPackageRequest;
 use App\Http\Requests\UpdateBbmAnlbPackageRequest;
 use App\Http\Resources\BbmAnlbPackageResource;
 use App\Models\BbmAnlbPackage;
+use App\Models\SystemLog;
+use Illuminate\Support\Facades\Auth;
 
 class BbmAnlbPackageController extends Controller
 {
@@ -52,6 +54,14 @@ class BbmAnlbPackageController extends Controller
     {
         $data = $request->validated();
         $bbmAnlbPackage = BbmAnlbPackage::create($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'CREATE',
+            'message' => 'Maakte een nieuwe ANLb-pakket aan: ' . $bbmAnlbPackage->anlb_number . $bbmAnlbPackage->anlb_letters,
+        ));
+
         return response(new BbmAnlbPackageResource($bbmAnlbPackage), 201);
     }
 
@@ -78,6 +88,14 @@ class BbmAnlbPackageController extends Controller
     {
         $data = $request->validated();
         $bbmanlbpackage->update($data);
+
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE',
+            'message' => 'Werkte ANLB-pakket bij: ' . $bbmanlbpackage->anlb_number . $bbmanlbpackage->anlb_letters,
+        ));
+
         return new BbmAnlbPackageResource($bbmanlbpackage);
     }
 
@@ -86,6 +104,13 @@ class BbmAnlbPackageController extends Controller
      */
     public function destroy(BbmAnlbPackage $bbmanlbpackage)
     {
+        // Log
+        SystemLog::firstOrCreate(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'DELETE',
+            'message' => 'Verwijderde ANLB-pakket: ' . $bbmanlbpackage->anlb_number . $bbmanlbpackage->anlb_letters,
+        ));
+
         $bbmanlbpackage->delete();
         return response('', 204);
     }

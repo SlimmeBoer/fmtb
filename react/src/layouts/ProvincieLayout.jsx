@@ -5,7 +5,6 @@ import {Outlet} from "react-router-dom";
 import {Box, CssBaseline, Stack} from "@mui/material";
 import {alpha, createTheme} from '@mui/material/styles';
 import Header from '../components/structure/Header.jsx';
-import AdminSideMenu from '../components/structure/admin/AdminSideMenu.jsx';
 import AppTheme from '../theme/AppTheme.jsx';
 
 import {

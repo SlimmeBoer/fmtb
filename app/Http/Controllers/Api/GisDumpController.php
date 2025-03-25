@@ -9,8 +9,10 @@ use App\Libraries\GisParser\GisParser;
 use App\Models\GisDump;
 use App\Models\GisRecord;
 use App\Models\KvkNumber;
+use App\Models\SystemLog;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Saloon\XmlWrangler\Exceptions\XmlReaderException;
 
@@ -46,6 +48,13 @@ class GisDumpController extends Controller
         $dump = GisDump::find($id);
 
         if ($dump) {
+            //Log
+            SystemLog::firstOrCreate(array(
+                'user_id' => Auth::user()->id,
+                'type' => 'DELETE',
+                'message' => 'GIS-dump verwijderd: ' . $dump->filename,
+            ));
+
             $dump->delete();
             return response()->json(['message' => 'Dump successfully deleted']);
         } else {
@@ -78,6 +87,13 @@ class GisDumpController extends Controller
                         'year' => $request['year'],
                     ));
                     $gisDump->save();
+
+                    //Log
+                    SystemLog::firstOrCreate(array(
+                        'user_id' => Auth::user()->id,
+                        'type' => 'create',
+                        'message' => 'GIS-dump toegevoegd: ' . $gisDump->filename,
+                    ));
 
                     $num_records = $gisParser->writeGisRecords($file, $gisDump->id);
                     Log::info($num_records);
