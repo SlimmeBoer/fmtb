@@ -3,10 +3,10 @@ import axiosClient from "../../axios_client.js";
 import IconButton from "@mui/material/IconButton";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
-const PdfButton = () => {
+export default function PdfButton(props) {
     const downloadPdf = async () => {
         try {
-            const response = await axiosClient.get('/generate-pdf', {
+            const response = await axiosClient.get(`/pdf/${props.company}`, {
                 responseType: 'blob', // Important: this tells Axios to handle the response as a binary blob
             });
 
@@ -14,7 +14,7 @@ const PdfButton = () => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'report.pdf'); // Set the file name for the download
+            link.setAttribute('download', 'Eindrapport UMDL.pdf'); // Set the file name for the download
             document.body.appendChild(link);
             link.click();
 
@@ -33,4 +33,3 @@ const PdfButton = () => {
     );
 };
 
-export default PdfButton;

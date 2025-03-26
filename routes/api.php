@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/bbmanlbpackages/overview', [BbmAnlbPackageController::class, 'getOverview']);
 
-    Route::get('/generate-pdf', [PdfController::class, 'generatePdf']);
+    Route::get('/pdf/{company}', [PdfController::class, 'generatePdf']);
 
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
     Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);

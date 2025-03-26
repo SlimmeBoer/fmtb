@@ -10,13 +10,10 @@ import CompanyPropertyTable from "../../components/data/CompanyPropertyTable.jsx
 import {useParams} from "react-router-dom";
 import CompanyMBP from "../../components/data/CompanyMBP.jsx";
 import CompanySMA from "../../components/data/CompanySMA.jsx";
-import IconButton from "@mui/material/IconButton";
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import Stack from "@mui/material/Stack";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import {useTranslation} from "react-i18next";
 import CompanyPickerCollective from "../../components/forms/CompanyPickerCollective.jsx";
+import PdfButton from "../../components/data/PdfButton.jsx";
 
 export default function Collectief_OverzichtIndividueel() {
 
@@ -39,17 +36,6 @@ export default function Collectief_OverzichtIndividueel() {
         setRenderTable((prev) => !prev);
     };
 
-    const exportPDF = () => {
-        const input = document.getElementById("pdf-content");
-        html2canvas(input).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF();
-
-            pdf.addImage(imgData, "PNG", 5, 5, 200, 200, '','FAST', 0);
-            pdf.save("download.pdf");
-        });
-    };
-
     const {t} = useTranslation();
 
     return (
@@ -69,9 +55,7 @@ export default function Collectief_OverzichtIndividueel() {
                        pt: 1.5, pb: 4,
                    }}>
                 <CompanyPickerCollective company={id} changeHandler={handleChange}/>
-                <IconButton variant="outlined" onClick={exportPDF}>
-                    <PictureAsPdfIcon/>
-                </IconButton>
+                <PdfButton company={id}/>
             </Stack>
             {id !== '' && id !== undefined && <Box>
                 <div id="pdf-content">

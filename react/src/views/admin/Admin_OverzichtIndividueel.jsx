@@ -10,11 +10,7 @@ import CompanyPropertyTable from "../../components/data/CompanyPropertyTable.jsx
 import {useParams} from "react-router-dom";
 import CompanyMBP from "../../components/data/CompanyMBP.jsx";
 import CompanySMA from "../../components/data/CompanySMA.jsx";
-import IconButton from "@mui/material/IconButton";
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import Stack from "@mui/material/Stack";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import {useTranslation} from "react-i18next";
 import PdfButton from "../../components/data/PdfButton.jsx";
 
@@ -59,27 +55,25 @@ export default function Admin_OverzichtIndividueel() {
                        pt: 1.5, pb: 4,
                    }}>
                 <CompanyPicker company={id} changeHandler={handleChange}/>
-                <PdfButton />
+                <PdfButton company={id}/>
             </Stack>
             {id !== '' && id !== undefined && <Box>
-                <div id="pdf-content">
-                    <Grid
-                        container
-                        spacing={2}
-                        columns={12}
-                        sx={{mb: (theme) => theme.spacing(2), mt: 2}}
-                    >
-                        <Grid size={{xs: 12, lg: 4}} key="indiv-grid-1">
-                            <CompanyInfoTable company={id}/>
-                            <CompanyPropertyTable company={id}/>
-                            <CompanyMBP company={id} notifyParent={rerenderTable}/>
-                            <CompanySMA company={id} notifyParent={rerenderTable}/>
-                        </Grid>
-                        <Grid size={{xs: 12, lg: 8}} key="indiv-grid-2">
-                            <KPITable company={id} key="kpitable" renderTable={renderTable}/>
-                        </Grid>
+                <Grid
+                    container
+                    spacing={2}
+                    columns={12}
+                    sx={{mb: (theme) => theme.spacing(2), mt: 2}}
+                >
+                    <Grid size={{xs: 12, lg: 4}} key="indiv-grid-1">
+                        <CompanyInfoTable company={id}/>
+                        <CompanyPropertyTable company={id}/>
+                        <CompanyMBP company={id} notifyParent={rerenderTable}/>
+                        <CompanySMA company={id} notifyParent={rerenderTable}/>
                     </Grid>
-                </div>
+                    <Grid size={{xs: 12, lg: 8}} key="indiv-grid-2">
+                        <KPITable company={id} key="kpitable" renderTable={renderTable}/>
+                    </Grid>
+                </Grid>
             </Box>
             }
             {id === undefined && <Box>
