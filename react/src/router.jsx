@@ -9,9 +9,7 @@ import Admin_OverzichtCollectief from "./views/admin/Admin_OverzichtCollectief.j
 import Admin_OverzichtIndividueel from "./views/admin/Admin_OverzichtIndividueel.jsx";
 import Admin_KLWData from "./views/admin/Admin_KLWData.jsx";
 import Admin_GISImporteren from "./views/admin/Admin_GISImporteren.jsx";
-import GISData from "./views/admin/Admin_GISData.jsx";
 import Admin_BBMCodeSettings from "./views/admin/Admin_BBMCodeSettings.jsx";
-import Admin_ImporteerMBPSMA from "./views/admin/Admin_ImporteerMBPSMA.jsx";
 import Admin_BBMKPISettings from "./views/admin/Admin_BBMKPISettings.jsx";
 import Admin_BBMGISSettings from "./views/admin/Admin_BBMGISSettings.jsx";
 import Admin_BBMANLbSettings from "./views/admin/Admin_BBMANLbSettings.jsx";
@@ -59,6 +57,7 @@ import Provincie_OverzichtTotaal from "./views/provincie/Provincie_OverzichtTota
 import Provincie_OverzichtIndividueel from "./views/provincie/Provincie_OverzichtIndividueel.jsx";
 import ForgotPassword from "./views/guest/ForgotPassword.jsx";
 import ResetPassword from "./views/guest/ResetPassword.jsx";
+import Admin_RawData from "./views/admin/Admin_RawData.jsx";
 
 const router = createBrowserRouter([
     {
@@ -114,6 +113,10 @@ const router = createBrowserRouter([
                     {
                         path: '/admin/gis/data',
                         element: <Admin_GISData />
+                    },
+                    {
+                        path: '/admin/rawdata',
+                        element: <Admin_RawData />
                     },
                     {
                         path: '/admin/settings/bbmcodes',

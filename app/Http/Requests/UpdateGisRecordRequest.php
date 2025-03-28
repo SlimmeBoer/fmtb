@@ -23,7 +23,7 @@ class UpdateGisRecordRequest extends FormRequest
     {
         return [
             'dump_id' => 'required|integer',
-            'company_id' => 'required|integer',
+            'kvk' => 'required|integer',
             'eenheid_code' => 'required|string|max:200',
             'lengte' => 'float',
             'breedte' => 'float',

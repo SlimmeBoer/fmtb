@@ -21,7 +21,7 @@ class GisRecord extends Model
      */
     protected $fillable = [
         'dump_id',
-        'company_id',
+        'kvk',
         'eenheid_code',
         'lengte',
         'breedte',

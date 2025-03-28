@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KpiScoreController;
 use App\Http\Controllers\Api\PdfController;
+use App\Http\Controllers\Api\RawFileController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SystemLogController;
 use App\Http\Controllers\Api\UmdlCollectiveController;
@@ -81,6 +82,9 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::put('/gisdump/uploadexcel', [GisDumpController::class, 'uploadexcel']);
     Route::get('/gisdump', [GisDumpController::class, 'index']);
+    Route::get('/gisdump/currentcollective', [GisDumpController::class, 'currentcollective']);
+    Route::get('/gisdump/runall', [GisDumpController::class, 'runall']);
+    Route::get('/gisdump/runcollective', [GisDumpController::class, 'runcollective']);
     Route::get('/gisdump/{id}', [GisDumpController::class, 'show']);
     Route::delete('/gisdump/{id}', [GisDumpController::class, 'destroy']);
 
@@ -108,6 +112,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/companies', CompanyController::class);
     Route::apiResource('/settings', SettingController::class);
     Route::apiResource('/systemlogs', SystemLogController::class);
+    Route::apiResource('/rawfiles', RawFileController::class);
 
 });
 

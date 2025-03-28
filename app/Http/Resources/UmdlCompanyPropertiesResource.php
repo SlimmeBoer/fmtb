@@ -28,7 +28,7 @@ class UmdlCompanyPropertiesResource extends JsonResource
             'wandelpad' => $this->wandelpad,
             'erkend_demobedrijf' => $this->erkend_demobedrijf,
             'bed_and_breakfast' => $this->bed_and_breakfast,
-            'opp_totaal' => $this->opp_totaal,
+            '' => $this->opp_totaal,
             'melkkoeien' => $this->melkkoeien,
             'meetmelk_per_koe' => $this->meetmelk_per_koe,
             'meetmelk_per_ha' => $this->meetmelk_per_ha,

@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGisDumpRequest;
 use App\Http\Requests\UpdateGisDumpRequest;
 use App\Libraries\GisParser\GisParser;
+use App\Libraries\GisParser\GisRunner;
+use App\Models\Company;
 use App\Models\GisDump;
 use App\Models\GisRecord;
 use App\Models\KvkNumber;
+use App\Models\RawFile;
 use App\Models\SystemLog;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,6 +24,17 @@ class GisDumpController extends Controller
     public function index()
     {
         $dumps = GisDump::withCount('gisRecords')->get();
+        return response()->json($dumps);
+    }
+
+    /**
+     * Gets a list of all companies, dumps in the current collective
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function currentcollective()
+    {
+        $collective_id = Auth::user()->collectives()->first()->id;
+        $dumps = GisDump::where('collective_id',$collective_id)->get();
         return response()->json($dumps);
     }
 
@@ -55,7 +69,21 @@ class GisDumpController extends Controller
                 'message' => 'GIS-dump verwijderd: ' . $dump->filename,
             ));
 
+            // Remove associated file from uploads
+            if ($dump->filename !== null && file_exists(public_path('uploads/gis/' . $dump->filename))) {
+                unlink(public_path('uploads/gis/'. $dump->filename));
+            }
+
+            // Remove file from RAW files db
+            $rawfile = RawFile::where('filename', $dump->filename)->first();
+
+            if ($rawfile) {
+                $rawfile->delete();
+            }
+
+            // Deelte the actual dum record from DB
             $dump->delete();
+
             return response()->json(['message' => 'Dump successfully deleted']);
         } else {
             return response()->json(['message' => 'Dump not found'], 404);
@@ -80,23 +108,45 @@ class GisDumpController extends Controller
                 if (!$gisParser->checkCorrectHeaders($file)) {
                     return response('De kolomheaders in de sheet bevatten niet de juiste informatie.', 500);
                 } else {
+                    // Gets the collective ID of the current user. If an admin, then it returns 0.
+                    if (Auth::user()->hasRole('collectief'))
+                    {
+                        $collective_id = Auth::user()->collectives()->first()->id;
+                    }
+                    else {
+                        $collective_id = 0;
+                    }
+
                     // File correct, sheet correct and headers correct, start the import.
-                    // First, create a new dump
+                    // 1. First, create a new dump
                     $gisDump = GisDump::firstOrNew(array(
                         'filename' => $file->getClientOriginalName(),
+                        'collective_id' => $collective_id,
                         'year' => $request['year'],
                     ));
                     $gisDump->save();
 
-                    //Log
+                    // 2. Write the actual GIS records
+                    $num_records = $gisParser->writeGisRecords($file, $gisDump->id);
+
+                    // 3. Save the physical file to the GIS uploads
+                    $file->move(public_path('uploads/gis/'), $file->getClientOriginalName());
+
+                    // 4. Record the file as RawFile to the database
+                    RawFile::firstOrCreate(array(
+                        'user_id' => Auth::user()->id,
+                        'type' => 'gis',
+                        'filename' => $file->getClientOriginalName(),
+                    ));
+
+                    //5. Log
                     SystemLog::firstOrCreate(array(
                         'user_id' => Auth::user()->id,
                         'type' => 'create',
                         'message' => 'GIS-dump toegevoegd: ' . $gisDump->filename,
                     ));
 
-                    $num_records = $gisParser->writeGisRecords($file, $gisDump->id);
-                    Log::info($num_records);
+                    // 6. Return response
                     return response('Bestand succesvol ingelezen, in totaal zijn ' . $num_records . ' records aangemaakt.', 201);
                 }
             }
@@ -105,4 +155,92 @@ class GisDumpController extends Controller
         }
 
     }
+
+    /**
+     * Calculates the natureKPI's for all companies in the database.
+     * @return Response
+     */
+    public function runall(): Response
+    {
+        // 1. First, get alle companies in the DB.
+        $companies = Company::all();
+        $gisrunner = new GisRunner();
+
+        foreach ($companies as $company)
+        {
+            // Get KVK's of the company
+            $kvks = KvkNumber::where('company_id',$company->id)->get();
+            $kvkValues = collect($kvks)->pluck('kvk')->toArray();
+
+            // Get all GIS-records associated with the company based on KVK's.
+            $total_gis_records = GisRecord::whereIn('kvk', $kvkValues)->get();
+
+            $bbm_values = $gisrunner->getValues();
+            $non_found_records = array();
+
+            // Get the bbm code for each gis record in the company and add the value to the set.
+            foreach ($total_gis_records as $gis_record) {
+                $bbmcode = $gisrunner->getBbmCode($gis_record->eenheid_code);
+
+                // Non-empty string, then code has been found. add totals
+                if ($bbmcode !== "") {
+                    $bbm_values = $gisrunner->updateValues($bbm_values, $bbmcode, $gis_record);
+                }
+                else {
+                    $non_found_records[] = $gis_record->kvk . ' met code ' .$gis_record->eenheid_code;
+                }
+            }
+
+            // All records processed? Then, update the companyproperties.
+            $gisrunner->processKPIs($bbm_values, $company);
+        }
+        return response('Run succesvol uitgevoerd. De volgende records konden niet gevonden worden:', 201);
+    }
+
+    /**
+     * Calculates the natureKPI's for all companies in the database.
+     * @return Response
+     */
+    public function runcollective(): Response
+    {
+        // 1. First, get alle companies in the DB.
+        $collectiveId = Auth::user()->collectives()->first()->id;
+
+        $companies = Company::whereHas('collectives', function ($query) use ($collectiveId) {
+            $query->where('umdl_collectives.id', $collectiveId);
+        })->orderBy('name')->get();
+
+        $gisrunner = new GisRunner();
+
+        foreach ($companies as $company)
+        {
+            // Get KVK's of the company
+            $kvks = KvkNumber::where('company_id',$company->id)->get();
+            $kvkValues = collect($kvks)->pluck('kvk')->toArray();
+
+            // Get all GIS-records associated with the company based on KVK's.
+            $total_gis_records = GisRecord::whereIn('kvk', $kvkValues)->get();
+
+            $bbm_values = $gisrunner->getValues();
+            $non_found_records = array();
+
+            // Get the bbm code for each gis record in the company and add the value to the set.
+            foreach ($total_gis_records as $gis_record) {
+                $bbmcode = $gisrunner->getBbmCode($gis_record->eenheid_code);
+
+                // Non-empty string, then code has been found. add totals
+                if ($bbmcode !== "") {
+                    $bbm_values = $gisrunner->updateValues($bbm_values, $bbmcode, $gis_record);
+                }
+                else {
+                    $non_found_records[] = $gis_record->kvk . ' met code ' .$gis_record->eenheid_code;
+                }
+            }
+
+            // All records processed? Then, update the companyproperties.
+            $gisrunner->processKPIs($bbm_values, $company);
+        }
+        return response('Run succesvol uitgevoerd. De volgende records konden niet gevonden worden:', 201);
+    }
+
 }

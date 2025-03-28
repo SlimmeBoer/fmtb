@@ -37,7 +37,7 @@ const BeheerderGauges = () => {
                                          complete_label={'Aangeleverd'} complete={data.total_klw_completed}/>
                     </Grid>
                     <Grid item xs={12} sm={4} lg={4}>
-                        <CompletionGauge main_label={'Milieubelasting'} total_label={'Totaal'} total={data.total_mbp}
+                        <CompletionGauge main_label={'Gewasbescherming'} total_label={'Totaal'} total={data.total_mbp}
                                          complete_label={'Ingevuld'} complete={data.total_mpb_completed}/>
                     </Grid>
                     <Grid item xs={12} sm={4} lg={4}>

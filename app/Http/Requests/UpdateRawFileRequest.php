@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGisRecordRequest extends FormRequest
+class UpdateRawFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,9 @@ class StoreGisRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'dump_id' => 'required|integer',
-            'kvk' => 'required|integer',
-            'eenheid_code' => 'required|string|max:200',
-            'lengte' => 'float',
-            'breedte' => 'float',
-            'oppervlakte' => 'float',
-            'eenheden' => 'float',
+            'type' => 'required|string',
+            'filename' => 'required|string',
+            'user_id' => 'required|integer',
         ];
     }
 }

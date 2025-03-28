@@ -14,6 +14,7 @@ use App\Models\Company;
 use App\Models\KlwDump;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
+use App\Models\RawFile;
 use App\Models\Signal;
 use App\Models\SystemLog;
 use App\Models\UmdlCollectiveCompany;
@@ -127,8 +128,21 @@ class KlwDumpController extends Controller
             'message' => 'KLW-dump verwijderd: ' . $klwDump->filename,
         ));
 
-        //5. Remove the dump itself.
+        // 5. Remove associated file from uploads
+        if ($klwDump->filename !== null && file_exists(public_path('uploads/klw/' . $klwDump->filename))) {
+            unlink(public_path('uploads/klw/'. $klwDump->filename));
+        }
+
+        // Remove file from RAW files db
+        $rawfile = RawFile::where('filename', $klwDump->filename)->first();
+
+        if ($rawfile) {
+            $rawfile->delete();
+        }
+
+        //7. Remove the dump itself.
         $klwDump->delete();
+
         return response()->json(['success' => true]);
     }
 
@@ -187,18 +201,30 @@ class KlwDumpController extends Controller
                 'year' => $klwParser->getYear($file),
             ));
 
-            // Log
+            // 5. Store all fields and their values into the database.
+            $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, $request['saveFields']);
+
+            // 6. Import signals
+            $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
+
+            // 7. Log
             SystemLog::firstOrCreate(array(
                 'user_id' => Auth::user()->id,
                 'type' => 'CREATE',
                 'message' => 'KLW-dump geupload : ' . $company->name . ' (jaar '. $klwParser->getYear($file) . ')',
             ));
 
-            // 5. Store all fields and their values into the database.
-            $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, $request['saveFields']);
+            // 8. Save the physical file to the GIS uploads
+            $file->move(public_path('uploads/klw/'), $file->getClientOriginalName());
 
-            // 6. Import signals
-            $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
+            // 9. Record the file as RawFile to the database
+            RawFile::firstOrCreate(array(
+                'user_id' => Auth::user()->id,
+                'type' => 'klw',
+                'filename' => $file->getClientOriginalName(),
+            ));
+
+
 
         }
 

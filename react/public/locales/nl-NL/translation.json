@@ -11,6 +11,7 @@
         "cancel": "Annuleren",
         "avg": "Gemiddelde",
         "save": "Opslaan",
+        "calculate": "Berekenen",
         "are_you_sure": "Weet je het zeker?",
         "record_added_succesfully": "Record succesvol toegevoegd.",
         "record_updated_succesfully": "Record succesvol bijgewerkt.",
@@ -38,6 +39,7 @@
         "general_settings": "Algemene instellingen",
         "general_settings_explained": "Via deze pagina kun je algemene systeeminstellingen aanpassen.",
         "management_data": "Managementdata",
+        "raw_data": "Ruwe data (geüploade bestanden)",
         "overview_collective": "Overzicht - Collectief",
         "overview_individual": "Overzicht - Individueel",
         "overview_total": "Overzicht - Totaal",
@@ -195,7 +197,8 @@
         "bedrijfsbenutting_n": "Bedrijfsbenutting N"
     },
     "gis_dumps_overview": {
-        "none_uploaded": "Er zijn nog geen ScanGis-dumpfiles geüpload",
+        "none_uploaded": "Er zijn nog geen ScanGis-dumpfiles geüpload.",
+        "none_uploaded_collective": "Er zijn nog geen ScanGis-dumpfiles geüpload voor dit collectief.",
         "error_fetch": "Fout bij ophalen dumps: ",
         "error_delete": "Fout bij verwijderen dump: ",
         "dump_id": "Dump ID",
@@ -213,6 +216,12 @@
         "width": "Breedte",
         "surface": "Oppervlakte",
         "units": "Eenheden"
+    },
+    "gis": {
+        "run": "Bereken NatuurKPI's",
+        "run_collective": "Bereken NatuurKPI's (collectief)",
+        "warning": "Hiermee worden voor alle bedrijven in de database alle natuur-KPI's opnieuw berekend. Weet je zeker dat je door wilt gaan?",
+        "warning_collective": "Hiermee worden voor alle bedrijven in dit collectief alle natuur-KPI's opnieuw berekend. Weet je zeker dat je door wilt gaan?"
     },
     "klw_overview": {
         "no_companies_in_db": "Geen bedrijven in de database",
@@ -308,6 +317,7 @@
         "settings": "Instellingen",
         "users": "Gebruikers",
         "data": "Databeheer",
+        "raw_data": "Ruwe data",
         "general_settings": "Algemeen",
         "logs": "Systeemlogs",
         "confrontation_matrix": "Confrontatiematrix"
@@ -371,6 +381,14 @@
         "type": "Logtype",
         "message": "Bericht",
         "created_at": "Gelogd op"
+    },
+    "raw_files":
+    {
+        "id": "ID",
+        "user_id": "Gebruiker",
+        "type": "Logtype",
+        "filename": "Bestandsnaam",
+        "created_at": "Geüpload op"
     },
     "about": {
         "title": "Webapplicatie UMDL",

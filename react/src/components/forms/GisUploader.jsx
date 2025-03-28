@@ -132,10 +132,10 @@ const GisUploader = () => {
                                     <Typography variant="body2">{t("general.uploading")}</Typography>
                                 </Box>
                             )}
-                            {feedback[file.name]?.status === "Uploaded" && (
+                            {feedback[file.name]?.status === t("general.uploaded") && (
                                 <Alert severity="success">{feedback[file.name]?.message}</Alert>
                             )}
-                            {feedback[file.name]?.status === "Failed" && (
+                            {feedback[file.name]?.status === t("general.failed") && (
                                 <Alert severity="error">{feedback[file.name]?.message}</Alert>
                             )}
                         </Box>

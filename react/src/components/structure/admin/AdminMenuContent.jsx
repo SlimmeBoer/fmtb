@@ -29,15 +29,14 @@ export default function AdminMenuContent() {
         {text: t("admin_menu.confrontation_matrix"), icon: <ReportIcon/>, link: '/admin/matrix'},
     ];
 
-    const klwItems = [
+    const data = [
         {text: t("admin_menu.klw_import"), icon: <ImportExportIcon/>, link: '/admin/klw/importeren'},
         {text: t("admin_menu.klw_data_management"), icon: <DatasetIcon/>, link: '/admin/klw/data'},
-    ];
-
-    const gisItems = [
         {text: t("admin_menu.gis_import"), icon: <ImportExportIcon/>, link: '/admin/gis/importeren'},
         {text: t("admin_menu.gis_data_management"), icon: <DatasetIcon/>, link: '/admin/gis/data'},
+        {text: t("admin_menu.raw_data"), icon: <DatasetIcon/>, link: '/admin/rawdata'},
     ];
+
 
     const settingItems = [
         {text: t("admin_menu.general_settings"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/general'},
@@ -69,10 +68,10 @@ export default function AdminMenuContent() {
             </List>
 
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("admin_menu.klw")}
+                {t("admin_menu.data")}
             </Typography>
             <List dense>
-                {klwItems.map((item, index) => (
+                {data.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{display: 'block'}}>
                         <ListItemButton component={Link} to={item.link}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -82,19 +81,6 @@ export default function AdminMenuContent() {
                 ))}
             </List>
 
-            <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
-                {t("admin_menu.scangis")}
-            </Typography>
-            <List dense>
-                {gisItems.map((item, index) => (
-                    <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                        <ListItemButton component={Link} to={item.link}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
             <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, mt: 1}}>
                 {t("admin_menu.settings")}
             </Typography>

@@ -18,7 +18,7 @@ class GisRecordResource extends JsonResource
         return [
             'id' => $this->id,
             'dump_id' => $this->dump_id,
-            'company_id' => $this->company_id,
+            'kvk' => $this->kvk,
             'eenheid_code' => $this->eenheid_code,
             'lengte' => $this->lengte,
             'breedte' => $this->breedte,
