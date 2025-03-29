@@ -1,21 +1,43 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Box, Paper, Container, useMediaQuery, Button} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
 import UserBar from "../../components/structure/bedrijf/UserBar.jsx";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
-import KLWUploader from "../../components/forms/KLWUploader.jsx";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import {CloudUpload} from "@mui/icons-material";
 import {useTranslation} from "react-i18next";
-import SaveIcon from "@mui/icons-material/Save";
+import axiosClient from "../../axios_client.js";
+import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
+import KPITable from "../../components/data/KPITable.jsx";
+import BedrijfAanleveren from "../../components/data/BedrijfAanleveren.jsx";
+import BedrijfCompleet from "../../components/data/BedrijfCompleet.jsx";
+import BedrijfScores from "../../components/data/BedrijfScores.jsx";
 
-const CenteredPaper = () => {
+const Bedrijf_Dashboard = () => {
     const theme = useTheme();
+    const [loading, setLoading] = useState(true);
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-    const [checked, setChecked] = useState(false);
+    const [datacomplete, setDataComplete] = useState(false);
+    const [scorespublished, setScoresPublished] = useState(false);
+    const [company, setCompany] = useState(0);
+
     const {t} = useTranslation();
+
+    useEffect(() => {
+        getCompletePublished();
+    }, []);
+
+    const getCompletePublished = (kpi) => {
+        setLoading(true);
+        axiosClient.get(`/companies/publishedcompleted`)
+            .then(({data}) => {
+                setDataComplete(data.data_completed);
+                setScoresPublished(data.scores_published);
+                setCompany(data.company);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            })
+    }
 
     return (
         <Box
@@ -76,53 +98,11 @@ const CenteredPaper = () => {
                                 src="/images/logo.png"
                             />
                         </Grid>
-                        <Grid size={{xs: 7, sm: 7, md: 7}}>
-                            <Typography variant="h4" sx={{mb: 3}}>
-                                Aanleveren bedrijfsdata
-                            </Typography>
-                            <Typography variant="body2" sx={{mb: 3}}>
-                                Welkom bij de bedrijfs-module van het UMDL-programma! Via deze pagina kunt u uw
-                                Kringloopwijzer-bestanden aanleveren waarmee een deel van de KPI's berekend wordt.
-                                <br/>De overige KPI's (MBP, social-maatschappelijke activiteiten en de natuur-KPI's)
-                                zullen door uw collectief worden ingevuld. <br/> <br/>
-                                In het onderstaande overzicht kunt u zien welke bestanden er al voor u zijn aangeleverd.
-                                Vul deze aan met de gevraagde gegevens.<br />
-
-                            </Typography>
-                            <Box sx={{backgroundColor: '#eeeeee', p: 2, border: "1px solid #ccc", borderRadius: 2 }}>
-                                <Typography variant="body2" sx={{mb: 6}}>
-                                    Er zijn voor uw bedrijf nog geen bestanden aangeleverd. Lever minimaal de bestanden
-                                    aan voor 2022, 2023 en 2024.
-                                </Typography>
-                                <KLWUploader/>
-
-                            </Box>
-                            <FormControlLabel
-                                sx={{pt: 4, pb: 4}}
-                                control={
-                                    <Checkbox
-                                        checked={checked}
-                                        onChange={(e) => setChecked(e.target.checked)}
-                                        color="primary"
-                                    />
-                                }
-                                label="Ik verklaar hierbij naar eer en geweten dat de door mij aangeleverde gegevens correct en volledig zijn verstrekt, en dat deze niet zijn gewijzigd of gemanipuleerd na ontvangst."
-                            />
-                            <Button
-                                variant="contained"
-                                component="label"
-                                color="success"
-                                startIcon={<SaveIcon />}
-                                sx={{ marginBottom: 2 }}
-                            >
-                                {t("company_dashboard.finish_data")}
-                                <input
-                                    type="file"
-                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excelhp "
-                                    multiple
-                                    hidden
-                                />
-                            </Button>
+                        <Grid size={{xs: 8, sm: 8, md: 8}}>
+                            {loading && <CenteredLoading />}
+                            {!loading && scorespublished && <BedrijfScores />}
+                            {!loading && !scorespublished && !datacomplete && <BedrijfAanleveren />}
+                            {!loading && !scorespublished && datacomplete && <BedrijfCompleet />}
                         </Grid>
                     </Grid>
                 </Paper>
@@ -131,4 +111,4 @@ const CenteredPaper = () => {
     );
 };
 
-export default CenteredPaper;
+export default Bedrijf_Dashboard;

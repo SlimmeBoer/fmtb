@@ -1,12 +1,14 @@
 import React from 'react';
 import axiosClient from "../../axios_client.js";
-import IconButton from "@mui/material/IconButton";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import {Button} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
-export default function PdfButton(props) {
+export default function PdfButtonCompany() {
+    const {t} = useTranslation();
     const downloadPdf = async () => {
         try {
-            const response = await axiosClient.get(`/pdf/getcompany/${props.company}`, {
+            const response = await axiosClient.get(`/pdf/currentcompany`, {
                 responseType: 'blob', // Important: this tells Axios to handle the response as a binary blob
             });
 
@@ -27,9 +29,9 @@ export default function PdfButton(props) {
     };
 
     return (
-        <IconButton variant="outlined" onClick={downloadPdf}>
-            <PictureAsPdfIcon/>
-        </IconButton>
+        <Button type="submit" variant="contained" startIcon={<PictureAsPdfIcon/>} sx={{mb: 2, mt: 4}} onClick={downloadPdf}>
+            {t("company_dashboard.download_pdf")}
+        </Button>
     );
 };
 

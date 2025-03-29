@@ -74,12 +74,6 @@ export default function AdminSideMenu() {
                     borderColor: 'divider',
                 }}
             >
-                <Avatar
-                    sizes="small"
-                    alt={showFullName(user.first_name, user.middle_name, user.last_name)}
-                    src={import.meta.env.VITE_API_BASE_URL + '/' + user.image}
-                    sx={{width: 36, height: 36}}
-                />
                 <Box sx={{mr: 'auto'}}>
                     <Typography variant="body2" sx={{fontWeight: 500, lineHeight: '16px'}}>
                         {showFullName(user.first_name, user.middle_name, user.last_name)}

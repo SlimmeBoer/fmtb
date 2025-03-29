@@ -31,8 +31,8 @@ class UpdateUserRequest extends FormRequest
             'first_name' => 'required|string|max:55',
             'middle_name' => 'max:20',
             'last_name' => 'required|string|max:55',
-            'image' => 'max:10000',
             'email' => 'required|email|unique:users,email,'.$this->id,
+            'ubn' => 'integer',
             'password' => [
                 'confirmed',
                 Password::min(8)

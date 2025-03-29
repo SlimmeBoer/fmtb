@@ -60,6 +60,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/companies/signalscollective', [CompanyController::class, 'getCollectiveSignals']);
     Route::get('/companies/signals', [CompanyController::class, 'getAllSignals']);
     Route::get('/companies/completion', [CompanyController::class, 'getCompletion']);
+    Route::get('/companies/publishedcompleted', [CompanyController::class, 'getPublishedCompleted']);
+    Route::post('/companies/savedata', [CompanyController::class, 'saveData']);
 
     Route::put('/companyproperties/update/{umdlcompanyproperties}', [UmdlCompanyPropertiesController::class, 'update']);
 
@@ -75,7 +77,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/bbmanlbpackages/overview', [BbmAnlbPackageController::class, 'getOverview']);
 
-    Route::get('/pdf/{company}', [PdfController::class, 'generatePdf']);
+    Route::get('/pdf/getcompany/{company}', [PdfController::class, 'generatePdf']);
+    Route::get('/pdf/currentcompany', [PdfController::class, 'generatePdfCurrentCompany']);
 
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
     Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);
@@ -92,11 +95,13 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/klwdump/dumpscollective', [KlwDumpController::class, 'dumpscollective']);
     Route::get('/klwdump/alldumps', [KlwDumpController::class, 'getAllDumps']);
     Route::get('/klwdump/currentcollective', [KlwDumpController::class, 'currentcollective']);
+    Route::get('/klwdump/currentcompany', [KlwDumpController::class, 'currentcompany']);
     Route::put('/klwdump/uploadexcel', [KlwDumpController::class, 'uploadexcel']);
     Route::get('/klwdump', [KlwDumpController::class, 'index']);
     Route::delete('/klwdump/{klwDump}', [KlwDumpController::class, 'destroy']);
 
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
+    Route::get('/umdlkpi/getscorescurrentcompany', array(UmdlKpiValuesController::class, 'getscorescurrentcompany'));
     Route::get('/umdlkpi/getcollectivescores/{collective}/', array(UmdlKpiValuesController::class, 'getcollectivescores'));
     Route::get('/umdlkpi/getallscores/', array(UmdlKpiValuesController::class, 'getallscores'));
     Route::get('/umdlkpi/getallscoresanon/', array(UmdlKpiValuesController::class, 'getallscoresanon'));

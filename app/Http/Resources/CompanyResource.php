@@ -30,6 +30,7 @@ class CompanyResource extends JsonResource
             'email' => $this->email,
             'type' => $this->type,
             'bio' => $this->bio,
+            'data_compleet' => $this->data_compleet,
         ];
     }
 }

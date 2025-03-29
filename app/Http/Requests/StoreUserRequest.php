@@ -28,8 +28,8 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|string|max:55',
             'middle_name' => 'max:20',
             'last_name' => 'required|string|max:55',
-            'image' => 'max:10000',
             'email' => 'required|email|unique:users,email',
+            'ubn' => 'integer',
             'password' => [
                 'required',
                 'confirmed',

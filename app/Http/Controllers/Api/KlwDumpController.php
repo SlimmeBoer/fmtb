@@ -67,6 +67,24 @@ class KlwDumpController extends Controller
     }
 
     /**
+     * Gets a list of all dumps for the current company
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function currentcompany()
+    {
+        $company = Company::where('ubn',Auth::user()->ubn)->first();
+
+        if ($company)
+        {
+            return response()->json(['klwDumps' => $company->klwDumps]);
+        }
+        else
+        {
+            return response()->json(['message' => 'Bedrijf niet gevonden'], 404);
+        }
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

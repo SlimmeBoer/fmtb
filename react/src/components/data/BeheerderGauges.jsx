@@ -21,26 +21,25 @@ const BeheerderGauges = () => {
                 setLoading(false);
             })
             .catch(error => {
-                console.error(t("klw_overview.error_fetch"), error);
                 setLoading(false);
             });
     }, []);
 
     return (
 
-        <Grid container item spacing={2}>
+        <Grid container spacing={2}>
             {loading && <CenteredLoading/>}
             {!loading && data.length !== 0 &&
                 <>
-                    <Grid item xs={12} sm={4} lg={4}>
+                    <Grid xs={12} sm={4} lg={4}>
                         <CompletionGauge main_label={'Kringloopwijzers'} total_label={'Totaal'} total={data.total_klw}
                                          complete_label={'Aangeleverd'} complete={data.total_klw_completed}/>
                     </Grid>
-                    <Grid item xs={12} sm={4} lg={4}>
+                    <Grid xs={12} sm={4} lg={4}>
                         <CompletionGauge main_label={'Gewasbescherming'} total_label={'Totaal'} total={data.total_mbp}
                                          complete_label={'Ingevuld'} complete={data.total_mpb_completed}/>
                     </Grid>
-                    <Grid item xs={12} sm={4} lg={4}>
+                    <Grid xs={12} sm={4} lg={4}>
                         <CompletionGauge main_label={'Activiteiten'} total_label={'Totaal'} total={data.total_sma}
                                          complete_label={'Ingevuld'} complete={data.total_sma_completed}/>
                     </Grid></>}

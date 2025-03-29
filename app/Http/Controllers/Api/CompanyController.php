@@ -11,12 +11,14 @@ use App\Models\KlwDump;
 use App\Models\KlwField;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
+use App\Models\Setting;
 use App\Models\SystemLog;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCompanyProperties;
 use App\Models\UmdlKpiValues;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -487,5 +489,58 @@ class CompanyController extends Controller
         $company->delete();
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * For the company interface, get the completion status of the company plus a
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPublishedCompleted()
+    {
+        // Get company completion status
+        $company = Company::where('ubn',Auth::user()->ubn)->first();
+        $data_compleet = false;
+        $company_id = 0;
+
+        if ($company !== null) {
+            $data_compleet = $company->data_compleet;
+            $company_id = $company->id;
+        }
+        // Get "scores published"-setting
+        $setting = Setting::where('key', 'publish_scores')->first();
+
+        return response()->json(['data_completed' => $data_compleet,
+                    'scores_published' => (($setting->value === 'true')),
+                    'company' => $company_id]);
+
+    }
+
+    /**
+     * Save the bankaccount and holder as the final step in thecompany process, also set company data to complete.
+     * @param Request $request
+     * @return Response
+     */
+    public function saveData(Request $request) : Response
+    {
+        $company = Company::where('ubn',Auth::user()->ubn)->first();
+
+        if (!$company) {
+            return response('Bedrijf niet gevonden', 500);
+        }
+        else {
+            $company->bank_account = $request['bankNumber'];
+            $company->bank_account_name = $request['accountHolder'];
+            $company->data_compleet = true;
+            $company->save();
+
+            SystemLog::firstOrCreate(array(
+                'user_id' => Auth::user()->id,
+                'type' => 'DATA COMPLETED',
+                'message' => 'Bedrijfsdata gecompleteerd: ' . $company->name,
+            ));
+
+            return response('Data succesvol verwerkt', 200);
+
+        }
     }
 }

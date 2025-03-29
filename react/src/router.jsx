@@ -58,6 +58,7 @@ import Provincie_OverzichtIndividueel from "./views/provincie/Provincie_Overzich
 import ForgotPassword from "./views/guest/ForgotPassword.jsx";
 import ResetPassword from "./views/guest/ResetPassword.jsx";
 import Admin_RawData from "./views/admin/Admin_RawData.jsx";
+import Bedrijf_Dashboard from "./views/bedrijf/Bedrijf_Dashboard.jsx";
 
 const router = createBrowserRouter([
     {
@@ -158,7 +159,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: '/bedrijf',
-                        element: <BedrijfDashboard/>,
+                        element: <Bedrijf_Dashboard />,
                     },
                     // Voeg hier meer user-routes toe
                 ],

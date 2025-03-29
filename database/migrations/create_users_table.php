@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->string('ubn')->nullable();
             $table->timestamp('email_verified_at')->nullable();

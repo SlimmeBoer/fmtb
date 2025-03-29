@@ -34,6 +34,7 @@ class Company extends Model
         'email',
         'type',
         'bio',
+        'data_compleet',
     ];
 
     public function collectives()

@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('bank_account_name')->nullable();
             $table->string('email')->nullable();
             $table->string('type')->nullable();
-            $table->boolean('bio');
+            $table->boolean('bio')->default(false);
+            $table->boolean('data_compleet')->default(false);
             $table->timestamps();
         });
     }

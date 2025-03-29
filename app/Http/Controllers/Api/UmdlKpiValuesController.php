@@ -84,6 +84,26 @@ class UmdlKpiValuesController extends Controller
 
     }
 
+    /**
+     * Gets the scores for the company of the currently logged in user.
+     * @return array
+     */
+    public function getscorescurrentcompany() : array
+    {
+        $company = Company::where('ubn',Auth::user()->ubn)->first();
+
+        if (!$company) {
+            return array();
+        }
+        else {
+            //1. Get individual scores
+            $umdlscores = new UMDLKPIScores();
+            return array_merge($umdlscores->getScores($company->id),
+                $umdlscores->collectiveAverages($company->id),
+                $umdlscores->totalAverages());
+        }
+    }
+
     public function getcollectivescores($collective_id) : array
     {
         $umdl_scores = new UMDLKPIScores();

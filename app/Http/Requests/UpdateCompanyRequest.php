@@ -34,7 +34,8 @@ class UpdateCompanyRequest extends FormRequest
             'bank_account_name' => 'max:50',
             'email' => 'max:50',
             'type' =>  'required|string|max:50',
-            'bio' => 'required|boolean'
+            'bio' => 'required|boolean',
+            'data_compleet' => 'required|boolean'
         ];
 
     }

@@ -22,8 +22,6 @@ class UserController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-
-        Log::info('bla');
         return UserResource::collection(
             User::query()->orderBy('id')->get()
         );
@@ -39,16 +37,6 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
-
-        if (isset($data['image'])) {
-            if (gettype($data['image']) != "string")
-            {
-                $fileName = time().'.' . $data['image']->extension();
-                $data['image']->move(public_path('uploads/users/'), $fileName);
-                $userImage = 'uploads/users/' . $fileName;
-                $data['image'] = $userImage;
-            }
-        }
 
         $user = User::create($data);
 
@@ -86,19 +74,7 @@ class UserController extends Controller
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         }
-        if (isset($data['image'])) {
-            if (gettype($data['image']) != "string")
-            {
-                if ($user->image !== null && file_exists(public_path($user->image))) {
-                    unlink(public_path($user->image));
-                }
 
-                $fileName = time().'.' . $data['image']->extension();
-                $data['image']->move(public_path('uploads/users/'), $fileName);
-                $userImage = 'uploads/users/' . $fileName;
-                $data['image'] = $userImage;
-            }
-        }
         $user->update($data);
 
         // Log
@@ -120,10 +96,6 @@ class UserController extends Controller
      */
     public function destroy(User $user): Response
     {
-        if ($user->image !== null && file_exists(public_path($user->image))) {
-            unlink(public_path($user->image));
-        }
-
         // Log
         SystemLog::firstOrCreate(array(
             'user_id' => Auth::user()->id,
