@@ -48,7 +48,6 @@ const RawFilesOverview = ({}) => {
         const fileUrl = import.meta.env.VITE_API_BASE_URL + `/uploads/${file.type}/${file.filename}`;
         const link = document.createElement("a");
         link.href = fileUrl;
-        console.log(fileUrl)
         link.download = file.filename; // Ensures it downloads instead of opening
         document.body.appendChild(link);
         link.click();

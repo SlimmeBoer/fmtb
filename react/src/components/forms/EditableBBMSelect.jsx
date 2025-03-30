@@ -9,8 +9,6 @@ import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 
 const EditableBBMSelect = ({ label, type, value, isEditing, onChange, displayvalues}) => {
 
-    console.log()
-
     const handleChange = (e) => {
         const value = e.target.value;
         onChange(value);
@@ -48,10 +46,10 @@ const EditableBBMSelect = ({ label, type, value, isEditing, onChange, displayval
                 </Select>
             ) : (
                 <div>
-                    {!isObjectEmpty(displayvalues) && displayvalues.map(dv => {
+                    {!isObjectEmpty(displayvalues) && displayvalues.map((dv, index) => {
                         if (dv.id === value)
                             return (
-                                <p>{dv.code}</p>
+                                <p key={index}>{dv.code}</p>
                             )
                         })
                     }

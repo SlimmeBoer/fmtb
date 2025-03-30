@@ -7,7 +7,6 @@ import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from 'react-i18next';
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import * as React from "react";
-import Copyright from "../../components/Copyright.jsx";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
@@ -38,10 +37,12 @@ export default function Login() {
             })
             .catch(error => {
                 const response = error.response;
-                if (response && response.status === 422) {
-                    if (response.data.errors) {
-                        setErrorData(response.data.errors, formErrors, setFormErrors)
-                    }
+                if (response.data.errors) {
+                    setFormErrors(prevErrors => {
+                        const newErrors = {...prevErrors};
+                        setErrorData(response.data.errors, newErrors, setFormErrors);
+                        return newErrors;
+                    });
                 }
             })
     }
@@ -92,12 +93,15 @@ export default function Login() {
                                        value={credentials.email}
                                        onChange={ev => setCredentials({...credentials, email: ev.target.value})}
                                        label={t('login.email_field')} variant="outlined" margin="dense"
+                                       required={true}
                                        error={formErrors.email.errorstatus}
                                        helperText={formErrors.email.helperText}/>
                             <TextField fullWidth
                                        value={credentials.password}
+                                       autoComplete="on"
                                        onChange={ev => setCredentials({...credentials, password: ev.target.value})}
                                        label={t('login.password_field')} type="password"
+                                       required={true}
                                        variant="outlined" margin="dense"
                                        error={formErrors.password.errorstatus}
                                        helperText={formErrors.password.helperText}/>
@@ -106,7 +110,7 @@ export default function Login() {
                                     startIcon={<LoginIcon/>}>
                                 {t('login.submit_button')}
                             </Button>
-                            <Typography component="body2" variant="body2" sx={{pt: 6}}>
+                            <Typography variant="body2" sx={{pt: 6}}>
                                 <Link href={'/wachtwoord-vergeten'}>{t('login.forgot_password')}</Link>
                             </Typography>
                         </form>

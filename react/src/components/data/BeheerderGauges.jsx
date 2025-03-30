@@ -7,7 +7,6 @@ import Grid from "@mui/material/Grid2";
 import CompletionGauge from "../visuals/CompletionGauge.jsx";
 
 const BeheerderGauges = () => {
-    const {user} = useStateContext();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -30,19 +29,24 @@ const BeheerderGauges = () => {
         <Grid container spacing={2}>
             {loading && <CenteredLoading/>}
             {!loading && data.length !== 0 &&
-                <>
-                    <Grid xs={12} sm={4} lg={4}>
+                <React.Fragment>
+                    <Grid size={{xs: 6, sm: 3, lg: 3}}>
                         <CompletionGauge main_label={'Kringloopwijzers'} total_label={'Totaal'} total={data.total_klw}
                                          complete_label={'Aangeleverd'} complete={data.total_klw_completed}/>
                     </Grid>
-                    <Grid xs={12} sm={4} lg={4}>
+                    <Grid size={{xs: 6, sm: 3, lg: 3}}>
                         <CompletionGauge main_label={'Gewasbescherming'} total_label={'Totaal'} total={data.total_mbp}
                                          complete_label={'Ingevuld'} complete={data.total_mpb_completed}/>
                     </Grid>
-                    <Grid xs={12} sm={4} lg={4}>
+                    <Grid size={{xs: 6, sm: 3, lg: 3}}>
                         <CompletionGauge main_label={'Activiteiten'} total_label={'Totaal'} total={data.total_sma}
                                          complete_label={'Ingevuld'} complete={data.total_sma_completed}/>
-                    </Grid></>}
+                    </Grid>
+                    <Grid size={{xs: 6, sm: 3, lg: 3}}>
+                        <CompletionGauge main_label={'Natuur-KPI\'s'} total_label={'Totaal'} total={data.total_kpi}
+                                         complete_label={'Ingevuld'} complete={data.total_kpi_completed}/>
+                    </Grid>
+                </React.Fragment>}
         </Grid>
     );
 };

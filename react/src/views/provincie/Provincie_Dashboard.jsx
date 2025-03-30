@@ -2,10 +2,8 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
-import ActionOverview from "../../components/visuals/ActionOverview.jsx";
 import {useTranslation} from "react-i18next";
 import BeheerderGauges from "../../components/data/BeheerderGauges.jsx";
-import KLWOverviewBeheerder from "../../components/data/KLWOverviewBeheerder.jsx";
 
 export default function Provincie_Dashboard() {
 
@@ -26,16 +24,10 @@ export default function Provincie_Dashboard() {
             >
                 {/* Left Column */}
                 <Grid
-                    container
-                    item
-                    xs={12} sm={12} lg={12}
-                    sx={{ display: "flex", flexDirection: "column" }} // Keeps items stacked but aligned properly
+                    size={8}
+                    sx={{ display: "flex", flexDirection: "column" }} // Keeps items stacked but aligned properly// Keeps items stacked but aligned properly
                 >
-                    {/* Row of CompletionGauges */}
                     <BeheerderGauges />
-
-                    {/* KLWOverviewBeheerder should stay at the top */}
-
                 </Grid>
             </Grid>
         </Box>

@@ -17,9 +17,14 @@ class  AuthController extends Controller
     public function login(LoginRequest $request): Response|Application|ResponseFactory
     {
         $credentials = $request->validated();
+
         if (!Auth::attempt($credentials)){
             return response([
-                'message'=> 'Het ingevulde e-mailadres of wachtwoord is niet correct'
+                'message'=> 'Het ingevulde e-mailadres of wachtwoord is niet correct',
+                "errors" => [
+                    "email" => ["Het ingevulde e-mailadres of wachtwoord is niet correct"],
+                    ]
+
             ],422);
         }
         /** @var User $user */

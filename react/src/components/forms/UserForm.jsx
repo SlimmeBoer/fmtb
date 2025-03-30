@@ -1,16 +1,15 @@
-
 import React, {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import {useStateContext} from "../../contexts/ContextProvider.jsx";
 import {useTranslation} from 'react-i18next';
 import Grid from '@mui/material/Grid2';
-import {Avatar, Box, Button, CircularProgress, DialogContent, DialogTitle, TextField} from "@mui/material";
+import {Button, CircularProgress, DialogContent, DialogTitle, TextField} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from "@mui/icons-material/Close";
 
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
+import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 export default function UserForm(props) {
     const [loading, setLoading] = useState(false);
@@ -20,7 +19,6 @@ export default function UserForm(props) {
         first_name: '',
         middle_name: '',
         last_name: '',
-        image: '',
         email: '',
         password: '',
         password_confirmation: ''
@@ -29,22 +27,10 @@ export default function UserForm(props) {
         first_name: {errorstatus: false, helperText: ''},
         middle_name: {errorstatus: false, helperText: ''},
         last_name: {errorstatus: false, helperText: ''},
-        image: {errorstatus: false, helperText: ''},
         email: {errorstatus: false, helperText: ''},
         password: {errorstatus: false, helperText: ''},
         password_confirmation: {errorstatus: false, helperText: ''},
     });
-
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
-
-    useEffect(() => {
-        if (selectedImage) {
-            setImageUrl(URL.createObjectURL(selectedImage))
-            setUser({...user, image: selectedImage})
-        }
-    }, [selectedImage]);
-
 
     const {t} = useTranslation();
 
@@ -106,15 +92,15 @@ export default function UserForm(props) {
     }
 
     return (
-        <>
-            {loading && <span className="loading-circle"><CircularProgress/></span>}
+        <React.Fragment>
+            {loading && <CenteredLoading/>}
             {!loading && user.id && <DialogTitle>Gebruiker aanpassen</DialogTitle>}
             {!loading && !user.id && <DialogTitle>Gebruiker toevoegen</DialogTitle>}
             {!loading &&
                 <DialogContent>
                     <form onSubmit={onSubmit}>
                         <Grid container spacing={2}>
-                            <Grid item xs={8}>
+                            <Grid size={12}>
                                 <TextField value={user.first_name}
                                            onChange={ev => setUser({...user, first_name: ev.target.value})}
                                            label={t('user_form.first_name')} variant="outlined" margin="dense"
@@ -143,30 +129,32 @@ export default function UserForm(props) {
                                            helperText={formErrors.email.helperText}/>
                                 <TextField onChange={ev => setUser({...user, password: ev.target.value})}
                                            type="password"
+                                           autoComplete="on"
                                            label={t('user_form.password')} variant="outlined" margin="dense"
                                            style={{width: 668}}
                                            error={formErrors.password.errorstatus}
                                            helperText={formErrors.password.helperText}/>
                                 <TextField onChange={ev => setUser({...user, password_confirmation: ev.target.value})}
                                            type="password"
+                                           autoComplete="on"
                                            label={t('user_form.password_confirmation')} variant="outlined"
                                            margin="dense" style={{width: 668}}
                                            error={formErrors.password_confirmation.errorstatus}
                                            helperText={formErrors.password_confirmation.helperText}/>
                                 <br/>&nbsp;<br/>
                                 {user.id && (
-                                <Button onClick={() => setUser({...user, _method: 'put'})}
-                                        type="submit" color="secondary" variant="outlined" size="large"
-                                        style={{width: 250}} margin="dense"
-                                        startIcon={<PersonIcon/>}>
-                                    {t('general.save')}
-                                </Button>)}
+                                    <Button onClick={() => setUser({...user, _method: 'put'})}
+                                            type="submit" color="secondary" variant="outlined" size="large"
+                                            style={{width: 250}} margin="dense"
+                                            startIcon={<PersonIcon/>}>
+                                        {t('general.save')}
+                                    </Button>)}
                                 {!user.id && (
                                     <Button
-                                    type="submit" color="secondary" variant="outlined" size="large"
-                                    style={{width: 250}} margin="dense"
-                                    startIcon={<PersonAddIcon/>}>
-                                {t('general.add')}
+                                        type="submit" color="secondary" variant="outlined" size="large"
+                                        style={{width: 250}} margin="dense"
+                                        startIcon={<PersonAddIcon/>}>
+                                        {t('general.add')}
                                     </Button>)}
                                 &nbsp;&nbsp;&nbsp;
                                 <Button
@@ -179,39 +167,10 @@ export default function UserForm(props) {
                                 </Button>
 
                             </Grid>
-
-                            <Grid item xs={4}>
-                                <input
-                                    accept="image/*"
-                                    type="file"
-                                    value=''
-                                    id="select-image"
-                                    style={{display: "none"}}
-                                    onChange={(e) => setSelectedImage(e.target.files[0])}
-                                />
-
-                                <Box mt={2} sx={{height: 230}}>
-                                    {imageUrl && selectedImage && (
-                                        <Avatar src={imageUrl} alt={selectedImage.name} sx={{ width: 230, height: 230 }}/>
-                                    )}
-                                    {!imageUrl && user.image && (
-                                        <Avatar src={import.meta.env.VITE_API_BASE_URL + '/' + user.image} alt={user.image} sx={{ width: 230, height: 230 }}/>
-                                    )}
-                                </Box>
-                                <label htmlFor="select-image">
-                                    <br/>&nbsp;<br/>
-                                    <Button variant="outlined" color="secondary" size="large" style={{width: 250}}
-                                            margin="dense"
-                                            component="span" startIcon={<AddPhotoAlternateIcon/>}>
-                                        {t('user_form.upload_avatar')}
-                                    </Button>
-                                </label>
-
-                            </Grid>
                         </Grid>
                     </form>
                 </DialogContent>}
-        </>
+        </React.Fragment>
     )
 
 }

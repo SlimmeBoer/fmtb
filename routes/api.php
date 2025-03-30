@@ -125,7 +125,6 @@ Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/forgot-password', function (Request $request) {
-    Log::info($request);
     $request->validate(['email' => 'required|email']);
 
     $status = Password::sendResetLink($request->only('email'));

@@ -90,6 +90,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                         {selected.map((s, index) => {
                             return (
                                 <Chip
+                                    key={"selected-"+kpi+"-"+index}
                                     label={s.bbm_code}
                                     onClick={() => unSelect(s)}
                                     deleteIcon={<DeleteIcon/>}
@@ -108,6 +109,7 @@ const BBMKPIDragger = ({kpi, title}) => {
                         {notselected.map((ns, index) => {
                             return (
                                 <Chip
+                                    key={"notselected-"+kpi+"-"+index}
                                     label={ns.bbm_code}
                                     onClick={() => Select(ns)}
                                     deleteIcon={<AddIcon/>}

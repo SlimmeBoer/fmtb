@@ -363,21 +363,25 @@ class CompanyController extends Controller
             $query->where('name', 'bedrijf');
         })->get();
 
-        // TODO: Admin not counted. Needs elegant fix
         $company_data["total_klw"] = count($bedrijfUsers) * 3;
         $company_data["total_mbp"] = count($bedrijfUsers);
         $company_data["total_sma"] = count($bedrijfUsers);
+        $company_data["total_kpi"] = count($bedrijfUsers);
         $company_data["total_klw_completed"] = 0;
         $company_data["total_mpb_completed"] = 0;
         $company_data["total_sma_completed"] = 0;
+        $company_data["total_kpi_completed"] = 0;
 
         $companies = Company::all();
 
-        foreach ($companies as $company) {
+        foreach ($companies as $company)
+        {
+            // 1. Aantal geuploade KLW's
             $company_data["total_klw_completed"] += count(KlwDump::where('company_id', $company->id)->get());
 
             $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
 
+            // 2. MBP niet ingevuld
             if ($company_properties->mbp != 0) {
                 $company_data["total_mpb_completed"] += 1;
             }
@@ -389,6 +393,13 @@ class CompanyController extends Controller
                 $company_properties->wandelpad == 1 || $company_properties->erkend_demobedrijf == 1 ||
                 $company_properties->bed_and_breakfast == 1) {
                 $company_data["total_sma_completed"] += 1;
+            }
+
+            // 4. NatuurKPI's niet compleet.
+            $kpivalues = UmdlKpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
+
+            if ($kpivalues->kpi10 != 0 && $kpivalues->kpi11 != 0 && $kpivalues->kpi12 != 0) {
+                $company_data["total_kpi_completed"] += 1;
             }
 
         }

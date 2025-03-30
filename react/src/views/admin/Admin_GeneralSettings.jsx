@@ -57,7 +57,7 @@ export default function Admin_GeneralSettings() {
                     </Typography>
                 </Stack>
             </Stack>
-            <Typography component="body2" variant="body2">
+            <Typography variant="body2">
                 {t("pages_admin.general_settings_explained")}
             </Typography>
             {loading && <CenteredLoading />}

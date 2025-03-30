@@ -46,43 +46,50 @@ export default function ScoreGauge(props) {
     }, [props.score])
 
     return (
-        <Stack direction="row" gap={3}>
-            <Box sx={{mt: 2, ml: 5}}>
-                <Typography  variant="h1">
-                    {props.text}
-                </Typography>
-                <Typography sx={{mt: 2}} variant="body2">
+        <Box>
+            <Stack direction="row" gap={3}>
+                <Box sx={{mt: 2, ml: 5}}>
+                    <Typography variant="h1">
+                        {props.text}
+                    </Typography>
+
+                </Box>
+                <Gauge
+                    value={props.score}
+                    startAngle={-90}
+                    endAngle={90}
+                    text={() => ""}
+                    valueMin={0}
+                    valueMax={props.maxScore}
+                    sx={() => ({
+                        [`& .${gaugeClasses.valueText}`]: {
+                            //fontSize: asNumber(atrFontSize).$or(() => undefined) ?? 12,
+                            //transform: `translate(0px, ${atrRepositionValue ?? "0"}%)`
+                        },
+                        [`& .${gaugeClasses.valueArc}`]: {
+                            // Set conditional fill color based on arc location.
+                            fill: value > props.cat3 ? "#385723" : value > props.cat2 ? "#548235" : value > props.cat1 ? "#a9d18e" : "#e2f0d9",
+                        }
+                    })}
+                    height={150}
+                    width={250}
+                >
+                    <GaugeReferenceArc/>
+                    <GaugePointer/>
+                </Gauge>
+            </Stack>
+            <Stack direction="row">
+                <Typography variant="body2">
                     {t("score_gauge.avg_collective")}: <strong>{props.score_col}</strong>&nbsp;
-                    <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_col} />
                 </Typography>
-                <Typography  component="h1" variant="body2">
+                <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_col}/>
+            </Stack>
+            <Stack direction="row">
+                <Typography component="h1" variant="body2">
                     {t("score_gauge.avg_total")}: <strong>{props.score_tot}</strong>&nbsp;
-                    <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_tot} />
                 </Typography>
-            </Box>
-            <Gauge
-                value={props.score}
-                startAngle={-90}
-                endAngle={90}
-                text={() => ""}
-                valueMin={0}
-                valueMax={props.maxScore}
-                sx={() => ({
-                    [`& .${gaugeClasses.valueText}`]: {
-                        //fontSize: asNumber(atrFontSize).$or(() => undefined) ?? 12,
-                        //transform: `translate(0px, ${atrRepositionValue ?? "0"}%)`
-                    },
-                    [`& .${gaugeClasses.valueArc}`]: {
-                        // Set conditional fill color based on arc location.
-                        fill: value > props.cat3 ? "#385723" : value > props.cat2  ? "#548235" : value > props.cat1  ? "#a9d18e" : "#e2f0d9",
-                    }
-                })}
-                height={150}
-                width={250}
-            >
-                <GaugeReferenceArc/>
-                <GaugePointer/>
-            </Gauge>
-        </Stack>
+                <PercentageChip ownvalue={props.score} lowerBetter={false} refvalue={props.score_tot}/>
+            </Stack>
+        </Box>
     );
 }

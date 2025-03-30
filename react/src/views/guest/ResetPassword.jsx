@@ -7,6 +7,7 @@ import * as React from "react";
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 import KeyIcon from '@mui/icons-material/Key';
+import {setErrorData} from "../../helpers/ErrorData.js";
 
 const ResetPassword = () => {
     const [searchParams] = useSearchParams();
@@ -21,11 +22,16 @@ const ResetPassword = () => {
     const token = searchParams.get("token");
     const email = searchParams.get("email");
 
+    const [formErrors, setFormErrors] = useState({
+        password: {errorstatus: false, helperText: ''},
+        confirm_password: {errorstatus: false, helperText: ''},
+    });
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            setMessage("Passwords do not match!");
+            setMessage("De wachtwoorden komen niet met elkaar overeen!");
             return;
         }
 
@@ -42,7 +48,14 @@ const ResetPassword = () => {
                 navigate("/login");
             }, 5000);
         } catch (error) {
-            setMessage(t("reset_password.error_occured"));
+            const response = error.response;
+            if (response.data.errors) {
+                setFormErrors(prevErrors => {
+                    const newErrors = {...prevErrors};
+                    setErrorData(response.data.errors, newErrors, setFormErrors);
+                    return newErrors;
+                });
+            }
         }
     };
 
@@ -89,23 +102,28 @@ const ResetPassword = () => {
                                 {t("reset_password.title")}
                             </Typography>
                             <Box sx={{width: 500}}>
-                                <Typography component="body2" variant="body2" sx={{width: '250px'}}>
+                                <Typography variant="body2">
                                     {t("reset_password.explanation")}
                                 </Typography>
                             </Box>
-                            <br/>
                             <TextField fullWidth
                                        value={password}
+                                       autoComplete="on"
                                        onChange={(e) => setPassword(e.target.value)}
                                        label={t('reset_password.password')}
                                        variant="outlined" margin="dense" type="password" required={true}
                                        sx={{mt: 4}}
+                                       error={formErrors.password.errorstatus}
+                                       helperText={formErrors.password.helperText}
                             />
                             <TextField fullWidth
                                        value={confirmPassword}
+                                       autoComplete="on"
                                        onChange={(e) => setConfirmPassword(e.target.value)}
                                        label={t('reset_password.password_confirmation')}
                                        variant="outlined" margin="dense" type="password" required={true}
+                                       error={formErrors.confirm_password.errorstatus}
+                                       helperText={formErrors.confirm_password.helperText}
                             />
                             <br/>&nbsp;<br/>
                             <Button sx={{mb: 4}} type="submit" fullWidth variant="contained" color="secondary"

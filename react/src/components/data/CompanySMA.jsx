@@ -45,7 +45,6 @@ export default function CompanySMA(props) {
                     setLoading(false);
                     setCompany(data);
                     setChecklistItems(makeSma(data))
-                    console.log(makeSma(data));
                 })
                 .catch(() => {
                     setLoading(false);
@@ -67,11 +66,9 @@ export default function CompanySMA(props) {
                 [item.key]: !item.value
             })
             .then(response => {
-                console.log('Value updated successfully:');
                 props.notifyParent();
             })
             .catch(error => {
-                console.error('Error updating value:', error);
             });
     };
 

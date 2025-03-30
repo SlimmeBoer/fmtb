@@ -39,7 +39,7 @@ const BBMKPICard = ({kpi, title, bgcolor}) => {
     }
 
     return (
-        <Card style={{backgroundColor: bgcolor, width: '550px'}}>
+        <Card style={{backgroundColor: bgcolor}}>
             <Stack direction="row" gap={2}>
                 <Typography variant="h6">
                     {title}
@@ -47,7 +47,7 @@ const BBMKPICard = ({kpi, title, bgcolor}) => {
             </Stack>
             {loading && <CenteredLoading />}
             {!loading && codes.length !== 0 && <TableContainer >
-                <Table size="small" sx={{ width: 500 }}>
+                <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell>Code</TableCell>

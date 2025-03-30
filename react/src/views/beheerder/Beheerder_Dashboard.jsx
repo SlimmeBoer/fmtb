@@ -26,26 +26,17 @@ export default function Beheerder_Dashboard() {
             >
                 {/* Left Column */}
                 <Grid
-                    container
-                    item
-                    xs={12} sm={12} lg={12}
+                    size={8}
                     sx={{ display: "flex", flexDirection: "column" }} // Keeps items stacked but aligned properly
                 >
                     {/* Row of CompletionGauges */}
                     <BeheerderGauges />
-
-                    {/* KLWOverviewBeheerder should stay at the top */}
-                    <Grid
-                        item
-                        xs={12}
-                        sx={{ alignSelf: "stretch", mt: 2 }} // Stretches to full width, stays at the top
-                    >
-                        <KLWOverviewBeheerder />
-                    </Grid>
+                    <br />
+                    <KLWOverviewBeheerder />
                 </Grid>
 
                 {/* Right Column */}
-                <Grid item xs={12} sm={4} lg={4} sx={{ display: "flex", flexDirection: "column" }}>
+                <Grid size={4} sx={{ display: "flex", flexDirection: "column" }}>
                     <ActionOverview />
                 </Grid>
             </Grid>

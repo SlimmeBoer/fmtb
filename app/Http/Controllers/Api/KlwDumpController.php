@@ -177,76 +177,83 @@ class KlwDumpController extends Controller
            $file = $request->file('file');
 
            $klwParser = new KLWParser();
-           $companyData = $klwParser->getCompany($file);
 
-           // 1. Store the company as a new one (if it not exists yet)
-           $company = Company::firstOrNew(['ubn' => $companyData['ubn']]);
+            if (!$klwParser->checkValid($file)) {
+                return response('De XML-file is niet geldig. Controleer of het mogelijk een input-file is.', 500);
+            } else {
+                $companyData = $klwParser->getCompany($file);
 
-            $company->name = $companyData['name'];
-            $company->address = $companyData['address'];
-            $company->postal_code = $companyData['postal_code'];
-            $company->city = $companyData['city'];
-            $company->province = $companyData['province'];
-            $company->brs = $companyData['brs'];
-            $company->type = $companyData['type'];
-            $company->bio = $companyData['bio'];
-            $company->save();
+                // 1. Store the company as a new one (if it not exists yet)
+                $company = Company::firstOrNew(['ubn' => $companyData['ubn']]);
 
-            // Log
-            SystemLog::firstOrCreate(array(
-                'user_id' => Auth::user()->id,
-                'type' => 'CREATE',
-                'message' => 'Bedrijf toegevoegd: ' . $company->name,
-            ));
+                $company->name = $companyData['name'];
+                $company->address = $companyData['address'];
+                $company->postal_code = $companyData['postal_code'];
+                $company->city = $companyData['city'];
+                $company->province = $companyData['province'];
+                $company->brs = $companyData['brs'];
+                $company->type = $companyData['type'];
+                $company->bio = $companyData['bio'];
+                $company->save();
 
-            // 2. Connect the company to an existing collective
-            $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
-            $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
-                'company_id' => $company->id,
-                'collective_id' => $ucpc->collective_id,
-            ));
+                // Log
+                SystemLog::firstOrCreate(array(
+                    'user_id' => Auth::user()->id,
+                    'type' => 'CREATE',
+                    'message' => 'Bedrijf toegevoegd: ' . $company->name,
+                ));
 
-            // 3. Save KVK-number as separate record
-            $kvkNr = KvkNumber::firstOrCreate(array(
-                'kvk' => $klwParser->getKVK($file),
-                'company_id' => $company->id,
-            ));
+                // 2. Connect the company to an existing collective
+                $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
+                $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
+                    'company_id' => $company->id,
+                    'collective_id' => $ucpc->collective_id,
+                ));
 
-            // 4. Store the dump metadata
-            $klwDump = KlwDump::firstOrCreate(array(
-                'filename' => $file->getClientOriginalName(),
-                'company_id' => $company->id,
-                'year' => $klwParser->getYear($file),
-            ));
+                // 3. Save KVK-number as separate record
+                $kvkNr = KvkNumber::firstOrCreate(array(
+                    'kvk' => $klwParser->getKVK($file),
+                    'company_id' => $company->id,
+                ));
 
-            // 5. Store all fields and their values into the database.
-            $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, $request['saveFields']);
+                // 4. Store the dump metadata
+                $klwDump = KlwDump::firstOrCreate(array(
+                    'filename' => $file->getClientOriginalName(),
+                    'company_id' => $company->id,
+                    'year' => $klwParser->getYear($file),
+                ));
 
-            // 6. Import signals
-            $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
+                // 5. Store all fields and their values into the database.
+                $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, true);
 
-            // 7. Log
-            SystemLog::firstOrCreate(array(
-                'user_id' => Auth::user()->id,
-                'type' => 'CREATE',
-                'message' => 'KLW-dump geupload : ' . $company->name . ' (jaar '. $klwParser->getYear($file) . ')',
-            ));
+                // 6. Import signals
+                $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
 
-            // 8. Save the physical file to the GIS uploads
-            $file->move(public_path('uploads/klw/'), $file->getClientOriginalName());
+                // 7. Log
+                SystemLog::firstOrCreate(array(
+                    'user_id' => Auth::user()->id,
+                    'type' => 'CREATE',
+                    'message' => 'KLW-dump geupload : ' . $company->name . ' (jaar ' . $klwParser->getYear($file) . ')',
+                ));
 
-            // 9. Record the file as RawFile to the database
-            RawFile::firstOrCreate(array(
-                'user_id' => Auth::user()->id,
-                'type' => 'klw',
-                'filename' => $file->getClientOriginalName(),
-            ));
+                // 8. Save the physical file to the GIS uploads
+                $file->move(public_path('uploads/klw/'), $file->getClientOriginalName());
 
+                // 9. Record the file as RawFile to the database
+                RawFile::firstOrCreate(array(
+                    'user_id' => Auth::user()->id,
+                    'type' => 'klw',
+                    'filename' => $file->getClientOriginalName(),
+                ));
 
-
+                return response('KLW succesvol ingelezen, in totaal zijn ' . $fieldsParsed . ' velden aangemaakt en ' . $signalsParsed . ' signalen.', 201);
+            }
+        }
+        else {
+            return response('Geen bestand geupload', 500);
         }
 
-        return response(201);
+
     }
 
     /**

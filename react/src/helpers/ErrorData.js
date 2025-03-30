@@ -9,7 +9,6 @@ export function setErrorData(errors, fields, setFields) {
             }
         }
     }
-    console.log(fields)
     setFields(fields);
 
 }

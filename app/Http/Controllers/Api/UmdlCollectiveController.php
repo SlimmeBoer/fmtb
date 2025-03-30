@@ -9,6 +9,7 @@ use App\Http\Resources\UmdlCollectiveResource;
 use App\Models\KlwDump;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCompanyProperties;
+use App\Models\UmdlKpiValues;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -93,20 +94,23 @@ class UmdlCollectiveController extends Controller
                 $query->where('name', 'bedrijf');
             })->get();
 
-            // TODO: Admin not counted. Needs elegant fix
             $collective_data["total_klw"] = count($bedrijfUsers) * 3;
             $collective_data["total_mbp"] = count($bedrijfUsers);
             $collective_data["total_sma"] = count($bedrijfUsers);
+            $collective_data["total_kpi"] = count($bedrijfUsers);
             $collective_data["total_klw_completed"] = 0;
             $collective_data["total_mpb_completed"] = 0;
             $collective_data["total_sma_completed"] = 0;
+            $collective_data["total_kpi_completed"] = 0;
 
             foreach ($collective->companies as $company)
             {
+                // 1. Aantal geuploade KLW's
                 $collective_data["total_klw_completed"] += count(KlwDump::where('company_id', $company->id)->get());
 
                 $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
 
+                // 2. MBP niet ingevuld
                 if ($company_properties->mbp != 0) {
                     $collective_data["total_mpb_completed"] += 1;
                 }
@@ -119,6 +123,13 @@ class UmdlCollectiveController extends Controller
                     $company_properties->bed_and_breakfast == 1)
                 {
                     $collective_data["total_sma_completed"] += 1;
+                }
+
+                // 4. NatuurKPI's niet compleet.
+                $kpivalues = UmdlKpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
+
+                if ($kpivalues->kpi10 != 0 && $kpivalues->kpi11 != 0 && $kpivalues->kpi12 != 0) {
+                    $collective_data["total_kpi_completed"] += 1;
                 }
 
             }

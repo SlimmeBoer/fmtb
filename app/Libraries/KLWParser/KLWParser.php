@@ -19,6 +19,18 @@ use function VeeWee\Xml\Dom\Xpath\Locator\query;
 
 class KLWParser
 {
+    public function checkValid($xml_file): bool
+    {
+        $reader = XmlReader::fromFile($xml_file);
+        try {
+            $reader->value('KW_Output.PLAN.DUMPFILES_JAAR0.veehouder')->sole();
+            return true;
+        }
+        catch (MissingNodeException $e) {
+            return false;
+        }
+    }
+
 
     public function getCompany($xml_file): array
     {
@@ -181,6 +193,8 @@ class KLWParser
                         'kenmerk' => $signal_type['kenmerk'],
                         'actie' => $signal_type['actie'],
                     );
+
+                    ++$totalParsed;
                 }
             }
         }

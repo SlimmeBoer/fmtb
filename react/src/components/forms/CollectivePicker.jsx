@@ -46,7 +46,7 @@ export default function CollectivePicker(props) {
         <Select
             labelId="collective-select"
             id="collective-simple-select"
-            value={''}
+            value={props.collective || ''}
             onChange={(e) => props.changeHandler(e)}
             inputProps={{'aria-label': 'Select collective'}}
 

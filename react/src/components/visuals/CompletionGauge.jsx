@@ -119,7 +119,6 @@ function CompletionGauge({main_label, total, total_label, complete, complete_lab
 }
 
 CompletionGauge.propTypes = {
-    year: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     complete: PropTypes.number.isRequired,
 };

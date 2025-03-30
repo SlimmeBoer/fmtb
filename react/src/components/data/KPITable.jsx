@@ -295,8 +295,8 @@ export default function KPITable(props) {
 
     return (
         <Grid container spacing={2} size={{xs: 12, lg: 12}}>
-            <Grid size={{xs: 12, lg: 6}} key="kpi-grid-1">
-                <Card variant="outlined" key="card-1">
+            <Grid size={{xs: 12, lg: 6}}>
+                <Card variant="outlined">
                     <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                         <ScoreboardIcon/>
                         <Typography component="h6" variant="h6">
@@ -311,8 +311,8 @@ export default function KPITable(props) {
                                     score_tot={kpi.total_tot.score}/>}
                 </Card>
             </Grid>
-            <Grid size={{xs: 12, lg: 6}} key="kpi-grid-2">
-                <Card variant="outlined" key="card-2">
+            <Grid size={{xs: 12, lg: 6}}>
+                <Card variant="outlined">
                     <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                         <EuroOutlinedIcon/>
                         <Typography component="h6" variant="h6">
@@ -328,8 +328,8 @@ export default function KPITable(props) {
 
                 </Card>
             </Grid>
-            <Grid size={{xs: 12, lg: 12}} key="kpi-grid-3">
-                <Card variant="outlined" key="card-3">
+            <Grid size={{xs: 12, lg: 12}}>
+                <Card variant="outlined">
                     <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                         <TimelineOutlinedIcon/>
                         <Typography component="h6" variant="h6">
@@ -341,7 +341,7 @@ export default function KPITable(props) {
                         {!loading && !isObjectEmpty(kpi) &&
                             <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                                 <TableHead>
-                                    <TableRow key={997}>
+                                    <TableRow key={"headrow"}>
                                         <TableCell sx={{width: 250}}> </TableCell>
                                         <TableCell sx={{width: 60, border: 1}}
                                                    align="center">{kpi.year1.year}</TableCell>
@@ -360,7 +360,7 @@ export default function KPITable(props) {
                                     {tableData.map((tab, index) => {
                                             if (tab.type === "normal") {
                                                 return (
-                                                    <TableRow key={index} sx={{margin: 0, color: tab.color}}>
+                                                    <TableRow key={`normal-${index}`} sx={{margin: 0, color: tab.color}}>
                                                         <TableCell component="th" scope="row">
                                                             {tab.text}
                                                         </TableCell>
@@ -391,8 +391,8 @@ export default function KPITable(props) {
                                                 )
                                             }
                                             if (tab.type === "double") {
-                                                return (<>
-                                                        <TableRow key={index + "01"}  sx={{margin: 0, color: tab.color_1}}>
+                                                return (<React.Fragment key={`double-${index}`}>
+                                                        <TableRow key={`double-${index}-01`}  sx={{margin: 0, color: tab.color_1}}>
                                                             <TableCell component="th" scope="row" sx={{color: tab.color_1}}>
                                                                 {tab.text_1}
                                                             </TableCell>
@@ -422,7 +422,7 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.score_tot}
                                                         </TableCell>
                                                         </TableRow>
-                                                        <TableRow sx={{margin: 0, color: tab.color_2}} key={index + "02"}>
+                                                        <TableRow sx={{margin: 0, color: tab.color_2}} key={`double-${index}-02`}>
                                                             <TableCell component="th" scope="row">
                                                                 {tab.text_2}
                                                             </TableCell>
@@ -443,12 +443,12 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_2}
                                                             </TableCell>
                                                         </TableRow>
-                                                    </>
+                                                    </React.Fragment>
                                                 )
                                             }
                                             if (tab.type === "quad") {
-                                                return (<>
-                                                        <TableRow key={(index * 100) + 1}  sx={{margin: 0}}>
+                                                return (<React.Fragment key={`quad-${index}`}>
+                                                        <TableRow key={`quad-${index}-1`}  sx={{margin: 0}}>
                                                             <TableCell sx={{color: tab.color_1}} component="th" scope="row">
                                                                 {tab.text_1}
                                                             </TableCell>
@@ -478,7 +478,7 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.score_tot}
                                                             </TableCell>
                                                         </TableRow>
-                                                        <TableRow key={(index * 100) + 2}  sx={{margin: 0}}>
+                                                        <TableRow key={`quad-${index}-2`}  sx={{margin: 0}}>
                                                             <TableCell component="th" scope="row">
                                                                 {tab.text_2}
                                                             </TableCell>
@@ -499,7 +499,7 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_2}
                                                             </TableCell>
                                                         </TableRow>
-                                                        <TableRow key={(index * 100) + 3}  sx={{margin: 0}} >
+                                                        <TableRow key={`quad-${index}-3`}  sx={{margin: 0}} >
                                                             <TableCell component="th" scope="row" sx={{color: tab.color_3}}>
                                                                 {tab.text_3}
                                                             </TableCell>
@@ -520,7 +520,7 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_3}
                                                             </TableCell>
                                                         </TableRow>
-                                                        <TableRow key={(index * 100) + 4}  sx={{margin: 0}} >
+                                                        <TableRow key={`quad-${index}-4`}  sx={{margin: 0}} >
                                                             <TableCell component="th" scope="row" sx={{color: tab.color_4}}>
                                                                 {tab.text_4}
                                                             </TableCell>
@@ -541,12 +541,12 @@ export default function KPITable(props) {
                                                                 {t("kpi_table.total_letter")}: {tab.avg_tot_4}
                                                             </TableCell>
                                                         </TableRow>
-                                                    </>
+                                                    </React.Fragment>
                                                 )
                                             }
                                             if (tab.type === "4-wide") {
                                                 return (
-                                                    <TableRow key={index}  sx={{margin: 0}} >
+                                                    <TableRow key={`4wide-${index}`}  sx={{margin: 0}} >
                                                         <TableCell component="th" scope="row">
                                                             {tab.text}
                                                         </TableCell>
@@ -570,7 +570,7 @@ export default function KPITable(props) {
                                         }
                                     )
                                     }
-                                    <TableRow sx={{margin: 0}} key={998}>
+                                    <TableRow sx={{margin: 0}} key={"total_score"}>
                                         <TableCell colSpan={5} align="right">
                                             {t("kpi_table.total_score")}:
                                         </TableCell>
@@ -578,7 +578,7 @@ export default function KPITable(props) {
                                             {kpi.total.score}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow sx={{margin: 0}} key={999}>
+                                    <TableRow sx={{margin: 0}} key={"total_money"}>
                                         <TableCell colSpan={5} align="right">
                                             {t("kpi_table.payout_money")}:
                                         </TableCell>

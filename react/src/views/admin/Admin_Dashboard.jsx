@@ -31,14 +31,8 @@ export default function Admin_Dashboard() {
                 >
                     {/* Row of CompletionGauges */}
                     <BeheerderGauges />
-
-                    {/* KLWOverviewBeheerder should stay at the top */}
-                    <Grid
-                        size={8}
-                        sx={{ alignSelf: "stretch", mt: 2 }} // Stretches to full width, stays at the top
-                    >
-                        <KLWOverviewBeheerder />
-                    </Grid>
+                    <br />
+                    <KLWOverviewBeheerder />
                 </Grid>
 
                 {/* Right Column */}

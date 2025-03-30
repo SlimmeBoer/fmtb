@@ -20,6 +20,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import GroupIcon from '@mui/icons-material/Group';
 import Box from "@mui/material/Box";
+import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
 
 export default function Admin_Users() {
 
@@ -97,19 +98,12 @@ export default function Admin_Users() {
                         <TableHead>
                             <TableRow>
                                 <TableCell>{t('users.header_id')}</TableCell>
-                                <TableCell>{t('users.header_image')}</TableCell>
                                 <TableCell>{t('users.header_full_name')}</TableCell>
                                 <TableCell>{t('users.header_email')}</TableCell>
                                 <TableCell>{t('users.header_actions')}</TableCell>
                             </TableRow>
                         </TableHead>
-                        {loading && <TableBody>
-                            <TableRow>
-                                <TableCell colSpan="5" className="text-center">
-                                   <CircularProgress/>
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>}
+                        {loading && <CenteredLoading />}
                         {!loading && <TableBody>
                             {users.map(u => (
                                 <TableRow
@@ -119,9 +113,6 @@ export default function Admin_Users() {
                                     <TableCell width="10%" component="th" scope="row">
                                         {u.id}
                                     </TableCell>
-                                    <TableCell width="10%">
-                                        <Avatar src={import.meta.env.VITE_API_BASE_URL + '/' + u.image} alt={u.image} sx={{ width: 40, height: 40 }}/>
-                                        </TableCell>
                                     <TableCell width="40%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
                                     <TableCell width="20%">{u.email}</TableCell>
                                     <TableCell width="20%">
@@ -142,7 +133,7 @@ export default function Admin_Users() {
                 <Dialog open={open}
                         PaperProps={{ style: {
                                 minHeight: '500px',
-                                minWidth: '1200px',
+                                minWidth: '720px',
                             }}}>
                     <UserForm id={user_id} onClose={closeHandler}/>
                 </Dialog>

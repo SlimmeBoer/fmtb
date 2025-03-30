@@ -51,7 +51,7 @@ const KLWUploaderBedrijf = (props) => {
                         [file.name]: {
                             status: t("general.uploaded"),
                             error: false,
-                            message: t("general.uploaded_message"),
+                            message: response.data,
                         },
                     }));
                     props.notifyParent()
@@ -63,7 +63,7 @@ const KLWUploaderBedrijf = (props) => {
                         [file.name]: {
                             status: t("general.failed"),
                             error: true,
-                            message: t("general.failed_message"),
+                            message: error.response.data,
                         },
                     }));
                 });

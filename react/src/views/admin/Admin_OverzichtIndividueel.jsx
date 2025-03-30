@@ -71,7 +71,7 @@ export default function Admin_OverzichtIndividueel() {
                         <CompanySMA company={id} notifyParent={rerenderTable}/>
                     </Grid>
                     <Grid size={{xs: 12, lg: 8}} key="indiv-grid-2">
-                        <KPITable company={id} key="kpitable" renderTable={renderTable}/>
+                        <KPITable company={id} renderTable={renderTable}/>
                     </Grid>
                 </Grid>
             </Box>

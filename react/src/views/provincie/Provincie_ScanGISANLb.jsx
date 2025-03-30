@@ -25,12 +25,9 @@ export default function Provincie_ScanGISANLb() {
                 sx={{mt: 4}}
             >
                 {/* Z-pakketten */}
-                <Grid
-                    item
-                    xs={12} sm={4} lg={4}
-                >
+                <Grid size={{xs: 12, md: 6, lg: 6}}>
                     <Box sx={{width: '700px', height: '60px'}}>
-                        <Typography component="body2" variant="body2">
+                        <Typography variant="body2">
                             {t("pages_provincie.scangis_anlb_settings_explanation1")}
                         </Typography>
                     </Box>
@@ -39,12 +36,9 @@ export default function Provincie_ScanGISANLb() {
                 </Grid>
 
                 {/* KPI 11 */}
-                <Grid
-                    item
-                    xs={12} sm={4} lg={4}
-                >
+                <Grid size={{xs: 12, md: 6, lg: 6}}>
                     <Box sx={{width: '700px', height: '60px'}}>
-                        <Typography component="body2" variant="body2">
+                        <Typography variant="body2">
                             {t("pages_provincie.scangis_anlb_settings_explanation2")}
                         </Typography>
                     </Box>

@@ -45,11 +45,9 @@ export default function CompanyMBP(props) {
             mbp: newValue
         })
             .then(response => {
-                console.log(t("mbp.updated"), response.data);
                 props.notifyParent()
             })
             .catch(error => {
-                console.error(t("mbp.error"), error);
             });
     };
 

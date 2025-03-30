@@ -26,26 +26,18 @@ export default function Collectief_Dashboard() {
             >
                 {/* Left Column */}
                 <Grid
-                    container
-                    item
-                    xs={12} sm={12} lg={12}
-                    sx={{ display: "flex", flexDirection: "column" }} // Keeps items stacked but aligned properly
+                    size={8}
+                    sx={{ display: "flex", flexDirection: "column" }} // Keeps items stacked but aligaligned properly
                 >
                     {/* Row of CompletionGauges */}
                     <CollectiefGauges />
+                    <br />
+                    <KLWOverviewCollectief />
 
-                    {/* KLWOverviewCollectief should stay at the top */}
-                    <Grid
-                        item
-                        xs={12}
-                        sx={{ alignSelf: "stretch", mt: 2 }} // Stretches to full width, stays at the top
-                    >
-                        <KLWOverviewCollectief />
-                    </Grid>
                 </Grid>
 
                 {/* Right Column */}
-                <Grid item xs={12} sm={4} lg={4} sx={{ display: "flex", flexDirection: "column" }}>
+                <Grid size={4} sx={{ display: "flex", flexDirection: "column" }}>
                     <ActionOverviewCollectief />
                 </Grid>
             </Grid>

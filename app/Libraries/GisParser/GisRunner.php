@@ -94,7 +94,6 @@ class GisRunner
                 } else {
                     $bbm_value['waarde'] += $gis_record->oppervlakte ;
                 }
-                Log::info($bbm_value);
             }
         }
         unset($bbm_value); // Unset reference after loop to avoid unintended modifications

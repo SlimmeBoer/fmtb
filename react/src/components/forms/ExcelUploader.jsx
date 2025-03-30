@@ -52,7 +52,6 @@ const ExcelUploader = () => {
                 })
                 .catch((error) => {
                     // Handle error
-                    console.log(error);
                     setFeedback((prevFeedback) => ({
                         ...prevFeedback,
                         [file.name]: {
