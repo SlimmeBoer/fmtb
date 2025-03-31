@@ -30,7 +30,7 @@ export default function BedrijfScores(props) {
     const getKPI = () => {
         if (props.company !== '') {
             setLoading(true);
-            axiosClient.get(`/umdlkpi/getscorescurrentcompany/`)
+            axiosClient.get(`/umdlkpi/getscorescurrentcompany`)
                 .then(({data}) => {
                     setLoading(false);
                     setKPI(data);

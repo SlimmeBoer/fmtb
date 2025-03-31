@@ -152,9 +152,9 @@ class KlwDumpController extends Controller
         }
 
         // Remove file from RAW files db
-        $rawfile = RawFile::where('filename', $klwDump->filename)->first();
+        $rawfiles = RawFile::where('filename', $klwDump->filename)->first();
 
-        if ($rawfile) {
+        foreach ($rawfiles as $rawfile) {
             $rawfile->delete();
         }
 
@@ -205,10 +205,19 @@ class KlwDumpController extends Controller
 
                 // 2. Connect the company to an existing collective
                 $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
-                $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
-                    'company_id' => $company->id,
-                    'collective_id' => $ucpc->collective_id,
-                ));
+
+                try {
+                    $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
+                        'company_id' => $company->id,
+                        'collective_id' => $ucpc->collective_id,
+                    ));
+                } catch (\Illuminate\Database\QueryException $e) {
+                    // If a duplicate entry error occurs, retrieve the existing record
+                    $company_collective = UmdlCollectiveCompany::where(array(
+                        'company_id' => $company->id,
+                        'collective_id' => $ucpc->collective_id,
+                    ))->first();
+                }
 
                 // 3. Save KVK-number as separate record
                 $kvkNr = KvkNumber::firstOrCreate(array(

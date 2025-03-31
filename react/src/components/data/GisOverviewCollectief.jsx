@@ -20,7 +20,7 @@ const GisOverviewCollectief = () => {
 
     const fetchDumps = async () => {
         try {
-            const response = await axiosClient.get('/gisdump/currentcollective/');
+            const response = await axiosClient.get('/gisdump/currentcollective');
             setDumps(response.data);
         } catch (error) {
             console.error(t("gis_dumps_overview.error_fetch"), error);

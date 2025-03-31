@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('collective_id');
             $table->foreignId('company_id');
             $table->timestamps();
+            $table->unique(['collective_id', 'company_id']);
         });
     }
 

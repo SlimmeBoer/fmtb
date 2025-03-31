@@ -11,7 +11,9 @@ use App\Models\KlwDump;
 use App\Models\KlwField;
 use App\Models\KlwValue;
 use App\Models\KvkNumber;
+use App\Models\RawFile;
 use App\Models\Setting;
+use App\Models\Signal;
 use App\Models\SystemLog;
 use App\Models\UmdlCollective;
 use App\Models\UmdlCollectiveCompany;
@@ -483,7 +485,20 @@ class CompanyController extends Controller
             // 6. Delete all Klw values associated with this dump
             KlwValue::where('dump_id', $dump->id)->delete();
 
-            // 7. Remove all signals associated with this dumo
+            // 7. Remove all signals associated with this dump
+            Signal::where('dump_id', $dump->id)->delete();
+
+            // 5. Remove associated file from uploads
+            if ($dump->filename !== null && file_exists(public_path('uploads/klw/' . $dump->filename))) {
+                unlink(public_path('uploads/klw/'. $dump->filename));
+            }
+
+            // Remove file from RAW files db
+            $rawfiles = RawFile::where('filename', $dump->filename)->get();
+
+            foreach ($rawfiles as $rawfile) {
+                $rawfile->delete();
+            }
         }
 
         //8. Remove the dumps themselves.
