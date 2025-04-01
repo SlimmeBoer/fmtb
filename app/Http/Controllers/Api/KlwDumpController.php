@@ -140,7 +140,7 @@ class KlwDumpController extends Controller
         Signal::where('dump_id', $klwDump->id)->delete();
 
         //4. Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'KLW-dump verwijderd: ' . $klwDump->filename,
@@ -152,7 +152,7 @@ class KlwDumpController extends Controller
         }
 
         // Remove file from RAW files db
-        $rawfiles = RawFile::where('filename', $klwDump->filename)->first();
+        $rawfiles = RawFile::where('filename', $klwDump->filename)->get();
 
         foreach ($rawfiles as $rawfile) {
             $rawfile->delete();
@@ -197,7 +197,7 @@ class KlwDumpController extends Controller
                 $company->save();
 
                 // Log
-                SystemLog::firstOrCreate(array(
+                SystemLog::create(array(
                     'user_id' => Auth::user()->id,
                     'type' => 'CREATE',
                     'message' => 'Bedrijf toegevoegd: ' . $company->name,
@@ -239,7 +239,7 @@ class KlwDumpController extends Controller
                 $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
 
                 // 7. Log
-                SystemLog::firstOrCreate(array(
+                SystemLog::create(array(
                     'user_id' => Auth::user()->id,
                     'type' => 'CREATE',
                     'message' => 'KLW-dump geupload : ' . $company->name . ' (jaar ' . $klwParser->getYear($file) . ')',

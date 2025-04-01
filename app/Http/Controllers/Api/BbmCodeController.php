@@ -54,7 +54,7 @@ class BbmCodeController extends Controller
         $bbmCode = BbmCode::create($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'CREATE',
             'message' => 'Maakte een nieuwe BBM-code aan: ' . $bbmCode->code ,
@@ -88,7 +88,7 @@ class BbmCodeController extends Controller
         $bbmcode->update($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'UPDATE',
             'message' => 'Werkte BBM-code bij: ' . $bbmcode->code ,
@@ -114,7 +114,7 @@ class BbmCodeController extends Controller
         BbmAnlbPackage::where('code_id',$bbmcode->id)->delete();
 
         // 4. Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'Verwijderde BBM-code: ' . $bbmcode->code ,

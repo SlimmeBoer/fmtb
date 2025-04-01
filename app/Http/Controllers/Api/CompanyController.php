@@ -452,7 +452,7 @@ class CompanyController extends Controller
         $company->update($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'UPDATE',
             'message' => 'Bedrijf aangepast: ' . $company->name,
@@ -505,7 +505,7 @@ class CompanyController extends Controller
         KlwDump::where('company_id', $company->id)->delete();
 
         // 9. Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'Bedrijf verwijderd: ' . $company->name,
@@ -559,7 +559,7 @@ class CompanyController extends Controller
             $company->data_compleet = true;
             $company->save();
 
-            SystemLog::firstOrCreate(array(
+            SystemLog::create(array(
                 'user_id' => Auth::user()->id,
                 'type' => 'DATA COMPLETED',
                 'message' => 'Bedrijfsdata gecompleteerd: ' . $company->name,

@@ -40,7 +40,7 @@ class SettingController extends Controller
         $setting->update($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'UPDATE',
             'message' => 'Werkte systeeminstelling bij: ' . $setting->key . ' naar ' . $setting->value,

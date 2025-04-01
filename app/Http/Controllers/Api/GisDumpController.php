@@ -63,7 +63,7 @@ class GisDumpController extends Controller
 
         if ($dump) {
             //Log
-            SystemLog::firstOrCreate(array(
+            SystemLog::create(array(
                 'user_id' => Auth::user()->id,
                 'type' => 'DELETE',
                 'message' => 'GIS-dump verwijderd: ' . $dump->filename,
@@ -75,9 +75,9 @@ class GisDumpController extends Controller
             }
 
             // Remove file from RAW files db
-            $rawfile = RawFile::where('filename', $dump->filename)->first();
+            $rawfiles = RawFile::where('filename', $dump->filename)->get();
 
-            if ($rawfile) {
+            foreach ($rawfiles as $rawfile) {
                 $rawfile->delete();
             }
 
@@ -140,7 +140,7 @@ class GisDumpController extends Controller
                     ));
 
                     //5. Log
-                    SystemLog::firstOrCreate(array(
+                    SystemLog::create(array(
                         'user_id' => Auth::user()->id,
                         'type' => 'create',
                         'message' => 'GIS-dump toegevoegd: ' . $gisDump->filename,

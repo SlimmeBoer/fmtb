@@ -93,7 +93,7 @@ class UmdlKpiValuesController extends Controller
         $company = Company::where('ubn',Auth::user()->ubn)->first();
 
         if (!$company) {
-            return array();
+            return array("total" => ["score" => 0, "money" => 0]);
         }
         else {
             //1. Get individual scores

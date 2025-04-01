@@ -40,7 +40,7 @@ class BbmKpiController extends Controller
         $bbmkpi = BbmKpi::create(array('kpi' => $kpi, 'code_id' => $bbm->id));
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'CREATE',
             'message' => 'BBM-code aan KPI toegekend: ' . $bbm_code . ' aan KPI#' . $kpi,
@@ -81,7 +81,7 @@ class BbmKpiController extends Controller
         $bbm = BbmCode::where('ID', $bbmkpi->code_id)->first();
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'BBM-code toekenning verwijderd: ' . $bbm->code . ' aan KPI#' . $bbmkpi->kpi,

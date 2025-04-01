@@ -17,7 +17,7 @@ import CenteredLoading from "../visuals/CenteredLoading.jsx";
 import PdfButton from "./PdfButton.jsx";
 import PdfButtonCompany from "./PdfButtonCompany.jsx";
 
-export default function BedrijfScores(props) {
+export default function BedrijfScores() {
     const [kpi, setKPI] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -25,21 +25,18 @@ export default function BedrijfScores(props) {
 
     useEffect(() => {
         getKPI();
-    }, [props.company, props.renderTable])
+    }, [])
 
     const getKPI = () => {
-        if (props.company !== '') {
-            setLoading(true);
-            axiosClient.get(`/umdlkpi/getscorescurrentcompany`)
-                .then(({data}) => {
-                    setLoading(false);
-                    setKPI(data);
-                    setTableData(makeTable(data));
-                })
-                .catch(() => {
-                    setLoading(false);
-                })
-        }
+        setLoading(true);
+        axiosClient.get(`/umdlkpi/getscorescurrentcompany`)
+            .then(({data}) => {
+                setLoading(false);
+                setKPI(data);
+            })
+            .catch(() => {
+                setLoading(false);
+            })
     }
 
     return (
@@ -50,47 +47,46 @@ export default function BedrijfScores(props) {
             <Typography variant="body2" sx={{mb: 3}}>
                 {t("company_dashboard.scores_overview_exlanation")}
             </Typography>
-
-            <Grid container spacing={2} size={{xs: 12, lg: 12}}>
-                <Grid size={{xs: 12, lg: 6}} key="kpi-grid-1">
-                    <Card variant="outlined" key="card-1">
-                        <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
-                            <ScoreboardIcon/>
-                            <Typography component="h6" variant="h6">
-                                {t("kpi_table.total_score_points")}
-                            </Typography>
-                        </Stack>
-                        {loading && <CenteredLoading/>}
-                        {!loading && !isObjectEmpty(kpi) &&
+            {loading && <CenteredLoading/>}
+            {!loading && !isObjectEmpty(kpi) && kpi.total.score !== 0 &&
+                <Grid container spacing={2} size={{xs: 12, lg: 12}}>
+                    <Grid size={{xs: 12, lg: 6}} key="kpi-grid-1">
+                        <Card variant="outlined" key="card-1">
+                            <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
+                                <ScoreboardIcon/>
+                                <Typography component="h6" variant="h6">
+                                    {t("kpi_table.total_score_points")}
+                                </Typography>
+                            </Stack>
                             <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={2900} cat3={2399}
                                         cat2={1899} cat1={1399}
                                         score_col={kpi.total_col.score}
-                                        score_tot={kpi.total_tot.score}/>}
-                    </Card>
-                </Grid>
-                <Grid size={{xs: 12, lg: 6}} key="kpi-grid-2">
-                    <Card variant="outlined" key="card-2">
-                        <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
-                            <EuroOutlinedIcon/>
-                            <Typography component="h6" variant="h6">
-                                {t("kpi_table.total_score_money")}
-                            </Typography>
-                        </Stack>
-                        {loading && <CenteredLoading/>}
-                        {!loading && !isObjectEmpty(kpi) &&
+                                        score_tot={kpi.total_tot.score}/>
+                        </Card>
+                    </Grid>
+                    <Grid size={{xs: 12, lg: 6}} key="kpi-grid-2">
+                        <Card variant="outlined" key="card-2">
+                            <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
+                                <EuroOutlinedIcon/>
+                                <Typography component="h6" variant="h6">
+                                    {t("kpi_table.total_score_money")}
+                                </Typography>
+                            </Stack>
                             <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={5000}
                                         cat3={3899} cat2={2399} cat1={1399}
                                         score_col={kpi.total_col.money}
-                                        score_tot={kpi.total_tot.money}/>}
+                                        score_tot={kpi.total_tot.money}/>
 
-                    </Card>
-                </Grid>
-            </Grid>
-            <PdfButtonCompany />
-            <Typography variant="body2" sx={{mt: 3}}>
-                {t("company_dashboard.questions")}
-            </Typography>
+                        </Card>
+                    </Grid>
+                    <PdfButtonCompany/>
+                    <Typography variant="body2" sx={{mt: 3}}>
+                        {t("company_dashboard.questions")}
+                    </Typography>
+                </Grid>}
+            {!loading && (isObjectEmpty(kpi) || kpi.total.score == 0) &&
+                <Alert severity="error">{t("company_dashboard.no_scores")}</Alert>
+            }
         </Box>
-    )
-        ;
+    );
 }

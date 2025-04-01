@@ -32,6 +32,7 @@ export default function CompanyPropertyTable(props) {
 
     const initialFormState = {
         id: props.company,
+        opp_totaal: '',
         melkkoeien: '',
         meetmelk_per_koe: '',
         meetmelk_per_ha: '',
@@ -47,6 +48,7 @@ export default function CompanyPropertyTable(props) {
     };
 
     const fieldLabels = {
+        opp_totaal: t("company_property_table.opp_totaal"),
         melkkoeien: t("company_property_table.melkkoeien"),
         meetmelk_per_koe: t("company_property_table.meetmelk_per_koe"),
         meetmelk_per_ha: t("company_property_table.meetmelk_per_ha"),

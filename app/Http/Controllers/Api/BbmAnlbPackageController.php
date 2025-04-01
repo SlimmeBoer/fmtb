@@ -56,7 +56,7 @@ class BbmAnlbPackageController extends Controller
         $bbmAnlbPackage = BbmAnlbPackage::create($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'CREATE',
             'message' => 'Maakte een nieuwe ANLb-pakket aan: ' . $bbmAnlbPackage->anlb_number . $bbmAnlbPackage->anlb_letters,
@@ -90,7 +90,7 @@ class BbmAnlbPackageController extends Controller
         $bbmanlbpackage->update($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'UPDATE',
             'message' => 'Werkte ANLB-pakket bij: ' . $bbmanlbpackage->anlb_number . $bbmanlbpackage->anlb_letters,
@@ -105,7 +105,7 @@ class BbmAnlbPackageController extends Controller
     public function destroy(BbmAnlbPackage $bbmanlbpackage)
     {
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'Verwijderde ANLB-pakket: ' . $bbmanlbpackage->anlb_number . $bbmanlbpackage->anlb_letters,

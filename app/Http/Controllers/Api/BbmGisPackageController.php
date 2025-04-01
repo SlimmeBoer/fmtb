@@ -57,7 +57,7 @@ class BbmGisPackageController extends Controller
         $bbmGisPackage = BbmGisPackage::create($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'CREATE',
             'message' => 'Maakte een nieuw GIS-pakket aan: ' . $bbmGisPackage->package,
@@ -91,7 +91,7 @@ class BbmGisPackageController extends Controller
         $bbmgispackage->update($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'UPDATE',
             'message' => 'Werkte een GIS-pakket bij: ' . $bbmgispackage->package,
@@ -106,7 +106,7 @@ class BbmGisPackageController extends Controller
     public function destroy(BbmGisPackage $bbmgispackage) : Response
     {
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'Verwijderde GIS-pakket: ' . $bbmgispackage->package,

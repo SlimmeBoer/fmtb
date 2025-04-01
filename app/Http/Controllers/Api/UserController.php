@@ -40,7 +40,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'CREATE',
             'message' => 'Gebruiker toegevoegd: ' . $data['email'],
@@ -78,7 +78,7 @@ class UserController extends Controller
         $user->update($data);
 
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'UPDATE',
             'message' => 'Gebruiker gewijzigd: ' . $data['email'],
@@ -97,7 +97,7 @@ class UserController extends Controller
     public function destroy(User $user): Response
     {
         // Log
-        SystemLog::firstOrCreate(array(
+        SystemLog::create(array(
             'user_id' => Auth::user()->id,
             'type' => 'DELETE',
             'message' => 'Gebruiker verwijderd: ' . $user->email,

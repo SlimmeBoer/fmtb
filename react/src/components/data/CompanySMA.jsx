@@ -62,7 +62,7 @@ export default function CompanySMA(props) {
         setChecklistItems(updatedItems);
 
         axiosClient.put(`/companyproperties/update/${company.id}`, {
-                company_id: company.id,
+                company_id: company.company_id,
                 [item.key]: !item.value
             })
             .then(response => {
