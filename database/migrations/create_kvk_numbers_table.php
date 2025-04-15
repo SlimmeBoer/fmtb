@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('company_id');
             $table->integer('kvk');
             $table->timestamps();
+            $table->unique(['company_id', 'kvk']);
         });
     }
 

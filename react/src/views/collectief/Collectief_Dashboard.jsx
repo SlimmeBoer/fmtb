@@ -31,14 +31,14 @@ export default function Collectief_Dashboard() {
                 >
                     {/* Row of CompletionGauges */}
                     <CollectiefGauges />
-                    <br />
-                    <KLWOverviewCollectief />
+                    <Box sx={{height: '20px;'}}/>
+                    <KLWOverviewCollectief link={"/collectief/scores/individueel/"} matrixlink={"/collectief/matrix/"} />
 
                 </Grid>
 
                 {/* Right Column */}
                 <Grid size={4} sx={{ display: "flex", flexDirection: "column" }}>
-                    <ActionOverviewCollectief />
+                    <ActionOverviewCollectief link={"/collectief/scores/individueel/"}/>
                 </Grid>
             </Grid>
         </Box>

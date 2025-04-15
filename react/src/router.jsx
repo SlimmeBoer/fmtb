@@ -100,6 +100,10 @@ const router = createBrowserRouter([
                         element: <Admin_Matrix/>
                     },
                     {
+                        path: '/admin/matrix/:id',
+                        element: <Admin_Matrix/>
+                    },
+                    {
                         path: '/admin/klw/importeren',
                         element: <Admin_KLWImporteren/>
                     },
@@ -243,6 +247,10 @@ const router = createBrowserRouter([
                         element: <Beheerder_Matrix/>,
                     },
                     {
+                        path: '/beheerder/matrix/:id',
+                        element: <Beheerder_Matrix/>
+                    },
+                    {
                         path: '/beheerder/klw/importeren',
                         element: <Beheerder_KLWImporteren/>,
                     },
@@ -302,6 +310,10 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/collectief/matrix',
+                        element: <Collectief_Matrix/>,
+                    },
+                    {
+                        path: '/collectief/matrix/:id',
                         element: <Collectief_Matrix/>,
                     },
                     {

@@ -239,6 +239,8 @@
         "error_delete_dump": "Fout bij verwijderen dump: ",
         "error_delete_company": "Fout bij verwijderen bedrijf: ",
         "company_name": "Bedrijfsnaam",
+        "complete": "Compleet?",
+        "complete_explanation": "De eigenaar van dit bedrijf heeft aangegeven dat de data voor dit bedrijf compleet is.",
         "delete_confirm_dump": "Weet je zeker dat je deze dump wilt verwijderen?",
         "delete_confirm_company": "Weet je zeker dat je dit bedrijf wilt verwijderen? Alle dumps, KPI-data en links met collectieven worden dan ook verwijderd voor dit bedrijf."
     },
@@ -402,7 +404,7 @@
     },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.5.2",
+        "version": "Versie 0.6.0",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },

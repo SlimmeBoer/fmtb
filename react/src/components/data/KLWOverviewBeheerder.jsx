@@ -23,8 +23,10 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DataComplete from "../visuals/DataComplete.jsx";
+import Link from "@mui/material/Link";
 
-const KLWOverviewBeheerder = () => {
+const KLWOverviewBeheerder = (props) => {
     const [companies, setCompanies] = useState([]);
     const [klwDumps, setKlwDumps] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -54,7 +56,7 @@ const KLWOverviewBeheerder = () => {
                         <Stack direction="row" gap={2}>
                             <ErrorIcon/>
                             <Typography variant="body">
-                                {dump.signals_count}
+                                <Link href={props.matrixlink + dump.id}>{dump.signals_count}</Link>
                             </Typography>
                         </Stack>
                     </TableCell>
@@ -67,6 +69,7 @@ const KLWOverviewBeheerder = () => {
                         <Stack direction="row" gap={2}>
                             <CheckCircleIcon/>
                             <Typography variant="body">
+                                0
                             </Typography>
                         </Stack>
                     </TableCell>
@@ -96,7 +99,8 @@ const KLWOverviewBeheerder = () => {
                 <Table size="small" >
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{ width: '50%' }}>{t("klw_overview.company_name")}</TableCell>
+                            <TableCell style={{ width: '40%' }}>{t("klw_overview.company_name")}</TableCell>
+                            <TableCell style={{ width: '10%' }}>{t("klw_overview.complete")}</TableCell>
                             <TableCell>2022</TableCell>
                             <TableCell>2023</TableCell>
                             <TableCell>2024</TableCell>
@@ -105,7 +109,8 @@ const KLWOverviewBeheerder = () => {
                     <TableBody>
                         {companies.map((company) => (
                             <TableRow key={company.id}>
-                                <TableCell>{company.name}</TableCell>
+                                <TableCell><Link href={props.link + company.id}>{company.name}</Link></TableCell>
+                                <TableCell><DataComplete complete={company.data_compleet} /></TableCell>
                                 {renderTableCell(company.id, '2022')}
                                 {renderTableCell(company.id, '2023')}
                                 {renderTableCell(company.id, '2024')}

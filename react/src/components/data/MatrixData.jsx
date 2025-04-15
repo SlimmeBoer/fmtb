@@ -1,76 +1,52 @@
-import React from "react";
-import {
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import React, {useEffect, useState} from "react";
+import DumpGroupAccordion from "./DumpGroupAccordion.jsx";
 
-const MatrixData = ({ companies }) => {
+const MatrixData = ({companies, openId}) => {
+
+    const [openDumps, setOpenDumps] = useState({}); // { [groupId]: [dumpId1, dumpId2] }
+
+    useEffect(() => {
+        if (!openId) return;
+
+        const targetId = Number(openId);
+
+        const company = companies.find(c =>
+            c.klw_dumps.some(d => d.id === targetId)
+        );
+
+        if (company) {
+            setOpenDumps(prev => ({
+                ...prev,
+                [company.id]: [...(prev[company.id] || []), targetId],
+            }));
+        }
+    }, [openId, companies]);
+
+    const toggleDump = (groupId, dumpId, isOpen) => {
+        setOpenDumps(prev => {
+            const current = prev[groupId] || [];
+
+            return {
+                ...prev,
+                [groupId]: isOpen
+                    ? [...current, dumpId]
+                    : current.filter(id => id !== dumpId),
+            };
+        });
+    };
+
+
     return (
-        <div>
-            {companies.map((company) => (
-                <Accordion key={company.id}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <strong>{company.name}</strong>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        {company.klw_dumps.map((dump) => (
-                            <Accordion key={dump.id}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <strong>Dump: {dump.filename}</strong>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <TableContainer component={Paper}>
-                                        <Table>
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>ID</TableCell>
-                                                    <TableCell>Itemnr.</TableCell>
-                                                    <TableCell>Signaalnr.</TableCell>
-                                                    <TableCell>Signaalcode</TableCell>
-                                                    <TableCell>Categorie</TableCell>
-                                                    <TableCell>Onderwerp</TableCell>
-                                                    <TableCell>Soort</TableCell>
-                                                    <TableCell>Kengetal</TableCell>
-                                                    <TableCell>Waarde</TableCell>
-                                                    <TableCell>Kenmerk</TableCell>
-                                                    <TableCell>Actie</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {dump.signals.map((signal) => (
-                                                    <TableRow key={signal.id}>
-                                                        <TableCell>{signal.id}</TableCell>
-                                                        <TableCell>{signal.item_nummer}</TableCell>
-                                                        <TableCell>{signal.signaal_nummer}</TableCell>
-                                                        <TableCell>{signal.signaal_code}</TableCell>
-                                                        <TableCell>{signal.categorie}</TableCell>
-                                                        <TableCell>{signal.onderwerp}</TableCell>
-                                                        <TableCell>{signal.soort}</TableCell>
-                                                        <TableCell>{signal.kengetal}</TableCell>
-                                                        <TableCell>{signal.waarde}</TableCell>
-                                                        <TableCell>{signal.kenmerk}</TableCell>
-                                                        <TableCell>{signal.actie}</TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                </AccordionDetails>
-                            </Accordion>
-                        ))}
-                    </AccordionDetails>
-                </Accordion>
-            ))}
-        </div>
+        <React.Fragment>
+                {companies.map((company) => (
+                    <DumpGroupAccordion
+                        key={company.id}
+                        company={company}
+                        openDumps={openDumps[company.id] || []}
+                        toggleDump={toggleDump}
+                    />
+                ))}
+        </React.Fragment>
     );
 };
 

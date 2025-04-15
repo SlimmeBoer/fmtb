@@ -31,13 +31,13 @@ export default function Admin_Dashboard() {
                 >
                     {/* Row of CompletionGauges */}
                     <BeheerderGauges />
-                    <br />
-                    <KLWOverviewBeheerder />
+                    <Box sx={{height: '20px;'}}/>
+                    <KLWOverviewBeheerder link={"/admin/overzicht/individueel/"} matrixlink={"/admin/matrix/"} />
                 </Grid>
 
                 {/* Right Column */}
                 <Grid size={4} sx={{ display: "flex", flexDirection: "column" }}>
-                    <ActionOverview />
+                    <ActionOverview link={"/admin/overzicht/individueel/"} />
                 </Grid>
             </Grid>
         </Box>

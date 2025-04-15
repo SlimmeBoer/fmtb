@@ -220,10 +220,18 @@ class KlwDumpController extends Controller
                 }
 
                 // 3. Save KVK-number as separate record
-                $kvkNr = KvkNumber::firstOrCreate(array(
-                    'kvk' => $klwParser->getKVK($file),
-                    'company_id' => $company->id,
-                ));
+                try {
+                    $kvkNr = KvkNumber::firstOrCreate(array(
+                        'kvk' => $klwParser->getKVK($file),
+                        'company_id' => $company->id,
+                    ));
+                } catch (\Illuminate\Database\QueryException $e) {
+                    // If a duplicate entry error occurs, retrieve the existing record
+                    $kvkNr = KvkNumber::where(array(
+                        'kvk' => $klwParser->getKVK($file),
+                        'company_id' => $company->id,
+                    ))->first();
+                }
 
                 // 4. Store the dump metadata
                 $klwDump = KlwDump::firstOrCreate(array(

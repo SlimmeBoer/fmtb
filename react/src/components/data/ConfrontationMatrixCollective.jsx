@@ -8,7 +8,7 @@ import MatrixData from "./MatrixData.jsx";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
 
-export default function ConfrontationMatrixCollective() {
+export default function ConfrontationMatrixCollective(props) {
 
     const {t} = useTranslation();
     const [companies, setCompanies] = useState([]);
@@ -31,7 +31,7 @@ export default function ConfrontationMatrixCollective() {
         <Card variant="outlined">
             {loading && <CenteredLoading/>}
             {!loading && companies.length !== 0 &&
-                <MatrixData companies={companies} />
+                <MatrixData companies={companies} openId={props.opendump}/>
             }
         </Card>
     )

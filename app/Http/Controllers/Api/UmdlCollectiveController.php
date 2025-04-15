@@ -128,7 +128,7 @@ class UmdlCollectiveController extends Controller
                 // 4. NatuurKPI's niet compleet.
                 $kpivalues = UmdlKpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
 
-                if ($kpivalues->kpi10 != 0 && $kpivalues->kpi11 != 0 && $kpivalues->kpi12 != 0) {
+                if ($kpivalues->kpi10 != 0 || $kpivalues->kpi11 != 0 || $kpivalues->kpi12 != 0) {
                     $collective_data["total_kpi_completed"] += 1;
                 }
 

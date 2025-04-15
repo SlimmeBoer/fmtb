@@ -4,8 +4,18 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import {useTranslation} from "react-i18next";
 import ConfrontationMatrixCollective from "../../components/data/ConfrontationMatrixCollective.jsx";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 export default function Collectief_Matrix() {
+    const {id: paramId} = useParams();
+    const [id, setId] = useState(paramId || '');
+
+    useEffect(() => {
+        if (paramId !== id) {
+            setId(paramId); // Sync state if URL param changes
+        }
+    }, [paramId]);
 
     const {t} = useTranslation();
 
@@ -15,7 +25,7 @@ export default function Collectief_Matrix() {
             <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
                 {t("pages_collectief.matrix")}
             </Typography>
-            <ConfrontationMatrixCollective />
+            <ConfrontationMatrixCollective opendump={id}/>
         </Box>
     )
 

@@ -31,13 +31,14 @@ export default function Beheerder_Dashboard() {
                 >
                     {/* Row of CompletionGauges */}
                     <BeheerderGauges />
-                    <br />
-                    <KLWOverviewBeheerder />
+                    <Box sx={{height: '20px;'}}/>
+
+                    <KLWOverviewBeheerder link={"/beheerder/scores/individueel/"} matrixlink={"/beheerder/matrix/"} />
                 </Grid>
 
                 {/* Right Column */}
                 <Grid size={4} sx={{ display: "flex", flexDirection: "column" }}>
-                    <ActionOverview />
+                    <ActionOverview link={"/beheerder/scores/individueel/"} />
                 </Grid>
             </Grid>
         </Box>
