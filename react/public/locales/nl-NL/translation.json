@@ -189,12 +189,14 @@
         "wandelpad": "Wandelpad",
         "erkend_demobedrijf": "Erkend demobedrijf",
         "bed_and_breakfast": "Bed & Breakfast",
+        "zorg": "Zorg",
         "updated": "Warde succesvol bijgewerkt:",
         "error": "Fout met bijwerken waarde:"
     },
     "company_property_table": {
         "title": "Managementinformatie",
-        "opp_totaal": "Totale opegegeven subsidiabele oppervlakte (gecombineerde opgave)",
+        "opp_totaal": "Totale oppervlakte",
+        "opp_totaal_subsidiabel": "Totale subsidiabele oppervlakte (gecombineerde opgave)",
         "melkkoeien": "Melkkoeien",
         "meetmelk_per_koe": "Meetmelk per koe",
         "meetmelk_per_ha": "Meetmelk per hectare",
@@ -407,7 +409,7 @@
     },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.6.1",
+        "version": "Versie 0.6.2",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },

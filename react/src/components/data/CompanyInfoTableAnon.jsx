@@ -171,6 +171,11 @@ export default function CompanyInfoTableAnon(props) {
                                    ...
                                 </TableCell>
                             </TableRow>
+                            <TableRow key={"companyinfo-" + 104}>
+                                <TableCell sx={{width: 50}}>Biologisch bedrijf?:</TableCell>
+                                <TableCell
+                                    sx={{width: 150, fontWeight: 'bold'}}>{company.bio === 1 ? 'Ja' : 'Nee'}</TableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>}
             </TableContainer>

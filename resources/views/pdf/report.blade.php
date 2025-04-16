@@ -69,7 +69,7 @@
 
         .header-row {
             width: 297mm;
-            height: 50mm;
+            height: 58mm;
         }
 
         .header-row .logo {
@@ -81,19 +81,19 @@
 
         .header-row .info {
             width: 247mm;
-            height: 50mm;
+            height: 58mm;
             float: left;
             vertical-align: top;
         }
 
         .data-row {
             width: 297mm;
-            height: 147.5mm;
+            height: 139.5mm;
         }
 
         .data-row .main-content {
             width: 200mm;
-            height: 147.5mm;
+            height: 139.5mm;
             background-color: #ffffff;
             float: left;
             vertical-align: top;
@@ -101,7 +101,7 @@
 
         .data-row .sidebar {
             width: 97mm;
-            height: 147.5mm;
+            height: 139.5mm;
             float: left;
             vertical-align: top;
         }
@@ -157,6 +157,10 @@
                <tr>
                    <td class="boldcell">Rekeninghouder:</td>
                    <td class="datacell">{{$company_data['bank_account_name']}}</td>
+               </tr>
+               <tr>
+                   <td class="boldcell">Biologisch bedrijf?:</td>
+                   <td class="datacell">{{ isset($company_data['bio']) && $company_data['bio'] == 1 ? 'Ja' : 'Nee' }}</td>
                </tr>
            </table>
         </td>
@@ -377,13 +381,14 @@
                 </tr>
                 <tr>
                     <td colspan="7" style="border: 0; text-align: right">In euro's:</td>
-                    <td>{{$scores['total']['money']}}</td>
-                    <td class="lightgreen">{{$scores['total_tot']['money']}}</td>
+                    <td style="border: 1px solid #000;">{{$scores['total']['money']}}</td>
+                    <td style="border: 1px solid #000;" class="lightgreen">{{$scores['total_tot']['money']}}</td>
                 </tr>
                 <tr>
                     <td style="border: 0;">&nbsp;</td>
-                    <td colspan="8" style="border: 0; text-align: left" class="disclaimer">Uitdraai op basis van de gegevens aangeleverd door de Utrechtse agrarische collectieven, op {{$date}}
+                    <td colspan="5" style="border: 0; text-align: left" class="disclaimer">Uitdraai op basis van de gegevens aangeleverd door u als melkveehouder, de Utrechtse agrarische collectieven en de gegevens uit de KringloopWijzer, op {{$date}}
                     </td>
+                    <td colspan="3" style="border: 0;">&nbsp;</td>
                 </tr>
             </table>
         </td>
@@ -396,6 +401,10 @@
                 <tr>
                     <td style="text-align: left">Hectares totaal:</td>
                     <td>{{number_format($company_properties['opp_totaal'],1)}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left">Hectares totaal (subsidiabel):</td>
+                    <td>{{number_format($company_properties['opp_totaal_subsidiabel'],1)}}</td>
                 </tr>
                 <tr>
                     <td style="text-align: left">Melkkoeien:</td>

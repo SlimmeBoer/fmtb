@@ -35,7 +35,8 @@ class UMDLKPIScores
             $companyproperties->open_dagen +
             $companyproperties->wandelpad +
             $companyproperties->erkend_demobedrijf +
-            $companyproperties->bed_and_breakfast;
+            $companyproperties->bed_and_breakfast +
+            $companyproperties->zorg;
         $sma_string = $this->getSMAstring($companyproperties);
 
 
@@ -452,6 +453,9 @@ class UMDLKPIScores
         }
         if ($properties->bed_and_breakfast == 1) {
             $smastring .= "Bed & Breakfast, ";
+        }
+        if ($properties->zorg == 1) {
+            $smastring .= "Zorg, ";
         }
 
         if ($smastring == "") {

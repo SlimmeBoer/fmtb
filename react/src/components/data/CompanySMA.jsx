@@ -30,6 +30,7 @@ export default function CompanySMA(props) {
         { label: t("sma.wandelpad"), key: "wandelpad", value: !!data.wandelpad },
         { label: t("sma.erkend_demobedrijf"), key: "erkend_demobedrijf", value: !!data.erkend_demobedrijf },
         { label: t("sma.bed_and_breakfast"), key: "bed_and_breakfast", value: !!data.bed_and_breakfast },
+        { label: t("sma.zorg"), key: "zorg", value: !!data.zorg },
     ];
 
 

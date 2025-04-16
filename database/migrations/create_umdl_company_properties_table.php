@@ -24,7 +24,9 @@ return new class extends Migration
             $table->boolean('wandelpad')->nullable();
             $table->boolean('erkend_demobedrijf')->nullable();
             $table->boolean('bed_and_breakfast')->nullable();
+            $table->boolean('zorg')->nullable();
             $table->float('opp_totaal')->nullable();
+            $table->float('opp_totaal_subsidiabel')->nullable();
             $table->float('melkkoeien')->nullable();
             $table->float('meetmelk_per_koe')->nullable();
             $table->float('meetmelk_per_ha')->nullable();

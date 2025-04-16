@@ -142,9 +142,9 @@ class GisRunner
 
         // KPIs are now set with all weighted data. Now, divide by the total surface of the company.
         $company_properties = UmdlCompanyProperties::where('company_id',$company->id)->first();
-        $kpi10 = $kpi10 / $company_properties->opp_totaal;
-        $kpi11 = $kpi11 / $company_properties->opp_totaal;
-        $kpi12 = $kpi12 / $company_properties->opp_totaal;
+        $kpi10 = $kpi10 / $company_properties->opp_totaal_subsidiabel;
+        $kpi11 = $kpi11 / $company_properties->opp_totaal_subsidiabel;
+        $kpi12 = $kpi12 / $company_properties->opp_totaal_subsidiabel;
 
         // Final action, store the percentage in all UMDLKpiValues
         $umdlkpivalues = UmdlKpiValues::where('company_id',$company->id)->get();

@@ -51,7 +51,7 @@ export default function CompanyInfoTable(props) {
     };
 
     const initialErrorState = Object.keys(initialFormState).reduce((acc, key) => {
-        acc[key] = { errorstatus: false, helperText: '' };
+        acc[key] = {errorstatus: false, helperText: ''};
         return acc;
     }, {});
 
@@ -151,25 +151,25 @@ export default function CompanyInfoTable(props) {
                 </Stack>
             </Stack>
             <TableContainer sx={{minHeight: 100}}>
-                {(loading || submitting) && <CenteredLoading />}
+                {(loading || submitting) && <CenteredLoading/>}
                 {!loading && !submitting && company.id != null &&
                     <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                         <TableBody>
                             {Object.keys(initialFormState).map((key, index) => (
-                            fieldLabels[key] && (
-                            <TableRow key={"companyinfo-" + index}>
-                                <TableCell sx={{ width: 50 }}>{fieldLabels[key]}:</TableCell>
-                                <TableCell sx={{ width: 150, fontWeight: 'bold' }}>
-                                    <EditableField
-                                        key={key}
-                                        onChange={(value) => handleFieldChange(key, value)}
-                                        value={tempformData[key]}
-                                        error={formErrors[key]}
-                                        isEditing={isEditing}
-                                    />
-                                </TableCell>
-                            </TableRow>
-                            )
+                                fieldLabels[key] && (
+                                    <TableRow key={"companyinfo-" + index}>
+                                        <TableCell sx={{width: 50}}>{fieldLabels[key]}:</TableCell>
+                                        <TableCell sx={{width: 150, fontWeight: 'bold'}}>
+                                            <EditableField
+                                                key={key}
+                                                onChange={(value) => handleFieldChange(key, value)}
+                                                value={tempformData[key]}
+                                                error={formErrors[key]}
+                                                isEditing={isEditing}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                )
                             ))
                             }
                             <TableRow key={"companyinfo-" + 101}>
@@ -185,11 +185,18 @@ export default function CompanyInfoTable(props) {
                                 <TableCell sx={{width: 150, fontWeight: 'bold'}}>
                                     {company.collectieven.map((c, index) => {
                                         return (
-                                            <Link key={"link-"+ index} href={"/overzicht/collectief/" + c.id}>{c.name}</Link>
+                                            <Link key={"link-" + index}
+                                                  href={"/overzicht/collectief/" + c.id}>{c.name}</Link>
                                         )
                                     })}
                                 </TableCell>
                             </TableRow>
+                            <TableRow key={"companyinfo-" + 104}>
+                                <TableCell sx={{width: 50}}>Biologisch bedrijf?:</TableCell>
+                                <TableCell
+                                    sx={{width: 150, fontWeight: 'bold'}}>{company.bio === 1 ? 'Ja' : 'Nee'}</TableCell>
+                            </TableRow>
+
                         </TableBody>
                     </Table>}
             </TableContainer>

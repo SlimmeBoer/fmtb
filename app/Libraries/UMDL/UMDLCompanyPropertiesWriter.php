@@ -54,8 +54,10 @@ class UMDLCompanyPropertiesWriter
         $umdlcompanyproperties->wandelpad = false;
         $umdlcompanyproperties->erkend_demobedrijf = false;
         $umdlcompanyproperties->bed_and_breakfast = false;
+        $umdlcompanyproperties->zorg = false;
 
         $umdlcompanyproperties->opp_totaal= $opp_totaal;
+        $umdlcompanyproperties->opp_totaal_subsidiabel = $opp_totaal;
         $umdlcompanyproperties->melkkoeien = $this->vars["nkoe"];
         $umdlcompanyproperties->meetmelk_per_koe = $this->vars["fpcmpkoe"];
         $umdlcompanyproperties->meetmelk_per_ha = $this->vars["bkg_prod_fpcm"] / $opp_totaal;
