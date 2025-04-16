@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
+import RolePicker from "./RolePicker.jsx";
 
 export default function UserForm(props) {
     const [loading, setLoading] = useState(false);
@@ -21,7 +22,8 @@ export default function UserForm(props) {
         last_name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        role_id: '',
     })
     const [formErrors, setFormErrors] = useState({
         first_name: {errorstatus: false, helperText: ''},
@@ -30,9 +32,14 @@ export default function UserForm(props) {
         email: {errorstatus: false, helperText: ''},
         password: {errorstatus: false, helperText: ''},
         password_confirmation: {errorstatus: false, helperText: ''},
+        role_id: {errorstatus: false, helperText: ''},
     });
 
     const {t} = useTranslation();
+
+    const handleChange = (e) => {
+        setUser({...user, role_id: e.target.value}); // Change `id` state based on user input or actions
+    };
 
     if (props.id !== 0) {
         useEffect(() => {
@@ -66,7 +73,11 @@ export default function UserForm(props) {
                     const response = error.response;
                     if (response && response.status === 422) {
                         if (response.data.errors) {
-                            setErrorData(response.data.errors, formErrors, setFormErrors)
+                            setFormErrors(prevErrors => {
+                                const newErrors = {...prevErrors};
+                                setErrorData(response.data.errors, newErrors, setFormErrors);
+                                return newErrors;
+                            });
                         }
                     }
                 })
@@ -99,53 +110,54 @@ export default function UserForm(props) {
             {!loading &&
                 <DialogContent>
                     <form onSubmit={onSubmit}>
-                        <Grid container spacing={2}>
-                            <Grid size={12}>
                                 <TextField value={user.first_name}
                                            onChange={ev => setUser({...user, first_name: ev.target.value})}
                                            label={t('user_form.first_name')} variant="outlined" margin="dense"
-                                           style={{width: 250}}
+                                           style={{width: 200}}
                                            error={formErrors.first_name.errorstatus}
                                            helperText={formErrors.first_name.helperText}/>
                                 &nbsp;&nbsp;&nbsp;
-                                <TextField value={user.middle_name}
+                                <TextField value={user.middle_name || ''}
                                            onChange={ev => setUser({...user, middle_name: ev.target.value})}
                                            label={t('user_form.middle_name')} variant="outlined" margin="dense"
-                                           style={{width: 150}}
+                                           style={{width: 100}}
                                            error={formErrors.middle_name.errorstatus}
                                            helperText={formErrors.middle_name.helperText}/>
                                 &nbsp;&nbsp;&nbsp;
                                 <TextField value={user.last_name}
                                            onChange={ev => setUser({...user, last_name: ev.target.value})}
                                            label={t('user_form.last_name')} variant="outlined" margin="dense"
-                                           style={{width: 250}}
+                                           style={{width: 200}}
                                            error={formErrors.last_name.errorstatus}
                                            helperText={formErrors.last_name.helperText}/>
                                 <TextField value={user.email}
                                            onChange={ev => setUser({...user, email: ev.target.value})}
                                            label={t('user_form.email')} variant="outlined" margin="dense"
-                                           style={{width: 668}}
+                                           style={{width: 518}}
                                            error={formErrors.email.errorstatus}
                                            helperText={formErrors.email.helperText}/>
                                 <TextField onChange={ev => setUser({...user, password: ev.target.value})}
                                            type="password"
                                            autoComplete="on"
                                            label={t('user_form.password')} variant="outlined" margin="dense"
-                                           style={{width: 668}}
+                                           style={{width: 518}}
                                            error={formErrors.password.errorstatus}
                                            helperText={formErrors.password.helperText}/>
                                 <TextField onChange={ev => setUser({...user, password_confirmation: ev.target.value})}
                                            type="password"
                                            autoComplete="on"
                                            label={t('user_form.password_confirmation')} variant="outlined"
-                                           margin="dense" style={{width: 668}}
+                                           margin="dense" style={{width: 518}}
                                            error={formErrors.password_confirmation.errorstatus}
                                            helperText={formErrors.password_confirmation.helperText}/>
+
+                                <RolePicker role={user.role_id} changeHandler={handleChange}/>
                                 <br/>&nbsp;<br/>
                                 {user.id && (
                                     <Button onClick={() => setUser({...user, _method: 'put'})}
                                             type="submit" color="secondary" variant="outlined" size="large"
                                             style={{width: 250}} margin="dense"
+                                            sx={{ml: 4}}
                                             startIcon={<PersonIcon/>}>
                                         {t('general.save')}
                                     </Button>)}
@@ -165,9 +177,6 @@ export default function UserForm(props) {
                                     startIcon={<CloseIcon/>}>
                                     {t('general.cancel')}
                                 </Button>
-
-                            </Grid>
-                        </Grid>
                     </form>
                 </DialogContent>}
         </React.Fragment>

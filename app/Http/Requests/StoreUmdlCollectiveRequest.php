@@ -24,6 +24,7 @@ class StoreUmdlCollectiveRequest extends FormRequest
         return [
             'name' => 'required|string|max:100',
             'description' => 'required|string',
+            'logo' => 'required|string',
         ];
     }
 }

@@ -53,7 +53,7 @@ export default function Login() {
             <Grid
                 size={{xs: 0, sm: 4, md: 7}}
                 sx={{
-                    backgroundImage: 'url(images/backdrop.jpg)',
+                    backgroundImage: 'url(/images/backdrop.jpg)',
                     backgroundRepeat: 'no-repeat',
                     backgroundColor: (t) =>
                         t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

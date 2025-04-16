@@ -45,9 +45,9 @@ export default function ActionOverviewCollectief(props) {
                     </Typography>
                 </Stack>
                 {companies.map((c, index) => (
-                    <React.Fragment>
+                    <React.Fragment key={index} >
                         {c.actions.length > 0 &&
-                            <Box key={index} sx={{
+                            <Box  sx={{
                                 mb: 2,
                                 width: "100%",
                                 padding: 1,
@@ -64,8 +64,8 @@ export default function ActionOverviewCollectief(props) {
                                         </Typography>
                                     </Stack>
                                     <List sx={{ml: 2, listStyleType: 'disc', padding: 0}}>
-                                        {c.actions.map((a, index) => (
-                                            <ListItem key={index} sx={{display: 'list-item', padding: 0, margin: 0}}>
+                                        {c.actions.map((a, actionindex) => (
+                                            <ListItem key={index + "-" + actionindex} sx={{display: 'list-item', padding: 0, margin: 0}}>
                                                 {a}
                                             </ListItem>
                                         ))}
@@ -74,7 +74,7 @@ export default function ActionOverviewCollectief(props) {
                                 </Stack>
                             </Box>}
                         {c.actions.length === 0 &&
-                            <Box key={index} sx={{
+                            <Box sx={{
                                 mb: 2,
                                 width: "100%",
                                 padding: 1,
@@ -90,14 +90,6 @@ export default function ActionOverviewCollectief(props) {
                                             <strong><Link href={props.link + c.id}>{c.name}</Link></strong>
                                         </Typography>
                                     </Stack>
-                                    <List sx={{ml: 2, listStyleType: 'disc', padding: 0}}>
-                                        {c.actions.map((a, index) => (
-                                            <ListItem key={index} sx={{display: 'list-item', padding: 0, margin: 0}}>
-                                                {a}
-                                            </ListItem>
-                                        ))}
-                                    </List>
-
                                 </Stack>
                             </Box>}
 

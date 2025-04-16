@@ -75,6 +75,15 @@ class UmdlCollectiveController extends Controller
     }
 
     /**
+     * Gets the collective of the currently logged in user.
+     * @return mixed
+     */
+    public function getCurrent() {
+        $user = User::where('id', Auth::id())->first();
+        return $user->collectives()->first();
+    }
+
+    /**
      * Returns an array for the completion gauges of a collective
      * @return array[]|\Illuminate\Http\JsonResponse
      */
@@ -128,7 +137,7 @@ class UmdlCollectiveController extends Controller
                 // 4. NatuurKPI's niet compleet.
                 $kpivalues = UmdlKpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
 
-                if ($kpivalues->kpi10 != 0 || $kpivalues->kpi11 != 0 || $kpivalues->kpi12 != 0) {
+                if ($kpivalues && ($kpivalues->kpi10 != 0 || $kpivalues->kpi11 != 0 || $kpivalues->kpi12 != 0)) {
                     $collective_data["total_kpi_completed"] += 1;
                 }
 

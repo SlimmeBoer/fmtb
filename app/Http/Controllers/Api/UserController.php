@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -23,7 +24,7 @@ class UserController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return UserResource::collection(
-            User::query()->orderBy('id')->get()
+            User::with('roles')->orderBy('id')->get()
         );
     }
 
@@ -39,6 +40,10 @@ class UserController extends Controller
         $data['password'] = bcrypt($data['password']);
 
         $user = User::create($data);
+
+        // Assign roles
+        $role = Role::find($data['role_id']);
+        $user->syncRoles([$role]);
 
         SystemLog::create(array(
             'user_id' => Auth::user()->id,
@@ -77,6 +82,10 @@ class UserController extends Controller
 
         $user->update($data);
 
+        // Assign roles
+        $role = Role::find($data['role_id']);
+        $user->syncRoles([$role]);
+
         // Log
         SystemLog::create(array(
             'user_id' => Auth::user()->id,
@@ -106,5 +115,15 @@ class UserController extends Controller
         $user->delete();
         return response("",204);
 
+    }
+
+    public function getCurrentRole()
+    {
+        return response()->json(Auth::user()->getRoleNames()->first());
+    }
+
+    public function roles()
+    {
+        return Role::orderBy('name')->get(['id', 'name']);
     }
 }

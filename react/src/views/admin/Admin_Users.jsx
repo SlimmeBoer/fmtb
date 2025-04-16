@@ -71,7 +71,7 @@ export default function Admin_Users() {
     }
 
     return (
-        <Box sx={{ width: '80%', maxWidth: { sm: '100%', md: '1700px' } }}>
+        <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
             <Stack direction="row" gap={2}
                    sx={{
                        display: { xs: 'none', md: 'flex' },
@@ -93,18 +93,20 @@ export default function Admin_Users() {
                     </Button>
                 </Stack>
             </Stack>
+                {loading && <CenteredLoading />}
+                {!loading &&
                 <TableContainer >
-                    <Table sx={{minWidth: 650, width: '80%'}} aria-label="simple table" size="small" >
+                    <Table aria-label="simple table" size="small" >
                         <TableHead>
                             <TableRow>
                                 <TableCell>{t('users.header_id')}</TableCell>
                                 <TableCell>{t('users.header_full_name')}</TableCell>
                                 <TableCell>{t('users.header_email')}</TableCell>
+                                <TableCell>{t('users.header_role')}</TableCell>
                                 <TableCell>{t('users.header_actions')}</TableCell>
                             </TableRow>
                         </TableHead>
-                        {loading && <CenteredLoading />}
-                        {!loading && <TableBody>
+                        <TableBody>
                             {users.map(u => (
                                 <TableRow
                                     key={u.id}
@@ -113,8 +115,9 @@ export default function Admin_Users() {
                                     <TableCell width="10%" component="th" scope="row">
                                         {u.id}
                                     </TableCell>
-                                    <TableCell width="40%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
+                                    <TableCell width="30%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
                                     <TableCell width="20%">{u.email}</TableCell>
+                                    <TableCell width="20%">{u.role}</TableCell>
                                     <TableCell width="20%">
                                         <IconButton onClick={() => handleClickOpen(u.id)} color="secondary" variant="outlined">
                                             <EditIcon/>
@@ -127,13 +130,13 @@ export default function Admin_Users() {
                                         </TableCell>
                                 </TableRow>
                             ))}
-                        </TableBody>}
+                        </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer>}
                 <Dialog open={open}
                         PaperProps={{ style: {
-                                minHeight: '500px',
-                                minWidth: '720px',
+                                minHeight: '420px',
+                                minWidth: '580px',
                             }}}>
                     <UserForm id={user_id} onClose={closeHandler}/>
                 </Dialog>

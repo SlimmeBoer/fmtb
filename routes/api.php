@@ -81,6 +81,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/pdf/currentcompany', [PdfController::class, 'generatePdfCurrentCompany']);
 
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
+    Route::get('/collectives/getcurrent', [UmdlCollectiveController::class, 'getCurrent']);
     Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);
 
     Route::put('/gisdump/uploadexcel', [GisDumpController::class, 'uploadexcel']);
@@ -107,6 +108,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/umdlkpi/getallscoresanon/', array(UmdlKpiValuesController::class, 'getallscoresanon'));
     Route::get('/umdlkpi/totalsperkpi/', array(UmdlKpiValuesController::class, 'totalsperkpi'));
     Route::get('/umdlkpi/totalsperkpicollective/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpicollective'));
+
+    Route::get('/user/getcurrentrole', [UserController::class, 'getCurrentRole']);
+    Route::get('/user/roles', [UserController::class, 'roles']);
 
     Route::apiResource('/bbmcodes', BbmCodeController::class);
     Route::apiResource('/bbmkpi', BbmKpiController::class);

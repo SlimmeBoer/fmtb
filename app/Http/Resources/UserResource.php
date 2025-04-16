@@ -31,6 +31,8 @@ class UserResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'ubn' => $this->ubn,
+            'role' => $this->roles->first()?->name, // Null-safe access
+            'role_id' => $this->roles->first()?->id, // Null-safe access
         ];
     }
 }

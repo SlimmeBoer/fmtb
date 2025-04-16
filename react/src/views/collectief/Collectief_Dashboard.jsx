@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import KLWOverviewCollectief from "../../components/data/KLWOverviewCollectief.jsx";
 import CollectiefGauges from "../../components/data/CollectiefGauges.jsx";
 import ActionOverviewCollectief from "../../components/visuals/ActionOverviewCollectief.jsx";
+import CollectiefLogo from "../../components/visuals/CollectefLogo.jsx";
 
 export default function Collectief_Dashboard() {
 
@@ -38,6 +39,8 @@ export default function Collectief_Dashboard() {
 
                 {/* Right Column */}
                 <Grid size={4} sx={{ display: "flex", flexDirection: "column" }}>
+                    <CollectiefLogo />
+                    <Box sx={{height: '20px;'}}/>
                     <ActionOverviewCollectief link={"/collectief/scores/individueel/"}/>
                 </Grid>
             </Grid>

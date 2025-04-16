@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useMemo, useState} from "react";
 import {Box, Button, Typography, CircularProgress, Alert, FormGroup} from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
 import axiosClient from "../../axios_client.js";
@@ -70,22 +70,32 @@ const KLWUploaderBedrijf = (props) => {
         });
     };
 
+    const uploading = useMemo(() => {
+        return Object.values(feedback).some((f) => f.status === "Uploading");
+    }, [feedback]);
+
+
     return (
         <Box sx={{ width: "80%", mt: 4}}>
             <Button
-                variant="contained"
+                variant={uploading ? "outlined" : "contained"}
                 component="label"
-                startIcon={<CloudUpload />}
+                disabled={uploading}
+                startIcon={
+                    uploading ? <CircularProgress size={20} sx={{ color: "white" }} /> : <CloudUpload />
+                }
                 sx={{ marginBottom: 2 }}
             >
-                {t("general.select_klw_files")}
-                <input
-                    type="file"
-                    accept="text/xml"
-                    multiple
-                    hidden
-                    onChange={handleFileChange}
-                />
+                {uploading ? t("general.uploading") : t("general.select_klw_files")}
+                {!uploading && (
+                    <input
+                        type="file"
+                        accept="text/xml"
+                        multiple
+                        hidden
+                        onChange={handleFileChange}
+                    />
+                )}
             </Button>
 
             {files.length > 0 && (

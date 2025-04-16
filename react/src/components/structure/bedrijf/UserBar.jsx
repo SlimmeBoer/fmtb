@@ -9,6 +9,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import {useStateContext} from "../../../contexts/ContextProvider.jsx";
 import axiosClient from "../../../axios_client.js";
 import {Navigate} from "react-router-dom";
+import DownloadManual from "../../visuals/DownloadManual.jsx";
 
 export default function UserBar() {
 
@@ -48,6 +49,7 @@ export default function UserBar() {
                     {user.email}
                 </Typography>
             </Box>
+            <DownloadManual/>
             <MenuButton
                 aria-label="Open menu"
                 onClick={onLogout}

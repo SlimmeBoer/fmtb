@@ -19,6 +19,7 @@ class UmdlCollectiveResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'logo' => $this->logo,
         ];
     }
 }

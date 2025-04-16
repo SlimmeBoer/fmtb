@@ -1,37 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axiosClient from "../../axios_client.js";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import {Button} from "@mui/material";
-import {useTranslation} from "react-i18next";
+import { Button, CircularProgress } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function PdfButtonCompany() {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
+    const [loading, setLoading] = useState(false);
+
     const downloadPdf = async () => {
+        setLoading(true);
         try {
             const response = await axiosClient.get(`/pdf/currentcompany`, {
-                responseType: 'blob', // Important: this tells Axios to handle the response as a binary blob
+                responseType: 'blob',
             });
 
-            // Create a link element to download the file
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'Eindrapport UMDL.pdf'); // Set the file name for the download
+            link.setAttribute('download', 'Eindrapport UMDL.pdf');
             document.body.appendChild(link);
             link.click();
 
-            // Clean up after download
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
         } catch (error) {
             console.error('Error downloading the PDF:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <Button type="submit" variant="contained" startIcon={<PictureAsPdfIcon/>} sx={{mb: 2, mt: 4}} onClick={downloadPdf}>
-            {t("company_dashboard.download_pdf")}
+        <Button
+            type="submit"
+            variant={loading ? "outlined" : "contained"}
+            startIcon={
+                loading ? <CircularProgress size={20} sx={{ color: '#424242' }} /> : <PictureAsPdfIcon />
+            }
+            onClick={downloadPdf}
+            sx={{
+                mb: 2,
+                width: '600px',
+                mt: 4,
+                bgcolor: loading ? '#e0e0e0 !important' : 'primary.main',
+                color: loading ? '#424242' : 'white',
+                pointerEvents: loading ? 'none' : 'auto',
+                opacity: loading ? 1 : 1, // Force full opacity even when simulating disabled
+                '&:hover': {
+                    bgcolor: loading ? '#d5d5d5 !important' : 'primary.dark',
+                },
+            }}
+        >
+            {loading ? "PDF wordt gemaakt..." : t("company_dashboard.download_pdf")}
         </Button>
     );
-};
-
+}

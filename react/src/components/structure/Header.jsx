@@ -2,6 +2,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import ColorModeIconDropdown from '../../theme/ColorModeIconDropdown.jsx';
 import AboutScreen from "../visuals/AboutScreen.jsx";
+import DownloadManual from "../visuals/DownloadManual.jsx";
 
 export default function Header() {
     return (
@@ -20,6 +21,7 @@ export default function Header() {
             <div></div>
             <Stack direction="row" sx={{gap: 1}}>
                 <ColorModeIconDropdown/>
+                <DownloadManual/>
                 <AboutScreen/>
             </Stack>
         </Stack>

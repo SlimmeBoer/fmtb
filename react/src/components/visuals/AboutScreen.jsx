@@ -1,6 +1,5 @@
 import * as React from 'react';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import {Dialog, DialogContent} from "@mui/material";
 import {useState} from "react";
@@ -8,6 +7,7 @@ import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 export default function AboutScreen() {
 
@@ -24,7 +24,7 @@ export default function AboutScreen() {
                 onClick={toggleOpen}
                 size="small"
             >
-                <HelpOutlineIcon/>
+                <InfoOutlinedIcon/>
             </IconButton>
             <Dialog open={open}
                     PaperProps={{
@@ -44,11 +44,11 @@ export default function AboutScreen() {
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 250,
+                                    height: 215,
                                     width: 250,
                                 }}
-                                alt="Agriviewer Logo"
-                                src="/images/logo.png"
+                                alt="TNDB Logo"
+                                src="/images/logo_tndb.png"
                             />
                         </Grid>
                         <Grid size={{xs: 11, lg: 6}} key="about-grid-2">

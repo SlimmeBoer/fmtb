@@ -31,11 +31,13 @@
         "complete_title": "Gegevensindiening is afgerond",
         "complete_explanation": "Voor uw bedrijf zijn alle gegevens ingevuld. U hoeft niets meer te doen. Zodra alle scores bekend zijn, zal uw collectief contact met u opnemen.",
         "scores_overview": "Overzicht Eindscores UMDL",
+        "delete_confirm_dump": "Weet je zeker dat je deze dump wilt verwijderen?",
         "scores_overview_exlanation": "De eindscores voor UMDL 2025 zijn bekend. Hieronder zit u hoeveel punten (en het bijbehorend geldbedrag) uw bedrijf heeft behaald, plus hoe zich dit verhoudt tot de andere bedrijven binnen uw collectief en de totale deelnemersgroep.",
         "download_pdf": "Klik hier om een PDF te downloaden met het volledige scorerapport",
+        "pdf_being_generated": "Het eindrapport wordt gegenereerd...",
         "questions": "Heeft u naar aanleiding van uw eindscores nog vragen? Neem dan contact op met de medewerker van uw collectief.",
         "checkbox_label": "Ik verklaar hierbij naar eer en geweten dat de door mij aangeleverde gegevens correct en volledig zijn verstrekt, en dat deze niet zijn gewijzigd of gemanipuleerd na ontvangst.",
-        "no_dumps": "Er zijn voor uw bedrijf nog geen kringloopwijzer-bestanden geüpload. Upload minimaal de bestanden voor 2022, 2023 en 2024.",
+        "no_dumps": "Er zijn voor uw bedrijf nog geen kringloopwijzer-bestanden geüpload. Upload hier minimaal één en maximaal drie Kringloopwijzer-bestanden.",
         "no_scores": "Voor uw bedrijf is niet de juiste data aangeleverd, waardoor er geen eindrapport opgemaakt kon worden. Neem voor vragen contact op met uw collectief."
     },
     "pages_admin": {
@@ -281,7 +283,8 @@
         "header_image": "Avatar",
         "header_full_name": "Volledige naam",
         "header_email": "E-mailadres",
-        "header_actions": "Acties"
+        "header_actions": "Acties",
+        "header_role": "Rol"
     },
     "login": {
         "title": "Inloggen",
@@ -404,7 +407,7 @@
     },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.6.0",
+        "version": "Versie 0.6.1",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },
