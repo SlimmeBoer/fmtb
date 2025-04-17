@@ -17,6 +17,7 @@ class RawFileResource extends JsonResource
     {
         return [
             'type' => $this->type,
+            'dump_id' => $this->dump_id,
             'filename' => $this->filename,
             'user_id' => $this->user_id,
         ];

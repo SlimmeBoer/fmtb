@@ -62,27 +62,25 @@ class GisDumpController extends Controller
         $dump = GisDump::find($id);
 
         if ($dump) {
-            //Log
-            SystemLog::create(array(
-                'user_id' => Auth::user()->id,
-                'type' => 'DELETE',
-                'message' => 'GIS-dump verwijderd: ' . $dump->filename,
-            ));
-
             // Remove associated file from uploads
             if ($dump->filename !== null && file_exists(public_path('uploads/gis/' . $dump->filename))) {
                 unlink(public_path('uploads/gis/'. $dump->filename));
             }
 
             // Remove file from RAW files db
-            $rawfiles = RawFile::where('filename', $dump->filename)->get();
+            RawFile::where('dump_id', $dump->id)
+                ->where('type', 'gis')
+                ->delete();
 
-            foreach ($rawfiles as $rawfile) {
-                $rawfile->delete();
-            }
-
-            // Deelte the actual dum record from DB
+            //7. Remove the dump itself.
             $dump->delete();
+
+            //Log
+            SystemLog::create(array(
+                'user_id' => Auth::user()->id,
+                'type' => 'DELETE',
+                'message' => 'GIS-dump verwijderd: ' . $dump->filename,
+            ));
 
             return response()->json(['message' => 'Dump successfully deleted']);
         } else {
@@ -119,8 +117,12 @@ class GisDumpController extends Controller
 
                     // File correct, sheet correct and headers correct, start the import.
                     // 1. First, create a new dump
+                    $originalName = $file->getClientOriginalName();
+                    $uniqueId = uniqid();
+                    $newFileName = 'gis_' . $uniqueId . '_' . $originalName;
+
                     $gisDump = GisDump::firstOrNew(array(
-                        'filename' => $file->getClientOriginalName(),
+                        'filename' => $newFileName,
                         'collective_id' => $collective_id,
                         'year' => $request['year'],
                     ));
@@ -130,19 +132,21 @@ class GisDumpController extends Controller
                     $num_records = $gisParser->writeGisRecords($file, $gisDump->id);
 
                     // 3. Save the physical file to the GIS uploads
-                    $file->move(public_path('uploads/gis/'), $file->getClientOriginalName());
+
+                    $file->move(public_path('uploads/gis/'), $newFileName);
 
                     // 4. Record the file as RawFile to the database
                     RawFile::firstOrCreate(array(
                         'user_id' => Auth::user()->id,
                         'type' => 'gis',
-                        'filename' => $file->getClientOriginalName(),
+                        'dump_id' => $gisDump->id,
+                        'filename' => $newFileName,
                     ));
 
                     //5. Log
                     SystemLog::create(array(
                         'user_id' => Auth::user()->id,
-                        'type' => 'create',
+                        'type' => 'CREATE',
                         'message' => 'GIS-dump toegevoegd: ' . $gisDump->filename,
                     ));
 

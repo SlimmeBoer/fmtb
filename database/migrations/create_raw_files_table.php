@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('raw_files', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->foreignId('dump_id');
             $table->string('filename');
-            $table->integer('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
 import Card from "@mui/material/Card";
 import {showFullName} from "../../helpers/FullName.js";
+import {formatDateNL} from "../../helpers/formatDateNL.js";
 
 const LogOverview = ({}) => {
     const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ const LogOverview = ({}) => {
                                     <TableCell>{showFullName(log.user.first_name, log.user.middle_name, log.user.last_name)}</TableCell>
                                     <TableCell>{log.type}</TableCell>
                                     <TableCell>{log.message}</TableCell>
-                                    <TableCell>{log.created_at}</TableCell>
+                                    <TableCell>{formatDateNL(log.created_at)}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

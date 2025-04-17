@@ -1,6 +1,6 @@
 // src/components/GisRecordsDialog.jsx
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, Table, TableHead, TableRow, TableCell, TableBody, DialogActions, Button, TablePagination } from '@mui/material';
+import { Table, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
 import axiosClient from '../../axios_client';
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import {showFullName} from "../../helpers/FullName.js";
 import IconButton from "@mui/material/IconButton";
 import DownloadIcon from '@mui/icons-material/Download';
+import {formatDateNL} from "../../helpers/formatDateNL.js";
 
 const RawFilesOverview = ({}) => {
     const [loading, setLoading] = useState(true);
@@ -61,12 +62,12 @@ const RawFilesOverview = ({}) => {
                     <Table size="small">
                         <TableHead>
                             <TableRow>
-                                <TableCell>{t("raw_files.id")}</TableCell>
-                                <TableCell>{t("raw_files.user_id")}</TableCell>
-                                <TableCell>{t("raw_files.type")}</TableCell>
-                                <TableCell>{t("raw_files.filename")}</TableCell>
-                                <TableCell>{t("raw_files.created_at")}</TableCell>
-                                <TableCell>&nbsp;</TableCell>
+                                <TableCell sx={{width: '5%'}}>{t("raw_files.id")}</TableCell>
+                                <TableCell sx={{width: '10%'}}>{t("raw_files.user_id")}</TableCell>
+                                <TableCell sx={{width: '5%'}}>{t("raw_files.type")}</TableCell>
+                                <TableCell sx={{width: '50%'}}>{t("raw_files.filename")}</TableCell>
+                                <TableCell sx={{width: '20%'}}>{t("raw_files.created_at")}</TableCell>
+                                <TableCell sx={{width: '10%'}}>&nbsp;</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -76,7 +77,7 @@ const RawFilesOverview = ({}) => {
                                     <TableCell>{showFullName(file.user.first_name, file.user.middle_name, file.user.last_name)}</TableCell>
                                     <TableCell>{file.type}</TableCell>
                                     <TableCell>{file.filename}</TableCell>
-                                    <TableCell>{file.created_at}</TableCell>
+                                    <TableCell>{formatDateNL(file.created_at)}</TableCell>
                                     <TableCell>
                                         <IconButton onClick={() => handleDownload(file)}>
                                             <DownloadIcon />

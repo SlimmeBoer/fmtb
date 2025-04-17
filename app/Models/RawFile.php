@@ -17,6 +17,7 @@ class RawFile extends Model
      */
     protected $fillable = [
         'type',
+        'dump_id',
         'filename',
         'user_id'
     ];

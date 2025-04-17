@@ -130,8 +130,9 @@ class KlwDumpController extends Controller
     public function destroy(KlwDump $klwDump)
     {
         //1. Delete KPI-values for the corresponding company and year
-        $umdlKpiValues = UmdlKpiValues::where(['company_id' => $klwDump->company_id, 'year' => $klwDump->year])->first();
-        $umdlKpiValues->delete();
+        UmdlKpiValues::where('company_id', $klwDump->company_id)
+            ->where('year', $klwDump->year)
+            ->delete();
 
         //2. Delete all Klw values associated with this dump
         KlwValue::where('dump_id', $klwDump->id)->delete();
@@ -152,11 +153,9 @@ class KlwDumpController extends Controller
         }
 
         // Remove file from RAW files db
-        $rawfiles = RawFile::where('filename', $klwDump->filename)->get();
-
-        foreach ($rawfiles as $rawfile) {
-            $rawfile->delete();
-        }
+        RawFile::where('dump_id', $klwDump->id)
+            ->where('type', 'klw')
+            ->delete();
 
         //7. Remove the dump itself.
         $klwDump->delete();
@@ -197,11 +196,13 @@ class KlwDumpController extends Controller
                 $company->save();
 
                 // Log
-                SystemLog::create(array(
-                    'user_id' => Auth::user()->id,
-                    'type' => 'CREATE',
-                    'message' => 'Bedrijf toegevoegd: ' . $company->name,
-                ));
+                if ($company->wasRecentlyCreated) {
+                    SystemLog::create(array(
+                        'user_id' => Auth::user()->id,
+                        'type' => 'CREATE',
+                        'message' => 'Bedrijf toegevoegd: ' . $company->name,
+                    ));
+                }
 
                 // 2. Connect the company to an existing collective
                 $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
@@ -233,9 +234,13 @@ class KlwDumpController extends Controller
                     ))->first();
                 }
 
+                $originalName = $file->getClientOriginalName();
+                $uniqueId = uniqid();
+                $newFileName = 'klw_' . $company->id . '_' . $uniqueId . '_' . $originalName;
+
                 // 4. Store the dump metadata
                 $klwDump = KlwDump::firstOrCreate(array(
-                    'filename' => $file->getClientOriginalName(),
+                    'filename' => $newFileName,
                     'company_id' => $company->id,
                     'year' => $klwParser->getYear($file),
                 ));
@@ -254,13 +259,14 @@ class KlwDumpController extends Controller
                 ));
 
                 // 8. Save the physical file to the GIS uploads
-                $file->move(public_path('uploads/klw/'), $file->getClientOriginalName());
+                $file->move(public_path('uploads/klw/'), $newFileName);
 
                 // 9. Record the file as RawFile to the database
                 RawFile::firstOrCreate(array(
                     'user_id' => Auth::user()->id,
                     'type' => 'klw',
-                    'filename' => $file->getClientOriginalName(),
+                    'dump_id' => $klwDump->id,
+                    'filename' => $newFileName,
                 ));
 
                 return response('KLW succesvol ingelezen, in totaal zijn ' . $fieldsParsed . ' velden aangemaakt en ' . $signalsParsed . ' signalen.', 201);

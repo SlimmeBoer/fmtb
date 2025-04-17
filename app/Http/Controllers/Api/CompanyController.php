@@ -494,11 +494,10 @@ class CompanyController extends Controller
             }
 
             // Remove file from RAW files db
-            $rawfiles = RawFile::where('filename', $dump->filename)->get();
+            RawFile::where('dump_id', $dump->id)
+                ->where('type', 'klw')
+                ->delete();
 
-            foreach ($rawfiles as $rawfile) {
-                $rawfile->delete();
-            }
         }
 
         //8. Remove the dumps themselves.

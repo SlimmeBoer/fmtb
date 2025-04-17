@@ -23,6 +23,7 @@ class UpdateRawFileRequest extends FormRequest
     {
         return [
             'type' => 'required|string',
+            'dump_id' => 'required|integer',
             'filename' => 'required|string',
             'user_id' => 'required|integer',
         ];
