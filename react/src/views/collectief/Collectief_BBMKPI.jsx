@@ -26,12 +26,12 @@ export default function Collectief_BBMKPI() {
             >
                 {/* KPI 10 */}
                 <Grid size={{xs: 12, md: 6, lg: 4}}>
-                    <BBMKPICard kpi={10} title={t('kpis.10')} bgcolor={'#e2efda'} />
+                    <BBMKPICard kpi={10} title={t('kpis.10')} bgcolor={'#fff2cc'} />
                 </Grid>
 
                 {/* KPI 11 */}
                 <Grid size={{xs: 12, md: 6, lg: 4}}>
-                    <BBMKPICard kpi={11} title={t('kpis.11')} bgcolor={'#fff2cc'} />
+                    <BBMKPICard kpi={11} title={t('kpis.11')} bgcolor={'#e2efda'} />
                 </Grid>
 
                 {/* KPI 12 */}

@@ -17,6 +17,8 @@ function PercentageChip({ownvalue, refvalue, lowerBetter}) {
     if (lowerBetter) {
         if (ownvalue > refvalue) {
             displayColor = 'error';
+        } else if (ownvalue === refvalue) {
+            displayColor = 'info';
         } else {
             displayColor = 'success';
         }
@@ -24,6 +26,8 @@ function PercentageChip({ownvalue, refvalue, lowerBetter}) {
     else {
         if (ownvalue > refvalue) {
             displayColor = 'success';
+        } else if (ownvalue === refvalue) {
+            displayColor = 'info';
         } else {
             displayColor = 'error';
         }
