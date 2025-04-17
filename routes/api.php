@@ -79,6 +79,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/pdf/getcompany/{company}', [PdfController::class, 'generatePdf']);
     Route::get('/pdf/currentcompany', [PdfController::class, 'generatePdfCurrentCompany']);
+    Route::get('/pdf/currentcompanyconcept', [PdfController::class, 'generatePdfCurrentCompanyConcept']);
 
     Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
     Route::get('/collectives/getcurrent', [UmdlCollectiveController::class, 'getCurrent']);

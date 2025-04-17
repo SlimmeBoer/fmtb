@@ -13,6 +13,8 @@
             font-family: sans-serif;
         }
 
+
+
         h1 {
             font-size: 18px;
             margin: 4mm;
@@ -124,7 +126,7 @@
             <img style="padding: 4mm;" src="{{ $logos['umbb'] }}" alt="Logo" width="140">
         </td>
         <td class="info">
-            <h1>Eindrapport UMDL</h1>
+            <h1>{{$title}}</h1>
            <table class="company-data">
                <tr>
                    <td class="boldcell">Bedrijfsnaam:</td>

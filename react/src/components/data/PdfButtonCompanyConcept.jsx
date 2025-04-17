@@ -4,21 +4,21 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Button, CircularProgress } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-export default function PdfButtonCompany() {
+export default function PdfButtonCompanyConcept() {
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
 
     const downloadPdf = async () => {
         setLoading(true);
         try {
-            const response = await axiosClient.get(`/pdf/currentcompany`, {
+            const response = await axiosClient.get(`/pdf/currentcompanyconcept`, {
                 responseType: 'blob',
             });
 
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'Eindrapport UMDL.pdf');
+            link.setAttribute('download', 'Conceptrapport UMDL.pdf');
             document.body.appendChild(link);
             link.click();
 
@@ -52,7 +52,7 @@ export default function PdfButtonCompany() {
                 },
             }}
         >
-            {loading ? t("company_dashboard.pdf_being_generated") : t("company_dashboard.download_pdf")}
+            {loading ? t("company_dashboard.pdf_concept_being_generated") : t("company_dashboard.download_pdf_concept")}
         </Button>
     );
 }

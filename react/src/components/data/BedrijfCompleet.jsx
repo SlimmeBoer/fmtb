@@ -5,6 +5,7 @@ import {
     Box, Alert
 } from '@mui/material';
 import {useTranslation} from "react-i18next";
+import PdfButtonCompanyConcept from "./PdfButtonCompanyConcept.jsx";
 
 const BedrijfCompleet = () => {
     const {t} = useTranslation();
@@ -15,6 +16,7 @@ const BedrijfCompleet = () => {
                 {t("company_dashboard.complete_title")}
             </Typography>
             <Alert severity="success">{t("company_dashboard.complete_explanation")}</Alert>
+            <PdfButtonCompanyConcept />
         </Box>
     );
 };

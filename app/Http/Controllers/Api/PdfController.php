@@ -101,4 +101,49 @@ class PdfController extends Controller
 
     }
 
+/**
+* Gets a concept-PDF for the company of the currently logged in user.
+ * This is not the final version of the report.
+* @return mixed
+*/
+    public function generatePdfCurrentCompanyConcept()
+    {
+        $company_data = Company::where('ubn',Auth::user()->ubn)->first();
+        $company_properties = UmdlCompanyProperties::where('company_id',$company_data->id)->first();
+
+        $umdlscores = new UMDLKPIScores();
+        $scores = array_merge($umdlscores->getScores($company_data->id),
+            $umdlscores->collectiveAverages($company_data->id),
+            $umdlscores->totalAverages());
+
+        // Example data for the PDF
+        $data = [
+            'title' => 'Conceptrapport UMDL',
+            'company_data' => $company_data,
+            'company_properties' => $company_properties,
+            'scores' => $scores,
+            'date' => now()->format('d-m-Y'),
+            'logos' => [
+                'umbb' => public_path('images/logo_umbb.png'),
+                'alblasserwaard' => public_path('images/logo_alblasserwaard.png'),
+                'eemland' => public_path('images/logo_eemland.png'),
+                'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
+                'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
+                'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
+                'watermark' => public_path('images/watermark_concept.png'),
+            ],
+        ];
+
+        // Load a Blade view and pass the data
+        $pdf = Pdf::loadView('pdf.concept-report', $data)->setPaper('a4', 'landscape')
+            ->set_option('margin_top', 0)
+            ->set_option('margin_right', 0)
+            ->set_option('margin_bottom', 0)
+            ->set_option('margin_left', 0);
+
+        // Option 1: Download the PDF
+        return $pdf->download('Certificaat UMDL 2025.pdf');
+
+    }
+
 }
