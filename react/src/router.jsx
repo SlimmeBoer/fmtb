@@ -61,6 +61,9 @@ import Admin_RawData from "./views/admin/Admin_RawData.jsx";
 import Bedrijf_Dashboard from "./views/bedrijf/Bedrijf_Dashboard.jsx";
 import Admin_FAQ from "./views/admin/Admin_FAQ.jsx";
 import Beheerder_FAQ from "./views/beheerder/Beheerder_FAQ.jsx";
+import Admin_Deelnemerslijst from "./views/admin/Admin_Deelnemerslijst.jsx";
+import Beheerder_Deelnemerslijst from "./views/beheerder/Beheerder_Deelnemerslijst.jsx";
+import Collectief_Deelnemerslijst from "./views/collectief/Collectief_Deelnemerslijst.jsx";
 
 const router = createBrowserRouter([
     {
@@ -156,6 +159,10 @@ const router = createBrowserRouter([
                     {
                         path: '/admin/users',
                         element: <Admin_Users/>
+                    },
+                    {
+                        path: '/admin/deelnemerslijst',
+                        element: <Admin_Deelnemerslijst/>
                     },
                 ]
             },
@@ -288,6 +295,10 @@ const router = createBrowserRouter([
                         path: '/beheerder/settings/criteria',
                         element: <Beheerder_Criteria/>,
                     },
+                    {
+                        path: '/beheerder/deelnemerslijst',
+                        element: <Beheerder_Deelnemerslijst/>
+                    },
                 ],
             },
         ],
@@ -353,6 +364,10 @@ const router = createBrowserRouter([
                     {
                         path: '/collectief/settings/criteria',
                         element: <Collectief_Criteria/>,
+                    },
+                    {
+                        path: '/collectief/deelnemerslijst',
+                        element: <Collectief_Deelnemerslijst/>
                     },
                 ],
             },

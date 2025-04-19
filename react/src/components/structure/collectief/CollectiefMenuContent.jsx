@@ -13,6 +13,7 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 import ReportIcon from '@mui/icons-material/Report';
+import ContactMailIcon from "@mui/icons-material/ContactMail";
 
 export default function CollectiefMenuContent() {
 
@@ -33,6 +34,7 @@ export default function CollectiefMenuContent() {
     ];
 
     const settingItems = [
+        {text: t("collectief_menu.deelnemerslijst"), icon: <ContactMailIcon/>, link: '/collectief/deelnemerslijst'},
         {text: t("collectief_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/bbmkpis'},
         {text: t("collectief_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/scangisanlb'},
         {text: t("collectief_menu.kpi_criteria"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/criteria'},

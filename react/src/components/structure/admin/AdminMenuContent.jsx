@@ -17,6 +17,7 @@ import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 import ReportIcon from "@mui/icons-material/Report";
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 export default function AdminMenuContent() {
 
@@ -51,6 +52,7 @@ export default function AdminMenuContent() {
 
     const userItems = [
         {text: t("admin_menu.user_management"), icon: <PersonIcon/>, link: '/admin/users/'},
+        {text: t("admin_menu.deelnemerslijst"), icon: <ContactMailIcon/>, link: '/admin/deelnemerslijst/'},
     ];
     return (
 

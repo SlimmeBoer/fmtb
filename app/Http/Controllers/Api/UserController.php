@@ -122,6 +122,13 @@ class UserController extends Controller
         return response()->json(Auth::user()->getRoleNames()->first());
     }
 
+    public function getUsersinCurrentCollective()
+    {
+        $user = User::where('id', Auth::id())->first();
+        $collective = $user->collectives()->first();
+        return response()->json($collective->users);
+    }
+
     public function roles()
     {
         return Role::orderBy('name')->get(['id', 'name']);
