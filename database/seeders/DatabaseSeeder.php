@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SettingSeeder::class,
             UmdlCollectiveSeeder::class,
+            FAQSeeder::class,
             UmdlCollectivePostalcodeSeeder::class,
             BbmCodeSeeder::class,
             BbmAnlbPackageSeeder::class,

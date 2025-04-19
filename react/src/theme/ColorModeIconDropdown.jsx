@@ -7,6 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {useColorScheme} from '@mui/material/styles';
 import {useTranslation} from "react-i18next";
+import {Tooltip} from "@mui/material";
 
 export default function ColorModeIconDropdown() {
     const {mode, systemMode, setMode} = useColorScheme();
@@ -46,17 +47,19 @@ export default function ColorModeIconDropdown() {
     }[resolvedMode];
     return (
         <React.Fragment>
-            <IconButton
-                data-screenshot="toggle-mode"
-                onClick={handleClick}
-                disableRipple
-                size="small"
-                aria-controls={open ? 'color-scheme-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-            >
-                {icon}
-            </IconButton>
+            <Tooltip title={t("tooltips.light_mode")}>
+                <IconButton
+                    data-screenshot="toggle-mode"
+                    onClick={handleClick}
+                    disableRipple
+                    size="small"
+                    aria-controls={open ? 'color-scheme-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                >
+                    {icon}
+                </IconButton>
+            </Tooltip>
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"

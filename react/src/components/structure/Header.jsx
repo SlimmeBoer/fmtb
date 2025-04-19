@@ -4,7 +4,9 @@ import ColorModeIconDropdown from '../../theme/ColorModeIconDropdown.jsx';
 import AboutScreen from "../visuals/AboutScreen.jsx";
 import DownloadManual from "../visuals/DownloadManual.jsx";
 
+
 export default function Header() {
+
     return (
         <Stack
             direction="row"

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BbmCodeController;
 use App\Http\Controllers\Api\BbmGisPackageController;
 use App\Http\Controllers\Api\BbmKpiController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\FAQController;
 use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KpiScoreController;
@@ -85,6 +86,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/collectives/getcurrent', [UmdlCollectiveController::class, 'getCurrent']);
     Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);
 
+    Route::post('/faq/reorder', [FAQController::class, 'reorder']);
+
     Route::put('/gisdump/uploadexcel', [GisDumpController::class, 'uploadexcel']);
     Route::get('/gisdump', [GisDumpController::class, 'index']);
     Route::get('/gisdump/currentcollective', [GisDumpController::class, 'currentcollective']);
@@ -119,6 +122,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/bbmgispackages', BbmGisPackageController::class);
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     Route::apiResource('/users', UserController::class);
+    Route::apiResource('/faq', FAQController::class);
     Route::apiResource('/companies', CompanyController::class);
     Route::apiResource('/settings', SettingController::class);
     Route::apiResource('/systemlogs', SystemLogController::class);

@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from "react";
 import IconButton from "@mui/material/IconButton";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import axiosClient from "../../axios_client.js";
+import {useTranslation} from "react-i18next";
+import {Tooltip} from "@mui/material";
 
 const DownloadManual = () => {
 
     const [role, setRole] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const {t} = useTranslation();
 
     useEffect(() => {
         setLoading(true);
@@ -14,7 +18,6 @@ const DownloadManual = () => {
             .then(({data}) => {
                 setLoading(false);
                 setRole(data);
-                consolge
             })
             .catch(() => {
                 setLoading(false);
@@ -22,7 +25,7 @@ const DownloadManual = () => {
     }, [])
 
     const handleDownload = () => {
-        let fileName = "handleiding_" + role +".pdf";
+        let fileName = "handleiding_" + role + ".pdf";
         const link = document.createElement("a");
         link.href = `/${fileName}`;
         link.download = fileName;
@@ -32,9 +35,12 @@ const DownloadManual = () => {
     return (
         <React.Fragment>
             {!loading &&
-                <IconButton size="small" onClick={handleDownload} aria-label="Download handleiding">
-                    <HelpOutlineIcon/>
-                </IconButton>}
+                <Tooltip title={t("tooltips.download_manual")}>
+                    <IconButton size="small" onClick={handleDownload} aria-label="Download handleiding">
+                        <AutoStoriesIcon/>
+                    </IconButton>
+                </Tooltip>}
+
         </React.Fragment>
     );
 };

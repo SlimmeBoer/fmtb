@@ -10,7 +10,7 @@ const DataComplete = (props) => {
     return (
         <Box display="flex" justifyContent="center" width="100%">
             {props.complete == 1 &&
-                <Tooltip title={t("klw_overview.complete_explanation")}>
+                <Tooltip title={t("tooltips.data_complete")}>
                 <CheckCircleIcon sx={{ color: 'green' }} />
                 </Tooltip>}
         </Box>

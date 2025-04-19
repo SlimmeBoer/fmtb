@@ -16,6 +16,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 import ReportIcon from "@mui/icons-material/Report";
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
 export default function AdminMenuContent() {
 
@@ -40,6 +41,7 @@ export default function AdminMenuContent() {
 
     const settingItems = [
         {text: t("admin_menu.general_settings"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/general'},
+        {text: t("admin_menu.faq"), icon: <ContactSupportIcon/>, link: '/admin/faq'},
         {text: t("admin_menu.bbm_codes"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmcodes'},
         {text: t("admin_menu.bbm_kpis"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmkpis'},
         {text: t("admin_menu.scangis_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/scangis'},

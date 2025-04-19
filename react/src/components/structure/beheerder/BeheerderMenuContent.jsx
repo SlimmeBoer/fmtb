@@ -13,6 +13,7 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 import ReportIcon from '@mui/icons-material/Report';
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 
 export default function BeheerderMenuContent() {
 
@@ -34,6 +35,7 @@ export default function BeheerderMenuContent() {
     ];
 
     const settingItems = [
+        {text: t("beheerder_menu.faq"), icon: <ContactSupportIcon/>, link: '/beheerder/faq'},
         {text: t("beheerder_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/beheerder/settings/bbmkpis'},
         {text: t("beheerder_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/beheerder/settings/scangisanlb'},
         {text: t("beheerder_menu.kpi_criteria"), icon: <SettingsRoundedIcon/>, link: '/beheerder/settings/criteria'},

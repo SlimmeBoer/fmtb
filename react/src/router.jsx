@@ -59,6 +59,8 @@ import ForgotPassword from "./views/guest/ForgotPassword.jsx";
 import ResetPassword from "./views/guest/ResetPassword.jsx";
 import Admin_RawData from "./views/admin/Admin_RawData.jsx";
 import Bedrijf_Dashboard from "./views/bedrijf/Bedrijf_Dashboard.jsx";
+import Admin_FAQ from "./views/admin/Admin_FAQ.jsx";
+import Beheerder_FAQ from "./views/beheerder/Beheerder_FAQ.jsx";
 
 const router = createBrowserRouter([
     {
@@ -102,6 +104,10 @@ const router = createBrowserRouter([
                     {
                         path: '/admin/matrix/:id',
                         element: <Admin_Matrix/>
+                    },
+                    {
+                        path: '/admin/faq',
+                        element: <Admin_FAQ/>
                     },
                     {
                         path: '/admin/klw/importeren',
@@ -245,6 +251,10 @@ const router = createBrowserRouter([
                     {
                         path: '/beheerder/matrix',
                         element: <Beheerder_Matrix/>,
+                    },
+                    {
+                        path: '/beheerder/faq',
+                        element: <Beheerder_FAQ/>
                     },
                     {
                         path: '/beheerder/matrix/:id',

@@ -10,6 +10,7 @@ import {useStateContext} from "../../../contexts/ContextProvider.jsx";
 import axiosClient from "../../../axios_client.js";
 import {Navigate} from "react-router-dom";
 import DownloadManual from "../../visuals/DownloadManual.jsx";
+import FAQScreen from "../../visuals/FAQScreen.jsx";
 
 export default function UserBar() {
 
@@ -50,6 +51,7 @@ export default function UserBar() {
                 </Typography>
             </Box>
             <DownloadManual/>
+            <FAQScreen/>
             <MenuButton
                 aria-label="Open menu"
                 onClick={onLogout}

@@ -63,7 +63,8 @@
         "kpi_settings_explain": "Klik op de BBM-codes hieronder om ze aan respectievelijk uit de KPI weg te halen of aan de KPI toe te voegen.",
         "users": "Gebruikers",
         "logs": "Systeemlogs",
-        "matrix": "Confrontatiematrix"
+        "matrix": "Confrontatiematrix",
+        "faq": "Beheren FAQ (vaak gestelde vragen)"
     },
     "pages_collectief": {
         "scangis_data": "ScanGIS - Data-overzicht",
@@ -96,7 +97,8 @@
         "scangis_anlb_settings_explanation1": "Onderstaande tabel geeft aan welke (Z-)pakketten ingelezen kunnen worden en aan welke BBM-code deze gekoppeld zijn.",
         "scangis_anlb_settings_explanation2": "Onderstaande tabel geeft aan welke ANLb-pakketten (met codering) gekoppeld zijn aan welke KPI.",
         "criteria": "Scoringstabel KPI's",
-        "matrix": "Confrontatiematrix"
+        "matrix": "Confrontatiematrix",
+        "faq": "Beheren FAQ (vaak gestelde vragen)"
     },
     "pages_provincie": {
         "dashboard": "Dashboard voor Provincie",
@@ -246,7 +248,6 @@
         "error_delete_company": "Fout bij verwijderen bedrijf: ",
         "company_name": "Bedrijfsnaam",
         "complete": "Compleet?",
-        "complete_explanation": "De eigenaar van dit bedrijf heeft aangegeven dat de data voor dit bedrijf compleet is.",
         "delete_confirm_dump": "Weet je zeker dat je deze dump wilt verwijderen?",
         "delete_confirm_company": "Weet je zeker dat je dit bedrijf wilt verwijderen? Alle dumps, KPI-data en links met collectieven worden dan ook verwijderd voor dit bedrijf."
     },
@@ -339,7 +340,8 @@
         "raw_data": "Ruwe data",
         "general_settings": "Algemeen",
         "logs": "Systeemlogs",
-        "confrontation_matrix": "Confrontatiematrix"
+        "confrontation_matrix": "Confrontatiematrix",
+        "faq": "FAQ"
     },
     "collectief_menu": {
         "dashboard": "Dashboard",
@@ -380,7 +382,8 @@
         "klw": "Kringloopwijzers",
         "scangis": "ScanGIS-data",
         "settings": "Toon Instellingen",
-        "confrontation_matrix": "Confrontatiematrix"
+        "confrontation_matrix": "Confrontatiematrix",
+        "faq": "FAQ"
     },
     "provincie_menu": {
         "dashboard": "Dashboard",
@@ -401,6 +404,14 @@
         "message": "Bericht",
         "created_at": "Gelogd op"
     },
+    "faq":
+    {
+        "edit": "Bestaande vraag + antwoord bewerken",
+        "explanation": "Klik hier om de vragen te bewerken die klanten kunnen openen vanuit hun bedrijfspagina. Met de pijltjestoetsen pas je de volgorde van de vragen aan.",
+        "new": "Nieuwe vraag + antwoord toevoegen",
+        "question": "Vraag",
+        "answer": "Antwoord"
+    },
     "raw_files":
     {
         "id": "ID",
@@ -409,9 +420,16 @@
         "filename": "Bestandsnaam",
         "created_at": "Geüpload op"
     },
+    "tooltips": {
+        "download_manual": "Klik hier om de handleiding te bekijken",
+        "data_complete": "De eigenaar van dit bedrijf heeft aangegeven dat de data voor dit bedrijf compleet is",
+        "light_mode": "Klik hier om te wisselen tussen donkere en lichte modus",
+        "about": "Over deze webapplicatie",
+        "faq": "Bekijk de vaak gestelde vragen"
+    },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.6.5",
+        "version": "Versie 0.6.7",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },
