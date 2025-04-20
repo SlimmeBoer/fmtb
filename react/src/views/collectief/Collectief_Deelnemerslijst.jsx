@@ -72,7 +72,7 @@ export default function Collectief_Deelnemerslijst() {
                     <Grid size={{xs: 12, md: 6, lg: 6}}>
                         <Box sx={{width: '700px', height: '80px'}}>
                             <Typography variant="body2">
-                                {t("deelnemerslijst.explanation_1")}
+                                {t("deelnemerslijst.explanation_1_collectief")}
                             </Typography>
                         </Box>
                         <TableContainer >
@@ -102,7 +102,7 @@ export default function Collectief_Deelnemerslijst() {
                     <Grid size={{xs: 12, md: 6, lg: 6}}>
                         <Box sx={{width: '700px', height: '80px'}}>
                             <Typography variant="body2">
-                                {t("deelnemerslijst.explanation_2")}
+                                {t("deelnemerslijst.explanation_2_collectief")}
                             </Typography>
                         </Box>
                         <TextareaAutosize

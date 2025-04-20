@@ -114,6 +114,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/umdlkpi/totalsperkpicollective/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpicollective'));
 
     Route::get('/user/getcurrentrole', [UserController::class, 'getCurrentRole']);
+    Route::get('/user/bylastname', [UserController::class, 'byLastName']);
     Route::get('/user/getusersincurrentcollective', [UserController::class, 'getUsersinCurrentCollective']);
     Route::get('/user/roles', [UserController::class, 'roles']);
 

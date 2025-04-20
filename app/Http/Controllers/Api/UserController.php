@@ -28,6 +28,13 @@ class UserController extends Controller
         );
     }
 
+    public function byLastName(): AnonymousResourceCollection
+    {
+        return UserResource::collection(
+            User::with('roles')->orderBy('last_name')->get()
+        );
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -126,7 +133,8 @@ class UserController extends Controller
     {
         $user = User::where('id', Auth::id())->first();
         $collective = $user->collectives()->first();
-        return response()->json($collective->users);
+
+        return response()->json($collective->users()->orderBy('last_name')->get());
     }
 
     public function roles()

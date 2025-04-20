@@ -29,7 +29,7 @@ export default function Beheerder_Deelnemerslijst() {
 
     const getDeelnemers = () => {
         setLoading(true);
-        axiosClient.get('/users')
+        axiosClient.get('/user/bylastname')
             .then(({data}) => {
                 setLoading(false);
                 setDeelnemers(data.data)

@@ -421,7 +421,7 @@
     "deelnemerslijst":
     {   "explanation_1": "Hieronder vind je een tabel met de volledige naam en het e-mailadres van alle deelnemers aan het UMDL-programma.",
         "explanation_2": "Hieronder vind je een reeks met alle e-mailadressen van de deelnemers van het UMDL-programma, deze kun je gebruiken om een mail te sturen aan iedereen (gebruik hiervoor wel het BCC-veld!)",
-        "explanation_1_collectief": "Hieronder vind je een tabel met de volledige naam en het e-mailadres van alle deelnemers binnen je collectief",
+        "explanation_1_collectief": "Hieronder vind je een tabel met de volledige naam en het e-mailadres van alle deelnemers binnen je collectief.",
         "explanation_2_collectief": "Hieronder vind je een reeks met alle e-mailadressen van de deelnemers binnen je collectief, deze kun je gebruiken om een mail te sturen aan iedereen (gebruik hiervoor wel het BCC-veld!)",
         "header_full_name": "Naam",
         "header_email": "E-mailadres",
@@ -444,7 +444,7 @@
     },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.6.8",
+        "version": "Versie 0.6.9",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },
