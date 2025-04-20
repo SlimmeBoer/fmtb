@@ -24,6 +24,7 @@
         "instructions": "Instructies",
         "select_klw_files": "Upload KLW-bestand(en)...",
         "select_excel_files": "Upload Excel-bestand(en)...",
+        "select_old_data_files": "Upload Excel-bestand(en) met oude resultaten...",
         "select_gis_files": "Upload ScanGIS-bestand(en)..."
     },
     "company_dashboard": {
@@ -345,7 +346,8 @@
         "logs": "Systeemlogs",
         "confrontation_matrix": "Confrontatiematrix",
         "faq": "FAQ",
-        "deelnemerslijst": "Deelnemerslijst"
+        "deelnemerslijst": "Deelnemerslijst",
+        "old_results": "Oude resultaten"
     },
     "collectief_menu": {
         "dashboard": "Dashboard",
@@ -427,6 +429,17 @@
         "header_email": "E-mailadres",
         "emails": "E-mailadressen"
     },
+    "old_results":
+    {   "title": "Beheren resultaten voorgaande jaren",
+        "explanation": "Op deze pagina kun je oude resultaten uploaden (in Excel-vorm) van het UMDL-programma vóór 2024. Deze wordt op basis van UMDL-nummer gekoppeld aan bedrijven in het huidige deelnmersbestand.",
+        "header_filename": "Bestandsnaam",
+        "header_ubn": "UBN",
+        "header_final_year": "Tijdsperiode",
+        "delete_confirm": "Weet je zeker dat je de oude resultaten voor dit bedrijf wilt verwijderen?",
+        "upload_form_title": "Upload eindresultaa)t(en) van voorgaande jaren",
+        "upload_form_explanation": "Selecteer hier één of meerdere bestanden (.xlsm) vanaf je computer o ze te uploaden.",
+        "upload_button": "Upload eindresultaa)t(en) van voorgaande jaren"
+    },
     "raw_files":
     {
         "id": "ID",
@@ -444,7 +457,7 @@
     },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.6.9",
+        "version": "Versie 0.6.10",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },

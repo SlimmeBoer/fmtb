@@ -64,6 +64,7 @@ import Beheerder_FAQ from "./views/beheerder/Beheerder_FAQ.jsx";
 import Admin_Deelnemerslijst from "./views/admin/Admin_Deelnemerslijst.jsx";
 import Beheerder_Deelnemerslijst from "./views/beheerder/Beheerder_Deelnemerslijst.jsx";
 import Collectief_Deelnemerslijst from "./views/collectief/Collectief_Deelnemerslijst.jsx";
+import Admin_OldResults from "./views/admin/Admin_OldResults.jsx";
 
 const router = createBrowserRouter([
     {
@@ -131,6 +132,10 @@ const router = createBrowserRouter([
                     {
                         path: '/admin/rawdata',
                         element: <Admin_RawData />
+                    },
+                    {
+                        path: '/admin/oldresults',
+                        element: <Admin_OldResults />
                     },
                     {
                         path: '/admin/settings/bbmcodes',

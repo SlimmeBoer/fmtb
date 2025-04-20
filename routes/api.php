@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\FAQController;
 use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
 use App\Http\Controllers\Api\KpiScoreController;
+use App\Http\Controllers\Api\OldResultController;
 use App\Http\Controllers\Api\PdfController;
 use App\Http\Controllers\Api\RawFileController;
 use App\Http\Controllers\Api\SettingController;
@@ -105,6 +106,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/klwdump', [KlwDumpController::class, 'index']);
     Route::delete('/klwdump/{klwDump}', [KlwDumpController::class, 'destroy']);
 
+    Route::put('/olddata/upload', [OldResultController::class, 'upload']);
+
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
     Route::get('/umdlkpi/getscorescurrentcompany', array(UmdlKpiValuesController::class, 'getscorescurrentcompany'));
     Route::get('/umdlkpi/getcollectivescores/{collective}/', array(UmdlKpiValuesController::class, 'getcollectivescores'));
@@ -124,6 +127,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('/bbmgispackages', BbmGisPackageController::class);
     Route::apiResource('/bbmanlbpackages', BbmAnlbPackageController::class);
     Route::apiResource('/users', UserController::class);
+    Route::apiResource('/oldresults', OldResultController::class);
     Route::apiResource('/faq', FAQController::class);
     Route::apiResource('/companies', CompanyController::class);
     Route::apiResource('/settings', SettingController::class);

@@ -37,6 +37,7 @@ export default function AdminMenuContent() {
         {text: t("admin_menu.gis_import"), icon: <ImportExportIcon/>, link: '/admin/gis/importeren'},
         {text: t("admin_menu.gis_data_management"), icon: <DatasetIcon/>, link: '/admin/gis/data'},
         {text: t("admin_menu.raw_data"), icon: <DatasetIcon/>, link: '/admin/rawdata'},
+        {text: t("admin_menu.old_results"), icon: <DatasetIcon/>, link: '/admin/oldresults'},
     ];
 
 
