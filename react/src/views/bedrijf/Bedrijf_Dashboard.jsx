@@ -59,7 +59,7 @@ const Bedrijf_Dashboard = () => {
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    backgroundImage: "url(images/backdrop.jpg)",
+                    backgroundImage: "url(/images/backdrop.jpg)",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundAttachment: "fixed",
