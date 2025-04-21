@@ -28,7 +28,7 @@ export default function ConfrontationMatrix(props) {
     }, []);
 
     return (
-        <Card variant="outlined">
+        <Card variant="outlined" sx={{mt: 2}}>
             {loading && <CenteredLoading/>}
             {!loading && companies.length !== 0 &&
                 <MatrixData companies={companies} openId={props.opendump} />

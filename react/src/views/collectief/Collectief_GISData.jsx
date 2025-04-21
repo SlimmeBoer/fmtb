@@ -8,14 +8,54 @@ import Stack from "@mui/material/Stack";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Button from "@mui/material/Button";
 import DatasetIcon from "@mui/icons-material/Dataset";
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
-import {useState} from "react";
+import {
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle, Link,
+    Table, TableBody, TableCell,
+    TableContainer, TableHead, TableRow
+} from "@mui/material";
+import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import GisOverviewCollectief from "../../components/data/GisOverviewCollectief.jsx";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AddIcon from "@mui/icons-material/Add";
+import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
+import GisRecordsDialog from "../../components/data/GisRecordsDialog.jsx";
+import Grid from "@mui/material/Grid2";
+import ImportExportIcon from "@mui/icons-material/ImportExport";
+import GisUploader from "../../components/forms/GisUploader.jsx";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Collectief_GISData() {
 
+    const [dumps, setDumps] = useState([]);
     const [dialogRunOpen, setDialogRunOpen] = useState(false);
+    const [dialogUploadOpen, setDialogUploadOpen] = useState(false);
+    const [dialogDeleteOpen, setDialogDeleteOpen] = useState(false);
+    const [dialogRecordsOpen, setDialogRecordsOpen] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        fetchDumps();
+    }, []);
+
+    const fetchDumps = async () => {
+        try {
+            setLoading(true);
+            const response = await axiosClient.get('/gisdump/currentcollective');
+            setDumps(response.data);
+        } catch (error) {
+            console.error(t("gis_dumps_overview.error_fetch"), error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleRunClick = () => {
         setDialogRunOpen(true);
@@ -30,7 +70,35 @@ export default function Collectief_GISData() {
             });
     };
 
-    const {t} = useTranslation();
+    const handleDeleteClick = (dump_id) => {
+        setDialogDeleteOpen(true);
+        setSelectedId(dump_id);
+    };
+
+    const closeUploader = () => {
+        setDialogUploadOpen(false);
+        fetchDumps();
+    };
+
+    const confirmDelete = () => {
+        axiosClient.delete(`/gisdump/${selectedId}`)
+            .then(() => {
+                setDialogDeleteOpen(false);
+                setSelectedId(null);
+                fetchDumps();
+            })
+            .catch(error => {
+            });
+    };
+
+    const openRecordsDialog = (id) => {
+        setSelectedId(id);
+        setDialogRecordsOpen(true);
+    };
+
+    const closeRecordsDialog = () => {
+        setDialogRecordsOpen(false);
+    };
 
     return (
         <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
@@ -41,21 +109,67 @@ export default function Collectief_GISData() {
                        alignItems: { xs: 'flex-start', md: 'center' },
                        justifyContent: 'space-between',
                        maxWidth: { sm: '100%', md: '1700px' },
-                       pt: 1.5, pb: 4,
+                       pb: 4,
                    }}>
                 <Stack direction="row" gap={2}>
-                    <DatasetIcon/>
+                    <DashboardIcon/>
                     <Typography component="h6" variant="h6">
-                        {t("pages_beheerder.scangis_data")}
+                        {t("pages_collectief.scangis_data")}
                     </Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
                     <Button variant="outlined" startIcon={<RefreshIcon />}  onClick={() => handleRunClick()} aria-label="run">
                         {t("gis.run_collective")}
                     </Button>
+                    <Button variant="outlined" startIcon={<AddIcon/>} onClick={() => setDialogUploadOpen(true)}
+                            aria-label="run">
+                        {t("gis.upload")}
+                    </Button>
                 </Stack>
             </Stack>
-            <GisOverviewCollectief />
+
+            {loading && <CenteredLoading/>}
+            {!loading && dumps.length === 0 && <Typography variant="body2">{t("gis_dumps_overview.none_uploaded")}</Typography>}
+            {!loading && dumps.length !== 0 && <TableContainer>
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>{t("gis_dumps_overview.dump_id")}</TableCell>
+                            <TableCell>{t("gis_dumps_overview.dump_filename")}</TableCell>
+                            <TableCell>{t("gis_dumps_overview.dump_year")}</TableCell>
+                            <TableCell>{t("gis_dumps_overview.dump_time_created")}</TableCell>
+                            <TableCell>{t("gis_dumps_overview.dump_records")}</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {dumps.map((dump) => (
+                            <TableRow key={dump.id}>
+                                <TableCell>{dump.id}</TableCell>
+                                <TableCell>
+                                    <Link
+                                        component="button"
+                                        variant="body2"
+                                        onClick={() => openRecordsDialog(dump.id)}
+                                        style={{cursor: 'pointer', textDecoration: 'underline'}}
+                                    >
+                                        {dump.filename}
+                                    </Link>
+                                </TableCell>
+                                <TableCell>{dump.year}</TableCell>
+                                <TableCell>{new Date(dump.created_at).toLocaleString()}</TableCell>
+                                <TableCell>{dump.gis_records_count}</TableCell>
+                                <TableCell>
+                                    <Button onClick={() => handleDeleteClick(dump.id)}
+                                            color="secondary">{t("general.delete")}</Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+
+                <GisRecordsDialog open={dialogRecordsOpen} onClose={closeRecordsDialog} dumpId={selectedId}/>
+            </TableContainer>}
 
             <Dialog open={dialogRunOpen} onClose={() => setDialogRunOpen(false)}>
                 <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
@@ -66,6 +180,46 @@ export default function Collectief_GISData() {
                     <Button onClick={() => setDialogRunOpen(false)} color="primary">{t("general.cancel")}</Button>
                     <Button onClick={confirmRun} color="primary">{t("general.calculate")}</Button>
                 </DialogActions>
+            </Dialog>
+
+            <Dialog open={dialogDeleteOpen} onClose={() => setDialogDeleteOpen(false)}>
+                <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>{t("gis.warning_delete")}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDialogDeleteOpen(false)} color="primary">{t("general.cancel")}</Button>
+                    <Button onClick={confirmDelete} color="primary">{t("general.delete")}</Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog open={dialogUploadOpen} maxWidth="md" fullWidth={true} onClose={closeUploader}>
+                <DialogContent>
+                    <Grid
+                        container
+                        spacing={2}
+                        columns={12}
+                        sx={{mb: (theme) => theme.spacing(2), mt: 2}}
+                    >
+                        <Grid size={{xs: 11, lg: 11}}>
+                            <Stack direction="row" gap={2}>
+                                <ImportExportIcon/>
+                                <Typography component="h6" variant="h6">
+                                    {t("pages_admin.scangis_import")}
+                                </Typography>
+
+                            </Stack>
+                            <GisUploader/>
+                        </Grid>
+                        <Grid size={{xs: 1, lg: 1}}>
+                            <IconButton
+                                onClick={closeUploader}
+                            >
+                                <CloseIcon/>
+                            </IconButton>
+                        </Grid>
+                    </Grid>
+                </DialogContent>
             </Dialog>
         </Box>
     )

@@ -163,10 +163,10 @@ const TrendDisplay = ({oldresult, newresult}) => {
                     </TableRow>
                     <TableRow>
                         <TableCell sx={{width: '500px'}}>{t("kpis.14")}</TableCell>
-                        <TableCell sx={{width: '200px', border: 1}} align="center">{showYearMonths(oldresult.result_kpi14)}</TableCell>
+                        <TableCell sx={{width: '200px', border: 1}} align="center">{showYearMonths(Math.round(oldresult.result_kpi14))}</TableCell>
                         <TableCell sx={{width: '200px', border: 1}} align="center">{oldresult.score_kpi14}</TableCell>
                         <TableCell sx={{width: '150px'}} align="center"><PercentageChip ownvalue={newresult.avg.kpi14} refvalue={oldresult.result_kpi14} lowerBetter={false} /></TableCell>
-                        <TableCell sx={{width: '200px', border: 1}} align="center">{showYearMonths(newresult.avg.kpi14)}</TableCell>
+                        <TableCell sx={{width: '200px', border: 1}} align="center">{showYearMonths(Math.round(newresult.avg.kpi14))}</TableCell>
                         <TableCell sx={{width: '200px', border: 1}} align="center">{newresult.score.kpi14}</TableCell>
                     </TableRow>
                     <TableRow>

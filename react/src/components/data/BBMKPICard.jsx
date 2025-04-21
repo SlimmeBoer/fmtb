@@ -50,10 +50,10 @@ const BBMKPICard = ({kpi, title, bgcolor}) => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Code</TableCell>
-                            <TableCell>Omschrijving</TableCell>
-                            <TableCell>Gewicht</TableCell>
-                            <TableCell>Type</TableCell>
+                            <TableCell>{t("bbm_kpi.code")}</TableCell>
+                            <TableCell>{t("bbm_kpi.description")}</TableCell>
+                            <TableCell>{t("bbm_kpi.weight")}</TableCell>
+                            <TableCell>{t("bbm_kpi.unit")}</TableCell>
 
                         </TableRow>
                     </TableHead>

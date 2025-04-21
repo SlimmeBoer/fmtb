@@ -6,6 +6,8 @@ import ActionOverview from "../../components/visuals/ActionOverview.jsx";
 import {useTranslation} from "react-i18next";
 import BeheerderGauges from "../../components/data/BeheerderGauges.jsx";
 import KLWOverviewBeheerder from "../../components/data/KLWOverviewBeheerder.jsx";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import Stack from "@mui/material/Stack";
 
 export default function Beheerder_Dashboard() {
 
@@ -13,10 +15,12 @@ export default function Beheerder_Dashboard() {
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px', lg: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_beheerder.dashboard")}
-            </Typography>
+            <Stack direction="row" gap={2}>
+                <HomeRoundedIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_beheerder.dashboard")}
+                </Typography>
+            </Stack>
             <Grid
                 container
                 spacing={2}

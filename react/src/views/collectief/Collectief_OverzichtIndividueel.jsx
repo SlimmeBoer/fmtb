@@ -14,6 +14,8 @@ import Stack from "@mui/material/Stack";
 import {useTranslation} from "react-i18next";
 import CompanyPickerCollective from "../../components/forms/CompanyPickerCollective.jsx";
 import PdfButton from "../../components/data/PdfButton.jsx";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 export default function Collectief_OverzichtIndividueel() {
 
@@ -41,10 +43,12 @@ export default function Collectief_OverzichtIndividueel() {
     return (
 
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_collectief.overview_individual")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <AnalyticsIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_collectief.overview_individual")}
+                </Typography>
+            </Stack>
             <Stack direction="row" gap={2}
                    sx={{
                        display: {xs: 'none', md: 'flex'},

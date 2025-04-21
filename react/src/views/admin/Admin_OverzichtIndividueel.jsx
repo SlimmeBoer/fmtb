@@ -13,6 +13,7 @@ import CompanySMA from "../../components/data/CompanySMA.jsx";
 import Stack from "@mui/material/Stack";
 import {useTranslation} from "react-i18next";
 import PdfButton from "../../components/data/PdfButton.jsx";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 export default function Admin_OverzichtIndividueel() {
 
@@ -42,9 +43,12 @@ export default function Admin_OverzichtIndividueel() {
 
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
             {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_admin.overview_individual")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <AnalyticsIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_admin.overview_individual")}
+                </Typography>
+            </Stack>
             <Stack direction="row" gap={2}
                    sx={{
                        display: {xs: 'none', md: 'flex'},
@@ -62,7 +66,7 @@ export default function Admin_OverzichtIndividueel() {
                     container
                     spacing={2}
                     columns={12}
-                    sx={{mb: (theme) => theme.spacing(2), mt: 2}}
+                    sx={{mb: (theme) => theme.spacing(2)}}
                 >
                     <Grid size={{xs: 12, lg: 4}} key="indiv-grid-1">
                         <CompanyInfoTable company={id}/>
@@ -77,7 +81,7 @@ export default function Admin_OverzichtIndividueel() {
             </Box>
             }
             {id === undefined && <Box>
-                <Typography component="h2" variant="body2" sx={{mb: 2, mt: 2}}>
+                <Typography component="h2" variant="body2" sx={{mb: 2}}>
                     Kies een bedrijf met bovenstaande selectiebox.
                 </Typography>
             </Box>

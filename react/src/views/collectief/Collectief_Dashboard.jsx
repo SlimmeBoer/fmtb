@@ -7,6 +7,9 @@ import KLWOverviewCollectief from "../../components/data/KLWOverviewCollectief.j
 import CollectiefGauges from "../../components/data/CollectiefGauges.jsx";
 import ActionOverviewCollectief from "../../components/visuals/ActionOverviewCollectief.jsx";
 import CollectiefLogo from "../../components/visuals/CollectefLogo.jsx";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import Stack from "@mui/material/Stack";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 export default function Collectief_Dashboard() {
 
@@ -14,10 +17,12 @@ export default function Collectief_Dashboard() {
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px', lg: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_collectief.dashboard")}
-            </Typography>
+            <Stack direction="row" gap={2}>
+                <HomeRoundedIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_collectief.dashboard")}
+                </Typography>
+            </Stack>
             <Grid
                 container
                 spacing={2}

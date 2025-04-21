@@ -168,7 +168,7 @@ const FaqAccordion = () => {
                            alignItems: {xs: 'flex-start', md: 'center'},
                            justifyContent: 'space-between',
                            maxWidth: {sm: '100%', md: '1700px'},
-                           pt: 1.5, pb: 4,
+                           pb: 4,
                        }}>
                     <Stack direction="row" gap={2}>
                         <ContactSupportIcon/>

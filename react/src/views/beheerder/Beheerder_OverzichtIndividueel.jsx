@@ -13,6 +13,7 @@ import CompanySMA from "../../components/data/CompanySMA.jsx";
 import Stack from "@mui/material/Stack";
 import {useTranslation} from "react-i18next";
 import PdfButton from "../../components/data/PdfButton.jsx";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 export default function Beheerder_OverzichtIndividueel() {
 
@@ -40,10 +41,12 @@ export default function Beheerder_OverzichtIndividueel() {
     return (
 
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_admin.overview_individual")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <AnalyticsIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_beheerder.overview_individual")}
+                </Typography>
+            </Stack>
             <Stack direction="row" gap={2}
                    sx={{
                        display: {xs: 'none', md: 'flex'},

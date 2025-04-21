@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import {useTranslation} from "react-i18next";
 import BeheerderGauges from "../../components/data/BeheerderGauges.jsx";
+import Stack from "@mui/material/Stack";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 export default function Provincie_Dashboard() {
 
@@ -11,10 +13,12 @@ export default function Provincie_Dashboard() {
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px', lg: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_provincie.dashboard")}
-            </Typography>
+            <Stack direction="row" gap={2}>
+                <HomeRoundedIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_provincie.dashboard")}
+                </Typography>
+            </Stack>
             <Grid
                 container
                 spacing={2}

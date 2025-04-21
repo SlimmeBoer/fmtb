@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 import CompanyPickerAnon from "../../components/forms/CompanyPickerAnon.jsx";
 import CompanyInfoTableAnon from "../../components/data/CompanyInfoTableAnon.jsx";
 import CompanyPropertyTableAnon from "../../components/data/CompanyPropertyTableAnon.jsx";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 export default function Provincie_OverzichtIndividueel() {
 
@@ -37,10 +38,12 @@ export default function Provincie_OverzichtIndividueel() {
     return (
 
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_provincie.overview_individual")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <AnalyticsIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_provincie.overview_individual")}
+                </Typography>
+            </Stack>
             <Stack direction="row" gap={2}
                    sx={{
                        display: {xs: 'none', md: 'flex'},

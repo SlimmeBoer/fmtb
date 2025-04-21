@@ -5,6 +5,8 @@ import Grid from "@mui/material/Grid2";
 import ScoresTableTotaal from "../../components/data/ScoresTableTotaal.jsx";
 import TotaalKPIs from "../../components/data/TotaalKPIs.jsx";
 import {useTranslation} from "react-i18next";
+import Stack from "@mui/material/Stack";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 export default function Beheerder_OverzichtTotaal() {
 
@@ -12,10 +14,12 @@ export default function Beheerder_OverzichtTotaal() {
 
     return (
         <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-                {t("pages_beheerder.overview_total")}
-            </Typography>
+            <Stack direction="row" gap={2}>
+                <AnalyticsIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_beheerder.overview_total")}
+                </Typography>
+            </Stack>
             <Box>
                 <Grid
                     container

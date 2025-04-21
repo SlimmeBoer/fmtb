@@ -4,11 +4,9 @@ import NotFound from "./views/guest/NotFound.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import GuestLayout from "./layouts/GuestLayout.jsx";
 import Admin_Dashboard from "./views/admin/Admin_Dashboard.jsx";
-import Admin_KLWImporteren from "./views/admin/Admin_KLWImporteren.jsx";
 import Admin_OverzichtCollectief from "./views/admin/Admin_OverzichtCollectief.jsx";
 import Admin_OverzichtIndividueel from "./views/admin/Admin_OverzichtIndividueel.jsx";
 import Admin_KLWData from "./views/admin/Admin_KLWData.jsx";
-import Admin_GISImporteren from "./views/admin/Admin_GISImporteren.jsx";
 import Admin_BBMCodeSettings from "./views/admin/Admin_BBMCodeSettings.jsx";
 import Admin_BBMKPISettings from "./views/admin/Admin_BBMKPISettings.jsx";
 import Admin_BBMGISSettings from "./views/admin/Admin_BBMGISSettings.jsx";
@@ -16,7 +14,6 @@ import Admin_BBMANLbSettings from "./views/admin/Admin_BBMANLbSettings.jsx";
 import Admin_Users from "./views/admin/Admin_Users.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import BedrijfLayout from "./layouts/BedrijfLayout.jsx";
-import BedrijfDashboard from "./views/bedrijf/Bedrijf_Dashboard.jsx";
 import Unauthorized from "./views/guest/Unauthorized.jsx";
 import ProvincieLayout from "./layouts/ProvincieLayout.jsx";
 import Provincie_Dashboard from "./views/provincie/Provincie_Dashboard.jsx";
@@ -25,8 +22,6 @@ import CollectiefLayout from "./layouts/CollectiefLayout.jsx";
 import Admin_OverzichtTotaal from "./views/admin/Admin_OverzichtTotaal.jsx";
 import Collectief_OverzichtCollectief from "./views/collectief/Collectief_OverzichtCollectief.jsx";
 import Collectief_OverzichtIndividueel from "./views/collectief/Collectief_OverzichtIndividueel.jsx";
-import Collectief_KLWImporteren from "./views/collectief/Collectief_KLWImporteren.jsx";
-import Collectief_GISImporteren from "./views/collectief/Collectief_GISImporteren.jsx";
 import Collectief_BBMKPI from "./views/collectief/Collectief_BBMKPI.jsx";
 import Collectief_ScanGISANLb from "./views/collectief/Collectief_ScanGISANLb.jsx";
 import Collectief_Criteria from "./views/collectief/Collectief_Criteria.jsx";
@@ -42,9 +37,7 @@ import Beheerder_OverzichtCollectief from "./views/beheerder/Beheerder_Overzicht
 import Beheerder_Dashboard from "./views/beheerder/Beheerder_Dashboard.jsx";
 import Beheerder_OverzichtIndividueel from "./views/beheerder/Beheerder_OverzichtIndividueel.jsx";
 import Beheerder_Matrix from "./views/beheerder/Beheerder_Matrix.jsx";
-import Beheerder_KLWImporteren from "./views/beheerder/Beheerder_KLWImporteren.jsx";
 import Beheerder_KLWData from "./views/beheerder/Beheerder_KLWData.jsx";
-import Beheerder_GISImporteren from "./views/beheerder/Beheerder_GISImporteren.jsx";
 import Beheerder_GISData from "./views/beheerder/Beheerder_GISData.jsx";
 import Beheerder_BBMKPI from "./views/beheerder/Beheerder_BBMKPI.jsx";
 import Beheerder_ScanGISANLb from "./views/beheerder/Beheerder_ScanGISANLb.jsx";
@@ -114,16 +107,8 @@ const router = createBrowserRouter([
                         element: <Admin_FAQ/>
                     },
                     {
-                        path: '/admin/klw/importeren',
-                        element: <Admin_KLWImporteren/>
-                    },
-                    {
                         path: '/admin/klw/data',
                         element: <Admin_KLWData/>
-                    },
-                    {
-                        path: '/admin/gis/importeren',
-                        element: <Admin_GISImporteren/>
                     },
                     {
                         path: '/admin/gis/data',
@@ -273,16 +258,8 @@ const router = createBrowserRouter([
                         element: <Beheerder_Matrix/>
                     },
                     {
-                        path: '/beheerder/klw/importeren',
-                        element: <Beheerder_KLWImporteren/>,
-                    },
-                    {
                         path: '/beheerder/klw/data',
                         element: <Beheerder_KLWData/>,
-                    },
-                    {
-                        path: '/beheerder/gis/importeren',
-                        element: <Beheerder_GISImporteren/>,
                     },
                     {
                         path: '/beheerder/gis/data',
@@ -343,16 +320,8 @@ const router = createBrowserRouter([
                         element: <Collectief_Matrix/>,
                     },
                     {
-                        path: '/collectief/klw/importeren',
-                        element: <Collectief_KLWImporteren/>,
-                    },
-                    {
                         path: '/collectief/klw/data',
                         element: <Collectief_KLWData/>,
-                    },
-                    {
-                        path: '/collectief/gis/importeren',
-                        element: <Collectief_GISImporteren/>,
                     },
                     {
                         path: '/collectief/gis/data',

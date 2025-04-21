@@ -15,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import ReportIcon from '@mui/icons-material/Report';
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import CropRotateIcon from "@mui/icons-material/CropRotate";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function BeheerderMenuContent() {
 
@@ -29,10 +31,8 @@ export default function BeheerderMenuContent() {
     ];
 
     const dataItems = [
-        {text: t("beheerder_menu.klw_import"), icon: <ImportExportIcon/>, link: '/beheerder/klw/importeren'},
-        {text: t("beheerder_menu.klw_data"), icon: <AnalyticsIcon/>, link: '/beheerder/klw/data'},
-        {text: t("beheerder_menu.gis_import"), icon: <ImportExportIcon/>, link: '/beheerder/gis/importeren'},
-        {text: t("beheerder_menu.gis_data"), icon: <AnalyticsIcon/>, link: '/beheerder/gis/data'},
+        {text: t("beheerder_menu.klw_data_management"), icon: <CropRotateIcon/>, link: '/beheerder/klw/data'},
+        {text: t("beheerder_menu.gis_data_management"), icon: <DashboardIcon/>, link: '/beheerder/gis/data'},
     ];
 
     const settingItems = [

@@ -7,6 +7,8 @@ import Grid from "@mui/material/Grid2";
 import BBMKPICard from "../../components/data/BBMKPICard.jsx";
 import BBMGisOverview from "../../components/data/BBMGisOverview.jsx";
 import BBMAnlbOverview from "../../components/data/BBMAnlbOverview.jsx";
+import Stack from "@mui/material/Stack";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 export default function Beheerder_ScanGISANLb() {
 
@@ -14,10 +16,13 @@ export default function Beheerder_ScanGISANLb() {
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_collectief.scangis_anlb_settings")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <SettingsRoundedIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_beheerder.scangis_anlb_settings")}
+                </Typography>
+            </Stack>
+
             <Grid
                 container
                 spacing={2}

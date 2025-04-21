@@ -44,6 +44,7 @@ const MatrixData = ({companies, openId}) => {
                         company={company}
                         openDumps={openDumps[company.id] || []}
                         toggleDump={toggleDump}
+                        sx={{mt:2}}
                     />
                 ))}
         </React.Fragment>

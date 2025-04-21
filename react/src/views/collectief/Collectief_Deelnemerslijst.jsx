@@ -44,21 +44,11 @@ export default function Collectief_Deelnemerslijst() {
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            <Stack direction="row" gap={2}
-                   sx={{
-                       display: {xs: 'none', md: 'flex'},
-                       width: '100%',
-                       alignItems: {xs: 'flex-start', md: 'center'},
-                       justifyContent: 'space-between',
-                       maxWidth: {sm: '100%', md: '1700px'},
-                       pt: 1.5, pb: 4,
-                   }}>
-                <Stack direction="row" gap={2}>
-                    <ContactMailIcon sx={{mt: 0.7}}/>
-                    <Typography component="h6" variant="h6">
-                        {t("pages_collectief.deelnemerslijst")}
-                    </Typography>
-                </Stack>
+            <Stack direction="row" gap={2}>
+                <ContactMailIcon sx={{mt: 0.7}}/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_collectief.deelnemerslijst")}
+                </Typography>
             </Stack>
             {loading && <CenteredLoading/>}
             {!loading &&

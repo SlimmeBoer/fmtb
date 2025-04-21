@@ -14,6 +14,8 @@ import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
 import ReportIcon from '@mui/icons-material/Report';
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import CropRotateIcon from "@mui/icons-material/CropRotate";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function CollectiefMenuContent() {
 
@@ -27,10 +29,8 @@ export default function CollectiefMenuContent() {
     ];
 
     const dataItems = [
-        {text: t("collectief_menu.klw_import"), icon: <ImportExportIcon/>, link: '/collectief/klw/importeren'},
-        {text: t("collectief_menu.klw_data"), icon: <AnalyticsIcon/>, link: '/collectief/klw/data'},
-        {text: t("collectief_menu.gis_import"), icon: <ImportExportIcon/>, link: '/collectief/gis/importeren'},
-        {text: t("collectief_menu.gis_data"), icon: <AnalyticsIcon/>, link: '/collectief/gis/data'},
+        {text: t("collectief_menu.klw_data_management"), icon: <CropRotateIcon/>, link: '/collectief/klw/data'},
+        {text: t("collectief_menu.gis_data_management"), icon: <DashboardIcon/>, link: '/collectief/gis/data'},
     ];
 
     const settingItems = [

@@ -83,7 +83,7 @@ export default function Admin_Users() {
                    }}>
                 <Stack direction="row" gap={2}>
                     <GroupIcon sx={{mt: 0.7}}/>
-                    <Typography component="h6" variant="h4">
+                    <Typography component="h6" variant="h6">
                         {t("pages_admin.users")}
                     </Typography>
                 </Stack>

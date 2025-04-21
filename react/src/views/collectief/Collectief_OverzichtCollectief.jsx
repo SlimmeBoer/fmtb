@@ -10,6 +10,8 @@ import TotaalKPIs from "../../components/data/TotaalKPIs.jsx";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import TotaalKPIsCollectief from "../../components/data/TotaalKPIsCollectief.jsx";
+import Stack from "@mui/material/Stack";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 
 export default function Collectief_OverzichtCollectief() {
 
@@ -18,10 +20,12 @@ export default function Collectief_OverzichtCollectief() {
 
     return (
         <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-                {t("pages_collectief.overview_collective")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <AnalyticsIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_collectief.overview_collective")}
+                </Typography>
+            </Stack>
             <Box>
                 <Grid
                     container

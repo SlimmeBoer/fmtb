@@ -1,15 +1,14 @@
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import GisOverview from "../../components/data/GisOverview.jsx";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import Card from "@mui/material/Card";
 import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
-import MatrixData from "../../components/data/MatrixData.jsx";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
 import Stack from "@mui/material/Stack";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 export default function Collectief_Criteria() {
 
@@ -32,10 +31,12 @@ export default function Collectief_Criteria() {
 
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            {/* cards */}
-            <Typography component="h2" variant="h6" sx={{mb: 2}}>
-                {t("pages_collectief.criteria")}
-            </Typography>
+            <Stack direction="row" gap={2} sx={{mb: 2}}>
+                <SettingsRoundedIcon/>
+                <Typography component="h6" variant="h6">
+                    {t("pages_collectief.criteria")}
+                </Typography>
+            </Stack>
             {loading && <CenteredLoading/>}
             {!loading && kpiscores.length !== 0 &&
                 <Stack direction="row" spacing={2}
