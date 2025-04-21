@@ -103,7 +103,7 @@ class UmdlCollectiveController extends Controller
                 $query->where('name', 'bedrijf');
             })->get();
 
-            $collective_data["total_klw"] = count($bedrijfUsers) * 3;
+            $collective_data["total_klw"] = count($bedrijfUsers);
             $collective_data["total_mbp"] = count($bedrijfUsers);
             $collective_data["total_sma"] = count($bedrijfUsers);
             $collective_data["total_kpi"] = count($bedrijfUsers);
@@ -114,8 +114,11 @@ class UmdlCollectiveController extends Controller
 
             foreach ($collective->companies as $company)
             {
-                // 1. Aantal geuploade KLW's
-                $collective_data["total_klw_completed"] += count(KlwDump::where('company_id', $company->id)->get());
+                // 1. Als een bedrijf 1 of meer Dumps heeft, dan telt hij als compleet
+                if (count(KlwDump::where('company_id', $company->id)->get()) > 0)
+                {
+                    $collective_data["total_klw_completed"] += 1;
+                }
 
                 $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
 

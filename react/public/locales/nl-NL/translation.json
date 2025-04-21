@@ -150,7 +150,13 @@
         "collective_letter": "C",
         "total_letter": "T",
         "total_score": "Totaalscore",
-        "payout_money": "Uit te betalen"
+        "payout_money": "Uit te betalen",
+        "view_trend": "Bekijk trend",
+        "trend_title": "Trend",
+        "trend_explanation": "Hier kun je zien hoe het bedrijf presteert t.a.v. de resultaten uit de vorige periode",
+        "trend_result": "Resultaat",
+        "trend_money": "Bedrag",
+        "trend_points": "Punten"
     },
     "bbm_kpi_dragger": {
         "in_kpi": "In KPI",
@@ -457,7 +463,7 @@
     },
     "about": {
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.6.10",
+        "version": "Versie 0.6.11",
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden."
     },

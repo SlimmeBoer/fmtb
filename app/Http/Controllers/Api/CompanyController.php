@@ -365,7 +365,7 @@ class CompanyController extends Controller
             $query->where('name', 'bedrijf');
         })->get();
 
-        $company_data["total_klw"] = count($bedrijfUsers) * 3;
+        $company_data["total_klw"] = count($bedrijfUsers);
         $company_data["total_mbp"] = count($bedrijfUsers);
         $company_data["total_sma"] = count($bedrijfUsers);
         $company_data["total_kpi"] = count($bedrijfUsers);
@@ -378,8 +378,11 @@ class CompanyController extends Controller
 
         foreach ($companies as $company)
         {
-            // 1. Aantal geuploade KLW's
-            $company_data["total_klw_completed"] += count(KlwDump::where('company_id', $company->id)->get());
+            // 1. Als een bedrijf 1 of meer Dumps heeft, dan telt hij als compleet
+            if (count(KlwDump::where('company_id', $company->id)->get()) > 0)
+            {
+                $company_data["total_klw_completed"] += 1;
+            }
 
             $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
 

@@ -1,7 +1,17 @@
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -14,9 +24,17 @@ import {showYearMonths} from "../../helpers/YearMonths.js";
 import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
+import AddIcon from "@mui/icons-material/Add";
+import AvTimerIcon from "@mui/icons-material/AvTimer";
+import OldDataUploader from "../forms/OldDataUploader.jsx";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import TrendDisplay from "./TrendDisplay.jsx";
 
 export default function KPITable(props) {
     const [kpi, setKPI] = useState({});
+    const [oldResult, setOldResult] = useState({});
+    const [trendOpen, setTrendOpen] = useState(false);
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -24,6 +42,7 @@ export default function KPITable(props) {
 
     useEffect(() => {
         getKPI();
+        getOldResult();
     }, [props.company, props.renderTable])
 
     const getKPI = () => {
@@ -40,6 +59,28 @@ export default function KPITable(props) {
                 })
         }
     }
+    const getOldResult = () => {
+        if (props.company !== '') {
+            setLoading(true);
+            axiosClient.get(`/oldresults/getbycompany/${props.company}`)
+                .then(({data}) => {
+                    setLoading(false);
+                    if (data.oldresult) {
+                        setOldResult(data.oldresult);
+                    }
+                    else{
+                        setOldResult({});
+                    }
+                })
+                .catch(() => {
+                    setLoading(false);
+                })
+        }
+    }
+
+    const closeTrend = () => {
+        setTrendOpen(false);
+    };
     const makeTable = (data) => [
         {
             text_1: t("kpis.1a"),
@@ -294,305 +335,367 @@ export default function KPITable(props) {
     ];
 
     return (
-        <Grid container spacing={2} size={{xs: 12, lg: 12}}>
-            <Grid size={{xs: 12, lg: 6}}>
-                <Card variant="outlined">
-                    <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
-                        <ScoreboardIcon/>
-                        <Typography component="h6" variant="h6">
-                            {t("kpi_table.total_score_points")}
-                        </Typography>
-                    </Stack>
-                    {loading && <CenteredLoading />}
-                    {!loading && !isObjectEmpty(kpi)  &&
-                        <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={2900} cat3={2399}
-                                    cat2={1899} cat1={1399}
-                                    score_col={kpi.total_col.score}
-                                    score_tot={kpi.total_tot.score}/>}
-                </Card>
-            </Grid>
-            <Grid size={{xs: 12, lg: 6}}>
-                <Card variant="outlined">
-                    <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
-                        <EuroOutlinedIcon/>
-                        <Typography component="h6" variant="h6">
-                            {t("kpi_table.total_score_money")}
-                        </Typography>
-                    </Stack>
-                    {loading && <CenteredLoading />}
-                    {!loading && !isObjectEmpty(kpi) &&
-                        <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={5000}
-                                    cat3={3899} cat2={2399} cat1={1399}
-                                    score_col={kpi.total_col.money}
-                                    score_tot={kpi.total_tot.money}/>}
-
-                </Card>
-            </Grid>
-            <Grid size={{xs: 12, lg: 12}}>
-                <Card variant="outlined">
-                    <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
-                        <TimelineOutlinedIcon/>
-                        <Typography component="h6" variant="h6">
-                            {t("kpi_table.kpis")}
-                        </Typography>
-                    </Stack>
-                    <TableContainer sx={{minHeight: 100,}}>
-                        {loading && <CenteredLoading />}
+        <React.Fragment>
+            <Grid container spacing={2} size={{xs: 12, lg: 12}}>
+                <Grid size={{xs: 12, lg: 6}}>
+                    <Card variant="outlined">
+                        <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
+                            <ScoreboardIcon/>
+                            <Typography component="h6" variant="h6">
+                                {t("kpi_table.total_score_points")}
+                            </Typography>
+                        </Stack>
+                        {loading && <CenteredLoading/>}
                         {!loading && !isObjectEmpty(kpi) &&
-                            <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
-                                <TableHead>
-                                    <TableRow key={"headrow"}>
-                                        <TableCell sx={{width: 250}}> </TableCell>
-                                        <TableCell sx={{width: 60, border: 1}}
-                                                   align="center">{kpi.year1.year}</TableCell>
+                            <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={2900} cat3={2399}
+                                        cat2={1899} cat1={1399}
+                                        score_col={kpi.total_col.score}
+                                        score_tot={kpi.total_tot.score}/>}
+                    </Card>
+                </Grid>
+                <Grid size={{xs: 12, lg: 6}}>
+                    <Card variant="outlined">
+                        <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
+                            <EuroOutlinedIcon/>
+                            <Typography component="h6" variant="h6">
+                                {t("kpi_table.total_score_money")}
+                            </Typography>
+                        </Stack>
+                        {loading && <CenteredLoading/>}
+                        {!loading && !isObjectEmpty(kpi) &&
+                            <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={5000}
+                                        cat3={3899} cat2={2399} cat1={1399}
+                                        score_col={kpi.total_col.money}
+                                        score_tot={kpi.total_tot.money}/>}
 
-                                        <TableCell sx={{width: 60, border: 1}}
-                                                   align="center">{kpi.year2.year}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}}
-                                                   align="center">{kpi.year3.year}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.average")}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.comparison")}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.points")}</TableCell>
-                                        <TableCell sx={{width: 60, border: 1}} align="center">{t("kpi_table.comparison")}</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {tableData.map((tab, index) => {
-                                            if (tab.type === "normal") {
-                                                return (
-                                                    <TableRow key={`normal-${index}`} sx={{margin: 0, color: tab.color}}>
-                                                        <TableCell component="th" scope="row">
-                                                            {tab.text}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {tab.year1}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {tab.year2}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {tab.year3}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                                            {tab.avg}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {t("kpi_table.collective_letter")}: {tab.avg_col}<br />
-                                                            {t("kpi_table.total_letter")}: {tab.avg_tot}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                                            {tab.score}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {t("kpi_table.collective_letter")}: {tab.score_col}<br />
-                                                            {t("kpi_table.total_letter")}: {tab.score_tot}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )
-                                            }
-                                            if (tab.type === "double") {
-                                                return (<React.Fragment key={`double-${index}`}>
-                                                        <TableRow key={`double-${index}-01`}  sx={{margin: 0, color: tab.color_1}}>
-                                                            <TableCell component="th" scope="row" sx={{color: tab.color_1}}>
-                                                                {tab.text_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {tab.year1_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {tab.year2_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {tab.year3_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold', color: tab.color_1}} align="center">
-                                                                {tab.avg_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.avg_col_1}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.avg_tot_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={2}
-                                                                       align="center">
-                                                                {tab.score}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1}} rowSpan={2}
-                                                            align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.score_col}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.score_tot}
-                                                        </TableCell>
-                                                        </TableRow>
-                                                        <TableRow sx={{margin: 0, color: tab.color_2}} key={`double-${index}-02`}>
+                    </Card>
+                </Grid>
+                <Grid size={{xs: 12, lg: 12}}>
+                    <Card variant="outlined">
+                        <Stack direction="row" gap={2}
+                               sx={{
+                                   display: {xs: 'none', md: 'flex'},
+                                   width: '100%',
+                                   alignItems: {xs: 'flex-start', md: 'center'},
+                                   justifyContent: 'space-between',
+                                   maxWidth: {sm: '100%', md: '1700px'},
+                                   pt: 1.5, pb: 4,
+                               }}>
+                            <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
+                                <TimelineOutlinedIcon/>
+                                <Typography component="h6" variant="h6">
+                                    {t("kpi_table.kpis")}
+                                </Typography>
+                            </Stack>
+                            {!loading && !isObjectEmpty(oldResult) &&
+                                <Stack direction="row" gap={2}>
+                                    <Button variant="outlined" startIcon={<AvTimerIcon/>} onClick={() => setTrendOpen(true)}>
+                                        {t("kpi_table.view_trend")}
+                                    </Button>
+                            </Stack>}
+                        </Stack>
+                        <TableContainer sx={{minHeight: 100,}}>
+                            {loading && <CenteredLoading/>}
+                            {!loading && !isObjectEmpty(kpi) &&
+                                <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow key={"headrow"}>
+                                            <TableCell sx={{width: 250}}> </TableCell>
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{kpi.year1.year}</TableCell>
+
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{kpi.year2.year}</TableCell>
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{kpi.year3.year}</TableCell>
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{t("kpi_table.average")}</TableCell>
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{t("kpi_table.comparison")}</TableCell>
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{t("kpi_table.points")}</TableCell>
+                                            <TableCell sx={{width: 60, border: 1}}
+                                                       align="center">{t("kpi_table.comparison")}</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {tableData.map((tab, index) => {
+                                                if (tab.type === "normal") {
+                                                    return (
+                                                        <TableRow key={`normal-${index}`} sx={{margin: 0, color: tab.color}}>
                                                             <TableCell component="th" scope="row">
-                                                                {tab.text_2}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color}} align="center">
-                                                                {tab.year1_2}
+                                                                {tab.text}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
-                                                                {tab.year2_2}
+                                                                {tab.year1}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
-                                                                {tab.year3_2}
+                                                                {tab.year2}
+                                                            </TableCell>
+                                                            <TableCell sx={{border: 1}} align="center">
+                                                                {tab.year3}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                                                {tab.avg_2}
+                                                                {tab.avg}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.avg_col_2}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.avg_tot_2}
+                                                                {t("kpi_table.collective_letter")}: {tab.avg_col}<br/>
+                                                                {t("kpi_table.total_letter")}: {tab.avg_tot}
                                                             </TableCell>
-                                                        </TableRow>
-                                                    </React.Fragment>
-                                                )
-                                            }
-                                            if (tab.type === "quad") {
-                                                return (<React.Fragment key={`quad-${index}`}>
-                                                        <TableRow key={`quad-${index}-1`}  sx={{margin: 0}}>
-                                                            <TableCell sx={{color: tab.color_1}} component="th" scope="row">
-                                                                {tab.text_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {tab.year1_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {tab.year2_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {tab.year3_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1, fontWeight: 'bold'}} align="center">
-                                                                {tab.avg_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_1}} align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.avg_col_1}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.avg_tot_1}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={4}
-                                                                       align="center">
+                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
                                                                 {tab.score}
                                                             </TableCell>
-                                                            <TableCell sx={{border: 1}} rowSpan={4}
-                                                                       align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.score_col}<br />
+                                                            <TableCell sx={{border: 1}} align="center">
+                                                                {t("kpi_table.collective_letter")}: {tab.score_col}<br/>
                                                                 {t("kpi_table.total_letter")}: {tab.score_tot}
                                                             </TableCell>
                                                         </TableRow>
-                                                        <TableRow key={`quad-${index}-2`}  sx={{margin: 0}}>
+                                                    )
+                                                }
+                                                if (tab.type === "double") {
+                                                    return (<React.Fragment key={`double-${index}`}>
+                                                            <TableRow key={`double-${index}-01`}
+                                                                      sx={{margin: 0, color: tab.color_1}}>
+                                                                <TableCell component="th" scope="row" sx={{color: tab.color_1}}>
+                                                                    {tab.text_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {tab.year1_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {tab.year2_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {tab.year3_1}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    sx={{border: 1, fontWeight: 'bold', color: tab.color_1}}
+                                                                    align="center">
+                                                                    {tab.avg_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.avg_col_1}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.avg_tot_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={2}
+                                                                           align="center">
+                                                                    {tab.score}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} rowSpan={2}
+                                                                           align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.score_col}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.score_tot}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                            <TableRow sx={{margin: 0, color: tab.color_2}}
+                                                                      key={`double-${index}-02`}>
+                                                                <TableCell component="th" scope="row">
+                                                                    {tab.text_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color}} align="center">
+                                                                    {tab.year1_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {tab.year2_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {tab.year3_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                                    {tab.avg_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.avg_col_2}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.avg_tot_2}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        </React.Fragment>
+                                                    )
+                                                }
+                                                if (tab.type === "quad") {
+                                                    return (<React.Fragment key={`quad-${index}`}>
+                                                            <TableRow key={`quad-${index}-1`} sx={{margin: 0}}>
+                                                                <TableCell sx={{color: tab.color_1}} component="th" scope="row">
+                                                                    {tab.text_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {tab.year1_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {tab.year2_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {tab.year3_1}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    sx={{border: 1, color: tab.color_1, fontWeight: 'bold'}}
+                                                                    align="center">
+                                                                    {tab.avg_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_1}} align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.avg_col_1}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.avg_tot_1}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={4}
+                                                                           align="center">
+                                                                    {tab.score}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} rowSpan={4}
+                                                                           align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.score_col}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.score_tot}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                            <TableRow key={`quad-${index}-2`} sx={{margin: 0}}>
+                                                                <TableCell component="th" scope="row">
+                                                                    {tab.text_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {tab.year1_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {tab.year2_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {tab.year3_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                                    {tab.avg_2}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1}} align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.avg_col_2}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.avg_tot_2}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                            <TableRow key={`quad-${index}-3`} sx={{margin: 0}}>
+                                                                <TableCell component="th" scope="row" sx={{color: tab.color_3}}>
+                                                                    {tab.text_3}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_3}} align="center">
+                                                                    {tab.year1_3}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_3}} align="center">
+                                                                    {tab.year2_3}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_3}} align="center">
+                                                                    {tab.year3_3}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    sx={{border: 1, color: tab.color_3, fontWeight: 'bold'}}
+                                                                    align="center">
+                                                                    {tab.avg_3}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_3}} align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.avg_col_3}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.avg_tot_3}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                            <TableRow key={`quad-${index}-4`} sx={{margin: 0}}>
+                                                                <TableCell component="th" scope="row" sx={{color: tab.color_4}}>
+                                                                    {tab.text_4}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_4}} align="center">
+                                                                    {tab.year1_4}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_4}} align="center">
+                                                                    {tab.year2_4}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_4}} align="center">
+                                                                    {tab.year3_4}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    sx={{border: 1, color: tab.color_4, fontWeight: 'bold'}}
+                                                                    align="center">
+                                                                    {tab.avg_4}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, color: tab.color_4}} align="center">
+                                                                    {t("kpi_table.collective_letter")}: {tab.avg_col_4}<br/>
+                                                                    {t("kpi_table.total_letter")}: {tab.avg_tot_4}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        </React.Fragment>
+                                                    )
+                                                }
+                                                if (tab.type === "4-wide") {
+                                                    return (
+                                                        <TableRow key={`4wide-${index}`} sx={{margin: 0}}>
                                                             <TableCell component="th" scope="row">
-                                                                {tab.text_2}
+                                                                {tab.text}
+                                                            </TableCell>
+                                                            <TableCell sx={{border: 1}} colSpan={4} align="center">
+                                                                {tab.avg}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
-                                                                {tab.year1_2}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
-                                                                {tab.year2_2}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1}} align="center">
-                                                                {tab.year3_2}
+                                                                {t("kpi_table.collective_letter")}: {tab.avg_col}<br/>
+                                                                {t("kpi_table.total_letter")}: {tab.avg_tot}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                                                {tab.avg_2}
+                                                                {tab.score}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.avg_col_2}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.avg_tot_2}
+                                                                {t("kpi_table.collective_letter")}: {tab.score_col}<br/>
+                                                                {t("kpi_table.total_letter")}: {tab.score_tot}
                                                             </TableCell>
                                                         </TableRow>
-                                                        <TableRow key={`quad-${index}-3`}  sx={{margin: 0}} >
-                                                            <TableCell component="th" scope="row" sx={{color: tab.color_3}}>
-                                                                {tab.text_3}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
-                                                                {tab.year1_3}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
-                                                                {tab.year2_3}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
-                                                                {tab.year3_3}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_3, fontWeight: 'bold'}} align="center">
-                                                                {tab.avg_3}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_3}} align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.avg_col_3}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.avg_tot_3}
-                                                            </TableCell>
-                                                        </TableRow>
-                                                        <TableRow key={`quad-${index}-4`}  sx={{margin: 0}} >
-                                                            <TableCell component="th" scope="row" sx={{color: tab.color_4}}>
-                                                                {tab.text_4}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
-                                                                {tab.year1_4}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
-                                                                {tab.year2_4}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
-                                                                {tab.year3_4}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_4, fontWeight: 'bold'}} align="center">
-                                                                {tab.avg_4}
-                                                            </TableCell>
-                                                            <TableCell sx={{border: 1, color: tab.color_4}} align="center">
-                                                                {t("kpi_table.collective_letter")}: {tab.avg_col_4}<br />
-                                                                {t("kpi_table.total_letter")}: {tab.avg_tot_4}
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    </React.Fragment>
-                                                )
+                                                    )
+                                                }
                                             }
-                                            if (tab.type === "4-wide") {
-                                                return (
-                                                    <TableRow key={`4wide-${index}`}  sx={{margin: 0}} >
-                                                        <TableCell component="th" scope="row">
-                                                            {tab.text}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} colSpan={4} align="center">
-                                                            {tab.avg}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {t("kpi_table.collective_letter")}: {tab.avg_col}<br />
-                                                            {t("kpi_table.total_letter")}: {tab.avg_tot}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                                            {tab.score}
-                                                        </TableCell>
-                                                        <TableCell sx={{border: 1}} align="center">
-                                                            {t("kpi_table.collective_letter")}: {tab.score_col}<br />
-                                                            {t("kpi_table.total_letter")}: {tab.score_tot}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )
-                                            }
+                                        )
                                         }
-                                    )
-                                    }
-                                    <TableRow sx={{margin: 0}} key={"total_score"}>
-                                        <TableCell colSpan={5} align="right">
-                                            {t("kpi_table.total_score")}:
-                                        </TableCell>
-                                        <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                            {kpi.total.score}
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow sx={{margin: 0}} key={"total_money"}>
-                                        <TableCell colSpan={5} align="right">
-                                            {t("kpi_table.payout_money")}:
-                                        </TableCell>
-                                        <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
-                                            &euro;{kpi.total.money},-
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        }
-                    </TableContainer>
-                </Card>
+                                        <TableRow sx={{margin: 0}} key={"total_score"}>
+                                            <TableCell colSpan={5} align="right">
+                                                {t("kpi_table.total_score")}:
+                                            </TableCell>
+                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                {kpi.total.score}
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow sx={{margin: 0}} key={"total_money"}>
+                                            <TableCell colSpan={5} align="right">
+                                                {t("kpi_table.payout_money")}:
+                                            </TableCell>
+                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                &euro;{kpi.total.money},-
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            }
+                        </TableContainer>
+                    </Card>
+                </Grid>
             </Grid>
-        </Grid>
+            <Dialog open={trendOpen} maxWidth="xl" fullWidth={true} onClose={closeTrend}>
+                <DialogContent>
+                    <Grid
+                        container
+                        spacing={2}
+                        columns={12}
+                        sx={{mb: (theme) => theme.spacing(2), mt: 2}}
+                    >
+                        <Grid size={{xs: 11, lg: 11}}>
+                            <Stack direction="row" gap={2}>
+                                <AvTimerIcon/>
+                                <Typography component="h6" variant="h6">
+                                    {t("kpi_table.trend_title")}
+                                </Typography>
+                            </Stack>
+                            <Typography variant="body2">
+                                {t("kpi_table.trend_explanation")}
+                            </Typography>
+                            <TrendDisplay oldresult={oldResult} newresult={kpi} />
+                        </Grid>
+                        <Grid size={{xs: 1, lg: 1}}>
+                            <IconButton
+                                onClick={closeTrend}
+                            >
+                                <CloseIcon/>
+                            </IconButton>
+                        </Grid>
+                    </Grid>
+                </DialogContent>
+            </Dialog>
+        </React.Fragment>
     )
         ;
 }

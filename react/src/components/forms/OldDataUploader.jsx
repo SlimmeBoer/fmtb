@@ -39,7 +39,7 @@ const OldDataUploader = () => {
 
             // Assuming the Laravel backend accepts file upload via /api/upload
             axiosClient
-                .post("/olddata/upload", formData, {
+                .post("/oldresults/upload", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },

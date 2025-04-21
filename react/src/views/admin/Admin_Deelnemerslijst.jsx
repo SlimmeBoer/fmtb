@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import CenteredLoading from "../../components/visuals/CenteredLoading.jsx";
 import Grid from "@mui/material/Grid2";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
-import {TextareaAutosize, TextField} from "@mui/material";
+import {TextareaAutosize} from "@mui/material";
 
 export default function Admin_Deelnemerslijst() {
 

@@ -1,4 +1,3 @@
-
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -8,7 +7,6 @@ import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import {
     Button, Dialog, DialogActions, DialogContent, DialogContentText,
     DialogTitle,
-    Link,
     Table,
     TableBody,
     TableCell,
@@ -24,6 +22,8 @@ import Grid from "@mui/material/Grid2";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import OldDataUploader from "../../components/forms/OldDataUploader.jsx";
+import AvTimerIcon from '@mui/icons-material/AvTimer';
+
 export default function Admin_OldResults() {
 
     const {t} = useTranslation();
@@ -82,13 +82,13 @@ export default function Admin_OldResults() {
                        pt: 1.5, pb: 4,
                    }}>
                 <Stack direction="row" gap={2}>
-                    <ContactSupportIcon/>
+                    <AvTimerIcon/>
                     <Typography component="h6" variant="h6">
                         {t("old_results.title")}
                     </Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
-                    <Button variant="outlined" startIcon={<AddIcon/>} onClick={() => setDialogUploadOpen(true)} >
+                    <Button variant="outlined" startIcon={<AddIcon/>} onClick={() => setDialogUploadOpen(true)}>
                         {t("general.add")}
                     </Button>
                 </Stack>
@@ -96,32 +96,33 @@ export default function Admin_OldResults() {
             <Typography variant="body2">
                 {t("old_results.explanation")}
             </Typography>
-            {loading && <CenteredLoading />}
+            {loading && <CenteredLoading/>}
             {!loading &&
-            <TableContainer sx={{mt:4}}>
-                <Table size="small">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>{t("old_results.header_filename")}</TableCell>
-                            <TableCell>{t("old_results.header_ubn")}</TableCell>
-                            <TableCell>{t("old_results.header_final_year")}</TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {oldresults.map((or,index) => (
-                            <TableRow key={index}>
-                                <TableCell>{or.filename}</TableCell>
-                                <TableCell>{or.ubn}</TableCell>
-                                <TableCell>{or.final_year}</TableCell>
-                                <TableCell>
-                                    <Button onClick={() => handleDeleteClick(or.id)} color="secondary">{t("general.delete")}</Button>
-                                </TableCell>
+                <TableContainer sx={{mt: 4}}>
+                    <Table size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>{t("old_results.header_filename")}</TableCell>
+                                <TableCell>{t("old_results.header_ubn")}</TableCell>
+                                <TableCell>{t("old_results.header_final_year")}</TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>}
+                        </TableHead>
+                        <TableBody>
+                            {oldresults.map((or, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{or.filename}</TableCell>
+                                    <TableCell>{or.ubn}</TableCell>
+                                    <TableCell>{or.final_year}</TableCell>
+                                    <TableCell>
+                                        <Button onClick={() => handleDeleteClick(or.id)}
+                                                color="secondary">{t("general.delete")}</Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>}
 
             <Dialog open={dialogDeleteOpen} onClose={() => setDialogDeleteOpen(false)}>
                 <DialogTitle>{t("general.are_you_sure")}</DialogTitle>
@@ -143,7 +144,17 @@ export default function Admin_OldResults() {
                         sx={{mb: (theme) => theme.spacing(2), mt: 2}}
                     >
                         <Grid size={{xs: 11, lg: 11}}>
-                            <OldDataUploader />
+                            <Stack direction="row" gap={2}>
+                                <AvTimerIcon/>
+                                <Typography component="h6" variant="h6">
+                                    {t("old_results.upload_form_title")}
+                                </Typography>
+
+                            </Stack>
+                            <Typography variant="body2">
+                                {t("old_results.upload_form_explanation")}
+                            </Typography>
+                            <OldDataUploader/>
                         </Grid>
                         <Grid size={{xs: 1, lg: 1}}>
                             <IconButton

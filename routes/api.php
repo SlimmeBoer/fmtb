@@ -106,7 +106,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/klwdump', [KlwDumpController::class, 'index']);
     Route::delete('/klwdump/{klwDump}', [KlwDumpController::class, 'destroy']);
 
-    Route::put('/olddata/upload', [OldResultController::class, 'upload']);
+    Route::put('/oldresults/upload', [OldResultController::class, 'upload']);
+    Route::get('/oldresults/getbycompany/{id}', [OldResultController::class, 'getByCompany']);
 
     Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
     Route::get('/umdlkpi/getscorescurrentcompany', array(UmdlKpiValuesController::class, 'getscorescurrentcompany'));

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateOldResultRequest;
 use App\Http\Resources\OldResultResource;
 use App\Libraries\GisParser\GisParser;
 use App\Libraries\ResultParser\ResultParser;
+use App\Models\Company;
 use App\Models\GisDump;
 use App\Models\OldResult;
 use App\Models\RawFile;
@@ -67,6 +68,27 @@ class OldResultController extends Controller
     public function update(UpdateOldResultRequest $request, OldResult $oldResult)
     {
         //
+    }
+
+    public function getByCompany($company_id)
+    {
+        $company = Company::find($company_id);
+
+        if ($company)
+        {
+            $oldresult = OldResult::where('ubn', $company->ubn)->first();
+
+            if ($oldresult)
+            {
+                return response()->json(['oldresult' => $oldresult]);
+            }
+            else {
+                return response()->json(['message' => 'Company found, but no old results found']);
+            }
+        }
+        else {
+            return response()->json(['message' => 'No company found']);
+        }
     }
 
     /**
