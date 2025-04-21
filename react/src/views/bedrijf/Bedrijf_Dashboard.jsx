@@ -99,10 +99,10 @@ const Bedrijf_Dashboard = () => {
                             />
                         </Grid>
                         <Grid size={{xs: 8, sm: 8, md: 8}}>
-                            {loading && <CenteredLoading />}
-                            {!loading && scorespublished && <BedrijfScores />}
-                            {!loading && !scorespublished && !datacomplete && <BedrijfAanleveren />}
-                            {!loading && !scorespublished && datacomplete && <BedrijfCompleet />}
+                            {loading ? <CenteredLoading /> : null}
+                            {!loading && scorespublished ? <BedrijfScores /> : null}
+                            {!loading && !scorespublished && !datacomplete ? <BedrijfAanleveren /> : null}
+                            {!loading && !scorespublished && datacomplete ? <BedrijfCompleet /> : null}
                         </Grid>
                     </Grid>
                 </Paper>
