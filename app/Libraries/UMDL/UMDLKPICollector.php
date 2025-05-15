@@ -27,6 +27,7 @@ class UMDLKPICollector
         "ureum" => 0.0,
         "bkg_prod_fpcm" => 0.0,
         "dzhm_co2_melkprod" => 0.0,
+        "dzhm_co2i_melkprod" => 0.0,
         "dzhm_eiwit_pcrants" => 0.0,
         "dzhm_blijgras_aand" => 0.0,
         "elek_prod_kwh" => 0.0,
@@ -61,10 +62,35 @@ class UMDLKPICollector
         $umdlkpivalues->kpi3 = $this->vars["dzhm_nh3_bedrha"];
         $umdlkpivalues->kpi4 = $this->vars["weidmk_dgn"] * $this->vars["weidmk_urn"];
         $umdlkpivalues->kpi5 = $this->vars["ureum"];
-        $umdlkpivalues->kpi6a = ($this->vars["bkg_prod_fpcm"] * $this->vars["dzhm_co2_melkprod"]) / $opp_totaal / 1000;
-        $umdlkpivalues->kpi6b = ($this->vars["bkg_prod_fpcm"] * ($this->vars["dzhm_co2_melkprod"] - (3.5 * $percentage_veen))) / $opp_totaal / 1000;
-        $umdlkpivalues->kpi6c = $this->vars["dzhm_co2_melkprod"];
-        $umdlkpivalues->kpi6d = $this->vars["dzhm_co2_melkprod"] - (3.5 * $percentage_veen);
+
+        // Kpi 6a
+        if ($year === '2024') {
+            $umdlkpivalues->kpi6a = ($this->vars["bkg_prod_fpcm"] * $this->vars["dzhm_co2i_melkprod"]) / $opp_totaal / 1000;
+        } else {
+            $umdlkpivalues->kpi6a = ($this->vars["bkg_prod_fpcm"] * $this->vars["dzhm_co2_melkprod"]) / $opp_totaal / 1000;
+        }
+
+        // Kpi 6b
+        if ($year === '2024') {
+            $umdlkpivalues->kpi6b = ($this->vars["bkg_prod_fpcm"] * $this->vars["dzhm_co2_melkprod"]) / $opp_totaal / 1000;
+        } else {
+            $umdlkpivalues->kpi6b = ($this->vars["bkg_prod_fpcm"] * ($this->vars["dzhm_co2_melkprod"] - (3.5 * $percentage_veen))) / $opp_totaal / 1000;
+        }
+        // Kpi 6c
+        if ($year === '2024') {
+            $umdlkpivalues->kpi6c = $this->vars["dzhm_co2i_melkprod"];
+        } else {
+            $umdlkpivalues->kpi6c = $this->vars["dzhm_co2_melkprod"];
+        }
+
+        // Kpi 6d
+        if ($year === '2024')
+        {
+            $umdlkpivalues->kpi6d = $this->vars["dzhm_co2_melkprod"];
+        } else {
+            $umdlkpivalues->kpi6d = $this->vars["dzhm_co2_melkprod"] - (3.5 * $percentage_veen);
+        }
+
         $umdlkpivalues->kpi7 = $this->vars["dzhm_eiwit_pcrants"];
         $umdlkpivalues->kpi8 = 0;
         $umdlkpivalues->kpi9 = $this->vars["dzhm_blijgras_aand"];

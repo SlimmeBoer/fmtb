@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gis_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dump_id');
-            $table->integer('kvk');
+            $table->bigInteger('kvk');
             $table->string('eenheid_code');
             $table->float('lengte');
             $table->float('breedte');

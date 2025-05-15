@@ -43,7 +43,7 @@ class UMDLCompanyPropertiesWriter
             'company_id' => $company_id,
         ));
 
-        // All KPI-scoring properties to zero or false (has to be set manually)php artisan serve --host 0.0.0.0:8000
+        // All KPI-scoring properties to zero or false (has to be set manually)
         $umdlcompanyproperties->mbp = 0;
         $umdlcompanyproperties->website = false;
         $umdlcompanyproperties->ontvangstruimte = false;

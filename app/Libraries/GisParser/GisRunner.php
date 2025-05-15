@@ -46,7 +46,7 @@ class GisRunner
             $bbmcode = $eenheid_code;
         }
         // 2. Four characters, means it's an ANLB-package
-        elseif (strlen($eenheid_code) == 4 && preg_match('/^[A-Za-z]\d{2}[A-Za-z]$/', $eenheid_code))
+        elseif (strlen($eenheid_code) >= 4 && preg_match('/^[A-Za-z]\d{2}[A-Za-z]$/', substr($eenheid_code, 0, 4)))
         {
             $anlb_numbers = substr($eenheid_code, 1, 2);
             $anlb_letter = substr($eenheid_code, 3, 1);

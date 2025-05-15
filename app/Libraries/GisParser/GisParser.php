@@ -7,6 +7,7 @@ use App\Models\GisRecord;
 use App\Models\UmdlCompanyProperties;
 use App\Models\UmdlKpiValues;
 use Illuminate\Support\Facades\Log;
+use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use Saloon\XmlWrangler\Exceptions\MissingNodeException;
 use Saloon\XmlWrangler\Exceptions\MultipleNodesFoundException;
@@ -17,13 +18,26 @@ use Saloon\XmlWrangler\Exceptions\XmlReaderException;
 class GisParser
 {
 
+    private function getReader($filename)
+    {
+        if (pathinfo($filename, PATHINFO_EXTENSION) === "xls")
+        {
+            return new Xls();
+        }
+        else
+        {
+            return new Xlsx();
+        }
+    }
+
+
     /**
      * @param $excel_file
      * @return bool
      */
     public function checkCorrectSheet($excel_file): bool
     {
-        $reader = new Xlsx();
+        $reader = $this->getReader($excel_file);
         $spreadsheet = $reader->load($excel_file);
 
         if ($spreadsheet->getSheetByName('Beheereenheden collectief') !== null) {
@@ -39,7 +53,7 @@ class GisParser
      */
     public function checkCorrectHeaders($excel_file): bool
     {
-        $reader = new Xlsx();
+        $reader = $this->getReader($excel_file);
         $spreadsheet = $reader->load($excel_file);
         $worksheet = $spreadsheet->getSheetByName('Beheereenheden collectief');
 
@@ -59,7 +73,7 @@ class GisParser
         $totalWritten = 0;
 
         // Get all fields
-        $reader = new Xlsx();
+        $reader = $this->getReader($excel_file);
         $spreadsheet = $reader->load($excel_file);
         $worksheet = $spreadsheet->getSheetByName('Beheereenheden collectief');
         $highestRow = $worksheet->getHighestDataRow();

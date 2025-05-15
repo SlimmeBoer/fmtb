@@ -21,10 +21,6 @@ const DumpAccordion = ({ dump, isOpen, toggleDump }) => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell>Itemnr.</TableCell>
-                                <TableCell>Signaalnr.</TableCell>
-                                <TableCell>Signaalcode</TableCell>
                                 <TableCell>Categorie</TableCell>
                                 <TableCell>Onderwerp</TableCell>
                                 <TableCell>Soort</TableCell>
@@ -37,10 +33,6 @@ const DumpAccordion = ({ dump, isOpen, toggleDump }) => {
                         <TableBody>
                             {dump.signals.map((signal) => (
                                 <TableRow key={signal.id}>
-                                    <TableCell>{signal.id}</TableCell>
-                                    <TableCell>{signal.item_nummer}</TableCell>
-                                    <TableCell>{signal.signaal_nummer}</TableCell>
-                                    <TableCell>{signal.signaal_code}</TableCell>
                                     <TableCell>{signal.categorie}</TableCell>
                                     <TableCell>{signal.onderwerp}</TableCell>
                                     <TableCell>{signal.soort}</TableCell>

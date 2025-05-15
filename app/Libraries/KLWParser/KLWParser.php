@@ -101,7 +101,9 @@ class KLWParser
                 foreach ($section_values as $subsection_key => $subsection_values) {
                     foreach ($subsection_values as $field_key => $field_value) {
 
-                        $field_key = str_replace('dzh_', 'dzhm_', $field_key);
+                        if ($year === '2021') {
+                            $field_key = str_replace('dzh_', 'dzhm_', $field_key);
+                        }
                         $field_value = str_replace(',', '.', $field_value);
 
                         // Only execute this code if the full import is checked
@@ -138,11 +140,12 @@ class KLWParser
                         if (array_key_exists($field_key, $collector->vars)) {
                             $collector->vars[$field_key] = $field_value;
                         }
-                        // Set vars of UMDL calculator
-                        if (array_key_exists($field_key, $company_properties->vars)) {
-                            $company_properties->vars[$field_key] = $field_value;
+                        // Set vars of UMDL calculator.
+                        if ($year === '2024') {
+                            if (array_key_exists($field_key, $company_properties->vars)) {
+                                $company_properties->vars[$field_key] = $field_value;
+                            }
                         }
-
                         ++$totalParsed;
                     }
                 }
@@ -155,8 +158,9 @@ class KLWParser
 
         // Calc KPI values
         $collector_record = $collector->saveKPIs($company_id, $year);
-        $properties_record = $company_properties->saveProperties($company_id);
-
+        if ($year === '2024') {
+            $properties_record = $company_properties->saveProperties($company_id);
+        }
         return $totalParsed;
     }
 

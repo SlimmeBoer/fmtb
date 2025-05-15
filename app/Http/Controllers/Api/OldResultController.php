@@ -101,8 +101,8 @@ class OldResultController extends Controller
 
         if ($oldresult) {
             // Remove associated file from uploads
-            if ($oldresult->filename !== null && file_exists(public_path('uploads/oldresults/' . $oldresult->filename))) {
-                unlink(public_path('uploads/oldresults/'. $oldresult->filename));
+            if ($oldresult->filename !== null && file_exists(public_path('uploads/oldresult/' . $oldresult->filename))) {
+                unlink(public_path('uploads/oldresult/'. $oldresult->filename));
             }
 
             // Remove file from RAW files db
@@ -155,7 +155,7 @@ class OldResultController extends Controller
 
                     // 3. Save the physical file to the GIS uploads
 
-                    $file->move(public_path('uploads/oldresults/'), $newFileName);
+                    $file->move(public_path('uploads/oldresult/'), $newFileName);
 
                     // 4. Record the file as RawFile to the database
                     RawFile::firstOrCreate(array(

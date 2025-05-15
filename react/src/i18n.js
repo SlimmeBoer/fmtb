@@ -6,6 +6,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import {DateTime} from 'luxon';
 
+const version = '20250515';
+
 i18n
     // i18next-http-backend
     // loads translations from your server
@@ -20,7 +22,11 @@ i18n
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
         debug: false,
+        cache: false,
         fallbackLng: 'nl-NL',
+        backend: {
+            loadPath: `/locales/{{lng}}/{{ns}}.json?v=${version}`
+        },
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
             // format: (value, format, lng) => { // legacy usage

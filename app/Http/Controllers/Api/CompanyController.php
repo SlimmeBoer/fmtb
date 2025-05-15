@@ -556,18 +556,23 @@ class CompanyController extends Controller
             return response('Bedrijf niet gevonden', 500);
         }
         else {
-            $company->bank_account = $request['bankNumber'];
-            $company->bank_account_name = $request['accountHolder'];
-            $company->data_compleet = true;
-            $company->save();
+            if ($request->validate(['bankNumber' => 'required|regex:/^NL[0-9]{2}[A-z0-9]{4}[0-9]{10}$/'])) {
+                $company->bank_account = $request['bankNumber'];
+                $company->bank_account_name = $request['accountHolder'];
+                $company->data_compleet = true;
+                $company->save();
 
-            SystemLog::create(array(
-                'user_id' => Auth::user()->id,
-                'type' => 'DATA COMPLETED',
-                'message' => 'Bedrijfsdata gecompleteerd: ' . $company->name,
-            ));
+                SystemLog::create(array(
+                    'user_id' => Auth::user()->id,
+                    'type' => 'DATA COMPLETED',
+                    'message' => 'Bedrijfsdata gecompleteerd: ' . $company->name,
+                ));
 
-            return response('Data succesvol verwerkt', 200);
+                return response('Data succesvol verwerkt', 200);
+            }
+            else {
+                return response('IBAN niet geldig.', 500);
+            }
 
         }
     }

@@ -45,14 +45,20 @@ const RawFilesOverview = ({}) => {
         setPage(newPage);
     };
 
-    const handleDownload = (file) => {
+    const handleDownload = async (file) => {
         const fileUrl = import.meta.env.VITE_API_BASE_URL + `/uploads/${file.type}/${file.filename}`;
+
+        const response = await fetch(fileUrl);
+        const blob = await response.blob();
+
+        const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
-        link.href = fileUrl;
-        link.download = file.filename; // Ensures it downloads instead of opening
+        link.href = url;
+        link.download = file.filename;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
     };
 
     return (

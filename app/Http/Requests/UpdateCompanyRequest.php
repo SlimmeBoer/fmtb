@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCompanyRequest extends FormRequest
@@ -30,7 +29,7 @@ class UpdateCompanyRequest extends FormRequest
             'brs' => 'required|string|max:15',
             'ubn' => 'required|string|max:15',
             'phone' => 'max:15',
-            'bank_account' => 'max:25',
+            'bank_account' => 'required|regex:/^NL[0-9]{2}[A-z0-9]{4}[0-9]{10}$/',
             'bank_account_name' => 'max:50',
             'email' => 'max:50',
             'type' =>  'required|string|max:50',
@@ -38,5 +37,12 @@ class UpdateCompanyRequest extends FormRequest
             'data_compleet' => 'required|boolean'
         ];
 
+    }
+
+    public function messages(): array
+    {
+        return [
+            'bank_account.regex' => 'Bankrekeningnummer is geen geldig IBAN-formaat (gebruik geen spaties)',
+        ];
     }
 }
