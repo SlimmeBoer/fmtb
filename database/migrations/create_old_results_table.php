@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('old_results', function (Blueprint $table) {
             $table->id();
-            $table->integer('ubn');
+            $table->integer('brs');
             $table->integer("final_year");
             $table->string("filename");
             $table->float("result_kpi1a")->nullable();

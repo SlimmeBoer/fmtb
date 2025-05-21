@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('umdl_company_properties', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id');
+            $table->integer('year');
             $table->integer('mbp')->nullable();
             $table->boolean('website')->nullable();
             $table->boolean('ontvangstruimte')->nullable();
@@ -39,6 +40,9 @@ return new class extends Migration
             $table->float('veebenutting_n')->nullable();
             $table->float('bodembenutting_n')->nullable();
             $table->float('bedrijfsbenutting_n')->nullable();
+            $table->float('g_co2_per_kg_meetmelk')->nullable();
+            $table->float('kg_co2_per_ha')->nullable();
+            $table->string('grondsoort')->nullable();
             $table->timestamps();
         });
     }

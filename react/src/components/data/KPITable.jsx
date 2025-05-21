@@ -2,6 +2,7 @@ import * as React from 'react';
 import {useEffect, useState} from "react";
 import axiosClient from "../../axios_client.js";
 import {
+    Alert,
     Button,
     Dialog,
     DialogContent,
@@ -55,6 +56,8 @@ export default function KPITable(props) {
                     setTableData(makeTable(data));
                 })
                 .catch(() => {
+                    setKPI({});
+                    setTableData([]);
                     setLoading(false);
                 })
         }
@@ -396,6 +399,9 @@ export default function KPITable(props) {
                         </Stack>
                         <TableContainer sx={{minHeight: 100,}}>
                             {loading && <CenteredLoading/>}
+                            {!loading && isObjectEmpty(kpi) &&
+                                <Alert severity="error">{t("kpi_table.error_loading_data")}</Alert>
+                            }
                             {!loading && !isObjectEmpty(kpi) &&
                                 <Table sx={{maxWidth: 1000, mt: 2}} size="small" aria-label="simple table">
                                     <TableHead>

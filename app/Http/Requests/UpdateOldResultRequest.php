@@ -22,7 +22,7 @@ class UpdateOldResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ubn' => 'required|integer',
+            'brs' => 'required|integer',
             'final_year' => 'required|integer',
             'filename' => 'required|string',
             'result_kpi1a' => 'float',

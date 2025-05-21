@@ -72,7 +72,7 @@ export default function CompanyPickerAnon(props) {
                         <AgricultureIcon sx={{fontSize: '1rem'}}/>
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={c.name} secondary={c.address+ ', ' +c.postal_code+', '+c.city}/>
+                <ListItemText primary={"Bedrijf " + c.id} secondary={c.address+ ', ' +c.postal_code+', '+c.city}/>
             </MenuItem>))}
 
         </Select>

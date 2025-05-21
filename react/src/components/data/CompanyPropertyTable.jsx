@@ -20,6 +20,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import EditableField from "../forms/EditableField.jsx";
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
+import {formatNumber} from "../../helpers/formatNumber.js";
 
 
 export default function CompanyPropertyTable(props) {
@@ -46,6 +47,9 @@ export default function CompanyPropertyTable(props) {
         veebenutting_n: '',
         bodembenutting_n: '',
         bedrijfsbenutting_n: '',
+        g_co2_per_kg_meetmelk: '',
+        kg_co2_per_ha: '',
+        grondsoort: '',
     };
 
     const fieldLabels = {
@@ -63,6 +67,29 @@ export default function CompanyPropertyTable(props) {
         veebenutting_n: t("company_property_table.veebenutting_n"),
         bodembenutting_n: t("company_property_table.bodembenutting_n"),
         bedrijfsbenutting_n: t("company_property_table.bedrijfsbenutting_n"),
+        g_co2_per_kg_meetmelk: t("company_property_table.g_co2_per_kg_meetmelk"),
+        kg_co2_per_ha: t("company_property_table.kg_co2_per_ha"),
+        grondsoort: t("company_property_table.grondsoort"),
+    };
+
+    const fieldUnits = {
+        opp_totaal: t("company_property_table_units.hectare"),
+        opp_totaal_subsidiabel: t("company_property_table_units.hectare"),
+        melkkoeien: t("company_property_table_units.pieces"),
+        meetmelk_per_koe: t("company_property_table_units.kilogram"),
+        meetmelk_per_ha: t("company_property_table_units.kilogram"),
+        jongvee_per_10mk: t("company_property_table_units.pieces"),
+        gve_per_ha: t("company_property_table_units.nothing"),
+        kunstmest_per_ha: t("company_property_table_units.nothing"),
+        opbrengst_grasland_per_ha: t("company_property_table_units.nothing"),
+        re_kvem: t("company_property_table_units.nothing"),
+        krachtvoer_per_100kg_melk: t("company_property_table_units.nothing"),
+        veebenutting_n: t("company_property_table_units.nothing"),
+        bodembenutting_n: t("company_property_table_units.nothing"),
+        bedrijfsbenutting_n: t("company_property_table_units.nothing"),
+        g_co2_per_kg_meetmelk: t("company_property_table_units.gram"),
+        kg_co2_per_ha: t("company_property_table_units.kilogram"),
+        grondsoort: t("company_property_table_units.nothing"),
     };
 
     const initialErrorState = Object.keys(initialFormState).reduce((acc, key) => {
@@ -178,7 +205,8 @@ export default function CompanyPropertyTable(props) {
                                             <EditableField
                                                 key={key}
                                                 onChange={(value) => handleFieldChange(key, value)}
-                                                value={tempformData[key]}
+                                                value={formatNumber(tempformData[key])}
+                                                sublabel={fieldUnits[key]}
                                                 error={formErrors[key]}
                                                 isEditing={isEditing}
                                             />

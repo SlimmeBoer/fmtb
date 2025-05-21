@@ -102,6 +102,7 @@ export default function Admin_Users() {
                                 <TableCell>{t('users.header_id')}</TableCell>
                                 <TableCell>{t('users.header_full_name')}</TableCell>
                                 <TableCell>{t('users.header_email')}</TableCell>
+                                <TableCell>{t('users.header_brs')}</TableCell>
                                 <TableCell>{t('users.header_role')}</TableCell>
                                 <TableCell>{t('users.header_actions')}</TableCell>
                             </TableRow>
@@ -115,9 +116,10 @@ export default function Admin_Users() {
                                     <TableCell width="10%" component="th" scope="row">
                                         {u.id}
                                     </TableCell>
-                                    <TableCell width="30%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
-                                    <TableCell width="20%">{u.email}</TableCell>
-                                    <TableCell width="20%">{u.role}</TableCell>
+                                    <TableCell width="25%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
+                                    <TableCell width="15%">{u.email}</TableCell>
+                                    <TableCell width="15%">{u.brs}</TableCell>
+                                    <TableCell width="15%">{u.role}</TableCell>
                                     <TableCell width="20%">
                                         <IconButton onClick={() => handleClickOpen(u.id)} color="secondary" variant="outlined">
                                             <EditIcon/>

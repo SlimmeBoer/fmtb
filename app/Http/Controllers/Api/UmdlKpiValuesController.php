@@ -90,7 +90,7 @@ class UmdlKpiValuesController extends Controller
      */
     public function getscorescurrentcompany() : array
     {
-        $company = Company::where('ubn',Auth::user()->ubn)->first();
+        $company = Company::where('brs',Auth::user()->brs)->first();
 
         if (!$company) {
             return array("total" => ["score" => 0, "money" => 0]);
@@ -114,14 +114,18 @@ class UmdlKpiValuesController extends Controller
             $collective_id = Auth::user()->collectives()->first()->id;
         }
 
-        $collective_companies = UmdlCollectiveCompany::where('collective_id',$collective_id)->get();
+        $companyIds = UmdlCollectiveCompany::where('collective_id', $collective_id)
+            ->pluck('company_id');
 
-        foreach ($collective_companies as $collective_company)
+        // Step 3: Get companies with klwDumps
+        $companies = Company::whereIn('id', $companyIds)
+            ->has('klwDumps')
+            ->get();
+
+        foreach ($companies as $company)
         {
-            $company = Company::where('id', $collective_company->company_id)->first();
-
-            $company_scores = $umdl_scores->getScores($collective_company->company_id);
-            $companyArray = array($collective_company->company_id => array (
+            $company_scores = $umdl_scores->getScores($company->id);
+            $companyArray = array($company->id => array (
                 'company_id' => $company->id,
                 'company_name' => $company->name,
                 'points' => $company_scores['total']['score'],
@@ -139,7 +143,7 @@ class UmdlKpiValuesController extends Controller
     {
         $umdl_scores = new UMDLKPIScores();
         $allTotals = array();
-        $companies = Company::all();
+        $companies = Company::has('klwDumps')->get();
 
         foreach ($companies as $company)
         {
@@ -160,7 +164,7 @@ class UmdlKpiValuesController extends Controller
     {
         $umdl_scores = new UMDLKPIScores();
         $allTotals = array();
-        $companies = Company::all();
+        $companies = Company::has('klwDumps')->get();
 
         foreach ($companies as $company)
         {

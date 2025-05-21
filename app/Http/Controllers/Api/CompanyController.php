@@ -526,7 +526,7 @@ class CompanyController extends Controller
     public function getPublishedCompleted()
     {
         // Get company completion status
-        $company = Company::where('ubn',Auth::user()->ubn)->first();
+        $company = Company::where('brs',Auth::user()->brs)->first();
         $data_compleet = false;
         $company_id = 0;
 
@@ -550,13 +550,13 @@ class CompanyController extends Controller
      */
     public function saveData(Request $request) : Response
     {
-        $company = Company::where('ubn',Auth::user()->ubn)->first();
+        $company = Company::where('brs',Auth::user()->brs)->first();
 
         if (!$company) {
             return response('Bedrijf niet gevonden', 500);
         }
         else {
-            if ($request->validate(['bankNumber' => 'required|regex:/^NL[0-9]{2}[A-z0-9]{4}[0-9]{10}$/'])) {
+            if ($request->validate(['bankNumber' => 'required|regex:/^NL[0-9]{2}[A-z0-9]{4}[0-9]{10}$/i'])) {
                 $company->bank_account = $request['bankNumber'];
                 $company->bank_account_name = $request['accountHolder'];
                 $company->data_compleet = true;
@@ -575,5 +575,27 @@ class CompanyController extends Controller
             }
 
         }
+    }
+
+    public function getViewingAllowed(Company $company)
+    {
+        $user = Auth::user();
+
+        // If the user does NOT have the 'collectief' role, allow access
+        if ($user->hasRole('programmaleider') || $user->hasRole('provincie') || $user->hasRole('admin')) {
+            return true;
+        }
+
+        // Get the collective IDs the user has access to
+        $userCollectiveIds = $user->collectives()->pluck('umdl_collectives.id');
+
+        // Check if the company is linked to any of the user's collectives
+        $data = UmdlCollectiveCompany::where('company_id', $company->id)
+            ->whereIn('collective_id', $userCollectiveIds)
+            ->value('collective_id');
+
+        $result = ($data !== null);
+
+        return response()->json(['allowed' => $result]);
     }
 }

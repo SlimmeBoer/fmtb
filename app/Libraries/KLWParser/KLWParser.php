@@ -141,11 +141,10 @@ class KLWParser
                             $collector->vars[$field_key] = $field_value;
                         }
                         // Set vars of UMDL calculator.
-                        if ($year === '2024') {
-                            if (array_key_exists($field_key, $company_properties->vars)) {
-                                $company_properties->vars[$field_key] = $field_value;
-                            }
+                        if (array_key_exists($field_key, $company_properties->vars)) {
+                            $company_properties->vars[$field_key] = $field_value;
                         }
+
                         ++$totalParsed;
                     }
                 }
@@ -158,9 +157,7 @@ class KLWParser
 
         // Calc KPI values
         $collector_record = $collector->saveKPIs($company_id, $year);
-        if ($year === '2024') {
-            $properties_record = $company_properties->saveProperties($company_id);
-        }
+        $properties_record = $company_properties->saveProperties($company_id);
         return $totalParsed;
     }
 

@@ -17,7 +17,7 @@ class OldResultResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'ubn' => $this->ubn,
+            'brs' => $this->brs,
             'final_year' => $this->final_year,
             'filename' => $this->filename,
             'result_kpi1a' => $this->result_kpi1a,

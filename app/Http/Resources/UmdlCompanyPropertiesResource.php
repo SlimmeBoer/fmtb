@@ -18,6 +18,7 @@ class UmdlCompanyPropertiesResource extends JsonResource
         return [
             'id' => $this->id,
             'company_id' => $this->company_id,
+            'year' => $this->year,
             'mbp' => $this->mbp,
             'website' => $this->website,
             'ontvangstruimte' => $this->ontvangstruimte,
@@ -43,6 +44,9 @@ class UmdlCompanyPropertiesResource extends JsonResource
             'veebenutting_n' => $this->veebenutting_n,
             'bodembenutting_n' => $this->bodembenutting_n,
             'bedrijfsbenutting_n' => $this->bedrijfsbenutting_n,
+            'g_co2_per_kg_meetmelk' => $this->g_co2_per_kg_meetmelk,
+            'kg_co2_per_ha' => $this->kg_co2_per_ha,
+            'grondsoort' => $this->grondsoort,
         ];
     }
 }

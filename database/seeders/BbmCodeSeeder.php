@@ -18,7 +18,7 @@ class BbmCodeSeeder extends Seeder
         BbmCode::factory()->create(['id' => 3, 'code' => 'BBM102', 'description' => 'Grasland met rustperiode tot 15 juni', 'weight' => 0.52,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 4, 'code' => 'BBM103', 'description' => '(Greppel) Plas-dras', 'weight' => 1.29,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 5, 'code' => 'BBM105', 'description' => 'Kruiden grasland rand', 'weight' => 1.00,'unit' => 'ha']);
-        BbmCode::factory()->create(['id' => 6, 'code' => 'BBM106', 'description' => 'Kruiden grasland rand', 'weight' => 0.32,'unit' => 'ha']);
+        BbmCode::factory()->create(['id' => 6, 'code' => 'BBM106', 'description' => 'Extensief beweid grasland', 'weight' => 0.32,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 7, 'code' => 'BBM107', 'description' => 'Bodemverbetering met ruige mest', 'weight' => 0.20,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 8, 'code' => 'BBM108', 'description' => 'Hoog waterpeil', 'weight' => 0.04,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 9, 'code' => 'BBM109', 'description' => 'Poel en klein historisch water', 'weight' => 5.00,'unit' => 'ha']);
@@ -46,10 +46,11 @@ class BbmCodeSeeder extends Seeder
         BbmCode::factory()->create(['id' => 31, 'code' => 'BBM151', 'description' => 'Kruidenrijk grasland (extensief)', 'weight' => 1.00,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 32, 'code' => 'BBM155', 'description' => 'Oude graslanden met kruiden (>20 jaar)', 'weight' => 0.40,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 33, 'code' => 'BBM171', 'description' => 'Bodemverbetering met organische stof', 'weight' => 0.20,'unit' => 'ha']);
-        BbmCode::factory()->create(['id' => 34, 'code' => 'BBM172', 'description' => 'Kunstmestvrij', 'weight' => 0.00,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 35, 'code' => 'BBM220a', 'description' => 'Nest en broedgelegenheid  op erf (licht)', 'weight' => 0.10,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 36, 'code' => 'BBM220b', 'description' => 'Nest en broedgelegenheid  op erf (zwaar)', 'weight' => 0.20,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 37, 'code' => 'BBM230a', 'description' => 'Opgaande beplanting op erf (licht)', 'weight' => 0.10,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 38, 'code' => 'BBM230b', 'description' => 'Opgaande beplanting op erf (zwaar)', 'weight' => 0.20,'unit' => 'ha']);
+        BbmCode::factory()->create(['id' => 39, 'code' => 'BBM420', 'description' => 'KlimaatBomen (UMDL klimaatbonus)', 'weight' => 0.01,'unit' => 'ha']);
+        BbmCode::factory()->create(['id' => 40, 'code' => 'BBM422', 'description' => 'Oude graslanden (UMDL klimaatbonus)', 'weight' => 0.01,'unit' => 'ha']);
     }
 }

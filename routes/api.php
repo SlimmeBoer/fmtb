@@ -64,6 +64,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/companies/completion', [CompanyController::class, 'getCompletion']);
     Route::get('/companies/publishedcompleted', [CompanyController::class, 'getPublishedCompleted']);
     Route::post('/companies/savedata', [CompanyController::class, 'saveData']);
+    Route::get('/companies/getviewingallowed/{company}', [CompanyController::class, 'getViewingAllowed']);
 
     Route::put('/companyproperties/update/{umdlcompanyproperties}', [UmdlCompanyPropertiesController::class, 'update']);
 

@@ -19,6 +19,7 @@ class UmdlCompanyProperties extends Model
      */
     protected $fillable = [
         'company_id',
+        'year',
         'mbp',
         'website',
         'ontvangstruimte',
@@ -44,5 +45,8 @@ class UmdlCompanyProperties extends Model
         'veebenutting_n',
         'bodembenutting_n',
         'bedrijfsbenutting_n',
+        'g_co2_per_kg_meetmelk',
+        'kg_co2_per_ha',
+        'grondsoort',
     ];
 }

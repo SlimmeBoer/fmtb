@@ -23,6 +23,7 @@ class UpdateUmdlCompanyPropertiesRequest extends FormRequest
     {
         return [
             'company_id' => 'required|integer',
+            'year' => 'required|integer',
             'mbp' => 'integer',
             'website' => 'boolean',
             'ontvangstruimte' => 'boolean',
@@ -48,6 +49,9 @@ class UpdateUmdlCompanyPropertiesRequest extends FormRequest
             'veebenutting_n' => 'numeric',
             'bodembenutting_n' => 'numeric',
             'bedrijfsbenutting_n' => 'numeric',
+            'g_co2_per_kg_meetmelk' => 'numeric',
+            'kg_co2_per_ha' => 'numeric',
+            'grondsoort'=> 'string',
         ];
     }
 }

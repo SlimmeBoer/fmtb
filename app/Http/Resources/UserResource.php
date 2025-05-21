@@ -30,7 +30,7 @@ class UserResource extends JsonResource
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'ubn' => $this->ubn,
+            'brs' => $this->brs,
             'role' => $this->roles->first()?->name, // Null-safe access
             'role_id' => $this->roles->first()?->id, // Null-safe access
         ];

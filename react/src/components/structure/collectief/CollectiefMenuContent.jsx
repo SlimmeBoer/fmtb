@@ -16,6 +16,7 @@ import ReportIcon from '@mui/icons-material/Report';
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import CropRotateIcon from "@mui/icons-material/CropRotate";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 
 export default function CollectiefMenuContent() {
 
@@ -34,6 +35,7 @@ export default function CollectiefMenuContent() {
     ];
 
     const settingItems = [
+        {text: t("collectief_menu.faq"), icon: <ContactSupportIcon/>, link: '/collectief/faq'},
         {text: t("collectief_menu.deelnemerslijst"), icon: <ContactMailIcon/>, link: '/collectief/deelnemerslijst'},
         {text: t("collectief_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/bbmkpis'},
         {text: t("collectief_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/scangisanlb'},

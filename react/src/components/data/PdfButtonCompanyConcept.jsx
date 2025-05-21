@@ -18,7 +18,7 @@ export default function PdfButtonCompanyConcept() {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'Conceptrapport UMDL.pdf');
+            link.setAttribute('download', 'Conceptpaspoort UMDL.pdf');
             document.body.appendChild(link);
             link.click();
 

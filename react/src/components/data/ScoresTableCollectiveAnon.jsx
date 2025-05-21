@@ -11,35 +11,36 @@ import Link from "@mui/material/Link";
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
 
-export default function ScoresTableTotaalAnon(props) {
+export default function ScoresTableCollectiveAnon(props) {
     const [scores, setScores] = useState({});
     const [loading, setLoading] = useState(false);
 
     const {t} = useTranslation();
 
-
     useEffect(() => {
         getScores();
-    }, [])
+    }, [props.collective])
 
     const getScores = () => {
-        setLoading(true);
-        axiosClient.get(`/umdlkpi/getallscoresanon`)
-            .then(({data}) => {
-                setLoading(false);
-                setScores(data);
-            })
-            .catch(() => {
-                setLoading(false);
-            })
+        if (props.collective !== '') {
+            setLoading(true);
+            axiosClient.get(`/umdlkpi/getcollectivescores/${props.collective}`)
+                .then(({data}) => {
+                    setLoading(false);
+                    setScores(data);
+                })
+                .catch(() => {
+                    setLoading(false);
+                })
+        }
     }
 
     return (
-        <Card variant="outlined" >
+        <Card variant="outlined">
             <Stack direction="row" gap={2} sx={{mb: 1, mt: 1}}>
                 <TimelineOutlinedIcon/>
                 <Typography component="h6" variant="h6">
-                    {t("scores_table.title_total")}
+                    {t("scores_table.title_collective")}
                 </Typography>
             </Stack>
             <TableContainer sx={{minHeight: 100,}}>
@@ -58,7 +59,6 @@ export default function ScoresTableTotaalAnon(props) {
                         </TableHead>
                         <TableBody>
                             {scores.map((s, index) => {
-                                if (index <= props.limit)
                                 return (
                                     <TableRow key={index} sx={{margin: 0}}>
                                         <TableCell component="th" scope="row">

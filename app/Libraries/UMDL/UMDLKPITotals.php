@@ -40,11 +40,10 @@ class UMDLKPITotals
         $umdl_scores = new UMDLKPIScores();
 
         if ($collective_id == 0) {
-            $companies = Company::all();
-        }
-        else {
+            $companies = Company::has('klwDumps')->get();
+        } else {
             $collective = UmdlCollective::find($collective_id);
-            $companies = $collective->companies;
+            $companies = $collective->companies()->has('klwDumps')->get();
         }
 
         foreach ($companies as $company) {

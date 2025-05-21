@@ -11,6 +11,7 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 
 export default function ProvincieMenuContent() {
 
@@ -20,9 +21,11 @@ export default function ProvincieMenuContent() {
         {text: t("provincie_menu.dashboard"), icon: <HomeRoundedIcon/>, link: '/provincie/dashboard'},
         {text: t("provincie_menu.overview_total"), icon: <AnalyticsIcon/>, link: '/provincie/scores/totaal'},
         {text: t("provincie_menu.overview_individual"), icon: <AnalyticsIcon/>, link: '/provincie/scores/individueel'},
+        {text: t("provincie_menu.overview_collective"), icon: <AnalyticsIcon/>, link: '/provincie/scores/collectief'},
     ];
 
     const settingItems = [
+        {text: t("provincie_menu.faq"), icon: <ContactSupportIcon/>, link: '/provincie/faq'},
         {text: t("provincie_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/provincie/settings/bbmkpis'},
         {text: t("provincie_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/provincie/settings/scangisanlb'},
         {text: t("provincie_menu.kpi_criteria"), icon: <SettingsRoundedIcon/>, link: '/provincie/settings/criteria'},

@@ -26,7 +26,7 @@ class OldResultController extends Controller
     public function index()
     {
         return OldResultResource::collection(
-            OldResult::query()->orderBy('ubn')->get()
+            OldResult::query()->orderBy('brs')->get()
         );
     }
 
@@ -76,7 +76,7 @@ class OldResultController extends Controller
 
         if ($company)
         {
-            $oldresult = OldResult::where('ubn', $company->ubn)->first();
+            $oldresult = OldResult::where('brs', $company->brs)->first();
 
             if ($oldresult)
             {
@@ -173,7 +173,7 @@ class OldResultController extends Controller
                     ));
 
                     // 6. Return response
-                    return response('Bestand succesvol ingelezen voor UBN ' . $oldresult->ubn . ' in jaar ' . $oldresult->final_year, 201);
+                    return response('Bestand succesvol ingelezen voor BRS ' . $oldresult->brs . ' in jaar ' . $oldresult->final_year, 201);
                 }
             }
         } else {

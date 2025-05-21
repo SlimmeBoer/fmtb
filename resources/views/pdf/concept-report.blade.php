@@ -104,8 +104,15 @@
         }
 
         .header-row .info {
-            width: 247mm;
+            width: 174mm;
             height: 58mm;
+            float: left;
+            vertical-align: top;
+        }
+
+        .header-row .logo-provincie {
+            width: 75mm;
+            height: 50mm;
             float: left;
             vertical-align: top;
         }
@@ -142,7 +149,7 @@
     <div class="content">
     <table>
         <tr class="top-row">
-            <td colspan="2">&nbsp;</td>
+            <td colspan="3">&nbsp;</td>
         </tr>
         <tr class="header-row">
             <td class="logo">
@@ -188,6 +195,9 @@
                         <td class="datacell">{{ isset($company_data['bio']) && $company_data['bio'] == 1 ? 'Ja' : 'Nee' }}</td>
                     </tr>
                 </table>
+            </td>
+            <td class="logo-provincie">
+                <img style="padding: 4mm;" src="{{ $logos['provincie'] }}" alt="Logo" width="210">
             </td>
         </tr>
     </table>
@@ -447,6 +457,18 @@
                     <tr>
                         <td style="text-align: left">Bedrijfsbenutting:</td>
                         <td>{{$company_properties['bedrijfsbenutting_n']}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">CO2-vastlegging bodem (gram per kg. meetmelk):</td>
+                        <td>{{$company_properties['g_co2_per_kg_meetmelk']}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">CO2-vastlegging bodem (kg. per hectare):</td>
+                        <td>{{$company_properties['kg_co2_per_ha']}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">Grondsoort:</td>
+                        <td>{{$company_properties['grondsoort']}}</td>
                     </tr>
                 </table>
             </td>

@@ -21,4 +21,6 @@ class UmdlCollectiveCompany extends Model
         'collective_id',
         'company_id',
     ];
+
+
 }

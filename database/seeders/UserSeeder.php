@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Janssen',
             'email' => 'henk.janssen@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '2121365'
+            'brs' => '2121365'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Vliet',
             'email' => 'theo.van.vliet@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '377142'
+            'brs' => '377142'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
@@ -41,9 +41,9 @@ class UserSeeder extends Seeder
             'first_name' => 'Karin',
             'middle_name' => 'de',
             'last_name' => 'Laat',
-            'email' => 'karen.de.laat@umdl.nl',
+            'email' => 'karin.de.laat@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '376765'
+            'brs' => '213503867'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Kessel',
             'email' => 'joost.kessel@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '377173'
+            'brs' => '377173'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
@@ -64,7 +64,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Vries',
             'email' => 'bert.de.vries@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '379580'
+            'brs' => '379580'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
@@ -75,7 +75,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Stigter',
             'email' => 'thea.de.stigter@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '377324'
+            'brs' => '377324'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Westbroek',
             'email' => 'fred.westbroek@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '473716'
+            'brs' => '473716'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
@@ -95,7 +95,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Wessels',
             'email' => 'roderick.wessels@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '331267'
+            'brs' => '331267'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
@@ -106,7 +106,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Zetten',
             'email' => 'piet.van.zetten@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '327381'
+            'brs' => '327381'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
@@ -117,7 +117,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Steen',
             'email' => 'agnes.van.der.steen@umdl.nl',
             'password' => Hash::make('UMDL2025!'),
-            'ubn' => '343248'
+            'brs' => '343248'
         ]);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);

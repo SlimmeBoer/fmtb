@@ -145,14 +145,23 @@ export default function CompanyInfoTableAnon(props) {
                             <TableRow key={"companyinfo-" + index}>
                                 <TableCell sx={{ width: 50 }}>{fieldLabels[key]}:</TableCell>
                                 <TableCell sx={{ width: 150, fontWeight: 'bold' }}>
-                                    <EditableField
-                                        key={key}
-                                        onChange={(value) => handleFieldChange(key, value)}
-                                        value={tempformData[key]}
-                                        error={formErrors[key]}
-                                        isEditing={isEditing}
-                                    />
-                                </TableCell>
+                                    {key === "name" ? (
+                                        <EditableField
+                                            key={key}
+                                            onChange={(value) => handleFieldChange(key, value)}
+                                            value={"Bedrijf " + company.id}
+                                            error={formErrors[key]}
+                                            isEditing={isEditing}
+                                        />
+                                    ) : (<EditableField
+                                            key={key}
+                                            onChange={(value) => handleFieldChange(key, value)}
+                                            value={tempformData[key]}
+                                            error={formErrors[key]}
+                                            isEditing={isEditing}
+                                        />
+                                    )
+                                }</TableCell>
                             </TableRow>
                             )
                             ))

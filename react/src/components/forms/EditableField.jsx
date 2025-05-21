@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 
-const EditableField = ({ label, type, value, isEditing, onChange, required, error}) => {
+const EditableField = ({ label, type, value, sublabel, isEditing, onChange, required, error}) => {
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -22,7 +22,7 @@ const EditableField = ({ label, type, value, isEditing, onChange, required, erro
                     align="center"
                 />
             ) : (
-                <p>{value}</p>
+                <p>{value} {sublabel}</p>
             )}
         </div>
     );

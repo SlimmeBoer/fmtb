@@ -16,7 +16,7 @@ class OldResult extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'ubn',
+        'brs',
         'final_year',
         'filename',
         'result_kpi1a',

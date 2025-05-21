@@ -16,17 +16,31 @@ import CompanyPickerCollective from "../../components/forms/CompanyPickerCollect
 import PdfButton from "../../components/data/PdfButton.jsx";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
+import axiosClient from "../../axios_client.js";
 
 export default function Collectief_OverzichtIndividueel() {
 
     const {id: paramId} = useParams();
     const [id, setId] = useState(paramId || '');
     const [renderTable, setRenderTable] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (paramId !== id) {
-            setId(paramId); // Sync state if URL param changes
-        }
+        if (!paramId) return;
+
+        setLoading(true)
+        axiosClient.get(`/companies/getviewingallowed/${paramId}`)
+            .then(({data}) => {
+                if (data.allowed === true) {
+                    setId(paramId); // Sync state if URL param changes
+                } else {
+                    setId('');
+                }
+                setLoading(false)
+            })
+            .catch(() => {
+                setLoading(false)
+            })
 
     }, [paramId]);
     const handleChange = (e) => {
@@ -41,54 +55,56 @@ export default function Collectief_OverzichtIndividueel() {
     const {t} = useTranslation();
 
     return (
-
-        <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
-            <Stack direction="row" gap={2} sx={{mb: 2}}>
-                <AnalyticsIcon/>
-                <Typography component="h6" variant="h6">
-                    {t("pages_collectief.overview_individual")}
-                </Typography>
-            </Stack>
-            <Stack direction="row" gap={2}
-                   sx={{
-                       display: {xs: 'none', md: 'flex'},
-                       width: '100%',
-                       alignItems: {xs: 'flex-start', md: 'center'},
-                       justifyContent: 'space-between',
-                       maxWidth: {sm: '100%'},
-                       pt: 1.5, pb: 4,
-                   }}>
-                <CompanyPickerCollective company={id} changeHandler={handleChange}/>
-                <PdfButton company={id}/>
-            </Stack>
-            {id !== '' && id !== undefined && <Box>
-                <div id="pdf-content">
-                    <Grid
-                        container
-                        spacing={2}
-                        columns={12}
-                        sx={{mb: (theme) => theme.spacing(2), mt: 2}}
-                    >
-                        <Grid size={{xs: 12, lg: 4}} key="indiv-grid-1">
-                            <CompanyInfoTable company={id}/>
-                            <CompanyPropertyTable company={id}/>
-                            <CompanyMBP company={id} notifyParent={rerenderTable}/>
-                            <CompanySMA company={id} notifyParent={rerenderTable}/>
-                        </Grid>
-                        <Grid size={{xs: 12, lg: 8}} key="indiv-grid-2">
-                            <KPITable company={id} key="kpitable" renderTable={renderTable}/>
-                        </Grid>
-                    </Grid>
-                </div>
-            </Box>
-            }
-            {id === undefined && <Box>
-                <Typography component="h2" variant="body2" sx={{mb: 2, mt: 2}}>
-                    Kies een bedrijf met bovenstaande selectiebox.
-                </Typography>
-            </Box>
-            }
-        </Box>
+        <React.Fragment>
+            {!loading &&
+                <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
+                    <Stack direction="row" gap={2} sx={{mb: 2}}>
+                        <AnalyticsIcon/>
+                        <Typography component="h6" variant="h6">
+                            {t("pages_collectief.overview_individual")}
+                        </Typography>
+                    </Stack>
+                    <Stack direction="row" gap={2}
+                           sx={{
+                               display: {xs: 'none', md: 'flex'},
+                               width: '100%',
+                               alignItems: {xs: 'flex-start', md: 'center'},
+                               justifyContent: 'space-between',
+                               maxWidth: {sm: '100%'},
+                               pt: 1.5, pb: 4,
+                           }}>
+                        <CompanyPickerCollective company={id} changeHandler={handleChange}/>
+                        <PdfButton company={id}/>
+                    </Stack>
+                    {id !== '' && id !== undefined && <Box>
+                        <div id="pdf-content">
+                            <Grid
+                                container
+                                spacing={2}
+                                columns={12}
+                                sx={{mb: (theme) => theme.spacing(2), mt: 2}}
+                            >
+                                <Grid size={{xs: 12, lg: 4}} key="indiv-grid-1">
+                                    <CompanyInfoTable company={id}/>
+                                    <CompanyPropertyTable company={id}/>
+                                    <CompanyMBP company={id} notifyParent={rerenderTable}/>
+                                    <CompanySMA company={id} notifyParent={rerenderTable}/>
+                                </Grid>
+                                <Grid size={{xs: 12, lg: 8}} key="indiv-grid-2">
+                                    <KPITable company={id} key="kpitable" renderTable={renderTable}/>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    </Box>
+                    }
+                    {(id === '' || id === undefined) && <Box>
+                        <Typography component="h2" variant="body2" sx={{mb: 2, mt: 2}}>
+                            Kies een bedrijf met bovenstaande selectiebox.
+                        </Typography>
+                    </Box>
+                    }
+                </Box>}
+        </React.Fragment>
     )
 
 }

@@ -103,7 +103,7 @@ export default function Admin_OldResults() {
                         <TableHead>
                             <TableRow>
                                 <TableCell>{t("old_results.header_filename")}</TableCell>
-                                <TableCell>{t("old_results.header_ubn")}</TableCell>
+                                <TableCell>{t("old_results.header_brs")}</TableCell>
                                 <TableCell>{t("old_results.header_final_year")}</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
@@ -112,7 +112,7 @@ export default function Admin_OldResults() {
                             {oldresults.map((or, index) => (
                                 <TableRow key={index}>
                                     <TableCell>{or.filename}</TableCell>
-                                    <TableCell>{or.ubn}</TableCell>
+                                    <TableCell>{or.brs}</TableCell>
                                     <TableCell>{or.final_year}</TableCell>
                                     <TableCell>
                                         <Button onClick={() => handleDeleteClick(or.id)}

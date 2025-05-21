@@ -185,8 +185,7 @@ export default function CompanyInfoTable(props) {
                                 <TableCell sx={{width: 150, fontWeight: 'bold'}}>
                                     {company.collectieven.map((c, index) => {
                                         return (
-                                            <Link key={"link-" + index}
-                                                  href={"/overzicht/collectief/" + c.id}>{c.name}</Link>
+                                            <React.Fragment key={index}>{c.name}</React.Fragment>
                                         )
                                     })}
                                 </TableCell>

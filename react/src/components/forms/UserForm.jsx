@@ -21,6 +21,7 @@ export default function UserForm(props) {
         middle_name: '',
         last_name: '',
         email: '',
+        brs: '',
         password: '',
         password_confirmation: '',
         role_id: '',
@@ -30,6 +31,7 @@ export default function UserForm(props) {
         middle_name: {errorstatus: false, helperText: ''},
         last_name: {errorstatus: false, helperText: ''},
         email: {errorstatus: false, helperText: ''},
+        brs: {errorstatus: false, helperText: ''},
         password: {errorstatus: false, helperText: ''},
         password_confirmation: {errorstatus: false, helperText: ''},
         role_id: {errorstatus: false, helperText: ''},
@@ -136,6 +138,12 @@ export default function UserForm(props) {
                                            style={{width: 518}}
                                            error={formErrors.email.errorstatus}
                                            helperText={formErrors.email.helperText}/>
+                                <TextField value={user.brs}
+                                           onChange={ev => setUser({...user, brs: ev.target.value})}
+                                           label={t('user_form.brs')} variant="outlined" margin="dense"
+                                           style={{width: 518}}
+                                           error={formErrors.brs.errorstatus}
+                                           helperText={formErrors.brs.helperText}/>
                                 <TextField onChange={ev => setUser({...user, password: ev.target.value})}
                                            type="password"
                                            autoComplete="on"

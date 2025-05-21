@@ -31,7 +31,7 @@ class PdfController extends Controller
 
         // Example data for the PDF
         $data = [
-            'title' => 'Eindrapport UMDL',
+            'title' => 'Paspoort UMDL',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
             'scores' => $scores,
@@ -43,6 +43,7 @@ class PdfController extends Controller
                 'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
                 'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
                 'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
+                'provincie' => public_path('images/logo_provincie_utrecht.png'),
                 ],
         ];
 
@@ -54,7 +55,7 @@ class PdfController extends Controller
             ->set_option('margin_left', 0);
 
         // Option 1: Download the PDF
-        return $pdf->download('Certificaat UMDL 2025.pdf');
+        return $pdf->download('Paspoort UMDL 2025.pdf');
 
     }
 
@@ -64,7 +65,7 @@ class PdfController extends Controller
      */
     public function generatePdfCurrentCompany()
     {
-        $company_data = Company::where('ubn',Auth::user()->ubn)->first();
+        $company_data = Company::where('brs',Auth::user()->brs)->first();
         $company_properties = UmdlCompanyProperties::where('company_id',$company_data->id)->first();
 
         $umdlscores = new UMDLKPIScores();
@@ -74,7 +75,7 @@ class PdfController extends Controller
 
         // Example data for the PDF
         $data = [
-            'title' => 'Eindrapport UMDL',
+            'title' => 'Paspoort UMDL',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
             'scores' => $scores,
@@ -86,6 +87,7 @@ class PdfController extends Controller
                 'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
                 'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
                 'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
+                'provincie' => public_path('images/logo_provincie_utrecht.png'),
             ],
         ];
 
@@ -97,7 +99,7 @@ class PdfController extends Controller
             ->set_option('margin_left', 0);
 
         // Option 1: Download the PDF
-        return $pdf->download('Certificaat UMDL 2025.pdf');
+        return $pdf->download('Paspoort UMDL 2025.pdf');
 
     }
 
@@ -108,7 +110,7 @@ class PdfController extends Controller
 */
     public function generatePdfCurrentCompanyConcept()
     {
-        $company_data = Company::where('ubn',Auth::user()->ubn)->first();
+        $company_data = Company::where('brs',Auth::user()->brs)->first();
         $company_properties = UmdlCompanyProperties::where('company_id',$company_data->id)->first();
 
         $umdlscores = new UMDLKPIScores();
@@ -118,7 +120,7 @@ class PdfController extends Controller
 
         // Example data for the PDF
         $data = [
-            'title' => 'Conceptrapport UMDL',
+            'title' => 'Conceptpaspoort UMDL',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
             'scores' => $scores,
@@ -130,6 +132,7 @@ class PdfController extends Controller
                 'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
                 'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
                 'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
+                'provincie' => public_path('images/logo_provincie_utrecht.png'),
                 'watermark' => public_path('images/watermark_concept.png'),
             ],
         ];
@@ -142,7 +145,7 @@ class PdfController extends Controller
             ->set_option('margin_left', 0);
 
         // Option 1: Download the PDF
-        return $pdf->download('Certificaat UMDL 2025.pdf');
+        return $pdf->download('Conceptpaspoort UMDL 2025.pdf');
 
     }
 

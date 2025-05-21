@@ -72,7 +72,7 @@ class KlwDumpController extends Controller
      */
     public function currentcompany()
     {
-        $company = Company::where('ubn',Auth::user()->ubn)->first();
+        $company = Company::where('brs',Auth::user()->brs)->first();
 
         if ($company)
         {
@@ -207,16 +207,23 @@ class KlwDumpController extends Controller
                 // 2. Connect the company to an existing collective
                 $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
 
+                if ($ucpc) {
+                    $collective_id = $ucpc->collective_id;
+                }
+                else {
+                    $collective_id = 99;
+                }
+
                 try {
                     $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
                         'company_id' => $company->id,
-                        'collective_id' => $ucpc->collective_id,
+                        'collective_id' => $collective_id,
                     ));
                 } catch (\Illuminate\Database\QueryException $e) {
                     // If a duplicate entry error occurs, retrieve the existing record
                     $company_collective = UmdlCollectiveCompany::where(array(
                         'company_id' => $company->id,
-                        'collective_id' => $ucpc->collective_id,
+                        'collective_id' => $collective_id,
                     ))->first();
                 }
 

@@ -33,7 +33,7 @@ class UpdateUserRequest extends FormRequest
             'last_name' => 'required|string|max:55',
             'email' => 'required|email|unique:users,email,'.$this->id,
             'role_id' => 'required|integer|exists:roles,id',
-            'ubn' => 'integer',
+            'brs' => 'integer',
             'password' => [
                 'confirmed',
                 Password::min(8)

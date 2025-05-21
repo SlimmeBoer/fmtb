@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import {useStateContext} from "../contexts/ContextProvider.jsx";
 import CenteredLoading from "./visuals/CenteredLoading.jsx";
 
-const ProtectedRoute = ({userRole }) => {
+const  ProtectedRoute = ({userRole }) => {
 
     const { user, loading ,token} = useStateContext();
 
@@ -18,7 +18,11 @@ const ProtectedRoute = ({userRole }) => {
 
     if (user.roles[0].name !== userRole) {
 
-        return <Navigate to="/unauthorized" />;
+        if (user.roles[0].name === "bedrijf") {
+            return <Navigate to="/bedrijf/unauthorized"/>;
+        } else {
+            return <Navigate to="/unauthorized"/>;
+        }
     }
 
     return <Outlet />;

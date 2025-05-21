@@ -18,6 +18,7 @@ class UmdlCollectiveSeeder extends Seeder
         UmdlCollective::factory()->create(['id' => 3, 'name' => 'Utrecht-Oost', 'description' => '', 'logo' => '/images/logo_utrecht_oost.png']);
         UmdlCollective::factory()->create(['id' => 4, 'name' => 'Eemland', 'description' => '', 'logo' => '/images/logo_eemland.png']);
         UmdlCollective::factory()->create(['id' => 5, 'name' => 'Alblasserwaard-Vijfheerenlanden', 'description' => '', 'logo' => '/images/logo_alblasserwaard.png']);
+        UmdlCollective::factory()->create(['id' => 99, 'name' => 'Overig (postcode niet gevonden)', 'description' => '', 'logo' => '/images/logo_umbb.png']);
 
     }
 }

@@ -30,7 +30,7 @@ class StoreUserRequest extends FormRequest
             'last_name' => 'required|string|max:55',
             'email' => 'required|email|unique:users,email',
             'role_id' => 'required|integer|exists:roles,id',
-            'ubn' => 'integer',
+            'brs' => 'integer',
             'password' => [
                 'required',
                 'confirmed',

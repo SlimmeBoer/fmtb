@@ -239,13 +239,30 @@ class UMDLKPIScores
             'money' => 0,
         );
 
-        $collective = UmdlCollectiveCompany::where('company_id', $company_id)->first();
-        $companies = UmdlCollectiveCompany::where('collective_id', $collective->collective_id)->get();
+        // Step 1: Get the first collective ID for the given company
+        $collective_id = UmdlCollectiveCompany::where('company_id', $company_id)
+            ->value('collective_id');
+
+
+        if ($collective_id) {
+            // Step 2: Get all company IDs in that collective
+            $companyIds = UmdlCollectiveCompany::where('collective_id', $collective_id)
+                ->pluck('company_id');
+
+            // Step 3: Get companies with klwDumps
+            $companies = Company::whereIn('id', $companyIds)
+                ->has('klwDumps')
+                ->get();
+        } else {
+            $companies = collect(); // return empty collection if no collective found
+        }
 
         if (count($companies) > 0) {
+
             // Add each indidivual company score to the grand total
             foreach ($companies as $company) {
-                $company_scores = $this->getScores($company->company_id);
+                Log::info($company->id);
+                $company_scores = $this->getScores($company->id);
 
                 foreach ($averageAveragesArray as $key => $value) {
                     $averageAveragesArray[$key] += $company_scores['avg'][$key];
@@ -336,7 +353,7 @@ class UMDLKPIScores
             'money' => 0,
         );
 
-        $companies = Company::all();
+        $companies = Company::has('klwDumps')->get();
 
         if (count($companies) > 0) {
             // Add each indidivual company score to the grand total

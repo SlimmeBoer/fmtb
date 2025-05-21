@@ -34,7 +34,7 @@ const BedrijfAanleveren = () => {
     const navigate = useNavigate();
 
     const isFormValid =
-        /^NL[0-9]{2}[A-Z0-9]{4}[0-9]{10}$/.test(bankNumber) &&
+        /^NL[0-9]{2}[A-Z0-9]{4}[0-9]{10}$/i.test(bankNumber) &&
         accountHolder &&
         checked &&
         klwDumps.length > 0;
@@ -82,12 +82,12 @@ const BedrijfAanleveren = () => {
                 <KLWUploaderBedrijf notifyParent={rerenderTable}/>
             </Box>
             <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 4}}>
-                <InputLabel>Bankrekeningnummer (geef een geldig IBAN-nummer op, zonder spaties)</InputLabel>
+                <InputLabel>Bankrekeningnummer (geef een geldig IBAN-nummer op, in hoofdletters, zonder spaties)</InputLabel>
                 <TextField
                     variant="outlined"
 
                     value={bankNumber}
-                    onChange={(e) => setBankNumber(e.target.value)}
+                    onChange={(e)  => setBankNumber(e.target.value)}
                 />
                 <InputLabel>Bankrekeninghouder</InputLabel>
                 <TextField

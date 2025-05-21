@@ -40,5 +40,7 @@ class BbmGisPackagesSeeder extends Seeder
         BbmGisPackage::factory()->create(['code_id' => 23, 'package' => 'Z.25.natuurboeren 17.06']);
         BbmGisPackage::factory()->create(['code_id' => 31, 'package' => 'Z.25.Natuurboeren 10.02']);
         BbmGisPackage::factory()->create(['code_id' => 27, 'package' => 'Z.25.Natuurboeren 13.01']);
+        BbmGisPackage::factory()->create(['code_id' => 39, 'package' => 'Z.26.220.KlimaatBomen']);
+        BbmGisPackage::factory()->create(['code_id' => 40, 'package' => 'Z.26.222.Oude Graslanden']);
     }
 }

@@ -61,12 +61,12 @@ class ResultParser
         $reader = new Xlsx();
         $spreadsheet = $reader->load($excel_file);
         $infosheet = $spreadsheet->getSheetByName('UMDL invulblad');
-        $ubn = $infosheet->getCell('E10')->getValue();
+        $brs = $infosheet->getCell('E9')->getValue();
         $worksheet = $spreadsheet->getSheetByName('Eindresultaat');
         $year = $worksheet->getCell('F15')->getValue();
 
         $oldresult = OldResult::firstOrNew(array(
-            'ubn' => $ubn,
+            'brs' => $brs,
             'final_year' => $year,
         ));
 

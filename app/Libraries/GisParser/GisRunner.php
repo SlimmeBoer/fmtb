@@ -90,7 +90,11 @@ class GisRunner
                 if ($bbmcode == "BBM121" || $bbmcode == "BBM146") {
                     $bbm_value['waarde'] += $gis_record->eenheden * 0.0001;
                 } elseif ($bbmcode == "BBM112" || $bbmcode == "BBM132") {
-                    $bbm_value['waarde'] += $gis_record->lengte * 0.0001;
+                    if ($gis_record->oppervlakte > 0){
+                        $bbm_value['waarde'] += $gis_record->oppervlakte;
+                    } else {
+                        $bbm_value['waarde'] += $gis_record->lengte * 0.0001;
+                    }
                 } else {
                     $bbm_value['waarde'] += $gis_record->oppervlakte ;
                 }
