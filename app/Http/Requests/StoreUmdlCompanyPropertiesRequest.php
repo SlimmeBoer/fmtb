@@ -23,7 +23,7 @@ class StoreUmdlCompanyPropertiesRequest extends FormRequest
     {
         return [
             'company_id' => 'required|integer',
-            'year' => 'required|integer',
+            'year' => 'integer',
             'mbp' => 'integer',
             'website' => 'boolean',
             'ontvangstruimte' => 'boolean',

@@ -30,7 +30,6 @@ class BbmKpiSeeder extends Seeder
         BbmKpi::factory()->create(['code_id' => 31, 'kpi' => 11]);
         BbmKpi::factory()->create(['code_id' => 32, 'kpi' => 11]);
         BbmKpi::factory()->create(['code_id' => 33, 'kpi' => 11]);
-        BbmKpi::factory()->create(['code_id' => 34, 'kpi' => 11]);
         BbmKpi::factory()->create(['code_id' => 35, 'kpi' => 11]);
         BbmKpi::factory()->create(['code_id' => 36, 'kpi' => 11]);
         BbmKpi::factory()->create(['code_id' => 37, 'kpi' => 11]);

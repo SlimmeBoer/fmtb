@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useSearchParams, useNavigate} from "react-router-dom";
+import {useSearchParams, useNavigate, useParams} from "react-router-dom";
 import axiosClient from "../../axios_client.js";
 import Grid from "@mui/material/Grid2";
 import {Box, Button, Paper, TextField} from "@mui/material";
@@ -19,7 +19,7 @@ const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    const token = searchParams.get("token");
+    const { token } = useParams();
     const email = searchParams.get("email");
 
     const [formErrors, setFormErrors] = useState({
@@ -65,7 +65,7 @@ const ResetPassword = () => {
             <Grid
                 size={{xs: 0, sm: 4, md: 7}}
                 sx={{
-                    backgroundImage: 'url(images/backdrop.jpg)',
+                    backgroundImage: 'url(/images/backdrop.jpg)',
                     backgroundRepeat: 'no-repeat',
                     backgroundColor: (t) =>
                         t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

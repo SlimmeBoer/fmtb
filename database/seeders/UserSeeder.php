@@ -16,13 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // 1. Bedrijven
-        $user = User::factory()->create([
-            'first_name' => 'Henk',
-            'last_name' => 'Janssen',
-            'email' => 'henk.janssen@umdl.nl',
-            'password' => Hash::make('UMDL2025!'),
-            'brs' => '2121365'
-        ]);
+        $user = User::factory()->create(['first_name' => 'Henk','last_name' => 'Janssen','email' => 'henk.janssen@umdl.nl','password' => Hash::make('UMDL2025!'),'brs' => '2121365']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
 

@@ -61,7 +61,12 @@ const LogOverview = ({}) => {
                             {logs.map((log) => (
                                 <TableRow key={log.id}>
                                     <TableCell>{log.id}</TableCell>
-                                    <TableCell>{showFullName(log.user.first_name, log.user.middle_name, log.user.last_name)}</TableCell>
+                                    <TableCell>
+                                        {log.user
+                                            ? showFullName(log.user.first_name, log.user.middle_name, log.user.last_name)
+                                            : `${log.user_id} (verwijderd)`
+                                        }
+                                    </TableCell>
                                     <TableCell>{log.type}</TableCell>
                                     <TableCell>{log.message}</TableCell>
                                     <TableCell>{formatDateNL(log.created_at)}</TableCell>

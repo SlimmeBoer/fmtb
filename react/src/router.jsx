@@ -422,7 +422,7 @@
                     element: <ForgotPassword/>
                 },
                 {
-                    path: '/reset-wachtwoord',
+                    path: '/reset-wachtwoord/:token',
                     element: <ResetPassword/>
                 },
 

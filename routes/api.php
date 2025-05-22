@@ -21,10 +21,14 @@ use App\Http\Controllers\Api\UmdlCollectiveController;
 use App\Http\Controllers\Api\UmdlCompanyPropertiesController;
 use App\Http\Controllers\Api\UmdlKpiValuesController;
 use App\Http\Controllers\Api\UserController;
+use App\Mail\ResetPasswordMail;
+use App\Models\SystemLog;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -144,13 +148,26 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
 
-    $status = Password::sendResetLink($request->only('email'));
+    $user = User::where('email', $request->email)->first();
 
-    return response()->json([
-        'message' => $status === Password::RESET_LINK_SENT
-            ? 'De reset-link is verzonden naar je e-mailadres.'
-            : 'Het e-mailadres is niet gevonden in de database.'
-    ]);
+    if (!$user) {
+        return response()->json(['message' => 'Het e-mailadres is niet gevonden in de database.']);
+    }
+
+    $token = Password::createToken($user);
+
+    $frontendUrl = config('app.frontend_url'); // << frontend URL uit .env
+    $url = "{$frontendUrl}/reset-wachtwoord/{$token}?email=" . urlencode($user->email);
+
+    Mail::to($user->email)->send(new ResetPasswordMail($url));
+
+    SystemLog::create(array(
+        'user_id' => $user->id,
+        'type' => 'RESET LINK',
+        'message' => 'Reset-link verstuurd voor ' . $user->email,
+    ));
+
+    return response()->json(['message' => 'De reset-link is verzonden naar je e-mailadres.']);
 });
 
 Route::post('/reset-password', function (Request $request) {
@@ -170,12 +187,18 @@ Route::post('/reset-password', function (Request $request) {
             $user->forceFill([
                 'password' => Hash::make($password),
             ])->save();
+
+            SystemLog::create(array(
+                'user_id' => $user->id,
+                'type' => 'PASSWORD RESET',
+                'message' => 'Password gereset voor ' . $user->email,
+            ));
         }
     );
 
     return response()->json([
         'message' => $status === Password::PASSWORD_RESET
-            ? 'Het wachtwoord is succesvol gewijzigd.'
+            ? 'Het wachtwoord is succesvol gewijzigd. Je wordt over 5 seconden teruggestuurd naar het inlogscherm.'
             : 'Ongeldig token of e-mailadres.'
     ]);
 });
