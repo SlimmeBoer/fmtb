@@ -48,7 +48,6 @@ const Bedrijf_Dashboard = () => {
                 justifyContent: "center",
                 alignItems: "flex-start",
                 pt: "3pt",
-                overflow: "hidden",
             }}
         >
             {/* Background Image with Blur Effect */}
@@ -83,7 +82,7 @@ const Bedrijf_Dashboard = () => {
                 >
                     <UserBar/>
                     <Grid container component="main"
-                          sx={{borderTop: 1, borderTopColor: '#aaa', height: '100vh', pt: 3}}>
+                          sx={{borderTop: 1, borderTopColor: '#aaa', minHeight: '100vh', pt: 3}}>
                         <Grid
                             size={{xs: 3, sm: 3, md: 3}}
                         >
