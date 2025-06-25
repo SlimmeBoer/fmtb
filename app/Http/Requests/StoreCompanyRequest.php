@@ -28,7 +28,7 @@ class StoreCompanyRequest extends FormRequest
             'city' => 'required|string|max:50',
             'province' => 'required|string|max:50',
             'brs' => 'required|string|max:15',
-            'ubn' => 'required|string|max:15',
+            'ubn' => 'required|string|max:35',
             'phone' => 'max:15',
             'bank_account' => 'max:25',
             'bank_account_name' => 'max:50',

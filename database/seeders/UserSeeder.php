@@ -100,7 +100,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Wilco den Boer', 'last_name' => '', 'email' => 'melkveedenboer@outlook.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '907812365']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
-        $user = User::factory()->create(['first_name' => 'Frank Gerards F.F.C.', 'last_name' => '', 'email' => 'frank.gerards@live.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70033873']);
+        $user = User::factory()->create(['first_name' => 'Frank Gerards F.F.C.', 'last_name' => '', 'email' => 'frank.gerards@live.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070033873']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
         $user = User::factory()->create(['first_name' => 'G. v. Wijngaarden-Boer', 'last_name' => '', 'email' => 'g.vanwijngaarden@cnsgouda.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '173348968']);
@@ -208,7 +208,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Pieter Kloek', 'last_name' => '', 'email' => 'kaasboerderijdekoepel@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '210933497']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
-        $user = User::factory()->create(['first_name' => 'J. Gijsen', 'last_name' => '', 'email' => 'jgijsen@vangelder.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70001383']);
+        $user = User::factory()->create(['first_name' => 'J. Gijsen', 'last_name' => '', 'email' => 'jgijsen@vangelder.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070001383']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
         $user = User::factory()->create(['first_name' => 'Anton Nap', 'last_name' => '', 'email' => 'denap@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201381396']);
@@ -238,7 +238,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Henk Achterberg', 'last_name' => '', 'email' => 'henk@achterberg.biz', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200191201']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Miranda van Leeuwen', 'last_name' => '', 'email' => 'meevanleeuwen@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70010998']);
+        $user = User::factory()->create(['first_name' => 'Miranda van Leeuwen', 'last_name' => '', 'email' => 'meevanleeuwen@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070010998']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
         $user = User::factory()->create(['first_name' => 'J.C. Kemp', 'last_name' => '', 'email' => 'jckemp@kliksafe.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '202357947']);
@@ -265,7 +265,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'MCJ de Bie Richard', 'last_name' => '', 'email' => 'richarddebie@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201234981']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Theo, T.J.M.', 'last_name' => '', 'email' => 'mjcm.kok@hetnet.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70079379']);
+        $user = User::factory()->create(['first_name' => 'Theo, T.J.M.', 'last_name' => '', 'email' => 'mjcm.kok@hetnet.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070079379']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
         $user = User::factory()->create(['first_name' => 'Martijn Baars', 'last_name' => '', 'email' => 'info.mbaars@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201202478']);
@@ -286,7 +286,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'V,O,F, van Egdom', 'last_name' => '', 'email' => 'albertvanegdom@live.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200781346']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'hartstocht', 'last_name' => '', 'email' => 'hartstocht@planet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70001452']);
+        $user = User::factory()->create(['first_name' => 'hartstocht', 'last_name' => '', 'email' => 'hartstocht@planet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070001452']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
         $user = User::factory()->create(['first_name' => 'V,O,F, A,T, en J,J, van Eck', 'last_name' => '', 'email' => 'melkveehouderijvaneck@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201803761']);
@@ -313,28 +313,28 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Biologische Melkveehouderij Boele', 'last_name' => '', 'email' => 'gjboele@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '904858055']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
-        $user = User::factory()->create(['first_name' => 'W,G,J, van Eck', 'last_name' => '', 'email' => 'w.eck.17@planet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70067538']);
+        $user = User::factory()->create(['first_name' => 'W,G,J, van Eck', 'last_name' => '', 'email' => 'w.eck.17@planet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070067538']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'A Doornenbal', 'last_name' => '', 'email' => 'Arie-40@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70033031']);
+        $user = User::factory()->create(['first_name' => 'A Doornenbal', 'last_name' => '', 'email' => 'Arie-40@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070033031']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
-        $user = User::factory()->create(['first_name' => 'VOF Botterblom - Hartman', 'last_name' => '', 'email' => 'gert.botterblom@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70012608']);
+        $user = User::factory()->create(['first_name' => 'VOF Botterblom - Hartman', 'last_name' => '', 'email' => 'gert.botterblom@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070012608']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(4);
         $user = User::factory()->create(['first_name' => 'Melkveehouderij C, Griffioen', 'last_name' => '', 'email' => 'vanderpaauw@hotmail.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '204927633']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
-        $user = User::factory()->create(['first_name' => 'Maatschap van Dijk van Vliet', 'last_name' => '', 'email' => 'mtsdijkvliet@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70041302']);
+        $user = User::factory()->create(['first_name' => 'Maatschap van Dijk van Vliet', 'last_name' => '', 'email' => 'mtsdijkvliet@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070041302']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
-        $user = User::factory()->create(['first_name' => 'Maatschap Van Rijn', 'last_name' => '', 'email' => 'rijnvankoen@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70091177']);
+        $user = User::factory()->create(['first_name' => 'Maatschap Van Rijn', 'last_name' => '', 'email' => 'rijnvankoen@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070091177']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
         $user = User::factory()->create(['first_name' => 'Cor landbouwbedrijf bongers en bongers', 'last_name' => '', 'email' => 'c.bongers9@kpnplanet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '213253191']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Melkveebedrijf Beukers', 'last_name' => '', 'email' => 'z@infobeukers.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70086671']);
+        $user = User::factory()->create(['first_name' => 'Melkveebedrijf Beukers', 'last_name' => '', 'email' => 'z@infobeukers.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070086671']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(4);
         $user = User::factory()->create(['first_name' => 'Mts J+J vd Scheer-Schep', 'last_name' => '', 'email' => 'mts.vdscheerschep@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200772356']);
@@ -352,7 +352,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'H,J,A, Kuijer en F, Hooft', 'last_name' => '', 'email' => 'henrifemkekuijer@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203642073']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(4);
-        $user = User::factory()->create(['first_name' => 'Mts van Ginkel-Klein Sniddelaar', 'last_name' => '', 'email' => 'eltonvanginkel@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70089875']);
+        $user = User::factory()->create(['first_name' => 'Mts van Ginkel-Klein Sniddelaar', 'last_name' => '', 'email' => 'eltonvanginkel@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070089875']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
         $user = User::factory()->create(['first_name' => 'Boerehoeve V,O,F,', 'last_name' => '', 'email' => 'd.boer@kliksafe.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '218187297']);
@@ -454,7 +454,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'M,J, den Bruinen', 'last_name' => '', 'email' => '3481lw19@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203893536']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
-        $user = User::factory()->create(['first_name' => 'Mts WJH+L Verwey', 'last_name' => '', 'email' => 'natuurcamping@outlook.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70055253']);
+        $user = User::factory()->create(['first_name' => 'Mts WJH+L Verwey', 'last_name' => '', 'email' => 'natuurcamping@outlook.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070055253']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(2);
         $user = User::factory()->create(['first_name' => 'V,O,F, G, Samson', 'last_name' => '', 'email' => 'samsonkamerik@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203917778']);
@@ -490,7 +490,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Maatschap Van Schip-Peterse', 'last_name' => '', 'email' => 'mtsvanschippeterse@outlook.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203805759']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Mts J+T van Schaik-Rodenburg', 'last_name' => '', 'email' => 'a_schaik@msn.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70089396']);
+        $user = User::factory()->create(['first_name' => 'Mts J+T van Schaik-Rodenburg', 'last_name' => '', 'email' => 'a_schaik@msn.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070089396']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
         $user = User::factory()->create(['first_name' => 'G C Baas', 'last_name' => '', 'email' => 'cobaas@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203635672']);
@@ -514,7 +514,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Mts, G,W,N, van Zijl en J,C,M, van Zijl-van Wijk', 'last_name' => '', 'email' => 'gerard.jolanda@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203671938']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Maatschap Hilhorst Veehouderij', 'last_name' => '', 'email' => 'pgahilhorst@planet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70069934']);
+        $user = User::factory()->create(['first_name' => 'Maatschap Hilhorst Veehouderij', 'last_name' => '', 'email' => 'pgahilhorst@planet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070069934']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
         $user = User::factory()->create(['first_name' => 'MTS DAVELAAR', 'last_name' => '', 'email' => 'dickagnes@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200691312']);
@@ -559,10 +559,10 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'V,O,F, Melkveebedrijf Van Ravenhorst', 'last_name' => '', 'email' => 'info@boerenstee.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201162468']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'L C Stalenhoef', 'last_name' => '', 'email' => 'veehouderij@destalenhoeve.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70015858']);
+        $user = User::factory()->create(['first_name' => 'L C Stalenhoef', 'last_name' => '', 'email' => 'veehouderij@destalenhoeve.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070015858']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(4);
-        $user = User::factory()->create(['first_name' => 'G,G, Overgoor', 'last_name' => '', 'email' => 'annelieke.overgoor@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70069956']);
+        $user = User::factory()->create(['first_name' => 'G,G, Overgoor', 'last_name' => '', 'email' => 'annelieke.overgoor@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070069956']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
         $user = User::factory()->create(['first_name' => 'Mts CGM +GRA Huurdeman', 'last_name' => '', 'email' => 'huurdenoortman@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201254114']);
@@ -598,7 +598,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'H Verweij', 'last_name' => '', 'email' => 'hm.verweij@outlook.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201777177']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Mts J en E de Groot Bos', 'last_name' => '', 'email' => 'cornelisdegroot@live.nl/ ja.el@live.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200631417']);
+        $user = User::factory()->create(['first_name' => 'Mts J en E de Groot Bos', 'last_name' => '', 'email' => 'cornelisdegroot@live.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200631417']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
         $user = User::factory()->create(['first_name' => 'Maatschap W,G, en H, van Vliet', 'last_name' => '', 'email' => 'wibevanvliet@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201651402']);
@@ -616,13 +616,13 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Buijserd Hoeve', 'last_name' => '', 'email' => 'peterbuijserd@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '90107282']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(5);
-        $user = User::factory()->create(['first_name' => 'Maatschap Vroege en van Woudenbergh', 'last_name' => '', 'email' => 'fam.vroege@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70089179']);
+        $user = User::factory()->create(['first_name' => 'Maatschap Vroege en van Woudenbergh', 'last_name' => '', 'email' => 'fam.vroege@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070089179']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Maatschap Snoek en Snoek-van Wijngaarden', 'last_name' => '', 'email' => 'melkveehouderij@snoek-gein.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70091111']);
+        $user = User::factory()->create(['first_name' => 'Maatschap Snoek en Snoek-van Wijngaarden', 'last_name' => '', 'email' => 'melkveehouderij@snoek-gein.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070091111']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
-        $user = User::factory()->create(['first_name' => 'Habbes Hoeve', 'last_name' => '', 'email' => 'Hans@habbeshoeve.info / johanhabbes@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200274297']);
+        $user = User::factory()->create(['first_name' => 'Habbes Hoeve', 'last_name' => '', 'email' => 'johanhabbes@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200274297']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
         $user = User::factory()->create(['first_name' => 'EKOHOEVE', 'last_name' => '', 'email' => 'nikkisoede@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201230112']);
@@ -688,7 +688,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Firma J, en C,H, van Dijk', 'last_name' => '', 'email' => 'keesvandijk.rhijnauwen@gmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '200366488']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(3);
-        $user = User::factory()->create(['first_name' => 'Samsom Wilnis vof', 'last_name' => '', 'email' => 'j@samsom-wilnis.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '70073016']);
+        $user = User::factory()->create(['first_name' => 'Samsom Wilnis vof', 'last_name' => '', 'email' => 'j@samsom-wilnis.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '070073016']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(1);
         $user = User::factory()->create(['first_name' => 'Firma De Rooij-van Walbeek-Kroon', 'last_name' => '', 'email' => 'fk.mderooij@outlook.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201453156']);
@@ -712,7 +712,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'Firma Koolhoeve', 'last_name' => '', 'email' => 'firmakoolhoeve@kpnplanet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201276234']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(5);
-        $user = User::factory()->create(['first_name' => 'Hoeve Zorg Zicht', 'last_name' => '', 'email' => 'teunis.sterk1@deheicopper.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '206867068']);
+        $user = User::factory()->create(['first_name' => 'Hoeve Zorg Zicht', 'last_name' => '', 'email' => 'michelsterk@live.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '206867068']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(5);
         $user = User::factory()->create(['first_name' => 'v,o,f, D, en A, Bassa', 'last_name' => '', 'email' => 'vofdenabassa@hotmail.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '201449378']);
@@ -724,7 +724,6 @@ class UserSeeder extends Seeder
         $user = User::factory()->create(['first_name' => 'VOF Melkveehouderij Willemse', 'last_name' => '', 'email' => 'lb.willemse@hetnet.nl', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '203682537']);
         $user->assignRole('bedrijf');
         $user->collectives()->attach(5);
-
 
         //2. Collectieven
         $user = User::factory()->create(['first_name' => 'Denzel', 'middle_name' => 'de', 'last_name' => '', 'email' => 'denzel.demello@collectieflopikerwaard.com', 'password' => Hash::make('UMDLProgramma2025!'), 'brs' => '123']);
