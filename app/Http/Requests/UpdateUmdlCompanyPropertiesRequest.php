@@ -35,6 +35,7 @@ class UpdateUmdlCompanyPropertiesRequest extends FormRequest
             'erkend_demobedrijf' => 'boolean',
             'bed_and_breakfast' => 'boolean',
             'zorg' => 'boolean',
+            'geen_sma' => 'boolean',
             'opp_totaal' => 'numeric',
             'opp_totaal_subsidiabel' => 'numeric',
             'melkkoeien' => 'numeric',

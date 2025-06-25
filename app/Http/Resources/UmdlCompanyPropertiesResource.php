@@ -30,6 +30,7 @@ class UmdlCompanyPropertiesResource extends JsonResource
             'erkend_demobedrijf' => $this->erkend_demobedrijf,
             'bed_and_breakfast' => $this->bed_and_breakfast,
             'zorg' => $this->zorg,
+            'geen_sma' => $this->geen_sma,
             'opp_totaal' => $this->opp_totaal,
             'opp_totaal_subsidiabel' => $this->opp_totaal_subsidiabel,
             'melkkoeien' => $this->melkkoeien,

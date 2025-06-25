@@ -128,11 +128,11 @@ class UmdlCollectiveController extends Controller
                 }
 
                 // 3. SMA's zijn niet ingevuld
-                if ($company_properties->website == 1 || $company_properties->ontvangstruimte == 1 ||
+                if (($company_properties->website == 1 || $company_properties->ontvangstruimte == 1 ||
                     $company_properties->winkel == 1 || $company_properties->educatie == 1 ||
                     $company_properties->meerjarige_monitoring == 1 || $company_properties->open_dagen == 1 ||
                     $company_properties->wandelpad == 1 || $company_properties->erkend_demobedrijf == 1 ||
-                    $company_properties->bed_and_breakfast == 1)
+                    $company_properties->bed_and_breakfast == 1) || $company_properties->geen_sma == 1)
                 {
                     $collective_data["total_sma_completed"] += 1;
                 }

@@ -31,6 +31,7 @@ class UmdlCompanyProperties extends Model
         'erkend_demobedrijf',
         'bed_and_breakfast',
         'zorg',
+        'geen_sma',
         'opp_totaal',
         'opp_totaal_subsidiabel',
         'melkkoeien',
