@@ -313,13 +313,13 @@
                 <tr>
                     <td>9</td>
                     <td style="text-align: left">Blijvend grasland</td>
-                    <td>{{$scores['year1']['kpi9']}}</td>
-                    <td>{{$scores['year2']['kpi9']}}</td>
-                    <td>{{$scores['year3']['kpi9']}}</td>
-                    <td>{{$scores['avg']['kpi9']}}</td>
-                    <td class="lightgreen">{{$scores['avg_tot']['kpi9']}}</td>
+                    <td>{{$scores['year1']['kpi9'].'%'}}</td>
+                    <td>{{$scores['year2']['kpi9'].'%'}}</td>
+                    <td>{{$scores['year3']['kpi9'].'%'}}</td>
+                    <td>{{$scores['avg']['kpi9'].'%'}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi9'].'%'}}</td>
                     <td>{{$scores['score']['kpi9']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi9']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi9'].'%'}}</td>
                 </tr>
                 <tr>
                     <td>10</td>
