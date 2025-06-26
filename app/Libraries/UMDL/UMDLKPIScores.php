@@ -261,7 +261,6 @@ class UMDLKPIScores
 
             // Add each indidivual company score to the grand total
             foreach ($companies as $company) {
-                Log::info($company->id);
                 $company_scores = $this->getScores($company->id);
 
                 foreach ($averageAveragesArray as $key => $value) {
@@ -280,17 +279,21 @@ class UMDLKPIScores
 
             // Then, divide the totals by the number of companies
             foreach ($averageAveragesArray as $key => $value) {
-                $averageAveragesArray[$key] = round($averageAveragesArray[$key] / count($companies),0);
+                if ($key == 'kpi10' || $key == 'kpi11' || $key == 'kpi12' || $key == 'kpi13a') {
+                    $averageAveragesArray[$key] = $averageAveragesArray[$key] / count($companies);
+                } else {
+                    $averageAveragesArray[$key] = round($averageAveragesArray[$key] / count($companies), 0);
+                }
             }
 
             foreach ($scoreAveragesArray as $key => $value) {
 
-                $scoreAveragesArray[$key] = round($scoreAveragesArray[$key] / count($companies),0);
+                $scoreAveragesArray[$key] = round($scoreAveragesArray[$key] / count($companies), 0);
             }
 
             foreach ($totalAveragesArray as $key => $value) {
 
-                $totalAveragesArray[$key] = round($totalAveragesArray[$key] / count($companies),0);
+                $totalAveragesArray[$key] = round($totalAveragesArray[$key] / count($companies), 0);
             }
         }
 
@@ -376,17 +379,21 @@ class UMDLKPIScores
 
             // Then, divide the totals by the number of companies
             foreach ($averageAveragesArray as $key => $value) {
-                $averageAveragesArray[$key] = round($averageAveragesArray[$key] / count($companies),0);
+                if ($key == 'kpi10' || $key == 'kpi11' || $key == 'kpi12' || $key == 'kpi13a') {
+                    $averageAveragesArray[$key] = $averageAveragesArray[$key] / count($companies);
+                } else {
+                    $averageAveragesArray[$key] = round($averageAveragesArray[$key] / count($companies), 0);
+                }
             }
 
             foreach ($scoreAveragesArray as $key => $value) {
 
-                $scoreAveragesArray[$key] = round($scoreAveragesArray[$key] / count($companies),0);
+                $scoreAveragesArray[$key] = round($scoreAveragesArray[$key] / count($companies), 0);
             }
 
             foreach ($totalAveragesArray as $key => $value) {
 
-                $totalAveragesArray[$key] = round($totalAveragesArray[$key] / count($companies),0);
+                $totalAveragesArray[$key] = round($totalAveragesArray[$key] / count($companies), 0);
             }
         }
 

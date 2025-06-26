@@ -330,28 +330,28 @@
                     <tr>
                         <td>10</td>
                         <td style="text-align: left">Extensief kruidenrijk grasland</td>
-                        <td colspan="4">{{number_format((int)$scores['year1']['kpi10']* 100,1) .'%'}}</td>
+                        <td colspan="4">{{number_format($scores['avg']['kpi10']* 100,1) .'%'}}</td>
                         <td>{{$scores['score']['kpi10']}}</td>
                     </tr>
                     <tr>
                         <td>11</td>
                         <td style="text-align: left">Natuur en Landschap</td>
-                        <td colspan="4">{{number_format((int)$scores['year1']['kpi11']* 100,1) .'%'}}</td>
+                        <td colspan="4">{{number_format($scores['avg']['kpi11']* 100,1) .'%'}}</td>
                         <td>{{$scores['score']['kpi11']}}</td>
                     </tr>
                     <tr>
                         <td>12</td>
                         <td style="text-align: left">Groenblauwe dooradering</td>
-                        <td colspan="4">{{number_format((int)$scores['year1']['kpi12']* 100,1) .'%'}}</td>
+                        <td colspan="4">{{number_format($scores['avg']['kpi12']* 100,1) .'%'}}</td>
                         <td>{{$scores['score']['kpi12']}}</td>
                     </tr>
                     <tr>
                         <td>13a</td>
                         <td style="text-align: left">Energiebalans (opgewekt/verbruikt)*</td>
-                        <td>{{number_format((int)$scores['year1']['kpi13a']* 100,1).'%'}}</td>
-                        <td>{{number_format((int)$scores['year2']['kpi13a']* 100,1) .'%'}}</td>
-                        <td>{{number_format((int)$scores['year3']['kpi13a']* 100,1) .'%'}}</td>
-                        <td>{{number_format((int)$scores['avg']['kpi13a']* 100,1).'%'}}</td>
+                        <td>{{number_format($scores['year1']['kpi13a']* 100,1).'%'}}</td>
+                        <td>{{number_format($scores['year2']['kpi13a']* 100,1) .'%'}}</td>
+                        <td>{{number_format($scores['year3']['kpi13a']* 100,1) .'%'}}</td>
+                        <td>{{number_format($scores['avg']['kpi13a']* 100,1).'%'}}</td>
                         <td>{{$scores['score']['kpi13a']}}</td>
                     </tr>
                     <tr>
