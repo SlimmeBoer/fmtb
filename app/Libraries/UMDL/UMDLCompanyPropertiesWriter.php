@@ -67,6 +67,7 @@ class UMDLCompanyPropertiesWriter
             $umdlcompanyproperties->erkend_demobedrijf = false;
             $umdlcompanyproperties->bed_and_breakfast = false;
             $umdlcompanyproperties->zorg = false;
+            $umdlcompanyproperties->geen_sma = false;
 
             $umdlcompanyproperties->opp_totaal= round($opp_totaal,1);
             $umdlcompanyproperties->opp_totaal_subsidiabel = round($opp_totaal,1);
