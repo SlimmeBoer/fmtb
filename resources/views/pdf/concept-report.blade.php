@@ -321,11 +321,11 @@
                     <tr>
                         <td>9</td>
                         <td style="text-align: left">Blijvend grasland</td>
-                        <td>{{$scores['year1']['kpi9'].'%'}}</td>
-                        <td>{{$scores['year2']['kpi9'].'%'}}</td>
-                        <td>{{$scores['year3']['kpi9'].'%'}}</td>
+                        <td>{{ is_numeric($scores['year1']['kpi9'] ?? null) ? $scores['year1']['kpi9'] . '%' : $scores['year1']['kpi9'] }}</td>
+                        <td>{{ is_numeric($scores['year2']['kpi9'] ?? null) ? $scores['year2']['kpi9'] . '%' : $scores['year2']['kpi9'] }}</td>
+                        <td>{{ is_numeric($scores['year3']['kpi9'] ?? null) ? $scores['year3']['kpi9'] . '%' : $scores['year3']['kpi9'] }}</td>
                         <td>{{$scores['avg']['kpi9'].'%'}}</td>
-                        <td>{{$scores['score']['kpi9'].'%'}}</td>
+                        <td>{{$scores['score']['kpi9']}}</td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -348,10 +348,26 @@
                     <tr>
                         <td>13a</td>
                         <td style="text-align: left">Energiebalans (opgewekt/verbruikt)*</td>
-                        <td>{{number_format($scores['year1']['kpi13a']* 100,1).'%'}}</td>
-                        <td>{{number_format($scores['year2']['kpi13a']* 100,1) .'%'}}</td>
-                        <td>{{number_format($scores['year3']['kpi13a']* 100,1) .'%'}}</td>
-                        <td>{{number_format($scores['avg']['kpi13a']* 100,1).'%'}}</td>
+                        <td>
+                            {{ is_numeric($scores['year1']['kpi13a'] ?? null)
+                                ? number_format($scores['year1']['kpi13a'] * 100, 1) . '%'
+                                : '–' }}
+                        </td>
+                        <td>
+                            {{ is_numeric($scores['year2']['kpi13a'] ?? null)
+                                ? number_format($scores['year2']['kpi13a'] * 100, 1) . '%'
+                                : '–' }}
+                        </td>
+                        <td>
+                            {{ is_numeric($scores['year3']['kpi13a'] ?? null)
+                                ? number_format($scores['year3']['kpi13a'] * 100, 1) . '%'
+                                : '–' }}
+                        </td>
+                        <td>
+                            {{ is_numeric($scores['avg']['kpi13a'] ?? null)
+                                ? number_format($scores['avg']['kpi13a'] * 100, 1) . '%'
+                                : '–' }}
+                        </td>
                         <td>{{$scores['score']['kpi13a']}}</td>
                     </tr>
                     <tr>

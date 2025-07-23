@@ -239,9 +239,9 @@ export default function KPITable(props) {
             avg: data.avg.kpi9 + "%",
             avg_col: data.avg_col.kpi9 + "%",
             avg_tot: data.avg_tot.kpi9 + "%",
-            score: data.score.kpi9 + "%",
-            score_col: data.score_col.kpi9 + "%",
-            score_tot: data.score_tot.kpi9 + "%",
+            score: data.score.kpi9,
+            score_col: data.score_col.kpi9,
+            score_tot: data.score_tot.kpi9,
         },
         {
             text: t("kpis.10"),

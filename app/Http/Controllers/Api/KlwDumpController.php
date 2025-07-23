@@ -19,6 +19,7 @@ use App\Models\Signal;
 use App\Models\SystemLog;
 use App\Models\UmdlCollectiveCompany;
 use App\Models\UmdlCollectivePostalcode;
+use App\Models\UmdlCompanyProperties;
 use App\Models\UmdlKpiValues;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -152,13 +153,49 @@ class KlwDumpController extends Controller
             unlink(public_path('uploads/klw/'. $klwDump->filename));
         }
 
-        // Remove file from RAW files db
+        //6. Remove file from RAW files db
         RawFile::where('dump_id', $klwDump->id)
             ->where('type', 'klw')
             ->delete();
 
-        //7. Remove the dump itself.
+
+        //7. Remove the dump itself. Store the company id beforehand for later checks.
+        $company_id = $klwDump->company_id;
         $klwDump->delete();
+
+        // HOTFIX 0.8.7 - Deletes the associated company if there are no more dumps, to prevent "ghost"-entries in the DB
+        $company = Company::find($company_id);
+
+        if ($company) {
+            // Count all klwDumps related to this company
+            $klwDumpCount = $company->klwDumps()->count();
+
+            // If only one (the current one), then we can delete the company after this klwDump is deleted
+            if ($klwDumpCount <= 1) {
+                //1. Delete KPI-values for the corresponding company
+                UmdlKpiValues::where('company_id', $company->id)->delete();
+
+                // 2. Remove all connections to collectives
+                UmdlCollectiveCompany::where('company_id', $company->id)->delete();
+
+                // 3. Remove all KVK-numbers associated to this company
+                KvkNumber::where('company_id', $company->id)->delete();
+
+                // 4. Delete company properties for the corresponding company
+                UmdlCompanyProperties::where('company_id', $company->id)->delete();
+
+                // 5. Log
+                SystemLog::create(array(
+                    'user_id' => Auth::user()->id,
+                    'type' => 'DELETE',
+                    'message' => 'Bedrijf verwijderd: ' . $company->name,
+                ));
+
+                // 6. Finally, remove the company itself.
+                $company->delete();
+            }
+        }
+
 
         return response()->json(['success' => true]);
     }
@@ -247,10 +284,11 @@ class KlwDumpController extends Controller
 
                 // 4. Store the dump metadata
                 $klwDump = KlwDump::firstOrCreate(array(
-                    'filename' => $newFileName,
                     'company_id' => $company->id,
                     'year' => $klwParser->getYear($file),
                 ));
+                $klwDump->filename = $newFileName;
+                $klwDump->save();
 
                 // 5. Store all fields and their values into the database.
                 $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, true);
