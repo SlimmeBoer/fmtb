@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id');
             $table->string('year');
-            $table->string('filename');
+            $table->string('filename')->nullable();
             $table->timestamps();
         });
     }

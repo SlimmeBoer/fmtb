@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('collective_id');
             $table->string('year');
-            $table->string('filename');
+            $table->string('filename')->nullable();
             $table->timestamps();
         });
     }

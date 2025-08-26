@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('brs');
             $table->integer("final_year");
-            $table->string("filename");
+            $table->string("filename")->nullable();
             $table->float("result_kpi1a")->nullable();
             $table->float("result_kpi1b")->nullable();
             $table->float("result_kpi2")->nullable();
