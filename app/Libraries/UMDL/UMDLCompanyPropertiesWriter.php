@@ -105,7 +105,7 @@ class UMDLCompanyPropertiesWriter
      * @param $zand3
      * @return string
      */
-    private function rangschikBodem($veen, $klei, $zand1, $zand2, $zand3) : string
+    public function rangschikBodem($veen, $klei, $zand1, $zand2, $zand3) : string
     {
         $zand = $zand1 + $zand2 + $zand3;
 

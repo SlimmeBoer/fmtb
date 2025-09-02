@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BbmCodeController;
 use App\Http\Controllers\Api\BbmGisPackageController;
 use App\Http\Controllers\Api\BbmKpiController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\ExcelController;
 use App\Http\Controllers\Api\FAQController;
 use App\Http\Controllers\Api\GisDumpController;
 use App\Http\Controllers\Api\KlwDumpController;
@@ -83,6 +84,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/bbmgispackages/overview', [BbmGisPackageController::class, 'getOverview']);
 
     Route::get('/bbmanlbpackages/overview', [BbmAnlbPackageController::class, 'getOverview']);
+
+    Route::get('/export/download', [ExcelController::class, 'download']); // sync, één call
 
     Route::get('/pdf/getcompany/{company}', [PdfController::class, 'generatePdf']);
     Route::get('/pdf/currentcompany', [PdfController::class, 'generatePdfCurrentCompany']);

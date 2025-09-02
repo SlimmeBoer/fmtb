@@ -7,7 +7,7 @@ const HorizontalBoxPlot = ({ data1, data2, data3 }) => {
             data={[
                 {
                     x: Object.values(data3),
-                    name: '2023',
+                    name: '2024',
                     type: 'box',
                     boxpoints: 'all',
                     jitter: 0.8,
@@ -16,7 +16,7 @@ const HorizontalBoxPlot = ({ data1, data2, data3 }) => {
                 },
                 {
                     x: Object.values(data2),
-                    name: '2022',
+                    name: '2023',
                     type: 'box',
                     boxpoints: 'all',
                     jitter: 0.8,
@@ -25,7 +25,7 @@ const HorizontalBoxPlot = ({ data1, data2, data3 }) => {
                 },
                 {
                     x: Object.values(data1),
-                    name: '2021',
+                    name: '2022',
                     type: 'box',
                     boxpoints: 'all',
                     jitter: 0.8,

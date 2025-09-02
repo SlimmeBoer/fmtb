@@ -10,6 +10,7 @@ import {isObjectEmpty} from "../../helpers/EmptyObject.js";
 import Link from "@mui/material/Link";
 import {useTranslation} from "react-i18next";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
+import CompanyOldDataIndicator from "../visuals/CompanyOldDataIndicator.jsx";
 
 export default function ScoresTableTotaal(props) {
     const [scores, setScores] = useState({});
@@ -63,6 +64,7 @@ export default function ScoresTableTotaal(props) {
                                     <TableRow key={index} sx={{margin: 0}}>
                                         <TableCell component="th" scope="row">
                                             {index+1}. <Link href={props.link + s.company_id}>{s.company_name}</Link>
+                                            <CompanyOldDataIndicator oldData={s.old_data} />
                                         </TableCell>
                                         <TableCell align="center">
                                             {s.points}

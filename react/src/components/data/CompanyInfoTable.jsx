@@ -195,6 +195,11 @@ export default function CompanyInfoTable(props) {
                                 <TableCell
                                     sx={{width: 150, fontWeight: 'bold'}}>{company.bio === 1 ? 'Ja' : 'Nee'}</TableCell>
                             </TableRow>
+                            <TableRow key={"companyinfo-" + 105}>
+                                <TableCell sx={{width: 50}}>Startjaar:</TableCell>
+                                <TableCell
+                                    sx={{width: 150, fontWeight: 'bold'}}>{company.old_data === true ? '2024' : '2025'}</TableCell>
+                            </TableRow>
 
                         </TableBody>
                     </Table>}

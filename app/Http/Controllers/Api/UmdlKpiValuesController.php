@@ -130,6 +130,7 @@ class UmdlKpiValuesController extends Controller
                 'company_name' => $company->name,
                 'points' => $company_scores['total']['score'],
                 'money' => $company_scores['total']['money'],
+                'old_data'     => (bool) $company->old_data, // hier de boolean
             ));
             $collectiveTotals = array_merge($collectiveTotals, $companyArray);
         }
@@ -153,6 +154,7 @@ class UmdlKpiValuesController extends Controller
                 'company_name' => $company->name,
                 'points' => $company_scores['total']['score'],
                 'money' => $company_scores['total']['money'],
+                'old_data'     => (bool) $company->old_data,
             ));
             $allTotals = array_merge($allTotals, $companyArray);
         }

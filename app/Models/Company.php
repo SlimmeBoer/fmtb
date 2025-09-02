@@ -47,4 +47,20 @@ class Company extends Model
         return $this->hasMany(KlwDump::class, 'company_id', 'id');
     }
 
+    public function oldResultByBrs()
+    {
+        return $this->hasOne(OldResult::class, 'brs', 'brs');
+    }
+
+    protected $appends = ['old_data']; // ← toevoegen
+
+// Accessor die slim omgaat met eager loaded relatie
+    public function getOldDataAttribute(): bool
+    {
+        if ($this->relationLoaded('oldResultByBrs')) {
+            return $this->oldResultByBrs !== null;
+        }
+        return $this->oldResultByBrs()->exists();
+    }
+
 }

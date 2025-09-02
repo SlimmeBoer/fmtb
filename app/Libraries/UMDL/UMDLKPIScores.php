@@ -16,7 +16,7 @@ class UMDLKPIScores
     {
 
         $scoresArray = array();
-        $settings = parse_ini_file('config/UMDL.ini', true);
+        $settings = parse_ini_file(public_path('config/UMDL.ini'), true);
 
         $scores = UmdlKpiValues::where('company_id', $company_id)
             ->orderByDesc('year')

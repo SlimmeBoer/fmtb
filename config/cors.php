@@ -25,7 +25,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'expose_headers' => ['Content-Disposition','X-Filename'],
 
     'max_age' => 0,
 

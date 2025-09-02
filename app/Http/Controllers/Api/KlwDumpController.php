@@ -367,9 +367,13 @@ class KlwDumpController extends Controller
     {
         $user = User::where('id', Auth::id())
             ->with([
-                'collectives.companies.klwDumps' => function ($query) {
-                    $query->withCount('signals'); // Get only the count of signals
-                }
+                // Voeg old_data toe op companies
+                'collectives.companies' => fn ($q) =>
+                $q->withExists(['oldResultByBrs as old_data']),
+
+                // Laad klwDumps + signals_count
+                'collectives.companies.klwDumps' => fn ($q) =>
+                $q->withCount('signals'),
             ])
             ->first();
 
@@ -406,11 +410,12 @@ class KlwDumpController extends Controller
     public function getAllDumps()
     {
         // Get all companies with their associated klwDumps and signal count
-        $companies = Company::with([
-            'klwDumps' => function ($query) {
-                $query->withCount('signals'); // Get only the count of signals for each dump
-            }
-        ])->get();
+        $companies = Company::query()
+            ->with([
+                'klwDumps' => fn ($q) => $q->withCount('signals'),
+            ])
+            ->withExists(['oldResultByBrs as old_data'])
+            ->get();
 
         $klwDumps = [];
 

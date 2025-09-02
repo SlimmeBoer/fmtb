@@ -3,7 +3,7 @@
         "copyright": "©2024-2025 Terug naar de Basis Advies / Precondition / Provincie Utrecht",
         "description": "Deze versie is bedoeld voor demonstratie-doeleinden.\n\nAlle getoonde data is niet berust op werkelijk bestaande bedrijven en personen. Eventuele gelijkenissen berusten op puur toeval. Alle rechten voorbehouden.",
         "title": "Webapplicatie UMDL",
-        "version": "Versie 0.8.8"
+        "version": "Versie 0.9.1"
     },
     "admin_menu": {
         "anlb_packages": "ANLb-pakketten",
@@ -165,6 +165,12 @@
         "header_email": "E-mailadres",
         "header_full_name": "Naam"
     },
+    "excel_export": {
+        "title": "Eindresultaten exporteren naar Excel",
+        "subtitle": "Klik op de knop hieronder om de resultaten van het lopende jaar te exporteren als Excel-sheet",
+        "generating": "Bezig met genereren…",
+        "ready_to_download": "Klaar om te downloaden."
+    },
     "faq": {
         "answer": "Antwoord",
         "edit": "Bestaande vraag + antwoord bewerken",
@@ -189,8 +195,10 @@
         "close": "Close",
         "delete": "Verwijderen",
         "edit": "Bewerken",
+        "excel_export": "Excel exporteren",
         "failed": "Mislukt",
         "failed_message": "Upload mislukt. Probeer het opnieuw.",
+        "freshly_started": "Deze deelnemer is gestart in 2025 (geen oude data)",
         "instructions": "Instructies",
         "logout": "Uitloggen",
         "new": "Nieuw",
