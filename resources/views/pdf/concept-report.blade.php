@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use App\Http\Middleware\YearMonths; @endphp
+    <!DOCTYPE html>
 <html>
 <head>
     <title>{{ $title }}</title>
@@ -146,7 +147,7 @@
     </style>
 </head>
 <body>
-    <div class="content">
+<div class="content">
     <table>
         <tr class="top-row">
             <td colspan="3">&nbsp;</td>
@@ -382,10 +383,10 @@
                     <tr>
                         <td>14</td>
                         <td style="text-align: left">Levensduur (maanden)</td>
-                        <td>{{$scores['year1']['kpi14']}}</td>
-                        <td>{{$scores['year2']['kpi14']}}</td>
-                        <td>{{$scores['year3']['kpi14']}}</td>
-                        <td>{{$scores['avg']['kpi14']}}</td>
+                        <td>{{YearMonths::showYearMonths($scores['year1']['kpi14'])}}</td>
+                        <td>{{YearMonths::showYearMonths($scores['year2']['kpi14'])}}</td>
+                        <td>{{YearMonths::showYearMonths($scores['year3']['kpi14'])}}</td>
+                        <td>{{YearMonths::showYearMonths($scores['avg']['kpi14'])}}</td>
                         <td>{{$scores['score']['kpi14']}}</td>
                     </tr>
                     <tr>
@@ -494,8 +495,8 @@
         </tr>
     </table>
 </div>
-    <div class="watermark">
-        <img src="{{ $logos['watermark'] }}">
-    </div>
+<div class="watermark">
+    <img src="{{ $logos['watermark'] }}">
+</div>
 </body>
 </html>

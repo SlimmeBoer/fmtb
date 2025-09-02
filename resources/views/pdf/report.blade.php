@@ -1,3 +1,4 @@
+@php use App\Http\Middleware\YearMonths; @endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -386,11 +387,11 @@
                 <tr>
                     <td>14</td>
                     <td style="text-align: left">Levensduur (maanden)</td>
-                    <td>{{$scores['year1']['kpi14']}}</td>
-                    <td>{{$scores['year2']['kpi14']}}</td>
-                    <td>{{$scores['year3']['kpi14']}}</td>
-                    <td>{{$scores['avg']['kpi14']}}</td>
-                    <td class="lightgreen">{{$scores['avg_tot']['kpi14']}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['year1']['kpi14'])}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['year2']['kpi14'])}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['year3']['kpi14'])}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['avg']['kpi14'])}}</td>
+                    <td class="lightgreen">{{YearMonths::showYearMonths($scores['avg_tot']['kpi14'])}}</td>
                     <td>{{$scores['score']['kpi14']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi14']}}</td>
                 </tr>

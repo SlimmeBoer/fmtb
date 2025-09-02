@@ -1731,6 +1731,9 @@ class Excel_Export
             $sheetAll->setCellValue("FG{$row}", $meta['postcode']);
             $sheetAll->setCellValue("FI{$row}", $meta['biobedrijf']);
 
+            // Heeft oude data? Dan startjaar -> 2024. ander 2025.
+            $starting_year = Company::findOrFail($cid)->old_data ? '2024' : '2025';
+            $sheetAll->setCellValue("FL" . $row, $starting_year);
 
             $sheetAll->setCellValue("FM" . $row, $avgPcKlaverW);
             $sheetAll->setCellValue("FN" . $row, $avgOppKlaverW);
