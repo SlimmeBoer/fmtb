@@ -1729,7 +1729,6 @@ class Excel_Export
             $sheetAll->setCellValue("DL" . $row, $avgAllocVleesW);
 
             $sheetAll->setCellValue("FG{$row}", $meta['postcode']);
-            $sheetAll->setCellValue("FI{$row}", $meta['biobedrijf']);
 
             // Heeft oude data? Dan startjaar -> 2024. ander 2025.
             $starting_year = Company::findOrFail($cid)->old_data ? '2024' : '2025';
@@ -1827,6 +1826,8 @@ class Excel_Export
             $sheetAll->setCellValue("FF{$row}", $total_money);
 
             $sheetAll->setCellValue("FH{$row}", Company::find($cid)->collectives->pluck('name')->join(', '));
+            $sheetAll->setCellValue("FI{$row}", (bool)Company::find($cid)->bio);
+
 
             // Properties (ET) in dezelfde rij
             $props   = UmdlCompanyProperties::query()->where('company_id', $cid)->first();
