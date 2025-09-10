@@ -17,10 +17,10 @@ use App\Models\KvkNumber;
 use App\Models\RawFile;
 use App\Models\Signal;
 use App\Models\SystemLog;
-use App\Models\UmdlCollectiveCompany;
-use App\Models\UmdlCollectivePostalcode;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues;
+use App\Models\CollectiveCompany;
+use App\Models\CollectivePostalcode;
+use App\Models\CompanyProperties;
+use App\Models\KpiValues;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -52,12 +52,12 @@ class KlwDumpController extends Controller
         $collective_id = Auth::user()->collectives()->first()->id;
 
         $companies = Company::whereHas('collectives', function ($query) use ($collective_id) {
-            $query->where('umdl_collectives.id', $collective_id);
+            $query->where('collectives.id', $collective_id);
         })->get();
 
         $klwDumps = KlwDump::whereHas('company', function ($query) use ($collective_id) {
             $query->whereHas('collectives', function ($subQuery) use ($collective_id) {
-                $subQuery->where('umdl_collectives.id', $collective_id);
+                $subQuery->where('collectives.id', $collective_id);
             });
         })->get();
 
@@ -131,7 +131,7 @@ class KlwDumpController extends Controller
     public function destroy(KlwDump $klwDump)
     {
         //1. Delete KPI-values for the corresponding company and year
-        UmdlKpiValues::where('company_id', $klwDump->company_id)
+        KpiValues::where('company_id', $klwDump->company_id)
             ->where('year', $klwDump->year)
             ->delete();
 
@@ -173,16 +173,16 @@ class KlwDumpController extends Controller
             // If only one (the current one), then we can delete the company after this klwDump is deleted
             if ($klwDumpCount <= 1) {
                 //1. Delete KPI-values for the corresponding company
-                UmdlKpiValues::where('company_id', $company->id)->delete();
+                KpiValues::where('company_id', $company->id)->delete();
 
                 // 2. Remove all connections to collectives
-                UmdlCollectiveCompany::where('company_id', $company->id)->delete();
+                CollectiveCompany::where('company_id', $company->id)->delete();
 
                 // 3. Remove all KVK-numbers associated to this company
                 KvkNumber::where('company_id', $company->id)->delete();
 
                 // 4. Delete company properties for the corresponding company
-                UmdlCompanyProperties::where('company_id', $company->id)->delete();
+                CompanyProperties::where('company_id', $company->id)->delete();
 
                 // 5. Log
                 SystemLog::create(array(
@@ -242,7 +242,7 @@ class KlwDumpController extends Controller
                 }
 
                 // 2. Connect the company to an existing collective
-                $ucpc = UmdlCollectivePostalcode::where('postal_code', $company->postal_code)->first();
+                $ucpc = CollectivePostalcode::where('postal_code', $company->postal_code)->first();
 
                 if ($ucpc) {
                     $collective_id = $ucpc->collective_id;
@@ -252,13 +252,13 @@ class KlwDumpController extends Controller
                 }
 
                 try {
-                    $company_collective = UmdlCollectiveCompany::firstOrCreate(array(
+                    $company_collective = CollectiveCompany::firstOrCreate(array(
                         'company_id' => $company->id,
                         'collective_id' => $collective_id,
                     ));
                 } catch (\Illuminate\Database\QueryException $e) {
                     // If a duplicate entry error occurs, retrieve the existing record
-                    $company_collective = UmdlCollectiveCompany::where(array(
+                    $company_collective = CollectiveCompany::where(array(
                         'company_id' => $company->id,
                         'collective_id' => $collective_id,
                     ))->first();

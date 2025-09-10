@@ -56,7 +56,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-    'frontend_url' => env('FRONTEND_URL', 'https://umdl.nl'),
+    'frontend_url' => env('FRONTEND_URL', 'https://fmtb.nl'),
 
     'asset_url' => env('ASSET_URL'),
 

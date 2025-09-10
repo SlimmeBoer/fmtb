@@ -3,8 +3,8 @@
 namespace App\Libraries\ExcelParser;
 
 use App\Models\Company;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues;
+use App\Models\CompanyProperties;
+use App\Models\KpiValues;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use Saloon\XmlWrangler\Exceptions\MissingNodeException;
 use Saloon\XmlWrangler\Exceptions\MultipleNodesFoundException;
@@ -44,23 +44,23 @@ class ExcelParser
         $spreadsheet = $reader->load($excel_file);
         $worksheet = $spreadsheet->getSheetByName('UMDL invulblad');
 
-        $umdlcompanyproperties = UmdlCompanyProperties::firstOrNew(array(
+        $companyproperties = CompanyProperties::firstOrNew(array(
             'company_id' => $company_id,
         ));
 
         // Set all properties
-        $umdlcompanyproperties->mbp = $this->transformMBP($worksheet->getCell('C20')->getValue());
-        $umdlcompanyproperties->website = $worksheet->getCell('F23')->getValue();
-        $umdlcompanyproperties->ontvangstruimte = $worksheet->getCell('F24')->getValue();
-        $umdlcompanyproperties->winkel = $worksheet->getCell('F25')->getValue();
-        $umdlcompanyproperties->educatie = $worksheet->getCell('F26')->getValue();
-        $umdlcompanyproperties->meerjarige_monitoring = $worksheet->getCell('F27')->getValue();
-        $umdlcompanyproperties->open_dagen = $worksheet->getCell('F28')->getValue();
-        $umdlcompanyproperties->wandelpad = $worksheet->getCell('F29')->getValue();
-        $umdlcompanyproperties->erkend_demobedrijf = $worksheet->getCell('F30')->getValue();
-        $umdlcompanyproperties->bed_and_breakfast = $worksheet->getCell('F31')->getValue();
+        $companyproperties->mbp = $this->transformMBP($worksheet->getCell('C20')->getValue());
+        $companyproperties->website = $worksheet->getCell('F23')->getValue();
+        $companyproperties->ontvangstruimte = $worksheet->getCell('F24')->getValue();
+        $companyproperties->winkel = $worksheet->getCell('F25')->getValue();
+        $companyproperties->educatie = $worksheet->getCell('F26')->getValue();
+        $companyproperties->meerjarige_monitoring = $worksheet->getCell('F27')->getValue();
+        $companyproperties->open_dagen = $worksheet->getCell('F28')->getValue();
+        $companyproperties->wandelpad = $worksheet->getCell('F29')->getValue();
+        $companyproperties->erkend_demobedrijf = $worksheet->getCell('F30')->getValue();
+        $companyproperties->bed_and_breakfast = $worksheet->getCell('F31')->getValue();
 
-        $umdlcompanyproperties->save();
+        $companyproperties->save();
 
         // Set additional company properties (email, bank account etc.)
         $company = Company::where(array('id' => $company_id))->first();
@@ -74,15 +74,15 @@ class ExcelParser
         }
 
         // TODO: Also reads the green KPI scores (needs to be fixed later)
-        $umdlkpivalues = UmdlKpiValues::where('company_id', $company_id)->get();
+        $kpivalues = KpiValues::where('company_id', $company_id)->get();
         $result_sheet = $spreadsheet->getSheetByName('Eindresultaat');
 
-        foreach ($umdlkpivalues as $umdl)
+        foreach ($kpivalues as $kpivalue)
         {
-            $umdl->kpi10 = $result_sheet->getCell('D29')->getCalculatedValue();
-            $umdl->kpi11 = $result_sheet->getCell('D30')->getCalculatedValue();
-            $umdl->kpi12 = $result_sheet->getCell('D31')->getCalculatedValue();
-            $umdl->save();
+            $kpivalue->kpi10 = $result_sheet->getCell('D29')->getCalculatedValue();
+            $kpivalue->kpi11 = $result_sheet->getCell('D30')->getCalculatedValue();
+            $kpivalue->kpi12 = $result_sheet->getCell('D31')->getCalculatedValue();
+            $kpivalue->save();
         }
 
 

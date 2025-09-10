@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Libraries\UMDL\UMDLKPICollector;
+use App\Libraries\Monitor\KPICollector;
 use App\Models\KlwField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

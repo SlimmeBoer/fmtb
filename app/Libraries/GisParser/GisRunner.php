@@ -8,8 +8,8 @@ use App\Models\BbmGisPackage;
 use App\Models\BbmKpi;
 use App\Models\Company;
 use App\Models\GisRecord;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues;
+use App\Models\CompanyProperties;
+use App\Models\KpiValues;
 use Illuminate\Support\Facades\Log;
 
 class GisRunner
@@ -145,20 +145,20 @@ class GisRunner
         }
 
         // KPIs are now set with all weighted data. Now, divide by the total surface of the company.
-        $company_properties = UmdlCompanyProperties::where('company_id',$company->id)->first();
+        $company_properties = CompanyProperties::where('company_id',$company->id)->first();
         $kpi10 = $kpi10 / $company_properties->opp_totaal_subsidiabel;
         $kpi11 = $kpi11 / $company_properties->opp_totaal_subsidiabel;
         $kpi12 = $kpi12 / $company_properties->opp_totaal_subsidiabel;
 
-        // Final action, store the percentage in all UMDLKpiValues
-        $umdlkpivalues = UmdlKpiValues::where('company_id',$company->id)->get();
+        // Final action, store the percentage in all KpiValues
+        $kpivalues = KpiValues::where('company_id',$company->id)->get();
 
-        foreach ($umdlkpivalues as $umdlkpivalue)
+        foreach ($kpivalues as $kpivalue)
         {
-            $umdlkpivalue->kpi10 = $kpi10;
-            $umdlkpivalue->kpi11 = $kpi11;
-            $umdlkpivalue->kpi12 = $kpi12;
-            $umdlkpivalue->save();
+            $kpivalue->kpi10 = $kpi10;
+            $kpivalue->kpi11 = $kpi11;
+            $kpivalue->kpi12 = $kpi12;
+            $kpivalue->save();
         }
 
     }

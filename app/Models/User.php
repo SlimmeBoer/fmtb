@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function collectives()
     {
-        return $this->belongsToMany(UmdlCollective::class, 'umdl_collective_users', 'user_id','collective_id');
+        return $this->belongsToMany(Collective::class, 'collective_users', 'user_id','collective_id');
     }
 
     public function sendPasswordResetNotification($token)

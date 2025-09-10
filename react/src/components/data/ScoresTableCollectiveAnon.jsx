@@ -24,7 +24,7 @@ export default function ScoresTableCollectiveAnon(props) {
     const getScores = () => {
         if (props.collective !== '') {
             setLoading(true);
-            axiosClient.get(`/umdlkpi/getcollectivescores/${props.collective}`)
+            axiosClient.get(`/kpi/getcollectivescores/${props.collective}`)
                 .then(({data}) => {
                     setLoading(false);
                     setScores(data);

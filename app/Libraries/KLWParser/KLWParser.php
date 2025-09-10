@@ -2,12 +2,12 @@
 
 namespace App\Libraries\KLWParser;
 
-use App\Libraries\UMDL\UMDLCompanyPropertiesWriter;
-use App\Libraries\UMDL\UMDLKPICollector;
+use App\Libraries\Monitor\CompanyPropertiesWriter;
+use App\Libraries\Monitor\KPICollector;
 use App\Models\KlwField;
 use App\Models\KlwValue;
 use App\Models\Signal;
-use App\Models\UmdlKpiValues;
+use App\Models\KpiValues;
 use Illuminate\Support\Facades\Log;
 use Saloon\XmlWrangler\Exceptions\MissingNodeException;
 use Saloon\XmlWrangler\Exceptions\MultipleNodesFoundException;
@@ -88,8 +88,8 @@ class KLWParser
         $reader = XmlReader::fromFile($xml_file);
         $all_elements = $reader->value('KW_Output.PLAN')->sole();
 
-        $collector = new UMDLKPICollector();
-        $company_properties = new UMDLCompanyPropertiesWriter();
+        $collector = new KPICollector();
+        $company_properties = new CompanyPropertiesWriter();
         $klwValueData = array();
 
         $existing_fields = KlwField::all();
@@ -136,11 +136,11 @@ class KLWParser
                                 'value' => $field_value,
                             );
                         }
-                        // Set vars of UMDL calculator
+                        // Set vars of calculator
                         if (array_key_exists($field_key, $collector->vars)) {
                             $collector->vars[$field_key] = $field_value;
                         }
-                        // Set vars of UMDL calculator.
+                        // Set vars of calculator.
                         if (array_key_exists($field_key, $company_properties->vars)) {
                             $company_properties->vars[$field_key] = $field_value;
                         }

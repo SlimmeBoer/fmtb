@@ -17,7 +17,7 @@ export default function PdfButton({ company }) {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'Paspoort UMDL.pdf');
+            link.setAttribute('download', 'Paspoort FMTB.pdf');
             document.body.appendChild(link);
             link.click();
 

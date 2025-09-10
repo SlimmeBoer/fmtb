@@ -18,9 +18,9 @@ use App\Http\Controllers\Api\PdfController;
 use App\Http\Controllers\Api\RawFileController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SystemLogController;
-use App\Http\Controllers\Api\UmdlCollectiveController;
-use App\Http\Controllers\Api\UmdlCompanyPropertiesController;
-use App\Http\Controllers\Api\UmdlKpiValuesController;
+use App\Http\Controllers\Api\CollectiveController;
+use App\Http\Controllers\Api\CompanyPropertiesController;
+use App\Http\Controllers\Api\KpiValuesController;
 use App\Http\Controllers\Api\UserController;
 use App\Mail\ResetPasswordMail;
 use App\Models\SystemLog;
@@ -71,7 +71,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/companies/savedata', [CompanyController::class, 'saveData']);
     Route::get('/companies/getviewingallowed/{company}', [CompanyController::class, 'getViewingAllowed']);
 
-    Route::put('/companyproperties/update/{umdlcompanyproperties}', [UmdlCompanyPropertiesController::class, 'update']);
+    Route::put('/companyproperties/update/{companyproperties}', [CompanyPropertiesController::class, 'update']);
 
     Route::get('/bbm/getcodes', [BbmCodeController::class, 'index']);
     Route::get('/bbm/getbykpi/{kpi}', [BbmCodeController::class, 'getByKpi']);
@@ -91,9 +91,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/pdf/currentcompany', [PdfController::class, 'generatePdfCurrentCompany']);
     Route::get('/pdf/currentcompanyconcept', [PdfController::class, 'generatePdfCurrentCompanyConcept']);
 
-    Route::get('/collectives/index', [UmdlCollectiveController::class, 'index']);
-    Route::get('/collectives/getcurrent', [UmdlCollectiveController::class, 'getCurrent']);
-    Route::get('/collectives/completion', [UmdlCollectiveController::class, 'getCompletion']);
+    Route::get('/collectives/index', [CollectiveController::class, 'index']);
+    Route::get('/collectives/getcurrent', [CollectiveController::class, 'getCurrent']);
+    Route::get('/collectives/completion', [CollectiveController::class, 'getCompletion']);
 
     Route::post('/faq/reorder', [FAQController::class, 'reorder']);
 
@@ -117,13 +117,13 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/oldresults/upload', [OldResultController::class, 'upload']);
     Route::get('/oldresults/getbycompany/{id}', [OldResultController::class, 'getByCompany']);
 
-    Route::get('/umdlkpi/getscores/{company}/', array(UmdlKpiValuesController::class, 'getscores'));
-    Route::get('/umdlkpi/getscorescurrentcompany', array(UmdlKpiValuesController::class, 'getscorescurrentcompany'));
-    Route::get('/umdlkpi/getcollectivescores/{collective}/', array(UmdlKpiValuesController::class, 'getcollectivescores'));
-    Route::get('/umdlkpi/getallscores/', array(UmdlKpiValuesController::class, 'getallscores'));
-    Route::get('/umdlkpi/getallscoresanon/', array(UmdlKpiValuesController::class, 'getallscoresanon'));
-    Route::get('/umdlkpi/totalsperkpi/', array(UmdlKpiValuesController::class, 'totalsperkpi'));
-    Route::get('/umdlkpi/totalsperkpicollective/{collective}/', array(UmdlKpiValuesController::class, 'totalsperkpicollective'));
+    Route::get('/kpi/getscores/{company}/', array(KpiValuesController::class, 'getscores'));
+    Route::get('/kpi/getscorescurrentcompany', array(KpiValuesController::class, 'getscorescurrentcompany'));
+    Route::get('/kpi/getcollectivescores/{collective}/', array(KpiValuesController::class, 'getcollectivescores'));
+    Route::get('/kpi/getallscores/', array(KpiValuesController::class, 'getallscores'));
+    Route::get('/kpi/getallscoresanon/', array(KpiValuesController::class, 'getallscoresanon'));
+    Route::get('/kpi/totalsperkpi/', array(KpiValuesController::class, 'totalsperkpi'));
+    Route::get('/kpi/totalsperkpicollective/{collective}/', array(KpiValuesController::class, 'totalsperkpicollective'));
 
     Route::get('/user/getcurrentrole', [UserController::class, 'getCurrentRole']);
     Route::get('/user/bylastname', [UserController::class, 'byLastName']);

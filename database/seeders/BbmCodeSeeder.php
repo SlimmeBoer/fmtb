@@ -50,7 +50,7 @@ class BbmCodeSeeder extends Seeder
         BbmCode::factory()->create(['id' => 36, 'code' => 'BBM220b', 'description' => 'Nest en broedgelegenheid  op erf (zwaar)', 'weight' => 0.20,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 37, 'code' => 'BBM230a', 'description' => 'Opgaande beplanting op erf (licht)', 'weight' => 0.10,'unit' => 'ha']);
         BbmCode::factory()->create(['id' => 38, 'code' => 'BBM230b', 'description' => 'Opgaande beplanting op erf (zwaar)', 'weight' => 0.20,'unit' => 'ha']);
-        BbmCode::factory()->create(['id' => 39, 'code' => 'BBM420', 'description' => 'KlimaatBomen (UMDL klimaatbonus)', 'weight' => 0.01,'unit' => 'ha']);
-        BbmCode::factory()->create(['id' => 40, 'code' => 'BBM422', 'description' => 'Oude graslanden (UMDL klimaatbonus)', 'weight' => 0.01,'unit' => 'ha']);
+        BbmCode::factory()->create(['id' => 39, 'code' => 'BBM420', 'description' => 'KlimaatBomen (klimaatbonus)', 'weight' => 0.01,'unit' => 'ha']);
+        BbmCode::factory()->create(['id' => 40, 'code' => 'BBM422', 'description' => 'Oude graslanden (klimaatbonus)', 'weight' => 0.01,'unit' => 'ha']);
     }
 }

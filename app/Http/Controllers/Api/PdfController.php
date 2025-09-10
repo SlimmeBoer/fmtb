@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Libraries\UMDL\UMDLCompanyPropertiesWriter;
-use App\Libraries\UMDL\UMDLKPIScores;
+use App\Libraries\Monitor\CompanyPropertiesWriter;
+use App\Libraries\Monitor\KPIScores;
 use App\Models\Company;
-use App\Models\UmdlCompanyProperties;
+use App\Models\CompanyProperties;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,16 +22,16 @@ class PdfController extends Controller
     public function generatePdf($company)
     {
         $company_data = Company::find($company);
-        $company_properties = UmdlCompanyProperties::where('company_id',$company)->first();
+        $company_properties = CompanyProperties::where('company_id',$company)->first();
 
-        $umdlscores = new UMDLKPIScores();
-        $scores = array_merge($umdlscores->getScores($company),
-            $umdlscores->collectiveAverages($company),
-            $umdlscores->totalAverages());
+        $scores = new KPIScores();
+        $scores = array_merge($scores->getScores($company),
+            $scores->collectiveAverages($company),
+            $scores->totalAverages());
 
         // Example data for the PDF
         $data = [
-            'title' => 'Paspoort UMDL',
+            'title' => 'Paspoort FMTB',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
             'scores' => $scores,
@@ -55,7 +55,7 @@ class PdfController extends Controller
             ->set_option('margin_left', 0);
 
         // Option 1: Download the PDF
-        return $pdf->download('Paspoort UMDL 2025.pdf');
+        return $pdf->download('Paspoort FMTB 2025.pdf');
 
     }
 
@@ -66,16 +66,16 @@ class PdfController extends Controller
     public function generatePdfCurrentCompany()
     {
         $company_data = Company::where('brs',Auth::user()->brs)->first();
-        $company_properties = UmdlCompanyProperties::where('company_id',$company_data->id)->first();
+        $company_properties = CompanyProperties::where('company_id',$company_data->id)->first();
 
-        $umdlscores = new UMDLKPIScores();
-        $scores = array_merge($umdlscores->getScores($company_data->id),
-            $umdlscores->collectiveAverages($company_data->id),
-            $umdlscores->totalAverages());
+        $scores = new KPIScores();
+        $scores = array_merge($scores->getScores($company_data->id),
+            $scores->collectiveAverages($company_data->id),
+            $scores->totalAverages());
 
         // Example data for the PDF
         $data = [
-            'title' => 'Paspoort UMDL',
+            'title' => 'Paspoort FMTB',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
             'scores' => $scores,
@@ -99,7 +99,7 @@ class PdfController extends Controller
             ->set_option('margin_left', 0);
 
         // Option 1: Download the PDF
-        return $pdf->download('Paspoort UMDL 2025.pdf');
+        return $pdf->download('Paspoort FMTB 2025.pdf');
 
     }
 
@@ -111,16 +111,16 @@ class PdfController extends Controller
     public function generatePdfCurrentCompanyConcept()
     {
         $company_data = Company::where('brs',Auth::user()->brs)->first();
-        $company_properties = UmdlCompanyProperties::where('company_id',$company_data->id)->first();
+        $company_properties = CompanyProperties::where('company_id',$company_data->id)->first();
 
-        $umdlscores = new UMDLKPIScores();
-        $scores = array_merge($umdlscores->getScores($company_data->id),
-            $umdlscores->collectiveAverages($company_data->id),
-            $umdlscores->totalAverages());
+        $scores = new KPIScores();
+        $scores = array_merge($scores->getScores($company_data->id),
+            $scores->collectiveAverages($company_data->id),
+            $scores->totalAverages());
 
         // Example data for the PDF
         $data = [
-            'title' => 'Conceptpaspoort UMDL',
+            'title' => 'Conceptpaspoort FMTB',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
             'scores' => $scores,
@@ -145,7 +145,7 @@ class PdfController extends Controller
             ->set_option('margin_left', 0);
 
         // Option 1: Download the PDF
-        return $pdf->download('Conceptpaspoort UMDL 2025.pdf');
+        return $pdf->download('Conceptpaspoort FMTB 2025.pdf');
 
     }
 

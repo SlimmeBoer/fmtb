@@ -39,7 +39,7 @@ class Company extends Model
 
     public function collectives()
     {
-        return $this->belongsToMany(UmdlCollective::class, 'umdl_collective_companies', 'company_id','collective_id');
+        return $this->belongsToMany(Collective::class, 'collective_companies', 'company_id','collective_id');
     }
 
     public function klwDumps()

@@ -36,7 +36,7 @@ class ResetPasswordNotification extends Notification
         $url = config('app.frontend_url') . "/reset-wachtwoord?token=" . $this->token . "&email=" . urlencode($notifiable->email);
 
         return (new MailMessage)
-            ->subject('UMDL - Reset je wacthwoord')
+            ->subject('FMTB - Reset je wachtwoord')
             ->line('Klik op de knop hieronder om je wachtwoord te resetten.')
             ->action('Herstel wachtwoord', $url)
             ->line('Als jij dit verzoek niet hebt ingediend, hoef je niets te doen.');

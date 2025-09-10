@@ -25,7 +25,7 @@ export default function ScoresTableTotaal(props) {
 
     const getScores = () => {
         setLoading(true);
-        axiosClient.get(`/umdlkpi/getallscores`)
+        axiosClient.get(`/kpi/getallscores`)
             .then(({data}) => {
                 setLoading(false);
                 setScores(data);

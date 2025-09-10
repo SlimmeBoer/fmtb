@@ -95,8 +95,8 @@
     },
     "company_dashboard": {
         "checkbox_label": "Ik verklaar hierbij naar eer en geweten dat de door mij aangeleverde gegevens correct en volledig zijn verstrekt, en dat deze niet zijn gewijzigd of gemanipuleerd na ontvangst.",
-        "complete_explanation1": "Voor uw melkveebedrijf heeft uw kringloopwijzer gegevens aangeleverd. Het agrarische collectief neemt (of heeft) contact met u om de drie ‘groene KPI’s’, de KPI chemische middelen en KPI sociaal-maatschappelijk te bespreken. En de voorlopige resultaten voor alle 15 KPIs. Zolang u nog geen gesprek met het collectief heeft gehad staan waarschijnlijk vijf KPIs nog op 0-punten. Met de knop hieronder ziet uw CONCEPT eindscores ‘UMDL-paspoort’. Pas in het najaar wordt het UMDL-paspoort definitief vastgesteld. Er kunnen geen rechten aan dit concept overzicht worden ontleend. ",
-        "complete_explanation2": "U kunt gedurende het jaar proberen uw scores met behulp van deelname aan de kennis- en studiegroepbijeenkomsten en met behulp van de brochure ‘Uitleg 15 KPI’s en draaiknoppen van de Utrechtse Monitor Duurzame Landbouw (UMDL)’ te verbeteren.",
+        "complete_explanation1": "Voor uw melkveebedrijf heeft uw kringloopwijzer gegevens aangeleverd. Het agrarische collectief neemt (of heeft) contact met u om de drie ‘groene KPI’s’, de KPI chemische middelen en KPI sociaal-maatschappelijk te bespreken. En de voorlopige resultaten voor alle 15 KPIs. Zolang u nog geen gesprek met het collectief heeft gehad staan waarschijnlijk vijf KPIs nog op 0-punten. Met de knop hieronder ziet uw CONCEPT eindscores ‘FMTB-paspoort’. Pas in het najaar wordt het FMTB-paspoort definitief vastgesteld. Er kunnen geen rechten aan dit concept overzicht worden ontleend. ",
+        "complete_explanation2": "U kunt gedurende het jaar proberen uw scores met behulp van deelname aan de kennis- en studiegroepbijeenkomsten en met behulp van de brochure ‘Uitleg 15 KPI’s en draaiknoppen van de Fryske Monitor Tûk Buorkjen (FMTB)’ te verbeteren.",
         "complete_title": "Gegevensindiening is afgerond",
         "delete_confirm_dump": "Weet je zeker dat je deze dump wilt verwijderen?",
         "download_pdf": "Klik hier om een PDF te downloaden met het paspoort",
@@ -109,8 +109,8 @@
         "pdf_being_generated": "Het paspoort wordt gegenereerd...",
         "pdf_concept_being_generated": "Het concept-paspoort wordt gegenereerd...",
         "questions": "Heeft u naar aanleiding van uw paspoort nog vragen? Neem dan contact op met de medewerker van uw collectief.",
-        "scores_overview": "Overzicht Eindscores UMDL",
-        "scores_overview_exlanation": "De eindscores voor UMDL 2025 zijn bekend. Hieronder zit u hoeveel punten (en het bijbehorend geldbedrag) uw bedrijf heeft behaald, plus hoe zich dit verhoudt tot de andere bedrijven binnen uw collectief en de totale deelnemersgroep.",
+        "scores_overview": "Overzicht Eindscores FMTB",
+        "scores_overview_exlanation": "De eindscores voor FMTB 2025 zijn bekend. Hieronder zit u hoeveel punten (en het bijbehorend geldbedrag) uw bedrijf heeft behaald, plus hoe zich dit verhoudt tot de andere bedrijven binnen uw collectief en de totale deelnemersgroep.",
         "unauthorized": "Geen toegang tot deze pagina",
         "unauthorized_explanation": "Op basis van je huidige gebruikersrol heb je geen toegang tot deze pagina."
     },
@@ -158,9 +158,9 @@
     },
     "deelnemerslijst": {
         "emails": "E-mailadressen",
-        "explanation_1": "Hieronder vind je een tabel met de volledige naam en het e-mailadres van alle deelnemers aan het UMDL-programma.",
+        "explanation_1": "Hieronder vind je een tabel met de volledige naam en het e-mailadres van alle deelnemers aan het FMTB-programma.",
         "explanation_1_collectief": "Hieronder vind je een tabel met de volledige naam en het e-mailadres van alle deelnemers binnen je collectief.",
-        "explanation_2": "Hieronder vind je een reeks met alle e-mailadressen van de deelnemers van het UMDL-programma, deze kun je gebruiken om een mail te sturen aan iedereen (gebruik hiervoor wel het BCC-veld!)",
+        "explanation_2": "Hieronder vind je een reeks met alle e-mailadressen van de deelnemers van het FMTB-programma, deze kun je gebruiken om een mail te sturen aan iedereen (gebruik hiervoor wel het BCC-veld!)",
         "explanation_2_collectief": "Hieronder vind je een reeks met alle e-mailadressen van de deelnemers binnen je collectief, deze kun je gebruiken om een mail te sturen aan iedereen (gebruik hiervoor wel het BCC-veld!)",
         "header_email": "E-mailadres",
         "header_full_name": "Naam"
@@ -310,7 +310,7 @@
     },
     "login": {
         "email_field": "E-mailadres",
-        "explanation": "Vul in het onderstaande formulier je gebruikersnaam (e-mailadres) en het wachtwoord in dat je via het UMDL-programma hebt ontvangen.",
+        "explanation": "Vul in het onderstaande formulier je gebruikersnaam (e-mailadres) en het wachtwoord in dat je via het FMTB-programma hebt ontvangen.",
         "forgot_password": "Klik hier als je je wachtwoord bent vergeten",
         "password_field": "Wachtwoord",
         "submit_button": "Inloggen",
@@ -333,7 +333,7 @@
     },
     "old_results": {
         "delete_confirm": "Weet je zeker dat je de oude resultaten voor dit bedrijf wilt verwijderen?",
-        "explanation": "Op deze pagina kun je oude resultaten uploaden (in Excel-vorm) van het UMDL-programma vóór 2024. Deze wordt op basis van UMDL-nummer gekoppeld aan bedrijven in het huidige deelnmersbestand.",
+        "explanation": "Op deze pagina kun je oude resultaten uploaden (in Excel-vorm) van het FMTB-programma vóór 2024. Deze wordt op basis van BRS-nummer gekoppeld aan bedrijven in het huidige deelnmersbestand.",
         "header_filename": "Bestandsnaam",
         "header_final_year": "Tijdsperiode",
         "header_brs": "BRS",
@@ -358,7 +358,7 @@
         "logs": "Systeemlogs",
         "management_data": "Managementdata",
         "matrix": "Confrontatiematrix",
-        "mbp_sma_import": "UMDL-Bedrijfsgegevens - Importeren",
+        "mbp_sma_import": "Bedrijfsgegevens - Importeren",
         "not_found": "Pagina niet gevonden (404)",
         "not_found_explanation": "De pagina die je zoekt is niet gevonden.",
         "overview_collective": "Overzicht - Collectief",

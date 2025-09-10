@@ -49,7 +49,7 @@ export default function KPITable(props) {
     const getKPI = () => {
         if (props.company !== '') {
             setLoading(true);
-            axiosClient.get(`/umdlkpi/getscores/${props.company}`)
+            axiosClient.get(`/kpi/getscores/${props.company}`)
                 .then(({data}) => {
                     setLoading(false);
                     setKPI(data);

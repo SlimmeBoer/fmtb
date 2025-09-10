@@ -26,7 +26,7 @@ export default function TotaalKPIsCollectief(props) {
 
     const getScores = () => {
         setLoading(true);
-        axiosClient.get(`/umdlkpi/totalsperkpicollective/${props.collective}`)
+        axiosClient.get(`/kpi/totalsperkpicollective/${props.collective}`)
             .then(({data}) => {
                 setLoading(false);
                 setScores(data);

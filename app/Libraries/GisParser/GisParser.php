@@ -4,8 +4,8 @@ namespace App\Libraries\GisParser;
 
 use App\Models\Company;
 use App\Models\GisRecord;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues;
+use App\Models\CompanyProperties;
+use App\Models\KpiValues;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;

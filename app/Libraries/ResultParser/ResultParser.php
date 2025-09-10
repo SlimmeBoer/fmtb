@@ -4,8 +4,8 @@ namespace App\Libraries\ResultParser;
 
 use App\Models\Company;
 use App\Models\OldResult;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues;
+use App\Models\CompanyProperties;
+use App\Models\KpiValues;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use Saloon\XmlWrangler\Exceptions\MissingNodeException;
 use Saloon\XmlWrangler\Exceptions\MultipleNodesFoundException;

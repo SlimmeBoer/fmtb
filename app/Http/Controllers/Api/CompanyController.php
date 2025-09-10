@@ -15,10 +15,10 @@ use App\Models\RawFile;
 use App\Models\Setting;
 use App\Models\Signal;
 use App\Models\SystemLog;
-use App\Models\UmdlCollective;
-use App\Models\UmdlCollectiveCompany;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues;
+use App\Models\Collective;
+use App\Models\CollectiveCompany;
+use App\Models\CompanyProperties;
+use App\Models\KpiValues;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -71,7 +71,7 @@ class CompanyController extends Controller
         $collectiveId = Auth::user()->collectives()->first()->id;
 
         $companies = Company::whereHas('collectives', function ($query) use ($collectiveId) {
-            $query->where('umdl_collectives.id', $collectiveId);
+            $query->where('collectives.id', $collectiveId);
         })->orderBy('name')->get();
 
         return CompanyResource::collection($companies);
@@ -99,11 +99,11 @@ class CompanyController extends Controller
         $company->kvks = $kvk_string;
 
         // 3. Add collectieven
-        $collectief_companies = UmdlCollectiveCompany::where('company_id', $id)->get();
+        $collectief_companies = CollectiveCompany::where('company_id', $id)->get();
         $collectieven_data = array();
         foreach ($collectief_companies as $collectief_company) {
 
-            $collectief = UmdlCollective::where('id', $collectief_company->collective_id)->first();
+            $collectief = Collective::where('id', $collectief_company->collective_id)->first();
             $collectieven_data[] = array(
                 'id' => $collectief->id,
                 'name' => $collectief->name,
@@ -147,16 +147,16 @@ class CompanyController extends Controller
     }
 
     /**
-     * Get UMDL-specific properties of a company
+     * Get specific properties of a company
      */
-    public function getproperties($id): UmdlCompanyProperties
+    public function getproperties($id): CompanyProperties
     {
-        return UmdlCompanyProperties::where('company_id', $id)->first();
+        return CompanyProperties::where('company_id', $id)->first();
     }
 
     public function saveproperties(Request $request)
     {
-        $properties = UmdlCompanyProperties::where('company_id', $request['id'])->first();
+        $properties = CompanyProperties::where('company_id', $request['id'])->first();
 
         $properties->name = $request['name'];
         $properties->save();
@@ -231,9 +231,9 @@ class CompanyController extends Controller
                 $actions = array();
 
                 // 1. NatuurKPI's nog niet ingevuld
-                $umdlkpivalues = UmdlKpiValues::where('company_id', $company->id)->get();
+                $kpivalues = KpiValues::where('company_id', $company->id)->get();
                 $action_set = false;
-                foreach ($umdlkpivalues as $ukv) {
+                foreach ($kpivalues as $ukv) {
                     if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set) {
                         $actions[] = "NatuurKPI's zijn niet ingevuld.";
                         $action_set = true;
@@ -241,7 +241,7 @@ class CompanyController extends Controller
                 }
 
                 // 2. Check MBP
-                $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+                $company_properties = CompanyProperties::where('company_id', $company->id)->first();
 
                 if ($company_properties->mbp == 0) {
                     $actions[] = "Milieubelasting is nog onbekend.";
@@ -290,9 +290,9 @@ class CompanyController extends Controller
             $actions = array();
 
             // 1. NatuurKPI's nog niet ingevuld
-            $umdlkpivalues = UmdlKpiValues::where('company_id', $company->id)->get();
+            $kpivalues = KpiValues::where('company_id', $company->id)->get();
             $action_set = false;
-            foreach ($umdlkpivalues as $ukv) {
+            foreach ($kpivalues as $ukv) {
                 if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set) {
                     $actions[] = "NatuurKPI's zijn niet ingevuld.";
                     $action_set = true;
@@ -300,7 +300,7 @@ class CompanyController extends Controller
             }
 
             // 2. Check MBP
-            $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+            $company_properties = CompanyProperties::where('company_id', $company->id)->first();
 
             if ($company_properties->mbp == 0) {
                 $actions[] = "Milieubelasting is nog onbekend.";
@@ -384,7 +384,7 @@ class CompanyController extends Controller
                 $company_data["total_klw_completed"] += 1;
             }
 
-            $company_properties = UmdlCompanyProperties::where('company_id', $company->id)->first();
+            $company_properties = CompanyProperties::where('company_id', $company->id)->first();
 
             // 2. MBP niet ingevuld
             if ($company_properties->mbp != 0) {
@@ -401,7 +401,7 @@ class CompanyController extends Controller
             }
 
             // 4. NatuurKPI's niet compleet.
-            $kpivalues = UmdlKpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
+            $kpivalues = KpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
 
             if ($kpivalues && ($kpivalues->kpi10 != 0 || $kpivalues->kpi11 != 0 || $kpivalues->kpi12 != 0)) {
                 $company_data["total_kpi_completed"] += 1;
@@ -470,16 +470,16 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //1. Delete KPI-values for the corresponding company
-        UmdlKpiValues::where('company_id', $company->id)->delete();
+        KpiValues::where('company_id', $company->id)->delete();
 
         // 2. Remove all connections to collectives
-        UmdlCollectiveCompany::where('company_id', $company->id)->delete();
+        CollectiveCompany::where('company_id', $company->id)->delete();
 
         // 3. Remove all KVK-numbers associated to this company
         KvkNumber::where('company_id', $company->id)->delete();
 
         // 4. Delete company properties for the corresponding company
-        UmdlCompanyProperties::where('company_id', $company->id)->delete();
+        CompanyProperties::where('company_id', $company->id)->delete();
 
         // 5. Get all dumps for this company
         $dumps = KlwDump::where('company_id', $company->id)->get();
@@ -587,10 +587,10 @@ class CompanyController extends Controller
         }
 
         // Get the collective IDs the user has access to
-        $userCollectiveIds = $user->collectives()->pluck('umdl_collectives.id');
+        $userCollectiveIds = $user->collectives()->pluck('collectives.id');
 
         // Check if the company is linked to any of the user's collectives
-        $data = UmdlCollectiveCompany::where('company_id', $company->id)
+        $data = CollectiveCompany::where('company_id', $company->id)
             ->whereIn('collective_id', $userCollectiveIds)
             ->value('collective_id');
 

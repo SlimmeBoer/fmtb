@@ -78,11 +78,11 @@ export default function Login() {
                                 component="img"
                                 sx={{
                                     mx: 10,
-                                    height: 300,
                                     width: 300,
-                                    marginBottom: 10
+                                    mb: 10,
+                                    mt: 10,
                                 }}
-                                alt="UMDL Logo"
+                                alt="FMTB Logo"
                                 src="/images/logo.png"
                             />
                             <Typography component="h2" variant="h2" sx={{mb: 2}}>

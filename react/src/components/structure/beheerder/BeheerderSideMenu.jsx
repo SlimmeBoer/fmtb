@@ -55,11 +55,13 @@ export default function BeheerderSideMenu() {
             <Box
                 component="img"
                 sx={{
-                    height: 200,
+                    height: 50,
                     width: 200,
+                    mt: 10,
+                    mb: 2,
                     ml: 6,
                 }}
-                alt="Agriviewer Logo"
+                alt="FMTB Logo"
                 src="/images/logo.png"
             />
 

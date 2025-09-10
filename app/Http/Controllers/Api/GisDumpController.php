@@ -211,7 +211,7 @@ class GisDumpController extends Controller
         $collectiveId = Auth::user()->collectives()->first()->id;
 
         $companies = Company::whereHas('collectives', function ($query) use ($collectiveId) {
-            $query->where('umdl_collectives.id', $collectiveId);
+            $query->where('collectives.id', $collectiveId);
         })->orderBy('name')->get();
 
         $gisrunner = new GisRunner();

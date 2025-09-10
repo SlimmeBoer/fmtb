@@ -2,12 +2,12 @@
 
 namespace App\Libraries\Excel;
 
-use App\Libraries\UMDL\UMDLCompanyPropertiesWriter;
-use App\Libraries\UMDL\UMDLKPIScores;
+use App\Libraries\Monitor\CompanyPropertiesWriter;
+use App\Libraries\Monitor\KPIScores;
 use App\Models\Company;
 use App\Models\KlwDump;
-use App\Models\UmdlCompanyProperties;
-use App\Models\UmdlKpiValues; // bevat statische getScores($companyId)
+use App\Models\CompanyProperties;
+use App\Models\KpiValues; // bevat statische getScores($companyId)
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -308,7 +308,7 @@ class Excel_Export
         $avgCgrondMelkEmi = [];
 
         $dumpcounter = 1;
-        $ucpw = new UMDLCompanyPropertiesWriter();
+        $ucpw = new CompanyPropertiesWriter();
 
         // 5) Verwerk dumps → schrijf in jaarsheet + Totaal, bouw meta/avg op
         foreach ($dumps as $dump) {
@@ -1748,8 +1748,8 @@ class Excel_Export
 
 
             // KPI’s (DM/DN/DO) in dezelfde rij
-            $umdlkpiscores = new UMDLKPIScores();
-            $scores = $umdlkpiscores->getScores($cid);
+            $kpiscores = new KPIScores();
+            $scores = $kpiscores->getScores($cid);
             $kpi1a_avg   = data_get($scores, 'avg.kpi1a', null);
             $kpi1b_avg   = data_get($scores, 'avg.kpi1b', null);
             $kpi1_score = data_get($scores, 'score.kpi1b', null);
@@ -1830,7 +1830,7 @@ class Excel_Export
 
 
             // Properties (ET) in dezelfde rij
-            $props   = UmdlCompanyProperties::query()->where('company_id', $cid)->first();
+            $props   = CompanyProperties::query()->where('company_id', $cid)->first();
             $sheetAll->setCellValue("ET{$row}", (bool)$props?->website);
             $sheetAll->setCellValue("EU{$row}", (bool)$props?->ontvangstruimte);
             $sheetAll->setCellValue("EV{$row}", (bool)$props?->winkel);

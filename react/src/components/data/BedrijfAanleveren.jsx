@@ -69,7 +69,7 @@ const BedrijfAanleveren = () => {
                 Aanleveren bedrijfsdata
             </Typography>
             <Typography variant="body2" sx={{mb: 3}}>
-                Welkom bij de bedrijfs-module van het UMDL-programma! Via deze pagina kunt u uw
+                Welkom bij de bedrijfsmodule van het FMTB-programma! Via deze pagina kunt u uw
                 Kringloopwijzer-bestanden aanleveren waarmee een deel van de KPI's berekend wordt.
                 <br/>De overige KPI's (MBP, social-maatschappelijke activiteiten en de natuur-KPI's)
                 zullen door uw collectief worden ingevuld. <br/> <br/>

@@ -22,7 +22,7 @@ class ResetPasswordMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Wachtwoord resetten - UMDL')
+        return $this->subject('Wachtwoord resetten - FMTB')
             ->view('emails.reset-password');
     }
 }

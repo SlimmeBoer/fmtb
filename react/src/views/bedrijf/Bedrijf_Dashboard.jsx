@@ -93,7 +93,7 @@ const Bedrijf_Dashboard = () => {
                                     height: 180,
                                     width: 180,
                                 }}
-                                alt="UMDL Logo"
+                                alt="FMTB Logo"
                                 src="/images/logo.png"
                             />
                         </Grid>
