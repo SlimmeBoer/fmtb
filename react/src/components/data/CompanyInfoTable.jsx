@@ -191,11 +191,21 @@ export default function CompanyInfoTable(props) {
                                 </TableCell>
                             </TableRow>
                             <TableRow key={"companyinfo-" + 104}>
+                                <TableCell sx={{width: 50}}>Onderdeel van gebied:</TableCell>
+                                <TableCell sx={{width: 150, fontWeight: 'bold'}}>
+                                    {company.gebieden.map((a, index) => {
+                                        return (
+                                            <React.Fragment key={index}>{a.name}</React.Fragment>
+                                        )
+                                    })}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key={"companyinfo-" + 105}>
                                 <TableCell sx={{width: 50}}>Biologisch bedrijf?:</TableCell>
                                 <TableCell
                                     sx={{width: 150, fontWeight: 'bold'}}>{company.bio === 1 ? 'Ja' : 'Nee'}</TableCell>
                             </TableRow>
-                            <TableRow key={"companyinfo-" + 105}>
+                            <TableRow key={"companyinfo-" + 106}>
                                 <TableCell sx={{width: 50}}>Startjaar:</TableCell>
                                 <TableCell
                                     sx={{width: 150, fontWeight: 'bold'}}>{company.old_data === true ? '2024' : '2025'}</TableCell>

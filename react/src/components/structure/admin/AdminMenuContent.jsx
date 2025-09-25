@@ -22,6 +22,7 @@ import AvTimerIcon from "@mui/icons-material/AvTimer";
 import DownloadIcon from "@mui/icons-material/Download";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CropRotateIcon from '@mui/icons-material/CropRotate';
+import NavigationIcon from "@mui/icons-material/Navigation";
 
 export default function AdminMenuContent() {
 
@@ -31,6 +32,7 @@ export default function AdminMenuContent() {
         {text: t("admin_menu.dashboard"), icon: <HomeRoundedIcon/>, link: '/admin/dashboard'},
         {text: t("admin_menu.overview_total"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/totaal'},
         {text: t("admin_menu.overview_collective"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/collectief'},
+        {text: t("admin_menu.overview_area"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/gebied'},
         {text: t("admin_menu.overview_individual"), icon: <AnalyticsIcon/>, link: '/admin/overzicht/individueel'},
         {text: t("admin_menu.confrontation_matrix"), icon: <ReportIcon/>, link: '/admin/matrix'},
     ];
@@ -39,7 +41,6 @@ export default function AdminMenuContent() {
         {text: t("admin_menu.klw_data_management"), icon: <CropRotateIcon/>, link: '/admin/klw/data'},
         {text: t("admin_menu.gis_data_management"), icon: <DashboardIcon/>, link: '/admin/gis/data'},
         {text: t("admin_menu.raw_data"), icon: <DownloadIcon/>, link: '/admin/rawdata'},
-        {text: t("admin_menu.old_results"), icon: <AvTimerIcon/>, link: '/admin/oldresults'},
     ];
 
 
@@ -50,6 +51,7 @@ export default function AdminMenuContent() {
         {text: t("admin_menu.anlb_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/anlb'},
         {text: t("admin_menu.scangis_packages"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/scangis'},
         {text: t("admin_menu.bbm_kpis"), icon: <SettingsRoundedIcon/>, link: '/admin/settings/bbmkpis'},
+        {text: t("admin_menu.area_weights"), icon: <NavigationIcon/>, link: '/admin/settings/areas'},
         {text: t("admin_menu.logs"), icon: <AssignmentIcon/>, link: '/admin/logs'},
     ];
 

@@ -1,12 +1,14 @@
 {
     "about": {
-        "copyright": "©2025 Slimme Boer / Provincie Fryslân",
-        "description": "Alle rechten voorbehouden.",
+        "disclaimer_1": "©2025 Precondition / Terug naar de Basis Advies / Slimme Boer / Provincie Fryslân",
+        "disclaimer_2": "Foto op achtergrond is © Marcel van Dammen",
+        "description": "Alle data in deze demo-applicatie is fictief en uitsluitend bedoeld voor testdoeleinden, deze mag niet hergebruikt worden. Alle rechten voorbehouden.",
         "title": "Monitor FMTB",
-        "version": "Versie 1.0"
+        "version": "Versie 1.1"
     },
     "admin_menu": {
         "anlb_packages": "ANLb-pakketten",
+        "area_weights": "Gebiedswegingen",
         "bbm_codes": "BBM-codes",
         "bbm_kpis": "BBM aan KPI's",
         "confrontation_matrix": "Confrontatiematrix",
@@ -23,6 +25,7 @@
         "management_data": "Managementdata",
         "mbp_sma_import": "Importeren MP/SMA",
         "old_results": "Oude resultaten",
+        "overview_area": "Overzicht gebied",
         "overview_collective": "Overzicht collectief",
         "overview_individual": "Overzicht individueel",
         "overview_total": "Overzicht totaal",
@@ -33,6 +36,18 @@
         "settings": "Instellingen",
         "user_management": "Gebruikersbeheer",
         "users": "Gebruikers"
+    },
+    "areas": {
+        "fix_highlighted": "Herstel de fouten in de aangegeven velden.",
+        "load_failed": "Het is niet gelukt om de gebieden in te laden.",
+        "no_data": "Er staan geen gebieden in de database.",
+        "saved": "De wegingen zijn succesvol opgeslagen."
+    },
+    "area_weights": {
+        "title": "Gewichten per KPI voor ",
+        "explanation": "In deze tabel wordt aangegeven wat per KPI de wegingen zijn voor dit gebied. Deze wordt vermenigvuldigd met de score voor iedere KPI waardoor de gewogen score wordt berekend.",
+        "header_kpi": "Naam KPI",
+        "header_weight": "Gewicht"
     },
     "bbm_kpi": {
         "code": "Code",
@@ -46,6 +61,7 @@
     },
     "beheerder_menu": {
         "anlb_packages": "ANLb-pakketten",
+        "area_weights": "Gebiedswegingen",
         "bbm_codes_kpis": "BBM-codes / KPI's",
         "confrontation_matrix": "Confrontatiematrix",
         "dashboard": "Dashboard",
@@ -59,6 +75,7 @@
         "overview_collective": "Scores collectief",
         "overview_individual": "Scores individueel",
         "overview_total": "Scores totaal",
+        "overview_area": "Overzicht gebied",
         "overviews": "Overzichten",
         "scangis": "ScanGIS-data",
         "scangis_anlb": "Z-pakketten / ANLb",
@@ -66,6 +83,7 @@
     },
     "collectief_menu": {
         "anlb_packages": "ANLb-pakketten",
+        "area_weights": "Gebiedswegingen",
         "bbm_codes_kpis": "BBM-codes / KPI's",
         "confrontation_matrix": "Confrontatiematrix",
         "dashboard": "Dashboard",
@@ -79,6 +97,7 @@
         "overview_collective": "Scores collectief",
         "overview_individual": "Scores individueel",
         "overview_total": "Overzicht totaal",
+        "overview_area": "Overzicht gebied",
         "overviews": "Overzichten",
         "scangis": "ScanGIS-data",
         "scangis_anlb": "Z-pakketten / ANLb",
@@ -95,8 +114,8 @@
     },
     "company_dashboard": {
         "checkbox_label": "Ik verklaar hierbij naar eer en geweten dat de door mij aangeleverde gegevens correct en volledig zijn verstrekt, en dat deze niet zijn gewijzigd of gemanipuleerd na ontvangst.",
-        "complete_explanation1": "Voor uw melkveebedrijf heeft uw kringloopwijzer gegevens aangeleverd. Het agrarische collectief neemt (of heeft) contact met u om de drie ‘groene KPI’s’, de KPI chemische middelen en KPI sociaal-maatschappelijk te bespreken. En de voorlopige resultaten voor alle 15 KPIs. Zolang u nog geen gesprek met het collectief heeft gehad staan waarschijnlijk vijf KPIs nog op 0-punten. Met de knop hieronder ziet uw CONCEPT eindscores ‘FMTB-paspoort’. Pas in het najaar wordt het FMTB-paspoort definitief vastgesteld. Er kunnen geen rechten aan dit concept overzicht worden ontleend. ",
-        "complete_explanation2": "U kunt gedurende het jaar proberen uw scores met behulp van deelname aan de kennis- en studiegroepbijeenkomsten en met behulp van de brochure ‘Uitleg 15 KPI’s en draaiknoppen van de Fryske Monitor Tûk Buorkjen (FMTB)’ te verbeteren.",
+        "complete_explanation1": "Voor uw melkveebedrijf heeft uw kringloopwijzergegevens aangeleverd. Het agrarische collectief neemt (of heeft) contact met u om de drie ‘groene KPI’s’, de KPI chemische middelen en KPI sociaal-maatschappelijk te bespreken, en de voorlopige resultaten voor alle KPIs. Zolang u nog geen gesprek met het collectief heeft gehad staan waarschijnlijk vijf KPIs nog op 0-punten. Met de knop hieronder ziet uw CONCEPT eindscores ‘FMTB-paspoort’. Pas in het najaar wordt het FMTB-paspoort definitief vastgesteld. Er kunnen geen rechten aan dit concept overzicht worden ontleend. ",
+        "complete_explanation2": "U kunt gedurende het jaar proberen uw scores met behulp van deelname aan de kennis- en studiegroepbijeenkomsten en met behulp van de brochure ‘Uitleg  KPI’s en draaiknoppen van de Fryske Monitor Tûk Buorkjen (FMTB)’ te verbeteren.",
         "complete_title": "Gegevensindiening is afgerond",
         "delete_confirm_dump": "Weet je zeker dat je deze dump wilt verwijderen?",
         "download_pdf": "Klik hier om een PDF te downloaden met het paspoort",
@@ -147,13 +166,17 @@
         "opp_totaal_subsidiabel": "Totale subsidiabele oppervlakte (gecombineerde opgave 2024)",
         "re_kvem": "RE / KVEM",
         "title": "Managementinformatie",
-        "veebenutting_n": "Veebenutting N"
+        "veebenutting_n": "Veebenutting N",
+        "stikstofbedrijfsoverschot": "Stikstofbedrijfsoverschot",
+        "bodembenutting_stikstof": "Bodembenutting stikstof",
+        "bodembenutting_fosfaat": "Bodembenutting fosfaat"
     },
     "company_property_table_units": {
         "hectare": "ha",
         "gram": "g",
         "kilogram": "kg",
         "nothing": "",
+        "percentage": "%",
         "pieces": "stuks"
     },
     "deelnemerslijst": {
@@ -207,6 +230,7 @@
         "record_deleted_succesfully": "Record succesvol verwijderd.",
         "record_updated_succesfully": "Record succesvol bijgewerkt.",
         "save": "Opslaan",
+        "saving": "Bezig met opslaan...",
         "select_excel_files": "Upload Excel-bestand(en)...",
         "select_gis_files": "Upload ScanGIS-bestand(en)...",
         "select_klw_files": "Upload KLW-bestand(en)...",
@@ -262,7 +286,7 @@
     },
     "klw_upload": {
         "diagram_scores": " Staafdiagram scores",
-        "explanation": "Via deze pagina kun je zelf Kringloopwijzer-bestanden uploaden voor de verschillende bedrijven die aangesloten zijn bij je collectief/collectieven. Let er op dat je de KLW-outputs gebruikt.",
+        "explanation": "Via deze pagina kun je zelf Kringloopwijzer-bestanden uploaden voor de verschillende bedrijven die aangesloten zijn bij je collectief/collectieven. Let er op dat je de KLW-outputs gebruikt. Kies voor je uploadt ook altijd de gebruiker waarvoor je de KLW wilt uploaden.",
         "title": "Upload Kringloopwijzer(s)"
     },
     "kpi_table": {
@@ -273,6 +297,7 @@
         "kpis": "KPI's",
         "payout_money": "Uit te betalen",
         "points": "Punten",
+        "points_weighted": "Pnt. Gew.",
         "total_letter": "T",
         "total_score": "Totaalscore",
         "total_score_money": "Totaalscore Geld",
@@ -285,27 +310,31 @@
         "view_trend": "Bekijk trend"
     },
     "kpis": {
-        "1": "KPI 1: Stikstofbalans bodemoverschot",
-        "10": "KPI 10: Extensief kruidenrijk grasland",
-        "11": "KPI 11: Natuur en Landschap",
-        "12": "KPI 12: Groenblauwe dooradering",
-        "13a": "KPI 13a: Energiebalans (opgewekt/verbruikt)*",
-        "13b": "KPI 13b: Energiebalans (KWH per koe per jaar)*",
-        "14": "KPI 14: Levensduur (maanden)",
-        "15": "KPI 15: Sociaal-maatschappelijk",
-        "1a": "KPI 1a: Stikstofbalans bodemoverschot (kg N-totaal per ha)",
-        "1b": "KPI 1b: Stikstofbalans bodemoverschot (kg N-totaal per ha) incl. correctie veen",
-        "2": "KPI 2: Fosfaatbalansbodemoverschot (kg P2O5 per ha)",
-        "3": "KPI 3: Ammoniakuitstoot (in kg NH3/ha)",
-        "4": "KPI 4: Weidegang (uur/jaar)",
-        "5": "KPI 5: Tankmelkureum  (mg/100g)",
-        "6": "KPI 6: Broeikasgasemissie",
-        "6a": "KPI 6a: Broeikasgasemissie (in CO2eq. per ha)",
-        "6b": "KPI 6b: Broeikasgasemissie (in CO2eq. per ha)  incl. correctie veen",
-        "6c": "KPI 6c: Broeikasgasemissie (in CO2eq. per kg fcpm)",
-        "6d": "KPI 6d: Broeikasgasemissie (in CO2eq. per kg fcpm) incl. correctie veen",
-        "7": "KPI 7: Eiwit van eigen land",
-        "8": "KPI 8: Gewasbeschermingsmiddelen",
+        "1": "KPI 1: Stikstofbodemoverschot",
+        "1a": "KPI 1a: Stikstofbodemoverschot",
+        "1b": "KPI 1b: Stikstofbodemoverschot (incl. veencorrectie)",
+        "11": "KPI 11: Extensief kruidenrijk grasland",
+        "12a": "KPI 12a: Agrarisch natuurbeheer",
+        "12b": "KPI 12b: Groenblauwe dooradering",
+        "13": "KPI 13: Dierenwelzijn en diergezondheid",
+        "14": "KPI 14: Sociaal-maatschappelijke activiteiten",
+        "2a": "KPI 2a: Ammoniakemissie",
+        "2b": "KPI 2b: Ruw eiwit in rantsoen",
+        "2c": "KPI 2c: Ureum",
+        "2d": "KPI 2d: Weidegang",
+        "3": "KPI 3: Fosfaatoverschot",
+        "4": "KPI 4: Eiwit van eigen land",
+        "5": "KPI 5a: Broeikasgasemissie",
+        "5a": "KPI 5a: Broeikasgasemissie (in CO2eq. per ha)",
+        "5b": "KPI 5b: Broeikasgasemissie (in CO2eq. per ha) incl. veencorrectie",
+        "5c": "KPI 5c: Broeikasgasemissie (in CO2eq. per kg fcpm)",
+        "5d": "KPI 5d: Broeikasgasemissie (in CO2eq. per kg fcpm) incl. veencorrectie",
+        "6": "KPI 6: Energiebalans",
+        "6a": "KPI 6a: Energiebalans (opwekking)",
+        "6b": "KPI 6b: Energiebalans (verbruik per koe)",
+        "6c": "KPI 6c: Energiebalans (% hernieuwbare energie)",
+        "7": "KPI 7: Milieubelasting gewasbeschermingsmiddelen",
+        "8": "KPI 8: Bodemorganische stof",
         "9": "KPI 9: Blijvend grasland"
     },
     "login": {
@@ -321,15 +350,13 @@
         "1": "Volvelds gewasbeschermingsmiddelen",
         "2": "Ingevulde MBP",
         "3": "Ingevulde Milieumaatlat",
-        "4": "Pleksgewijs grasland, volvelds maisland",
-        "5": "Pleksgewijs hele bedrijf",
-        "6": "On the way to Planet Proof / AH programma",
-        "7": "Beterleven Keurmerk",
-        "8": "Biologisch",
-        "9": "Geen middelen",
+        "4": "Pleksgewijs hele bedrijf",
+        "5": "On the way to Planet Proof",
+        "6": "Beterleven Keurmerk",
+        "7": "Geen middelen",
         "error": "Fout met bijwerken waarde:",
         "title": "Gewasbeschermingsmiddelen",
-        "updated": "Warde succesvol bijgewerkt:"
+        "updated": "Waarde succesvol bijgewerkt:"
     },
     "old_results": {
         "delete_confirm": "Weet je zeker dat je de oude resultaten voor dit bedrijf wilt verwijderen?",
@@ -344,6 +371,8 @@
     },
     "pages_admin": {
         "anlb_settings": "ANLb-pakketten aan BBM-codes koppelen",
+        "area_weights": "Gebiedswegingen",
+        "area_weights_explained": "Gebruik deze pagina om de wegingen per KPI per deelgebied in te stellen.",
         "code_settings": "BBM-codes (voor importeren ScanGIS-pakketten)",
         "dashboard": "Administratiedashboard",
         "deelnemerslijst": "Deelnemerslijst",
@@ -362,6 +391,7 @@
         "not_found": "Pagina niet gevonden (404)",
         "not_found_explanation": "De pagina die je zoekt is niet gevonden.",
         "overview_collective": "Overzicht - Collectief",
+        "overview_area": "Overzicht - Gebied",
         "overview_individual": "Overzicht - Individueel",
         "overview_total": "Overzicht - Totaal",
         "raw_data": "Ruwe data (geüploade bestanden)",
@@ -372,6 +402,8 @@
         "unauthorized_explanation": "Op basis van je huidige gebruikersrol (admin) heb je geen toegang tot deze pagina."
     },
     "pages_beheerder": {
+        "area_weights": "Gebiedswegingen",
+        "area_weights_explained": "In deze tabel worden de wegingen per gebied aangegeven die gebruikt worden om de KPI's te berekenen. Neem contact op met een administrator als je deze wilt aanpassen.",
         "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
         "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
         "criteria": "Scoringstabel KPI's",
@@ -383,6 +415,7 @@
         "matrix": "Confrontatiematrix",
         "not_found": "Pagina niet gevonden (404)",
         "not_found_explanation": "De pagina die je zoekt is niet gevonden.",
+        "overview_area": "Overzicht - Gebied",
         "overview_collective": "Overzicht - Collectief",
         "overview_individual": "Overzicht - Individueel bedrijf",
         "overview_total": "Overzicht - Totaal",
@@ -395,6 +428,8 @@
         "unauthorized_explanation": "Op basis van je huidige gebruikersrol (programmaleider) heb je geen toegang tot deze pagina."
     },
     "pages_collectief": {
+        "area_weights": "Gebiedswegingen",
+        "area_weights_explained": "In deze tabel worden de wegingen per gebied aangegeven die gebruikt worden om de KPI's te berekenen.",
         "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
         "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
         "criteria": "Scoringstabel KPI's",
@@ -417,6 +452,8 @@
         "unauthorized_explanation": "Op basis van je huidige gebruikersrol (collectief) heb je geen toegang tot deze pagina."
     },
     "pages_provincie": {
+        "area_weights": "Gebiedswegingen",
+        "area_weights_explained": "In deze tabel worden de wegingen per gebied aangegeven die gebruikt worden om de KPI's te berekenen.",
         "bbmkpi_settings": "Indeling van BBM-codes en toekenning aan KPI's",
         "bbmkpi_settings_explanation": "In onderstaande tabellen is terug te zien hoe de BBM-codes over de KPI's verdeeld zijn.",
         "criteria": "Scoringstabel KPI's",
@@ -425,6 +462,7 @@
         "matrix": "Confrontatiematrix",
         "not_found": "Pagina niet gevonden (404)",
         "not_found_explanation": "De pagina die je zoekt is niet gevonden.",
+        "overview_area": "Overzicht - gebied (geanonimiseerd)",
         "overview_collective": "Overzicht - Collectief (geanonimiseerd)",
         "overview_individual": "Overzicht - Individueel bedrijf (geanonimiseerd)",
         "overview_total": "Overzicht - Totaal (geanonimiseerd)",
@@ -436,10 +474,12 @@
     },
     "provincie_menu": {
         "anlb_packages": "ANLb-pakketten",
+        "area_weights": "Gebiedswegingen",
         "bbm_codes_kpis": "BBM-codes / KPI's",
         "dashboard": "Dashboard",
         "faq": "FAQ",
         "kpi_criteria": "Scoringscriteria KPI's",
+        "overview_area": "Scores gebied",
         "overview_collective": "Scores collectief",
         "overview_individual": "Scores individueel",
         "overview_total": "Scores totaal",
@@ -471,11 +511,12 @@
         "company_name": "Bedrijfsnaam",
         "money": "Bedrag",
         "score": "Score",
+        "title_area": "Scores Bedrijven Gebied",
         "title_collective": "Scores Bedrijven Collectief",
         "title_total": "Scores Bedrijven Totaal"
     },
     "sma": {
-        "bed_and_breakfast": "Bed & Breakfast",
+        "bedrijfsgebonden_recreatie": "Bedrijfsgebonden recreatie",
         "educatie": "Educatie",
         "erkend_demobedrijf": "Erkend demobedrijf",
         "error": "Fout met bijwerken waarde:",
@@ -486,7 +527,6 @@
         "title": "Sociaal-maatschappelijke activiteiten",
         "updated": "Warde succesvol bijgewerkt:",
         "wandelpad": "Wandelpad",
-        "website": "Website",
         "winkel": "Winkel",
         "zorg": "Zorg"
     },
@@ -499,6 +539,7 @@
     },
     "tooltips": {
         "about": "Over deze webapplicatie",
+        "area_weights": "Klik hier om de gewichten van het gebied te bekijken",
         "data_complete": "De eigenaar van dit bedrijf heeft aangegeven dat de data voor dit bedrijf compleet is",
         "download_manual": "Klik hier om de handleiding te bekijken",
         "faq": "Bekijk de vaak gestelde vragen",
@@ -524,7 +565,9 @@
     },
     "users": {
         "header_actions": "Acties",
+        "header_area": "Gebied",
         "header_brs": "BRS",
+        "header_collective": "Collectief",
         "header_email": "E-mailadres",
         "header_full_name": "Volledige naam",
         "header_id": "ID",

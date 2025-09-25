@@ -4,7 +4,6 @@ namespace App\Libraries\Monitor;
 
 use App\Models\Company;
 use App\Models\KlwValue;
-use App\Models\CollectiveCompany;
 use App\Models\CompanyProperties;
 use App\Models\KpiValues;
 use Illuminate\Support\Facades\DB;
@@ -26,40 +25,44 @@ class KPIScores
         $companyproperties = CompanyProperties::where('company_id', $company_id)
             ->first();
 
+        $company = Company::where('id',$company_id)->first();
+        $area = $company->areas->first();
+
         $mbp_string = $this->getMBPstring($companyproperties->mbp);
-        $sma_total = $companyproperties->website +
-            $companyproperties->ontvangstruimte +
+        $sma_total = $companyproperties->ontvangstruimte +
             $companyproperties->winkel +
             $companyproperties->educatie +
             $companyproperties->meerjarige_monitoring +
             $companyproperties->open_dagen +
             $companyproperties->wandelpad +
             $companyproperties->erkend_demobedrijf +
-            $companyproperties->bed_and_breakfast +
+            $companyproperties->bedrijfsgebonden_recreatie +
             $companyproperties->zorg;
         $sma_string = $this->getSMAstring($companyproperties);
 
-
         $total_kpi1a = 0;
         $total_kpi1b = 0;
-        $total_kpi2 = 0;
+        $total_kpi2a = 0;
+        $total_kpi2b = 0;
+        $total_kpi2c = 0;
+        $total_kpi2d = 0;
         $total_kpi3 = 0;
         $total_kpi4 = 0;
-        $total_kpi5 = 0;
+        $total_kpi5a = 0;
+        $total_kpi5b = 0;
+        $total_kpi5c = 0;
+        $total_kpi5d = 0;
         $total_kpi6a = 0;
         $total_kpi6b = 0;
         $total_kpi6c = 0;
-        $total_kpi6d = 0;
         $total_kpi7 = 0;
         $total_kpi8 = 0;
         $total_kpi9 = 0;
-        $total_kpi10 = 0;
         $total_kpi11 = 0;
-        $total_kpi12 = 0;
-        $total_kpi13a = 0;
-        $total_kpi13b = 0;
+        $total_kpi12a = 0;
+        $total_kpi12b = 0;
+        $total_kpi13 = 0;
         $total_kpi14 = 0;
-        $total_kpi15 = 0;
 
         $index = 3;
         foreach ($scores as $year_score) {
@@ -68,42 +71,48 @@ class KPIScores
                 'year' => $year_score->year,
                 'kpi1a' => round($year_score->kpi1a),
                 'kpi1b' => round($year_score->kpi1b),
-                'kpi2' => round($year_score->kpi2),
+                'kpi2a' => round($year_score->kpi2a),
+                'kpi2b' => round($year_score->kpi2b),
+                'kpi2c' => round($year_score->kpi2c),
+                'kpi2d' => round($year_score->kpi2d),
                 'kpi3' => round($year_score->kpi3),
                 'kpi4' => round($year_score->kpi4),
-                'kpi5' => round($year_score->kpi5),
+                'kpi5a' => round($year_score->kpi5a),
+                'kpi5b' => round($year_score->kpi5b),
+                'kpi5c' => round($year_score->kpi5c),
+                'kpi5d' => round($year_score->kpi5d),
                 'kpi6a' => round($year_score->kpi6a),
                 'kpi6b' => round($year_score->kpi6b),
                 'kpi6c' => round($year_score->kpi6c),
-                'kpi6d' => round($year_score->kpi6d),
-                'kpi7' => round($year_score->kpi7),
+                'kpi8' => round($year_score->kpi8),
                 'kpi9' => round($year_score->kpi9),
-                'kpi10' => round($year_score->kpi10),
                 'kpi11' => round($year_score->kpi11),
-                'kpi12' => round($year_score->kpi12),
-                'kpi13a' => $year_score->kpi13a,
-                'kpi13b' => round($year_score->kpi13b),
-                'kpi14' => round($year_score->kpi14),
+                'kpi12a' => round($year_score->kpi12a),
+                'kpi12b' => round($year_score->kpi12b),
+                'kpi13' => round($year_score->kpi13),
             ));
 
             $total_kpi1a += $year_score->kpi1a;
             $total_kpi1b += $year_score->kpi1b;
-            $total_kpi2 += $year_score->kpi2;
+            $total_kpi2a += $year_score->kpi2a;
+            $total_kpi2b += $year_score->kpi2b;
+            $total_kpi2c += $year_score->kpi2c;
+            $total_kpi2d += $year_score->kpi2d;
             $total_kpi3 += $year_score->kpi3;
             $total_kpi4 += $year_score->kpi4;
-            $total_kpi5 += $year_score->kpi5;
+            $total_kpi5a += $year_score->kpi5a;
+            $total_kpi5b += $year_score->kpi5b;
+            $total_kpi5c += $year_score->kpi5c;
+            $total_kpi5d += $year_score->kpi5d;
             $total_kpi6a += $year_score->kpi6a;
             $total_kpi6b += $year_score->kpi6b;
             $total_kpi6c += $year_score->kpi6c;
-            $total_kpi6d += $year_score->kpi6d;
-            $total_kpi7 += $year_score->kpi7;
+            $total_kpi8 += $year_score->kpi8;
             $total_kpi9 += $year_score->kpi9;
-            $total_kpi10 = $year_score->kpi10;
             $total_kpi11 = $year_score->kpi11;
-            $total_kpi12 = $year_score->kpi12;
-            $total_kpi13a = $year_score->kpi13a;
-            $total_kpi13b = $year_score->kpi13b;
-            $total_kpi14 += $year_score->kpi14;
+            $total_kpi12a = $year_score->kpi12a;
+            $total_kpi12b = $year_score->kpi12b;
+            $total_kpi13 += $year_score->kpi13;
 
             $index = $index - 1;
 
@@ -123,64 +132,106 @@ class KPIScores
         $avgArray = array("avg" => array(
             'kpi1a' => round($total_kpi1a / count($scores)),
             'kpi1b' => round($total_kpi1b / count($scores)),
-            'kpi2' => round($total_kpi2 / count($scores)),
+            'kpi2a' => round($total_kpi2a / count($scores)),
+            'kpi2b' => round($total_kpi2b / count($scores)),
+            'kpi2c' => round($total_kpi2c / count($scores)),
+            'kpi2d' => round($total_kpi2d / count($scores)),
             'kpi3' => round($total_kpi3 / count($scores)),
             'kpi4' => round($total_kpi4 / count($scores)),
-            'kpi5' => round($total_kpi5 / count($scores)),
+            'kpi5a' => round($total_kpi5a / count($scores)),
+            'kpi5b' => round($total_kpi5b / count($scores)),
+            'kpi5c' => round($total_kpi5c / count($scores)),
+            'kpi5d' => round($total_kpi5d / count($scores)),
             'kpi6a' => round($total_kpi6a / count($scores)),
             'kpi6b' => round($total_kpi6b / count($scores)),
             'kpi6c' => round($total_kpi6c / count($scores)),
-            'kpi6d' => round($total_kpi6d / count($scores)),
-            'kpi7' => round($total_kpi7 / count($scores)),
-            'kpi8' => $mbp_string,
+            'kpi7' => $mbp_string,
+            'kpi8' => round($total_kpi8 / count($scores)),
             'kpi9' => round($total_kpi9 / count($scores)),
-            'kpi10' => $total_kpi10,
             'kpi11' => $total_kpi11,
-            'kpi12' => $total_kpi12,
-            'kpi13a' => $scoresArray["year3"]["kpi13a"],
-            'kpi13b' => $scoresArray["year3"]["kpi13b"],
-            'kpi14' => round($total_kpi14 / count($scores)),
-            'kpi15' => $sma_string,
+            'kpi12a' => $total_kpi12a,
+            'kpi12b' => $total_kpi12b,
+            'kpi13' => round($total_kpi13 / count($scores)),
+            'kpi14' => $sma_string,
         ));
         $scoresArray = array_merge($scoresArray, $avgArray);
 
         // Add scores
         $totalArray = array("score" => array(
             'kpi1a' => '-',
-            'kpi1b' => $this->calculateScore($settings["kpi_scores"]["kpi1"], round($total_kpi1b / count($scores))),
-            'kpi2' => $this->calculateScore($settings["kpi_scores"]["kpi2"], round($total_kpi2 / count($scores))),
+            'kpi1b' => $this->calculateScore($settings["kpi_scores"]["kpi1_" . $companyproperties->grondsoort_dominant], round($total_kpi1b / count($scores))),
+            'kpi2a' => $this->calculateScore($settings["kpi_scores"]["kpi2a"], round($total_kpi2a / count($scores))),
+            'kpi2b' => $this->calculateScore($settings["kpi_scores"]["kpi2b"], round($total_kpi2b / count($scores))),
+            'kpi2c' => $this->calculateScore($settings["kpi_scores"]["kpi2c"], round($total_kpi2c / count($scores))),
+            'kpi2d' => $this->calculateScore($settings["kpi_scores"]["kpi2d"], round($total_kpi2d / count($scores))),
             'kpi3' => $this->calculateScore($settings["kpi_scores"]["kpi3"], round($total_kpi3 / count($scores))),
             'kpi4' => $this->calculateScore($settings["kpi_scores"]["kpi4"], round($total_kpi4 / count($scores))),
-            'kpi5' => $this->calculateScore($settings["kpi_scores"]["kpi5"], round($total_kpi5 / count($scores))),
-            'kpi6a' => '-',
-            'kpi6b' => $this->calculateScore($settings["kpi_scores"]["kpi6"], round($total_kpi6b / count($scores))),
-            'kpi6c' => '-',
-            'kpi6d' => '-',
-            'kpi7' => $this->calculateScore($settings["kpi_scores"]["kpi7"], round($total_kpi7 / count($scores))),
-            'kpi8' => $this->calculateScore($settings["kpi_scores"]["kpi8"], $companyproperties->mbp),
+            'kpi5a' => '-',
+            'kpi5b' => $this->calculateScore($settings["kpi_scores"]["kpi5"], round($total_kpi5b / count($scores))),
+            'kpi5c' => '-',
+            'kpi5d' => '-',
+            'kpi6a' => $this->calculateScore($settings["kpi_scores"]["kpi6a"], round($total_kpi6a / count($scores))),
+            'kpi6b' => $this->calculateScore($settings["kpi_scores"]["kpi6b"], round($total_kpi6b / count($scores))),
+            'kpi6c' => $this->calculateScore($settings["kpi_scores"]["kpi6c"], round($total_kpi6c / count($scores))),
+            'kpi7' => $this->calculateScore($settings["kpi_scores"]["kpi7"], $companyproperties->mbp),
+            'kpi8' => $this->calculateScore($settings["kpi_scores"]["kpi8"], round($total_kpi8 / count($scores))),
             'kpi9' => $this->calculateScore($settings["kpi_scores"]["kpi9"], round($total_kpi9 / count($scores))),
-            'kpi10' => $this->calculateScore($settings["kpi_scores"]["kpi10"], $total_kpi10),
             'kpi11' => $this->calculateScore($settings["kpi_scores"]["kpi11"], $total_kpi11),
-            'kpi12' => $this->calculateScore($settings["kpi_scores"]["kpi12"], $total_kpi12),
-            'kpi13a' => $this->calculateScore($settings["kpi_scores"]["kpi13a"], $scoresArray["year3"]["kpi13a"]),
-            'kpi13b' => $this->calculateScore($settings["kpi_scores"]["kpi13b"], $scoresArray["year3"]["kpi13b"]),
-            'kpi14' => $this->calculateScore($settings["kpi_scores"]["kpi14"], round($total_kpi14 / count($scores))),
-            'kpi15' => $this->calculateScore($settings["kpi_scores"]["kpi15"], $sma_total),
+            'kpi12a' => $this->calculateScore($settings["kpi_scores"]["kpi12a"], $total_kpi12a),
+            'kpi12b' => $this->calculateScore($settings["kpi_scores"]["kpi12b"], $total_kpi12b),
+            'kpi13' => $this->calculateScore($settings["kpi_scores"]["kpi13"], round($total_kpi13 / count($scores))),
+            'kpi14' => $this->calculateScore($settings["kpi_scores"]["kpi14"], $sma_total),
         ));
 
-        $totalScore = $totalArray["score"]["kpi1b"] + $totalArray["score"]["kpi2"] + $totalArray["score"]["kpi3"] +
-            $totalArray["score"]["kpi4"] + $totalArray["score"]["kpi5"] + $totalArray["score"]["kpi6b"] +
+        $totalWeightedArray = array("weighted_score" => array(
+            'kpi1a' => '-',
+            'kpi1b' => $totalArray["score"]["kpi1b"] * $area->weight_kpi1,
+            'kpi2a' => $totalArray["score"]["kpi2a"] * $area->weight_kpi2a,
+            'kpi2b' => $totalArray["score"]["kpi2b"] * $area->weight_kpi2b,
+            'kpi2c' => $totalArray["score"]["kpi2c"] * $area->weight_kpi2c,
+            'kpi2d' => $totalArray["score"]["kpi2d"] * $area->weight_kpi2d,
+            'kpi3' => $totalArray["score"]["kpi3"] * $area->weight_kpi3,
+            'kpi4' => $totalArray["score"]["kpi4"] * $area->weight_kpi4,
+            'kpi5a' => '-',
+            'kpi5b' => $totalArray["score"]["kpi5b"] * $area->weight_kpi5b,
+            'kpi5c' => '-',
+            'kpi5d' => '-',
+            'kpi6a' => $totalArray["score"]["kpi6a"] * $area->weight_kpi6a,
+            'kpi6b' => $totalArray["score"]["kpi6b"] * $area->weight_kpi6b,
+            'kpi6c' => $totalArray["score"]["kpi6c"] * $area->weight_kpi6c,
+            'kpi7' => $totalArray["score"]["kpi7"] * $area->weight_kpi7,
+            'kpi8' => $totalArray["score"]["kpi8"] * $area->weight_kpi8,
+            'kpi9' => $totalArray["score"]["kpi9"] * $area->weight_kpi9,
+            'kpi11' => $totalArray["score"]["kpi11"] * $area->weight_kpi11,
+            'kpi12a' => $totalArray["score"]["kpi12a"] * $area->weight_kpi12a,
+            'kpi12b' => $totalArray["score"]["kpi12b"] * $area->weight_kpi12b,
+            'kpi13' => $totalArray["score"]["kpi13"] * $area->weight_kpi13,
+            'kpi14' => $totalArray["score"]["kpi14"] * $area->weight_kpi14,
+        ));
+
+        $totalScore = $totalArray["score"]["kpi1b"] + $totalArray["score"]["kpi2a"] + $totalArray["score"]["kpi2b"] +
+            + $totalArray["score"]["kpi2c"] + + $totalArray["score"]["kpi2d"] + $totalArray["score"]["kpi3"] +
+            $totalArray["score"]["kpi4"] + $totalArray["score"]["kpi5b"] + $totalArray["score"]["kpi6a"] +
+            $totalArray["score"]["kpi6b"] + $totalArray["score"]["kpi6c"] +
             $totalArray["score"]["kpi7"] + $totalArray["score"]["kpi8"] + $totalArray["score"]["kpi9"] +
-            $totalArray["score"]["kpi10"] + $totalArray["score"]["kpi11"] + $totalArray["score"]["kpi12"] +
-            max($totalArray["score"]["kpi13a"], $totalArray["score"]["kpi13b"]) +
-            $totalArray["score"]["kpi14"] + $totalArray["score"]["kpi15"];
+            $totalArray["score"]["kpi11"] + $totalArray["score"]["kpi12a"] + $totalArray["score"]["kpi12b"] +
+            $totalArray["score"]["kpi13"] + $totalArray["score"]["kpi14"];
+
+        $totalWeightedScore = $totalWeightedArray["weighted_score"]["kpi1b"] + $totalWeightedArray["weighted_score"]["kpi2a"] + $totalWeightedArray["weighted_score"]["kpi2b"] +
+            + $totalWeightedArray["weighted_score"]["kpi2c"] + + $totalWeightedArray["weighted_score"]["kpi2d"] + $totalWeightedArray["weighted_score"]["kpi3"] +
+            $totalWeightedArray["weighted_score"]["kpi4"] + $totalWeightedArray["weighted_score"]["kpi5b"] + $totalWeightedArray["weighted_score"]["kpi6a"] +
+            $totalWeightedArray["weighted_score"]["kpi6b"] + $totalWeightedArray["weighted_score"]["kpi6c"] +
+            $totalWeightedArray["weighted_score"]["kpi7"] + $totalWeightedArray["weighted_score"]["kpi8"] + $totalWeightedArray["weighted_score"]["kpi9"] +
+            $totalWeightedArray["weighted_score"]["kpi11"] + $totalWeightedArray["weighted_score"]["kpi12a"] + $totalWeightedArray["weighted_score"]["kpi12b"] +
+            $totalWeightedArray["weighted_score"]["kpi13"] + $totalWeightedArray["weighted_score"]["kpi14"];
 
         $overviewArray = array("total" => array(
-            'score' => $totalScore,
-            'money' => $totalScore + $this->calculateScore($settings["kpi_money"]["bonus"], $totalScore),
+            'score' => $totalWeightedScore,
+            'money' => $totalWeightedScore,
         ));
 
         $scoresArray = array_merge($scoresArray, $totalArray);
+        $scoresArray = array_merge($scoresArray, $totalWeightedArray);
         $scoresArray = array_merge($scoresArray, $overviewArray);
 
         return $scoresArray;
@@ -197,41 +248,47 @@ class KPIScores
         $averageAveragesArray = array(
             'kpi1a' => 0,
             'kpi1b' => 0,
-            'kpi2' => 0,
+            'kpi2a' => 0,
+            'kpi2b' => 0,
+            'kpi2c' => 0,
+            'kpi2d' => 0,
             'kpi3' => 0,
             'kpi4' => 0,
-            'kpi5' => 0,
+            'kpi5a' => 0,
+            'kpi5b' => 0,
+            'kpi5c' => 0,
+            'kpi5d' => 0,
             'kpi6a' => 0,
             'kpi6b' => 0,
             'kpi6c' => 0,
-            'kpi6d' => 0,
-            'kpi7' => 0,
+            'kpi8' => 0,
             'kpi9' => 0,
-            'kpi10' => 0,
             'kpi11' => 0,
-            'kpi12' => 0,
-            'kpi13a' => 0,
-            'kpi13b' => 0,
-            'kpi14' => 0
+            'kpi12a' => 0,
+            'kpi12b' => 0,
+            'kpi13' => 0,
         );
 
         $scoreAveragesArray = array(
             'kpi1b' => 0,
-            'kpi2' => 0,
+            'kpi2a' => 0,
+            'kpi2b' => 0,
+            'kpi2c' => 0,
+            'kpi2d' => 0,
             'kpi3' => 0,
             'kpi4' => 0,
-            'kpi5' => 0,
+            'kpi5b' => 0,
+            'kpi6a' => 0,
             'kpi6b' => 0,
+            'kpi6c' => 0,
             'kpi7' => 0,
             'kpi8' => 0,
             'kpi9' => 0,
-            'kpi10' => 0,
             'kpi11' => 0,
-            'kpi12' => 0,
-            'kpi13a' => 0,
-            'kpi13b' => 0,
+            'kpi12a' => 0,
+            'kpi12b' => 0,
+            'kpi13' => 0,
             'kpi14' => 0,
-            'kpi15' => 0
         );
 
         $totalAveragesArray = array(
@@ -239,22 +296,18 @@ class KPIScores
             'money' => 0,
         );
 
-        // Step 1: Get the first collective ID for the given company
-        $collective_id = CollectiveCompany::where('company_id', $company_id)
-            ->value('collective_id');
+        $company = Company::findOrFail($company_id);
 
+        // Step 1: first collective for this company
+        $collective = $company->collectives()->select('collectives.id')->first();
 
-        if ($collective_id) {
-            // Step 2: Get all company IDs in that collective
-            $companyIds = CollectiveCompany::where('collective_id', $collective_id)
-                ->pluck('company_id');
-
-            // Step 3: Get companies with klwDumps
-            $companies = Company::whereIn('id', $companyIds)
+        if ($collective) {
+            // Step 2 + 3: companies in that collective that have klwDumps
+            $companies = $collective->companies()
                 ->has('klwDumps')
                 ->get();
         } else {
-            $companies = collect(); // return empty collection if no collective found
+            $companies = collect(); // empty collection if no collective found
         }
 
         if (count($companies) > 0) {
@@ -268,7 +321,7 @@ class KPIScores
                 }
 
                 foreach ($scoreAveragesArray as $key => $value) {
-                    $scoreAveragesArray[$key] += $company_scores['score'][$key];
+                    $scoreAveragesArray[$key] += $company_scores['weighted_score'][$key];
                 }
 
                 foreach ($totalAveragesArray as $key => $value) {
@@ -279,7 +332,7 @@ class KPIScores
 
             // Then, divide the totals by the number of companies
             foreach ($averageAveragesArray as $key => $value) {
-                if ($key == 'kpi10' || $key == 'kpi11' || $key == 'kpi12' || $key == 'kpi13a') {
+                if ($key == 'kpi11' || $key == 'kpi12a' || $key == 'kpi12b') {
                     $averageAveragesArray[$key] = $averageAveragesArray[$key] / count($companies);
                 } else {
                     $averageAveragesArray[$key] = round($averageAveragesArray[$key] / count($companies), 0);
@@ -314,41 +367,47 @@ class KPIScores
         $averageAveragesArray = array(
             'kpi1a' => 0,
             'kpi1b' => 0,
-            'kpi2' => 0,
+            'kpi2a' => 0,
+            'kpi2b' => 0,
+            'kpi2c' => 0,
+            'kpi2d' => 0,
             'kpi3' => 0,
             'kpi4' => 0,
-            'kpi5' => 0,
+            'kpi5a' => 0,
+            'kpi5b' => 0,
+            'kpi5c' => 0,
+            'kpi5d' => 0,
             'kpi6a' => 0,
             'kpi6b' => 0,
             'kpi6c' => 0,
-            'kpi6d' => 0,
-            'kpi7' => 0,
+            'kpi8' => 0,
             'kpi9' => 0,
-            'kpi10' => 0,
             'kpi11' => 0,
-            'kpi12' => 0,
-            'kpi13a' => 0,
-            'kpi13b' => 0,
-            'kpi14' => 0
+            'kpi12a' => 0,
+            'kpi12b' => 0,
+            'kpi13' => 0
         );
 
         $scoreAveragesArray = array(
             'kpi1b' => 0,
-            'kpi2' => 0,
+            'kpi2a' => 0,
+            'kpi2b' => 0,
+            'kpi2c' => 0,
+            'kpi2d' => 0,
             'kpi3' => 0,
             'kpi4' => 0,
-            'kpi5' => 0,
+            'kpi5b' => 0,
+            'kpi6a' => 0,
             'kpi6b' => 0,
+            'kpi6c' => 0,
             'kpi7' => 0,
             'kpi8' => 0,
             'kpi9' => 0,
-            'kpi10' => 0,
             'kpi11' => 0,
-            'kpi12' => 0,
-            'kpi13a' => 0,
-            'kpi13b' => 0,
+            'kpi12a' => 0,
+            'kpi12b' => 0,
+            'kpi13' => 0,
             'kpi14' => 0,
-            'kpi15' => 0
         );
 
         $totalAveragesArray = array(
@@ -368,7 +427,7 @@ class KPIScores
                 }
 
                 foreach ($scoreAveragesArray as $key => $value) {
-                    $scoreAveragesArray[$key] += $company_scores['score'][$key];
+                    $scoreAveragesArray[$key] += $company_scores['weighted_score'][$key];
                 }
 
                 foreach ($totalAveragesArray as $key => $value) {
@@ -379,7 +438,7 @@ class KPIScores
 
             // Then, divide the totals by the number of companies
             foreach ($averageAveragesArray as $key => $value) {
-                if ($key == 'kpi10' || $key == 'kpi11' || $key == 'kpi12' || $key == 'kpi13a') {
+                if ($key == 'kpi11' || $key == 'kpi12a' || $key == 'kpi12b') {
                     $averageAveragesArray[$key] = $averageAveragesArray[$key] / count($companies);
                 } else {
                     $averageAveragesArray[$key] = round($averageAveragesArray[$key] / count($companies), 0);
@@ -433,12 +492,10 @@ class KPIScores
             1 => "Volvelds gewasbeschermingsmiddelen",
             2 => "Ingevulde MBP",
             3 => "Ingevulde Milieumaatlat",
-            4 => "Pleksgewijs grasland, volvelds maisland",
-            5 => "Pleksgewijs hele bedrijf",
-            6 => "On the way to Planet Proof / AH programma",
-            7 => "Beterlevnen Keurmerk",
-            8 => "Biologisch",
-            9 => "Geen middelen",
+            4 => "Pleksgewijs hele bedrijf",
+            5 => "On the way to Planet Proof",
+            6 => "Beterleven Keurmerk",
+            7 => "Geen middelen",
             default => "Onbekend",
         };
     }
@@ -451,9 +508,6 @@ class KPIScores
     {
         $smastring = "";
 
-        if ($properties->website == 1) {
-            $smastring .= "Website, ";
-        }
         if ($properties->ontvangstruimte == 1) {
             $smastring .= "Ontvangstruimte, ";
         }
@@ -475,8 +529,8 @@ class KPIScores
         if ($properties->erkend_demobedrijf == 1) {
             $smastring .= "Erkend demobedrijf, ";
         }
-        if ($properties->bed_and_breakfast == 1) {
-            $smastring .= "Bed & Breakfast, ";
+        if ($properties->bedrijfsgebonden_recreatie == 1) {
+            $smastring .= "Bedrijfsgebonden recreatie, ";
         }
         if ($properties->zorg == 1) {
             $smastring .= "Zorg, ";
@@ -497,24 +551,27 @@ class KPIScores
             'year' => '-',
             'kpi1a' => "-",
             'kpi1b' => "-",
-            'kpi2' => "-",
+            'kpi2a' => "-",
+            'kpi2b' => "-",
+            'kpi2c' => "-",
+            'kpi2d' => "-",
             'kpi3' => "-",
             'kpi4' => "-",
-            'kpi5' => "-",
+            'kpi5a' => "-",
+            'kpi5b' => "-",
+            'kpi5c' => "-",
+            'kpi5d' => "-",
             'kpi6a' => "-",
             'kpi6b' => "-",
             'kpi6c' => "-",
-            'kpi6d' => "-",
             'kpi7' => "-",
             'kpi8' => "-",
             'kpi9' => "-",
-            'kpi10' => "-",
             'kpi11' => "-",
-            'kpi12' => "-",
-            'kpi13a' => "-",
-            'kpi13b' => "-",
+            'kpi12a' => "-",
+            'kpi12b' => "-",
+            'kpi13' => "-",
             'kpi14' => "-",
-            'kpi15' => "-",
         ));
     }
 

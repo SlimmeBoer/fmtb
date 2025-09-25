@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bbm_kpis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('code_id');
-            $table->integer('kpi');
+            $table->string('kpi');
             $table->timestamps();
         });
     }

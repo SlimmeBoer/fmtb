@@ -26,9 +26,9 @@ export default function Admin_BBMKPISettings() {
             <Typography variant="body2">
                 {t("pages_admin.kpi_settings_explain")}
             </Typography>
-            <BBMKPIDragger kpi={10} title={t("kpis.10")}/>
-            <BBMKPIDragger kpi={11} title={t("kpis.11")}/>
-            <BBMKPIDragger kpi={12} title={t("kpis.12")}/>
+            <BBMKPIDragger kpi={"11"} title={t("kpis.11")}/>
+            <BBMKPIDragger kpi={"12a"} title={t("kpis.12a")}/>
+            <BBMKPIDragger kpi={"12b"} title={t("kpis.12b")}/>
         </Box>
     )
 

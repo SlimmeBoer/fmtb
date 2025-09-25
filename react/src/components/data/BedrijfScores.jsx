@@ -58,8 +58,8 @@ export default function BedrijfScores() {
                                     {t("kpi_table.total_score_points")}
                                 </Typography>
                             </Stack>
-                            <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={2900} cat3={2399}
-                                        cat2={1899} cat1={1399}
+                            <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={100} cat3={75}
+                                        cat2={50} cat1={25}
                                         score_col={kpi.total_col.score}
                                         score_tot={kpi.total_tot.score}/>
                         </Card>
@@ -72,8 +72,8 @@ export default function BedrijfScores() {
                                     {t("kpi_table.total_score_money")}
                                 </Typography>
                             </Stack>
-                            <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={5000}
-                                        cat3={3899} cat2={2399} cat1={1399}
+                            <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={100}
+                                        cat3={75} cat2={50} cat1={25}
                                         score_col={kpi.total_col.money}
                                         score_tot={kpi.total_tot.money}/>
 

@@ -58,7 +58,7 @@ class UserController extends Controller
             'message' => 'Gebruiker toegevoegd: ' . $data['email'],
         ));
 
-        return response(new UserResource($user),201);
+        return response(new UserResource($user), 201);
     }
 
     /**
@@ -93,6 +93,21 @@ class UserController extends Controller
         $role = Role::find($data['role_id']);
         $user->syncRoles([$role]);
 
+        // Assign collective
+        if (array_key_exists('collective_id', $data)) {
+            $user->collectives()->sync(
+                $data['collective_id'] ? [$data['collective_id']] : []
+            );
+        }
+
+        // Assign area
+        if (array_key_exists('area_id', $data)) {
+            $user->areas()->sync(
+                $data['area_id'] ? [$data['area_id']] : []
+            );
+        }
+
+
         // Log
         SystemLog::create(array(
             'user_id' => Auth::user()->id,
@@ -120,7 +135,7 @@ class UserController extends Controller
         ));
 
         $user->delete();
-        return response("",204);
+        return response("", 204);
 
     }
 
@@ -135,6 +150,19 @@ class UserController extends Controller
         $collective = $user->collectives()->first();
 
         return response()->json($collective->users()->orderBy('last_name')->get());
+    }
+
+    public function getDropDown()
+    {
+        if (Auth::user()->getRoleNames()->first() == 'admin' || Auth::user()->getRoleNames()->first() == 'programmaleider') {
+            $return_users = User::role('bedrijf')->orderBy('last_name')->get();
+        } else if (Auth::user()->getRoleNames()->first() == 'collectief') {
+            $user = User::where('id', Auth::id())->first();
+            $collective = $user->collectives()->first();
+            $return_users = $collective->users()->role('bedrijf')->orderBy('last_name')->get();
+        }
+
+        return response()->json($return_users);
     }
 
     public function roles()

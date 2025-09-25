@@ -25,7 +25,6 @@ class StoreCompanyPropertiesRequest extends FormRequest
             'company_id' => 'required|integer',
             'year' => 'integer',
             'mbp' => 'integer',
-            'website' => 'boolean',
             'ontvangstruimte' => 'boolean',
             'winkel' => 'boolean',
             'educatie' => 'boolean',
@@ -33,7 +32,7 @@ class StoreCompanyPropertiesRequest extends FormRequest
             'open_dagen' => 'boolean',
             'wandelpad' => 'boolean',
             'erkend_demobedrijf' => 'boolean',
-            'bed_and_breakfast' => 'boolean',
+            'bedrijfsgebonden_recreatie' => 'boolean',
             'zorg' => 'boolean',
             'geen_sma' => 'boolean',
             'opp_totaal' => 'numeric',
@@ -53,6 +52,10 @@ class StoreCompanyPropertiesRequest extends FormRequest
             'g_co2_per_kg_meetmelk' => 'numeric',
             'kg_co2_per_ha' => 'numeric',
             'grondsoort'=> 'string',
+            'grondsoort_dominant'=> 'string',
+            'stikstofbedrijfsoverschot' => 'numeric',
+            'bodembenutting_stikstof' => 'numeric',
+            'bodembenutting_fosfaat' => 'numeric',
         ];
     }
 }

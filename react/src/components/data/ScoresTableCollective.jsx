@@ -64,7 +64,6 @@ export default function ScoresTableCollective(props) {
                                     <TableRow key={index} sx={{margin: 0}}>
                                         <TableCell component="th" scope="row">
                                             {index+1}. <Link href={props.link + s.company_id}>{s.company_name}</Link>
-                                            <CompanyOldDataIndicator oldData={s.old_data} />
                                         </TableCell>
                                         <TableCell align="center">
                                             {s.points}

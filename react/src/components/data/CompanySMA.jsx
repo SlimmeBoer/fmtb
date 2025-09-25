@@ -21,7 +21,6 @@ export default function CompanySMA(props) {
     const {t} = useTranslation();
 
     const makeSma = (data) => [
-        { label: t("sma.website"), key: "website", value: !!data.website },
         { label: t("sma.ontvangstruimte"), key: "ontvangstruimte", value: !!data.ontvangstruimte },
         { label: t("sma.winkel"), key: "winkel", value: !!data.winkel },
         { label: t("sma.educatie"), key: "educatie", value: !!data.educatie },
@@ -29,7 +28,7 @@ export default function CompanySMA(props) {
         { label: t("sma.open_dagen"), key: "open_dagen", value: !!data.open_dagen },
         { label: t("sma.wandelpad"), key: "wandelpad", value: !!data.wandelpad },
         { label: t("sma.erkend_demobedrijf"), key: "erkend_demobedrijf", value: !!data.erkend_demobedrijf },
-        { label: t("sma.bed_and_breakfast"), key: "bed_and_breakfast", value: !!data.bed_and_breakfast },
+        { label: t("sma.bedrijfsgebonden_recreatie"), key: "bedrijfsgebonden_recreatie", value: !!data.bedrijfsgebonden_recreatie },
         { label: t("sma.zorg"), key: "zorg", value: !!data.zorg },
         { label: t("sma.geen_sma"), key: "geen_sma", value: !!data.geen_sma },
     ];

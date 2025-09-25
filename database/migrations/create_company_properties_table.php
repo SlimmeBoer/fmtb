@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('company_id');
             $table->integer('year');
             $table->integer('mbp')->nullable();
-            $table->boolean('website')->nullable();
             $table->boolean('ontvangstruimte')->nullable();
             $table->boolean('winkel')->nullable();
             $table->boolean('educatie')->nullable();
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->boolean('open_dagen')->nullable();
             $table->boolean('wandelpad')->nullable();
             $table->boolean('erkend_demobedrijf')->nullable();
-            $table->boolean('bed_and_breakfast')->nullable();
+            $table->boolean('bedrijfsgebonden_recreatie')->nullable();
             $table->boolean('zorg')->nullable();
             $table->boolean('geen_sma')->nullable();
             $table->float('opp_totaal')->nullable();
@@ -44,6 +43,10 @@ return new class extends Migration
             $table->float('g_co2_per_kg_meetmelk')->nullable();
             $table->float('kg_co2_per_ha')->nullable();
             $table->string('grondsoort')->nullable();
+            $table->string('grondsoort_dominant')->nullable();
+            $table->float('stikstofbedrijfsoverschot')->nullable();
+            $table->float('bodembenutting_stikstof')->nullable();
+            $table->string('bodembenutting_fosfaat')->nullable();
             $table->timestamps();
         });
     }

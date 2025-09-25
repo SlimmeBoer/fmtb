@@ -90,7 +90,7 @@ const Bedrijf_Dashboard = () => {
                                 component="img"
                                 sx={{
                                     ml: 6,
-                                    height: 180,
+                                    mt: 6,
                                     width: 180,
                                 }}
                                 alt="FMTB Logo"

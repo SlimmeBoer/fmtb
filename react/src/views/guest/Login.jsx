@@ -110,8 +110,14 @@ export default function Login() {
                                     startIcon={<LoginIcon/>}>
                                 {t('login.submit_button')}
                             </Button>
-                            <Typography variant="body2" sx={{pt: 6}}>
+                            <Typography variant="body2" sx={{pt: 3}}>
                                 <Link href={'/wachtwoord-vergeten'}>{t('login.forgot_password')}</Link>
+                            </Typography>
+                            <Typography variant="body2" sx={{pt: 8}}>
+                                {t("about.disclaimer_1")}
+                            </Typography>
+                            <Typography variant="body2">
+                                {t("about.disclaimer_2")}
                             </Typography>
                         </form>
                     </div>

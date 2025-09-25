@@ -115,9 +115,9 @@ class GisRunner
     {
 
         // Initialize data
-        $kpi10 = 0;
         $kpi11 = 0;
-        $kpi12 = 0;
+        $kpi12a = 0;
+        $kpi12b = 0;
 
         // Load all BBMKPI-connections
         $bbmkpis = BbmKpi::all();
@@ -129,35 +129,35 @@ class GisRunner
 
             foreach ($bbmkpis as $bbmkpi)
             {
-                if ($bbmkpi->kpi == 10 && $bbmkpi->code_id == $bbm->id)
-                {
-                    $kpi10 += ($bbm_value['waarde'] * $bbm->weight);
-                }
-                if ($bbmkpi->kpi == 11 && $bbmkpi->code_id == $bbm->id)
+                if ($bbmkpi->kpi == "11" && $bbmkpi->code_id == $bbm->id)
                 {
                     $kpi11 += ($bbm_value['waarde'] * $bbm->weight);
                 }
-                if ($bbmkpi->kpi == 12 && $bbmkpi->code_id == $bbm->id)
+                if ($bbmkpi->kpi == "12a" && $bbmkpi->code_id == $bbm->id)
                 {
-                    $kpi12 += ($bbm_value['waarde'] * $bbm->weight);
+                    $kpi12a += ($bbm_value['waarde'] * $bbm->weight);
+                }
+                if ($bbmkpi->kpi == "12b" && $bbmkpi->code_id == $bbm->id)
+                {
+                    $kpi12b += ($bbm_value['waarde'] * $bbm->weight);
                 }
             }
         }
 
         // KPIs are now set with all weighted data. Now, divide by the total surface of the company.
         $company_properties = CompanyProperties::where('company_id',$company->id)->first();
-        $kpi10 = $kpi10 / $company_properties->opp_totaal_subsidiabel;
         $kpi11 = $kpi11 / $company_properties->opp_totaal_subsidiabel;
-        $kpi12 = $kpi12 / $company_properties->opp_totaal_subsidiabel;
+        $kpi12a = $kpi12a / $company_properties->opp_totaal_subsidiabel;
+        $kpi12b = $kpi12b / $company_properties->opp_totaal_subsidiabel;
 
         // Final action, store the percentage in all KpiValues
         $kpivalues = KpiValues::where('company_id',$company->id)->get();
 
         foreach ($kpivalues as $kpivalue)
         {
-            $kpivalue->kpi10 = $kpi10;
             $kpivalue->kpi11 = $kpi11;
-            $kpivalue->kpi12 = $kpi12;
+            $kpivalue->kpi12a = $kpi12a;
+            $kpivalue->kpi12b = $kpi12b;
             $kpivalue->save();
         }
 

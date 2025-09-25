@@ -24,7 +24,6 @@ class User extends Authenticatable
         'middle_name',
         'last_name',
         'email',
-        'brs',
         'password',
     ];
 
@@ -54,6 +53,16 @@ class User extends Authenticatable
     public function collectives()
     {
         return $this->belongsToMany(Collective::class, 'collective_users', 'user_id','collective_id');
+    }
+
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class, 'area_users', 'user_id','area_id');
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
     }
 
     public function sendPasswordResetNotification($token)

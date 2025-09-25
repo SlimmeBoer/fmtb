@@ -20,7 +20,6 @@ class CompanyPropertiesResource extends JsonResource
             'company_id' => $this->company_id,
             'year' => $this->year,
             'mbp' => $this->mbp,
-            'website' => $this->website,
             'ontvangstruimte' => $this->ontvangstruimte,
             'winkel' => $this->winkel,
             'educatie' => $this->educatie,
@@ -28,7 +27,7 @@ class CompanyPropertiesResource extends JsonResource
             'open_dagen' => $this->open_dagen,
             'wandelpad' => $this->wandelpad,
             'erkend_demobedrijf' => $this->erkend_demobedrijf,
-            'bed_and_breakfast' => $this->bed_and_breakfast,
+            'bedrijfsgebonden_recreatie' => $this->bedrijfsgebonden_recreatie,
             'zorg' => $this->zorg,
             'geen_sma' => $this->geen_sma,
             'opp_totaal' => $this->opp_totaal,
@@ -48,6 +47,10 @@ class CompanyPropertiesResource extends JsonResource
             'g_co2_per_kg_meetmelk' => $this->g_co2_per_kg_meetmelk,
             'kg_co2_per_ha' => $this->kg_co2_per_ha,
             'grondsoort' => $this->grondsoort,
+            'grondsoort_dominant' => $this->grondsoort_dominant,
+            'stikstofbedrijfsoverschot' => $this->stikstofbedrijfsoverschot,
+            'bodembenutting_stikstof' => $this->bodembenutting_stikstof,
+            'bodembenutting_fosfaat' => $this->bodembenutting_fosfaat,
         ];
     }
 }

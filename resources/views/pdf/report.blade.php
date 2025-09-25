@@ -14,8 +14,6 @@
             font-family: sans-serif;
         }
 
-
-
         h1 {
             font-size: 18px;
             margin: 4mm;
@@ -55,11 +53,11 @@
         }
 
         .green {
-            background-color: #c6e0b4;
+            background-color: #99e5ff;
             font-weight: bold;
         }
         .lightgreen {
-            background-color: #e2efda;
+            background-color: #caf1ff;
         }
         .disclaimer {
             font-style: italic;
@@ -131,7 +129,7 @@
     </tr>
     <tr class="header-row">
         <td class="logo">
-            <img style="padding: 4mm;" src="{{ $logos['umbb'] }}" alt="Logo" width="140">
+            <img style="padding: 4mm;" src="{{ $logos['provincie'] }}" alt="Logo" width="140">
         </td>
         <td class="info">
             <h1>{{$title}}</h1>
@@ -141,16 +139,8 @@
                    <td class="datacell">{{$company_data['name']}}</td>
                </tr>
                <tr>
-                   <td class="boldcell">KvK-nummer(s):</td>
-                   <td class="datacell">{{$company_data['name']}}</td>
-               </tr>
-               <tr>
-                   <td class="boldcell">Straat en huisnummer:</td>
-                   <td class="datacell">{{$company_data['address']}}</td>
-               </tr>
-               <tr>
-                   <td class="boldcell">Postcode / woonplaats:</td>
-                   <td class="datacell">{{$company_data['postal_code']}} {{$company_data['city']}}</td>
+                   <td class="boldcell">Adres:</td>
+                   <td class="datacell">{{$company_data['address']}}, {{$company_data['postal_code']}} {{$company_data['city']}}</td>
                </tr>
                <tr>
                    <td class="boldcell">Telefoon:</td>
@@ -171,6 +161,14 @@
                <tr>
                    <td class="boldcell">Biologisch bedrijf?:</td>
                    <td class="datacell">{{ isset($company_data['bio']) && $company_data['bio'] == 1 ? 'Ja' : 'Nee' }}</td>
+               </tr>
+               <tr>
+                   <td class="boldcell">Onderdeel van collectief:</td>
+                   <td class="datacell">{{$collectieven_string}}</td>
+               </tr>
+               <tr>
+                   <td class="boldcell">Onderdeel van gebied:</td>
+                   <td class="datacell">{{$gebieden_string}}</td>
                </tr>
            </table>
         </td>
@@ -202,7 +200,7 @@
                     <td>{{$scores['year3']['kpi1a']}}</td>
                     <td>{{$scores['avg']['kpi1a']}}</td>
                     <td rowspan="2" class="lightgreen">{{$scores['avg_tot']['kpi1b']}}</td>
-                    <td rowspan="2" >{{$scores['score']['kpi1b']}}</td>
+                    <td rowspan="2" >{{$scores['weighted_score']['kpi1b']}}</td>
                     <td rowspan="2" class="lightgreen">{{$scores['score_tot']['kpi1b']}}</td>
                 </tr>
                 <tr>
@@ -214,101 +212,157 @@
                     <td>{{$scores['avg']['kpi1b']}}</td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td style="text-align: left">Fosfaatbalansbodemoverschot (kg P2O5 per ha)</td>
-                    <td>{{$scores['year1']['kpi2']}}</td>
-                    <td>{{$scores['year2']['kpi2']}}</td>
-                    <td>{{$scores['year3']['kpi2']}}</td>
-                    <td>{{$scores['avg']['kpi2']}}</td>
-                    <td class="lightgreen">{{$scores['avg_tot']['kpi2']}}</td>
-                    <td>{{$scores['score']['kpi2']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi2']}}</td>
+                    <td>2a</td>
+                    <td style="text-align: left">Ammoniakemissie</td>
+                    <td>{{$scores['year1']['kpi2a']}}</td>
+                    <td>{{$scores['year2']['kpi2a']}}</td>
+                    <td>{{$scores['year3']['kpi2a']}}</td>
+                    <td>{{$scores['avg']['kpi2a']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi2a']}}</td>
+                    <td>{{$scores['weighted_score']['kpi2a']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi2a']}}</td>
+                </tr>
+                <tr>
+                    <td>2b</td>
+                    <td style="text-align: left">Ruw eiwit in rantsoen</td>
+                    <td>{{$scores['year1']['kpi2b']}}</td>
+                    <td>{{$scores['year2']['kpi2b']}}</td>
+                    <td>{{$scores['year3']['kpi2b']}}</td>
+                    <td>{{$scores['avg']['kpi2b']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi2b']}}</td>
+                    <td>{{$scores['weighted_score']['kpi2b']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi2b']}}</td>
+                </tr>
+                <tr>
+                    <td>2c</td>
+                    <td style="text-align: left">Ureum</td>
+                    <td>{{$scores['year1']['kpi2c']}}</td>
+                    <td>{{$scores['year2']['kpi2c']}}</td>
+                    <td>{{$scores['year3']['kpi2c']}}</td>
+                    <td>{{$scores['avg']['kpi2c']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi2c']}}</td>
+                    <td>{{$scores['weighted_score']['kpi2c']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi2c']}}</td>
+                </tr>
+                <tr>
+                    <td>2d</td>
+                    <td style="text-align: left">Weidegang</td>
+                    <td>{{$scores['year1']['kpi2d']}}</td>
+                    <td>{{$scores['year2']['kpi2d']}}</td>
+                    <td>{{$scores['year3']['kpi2d']}}</td>
+                    <td>{{$scores['avg']['kpi2d']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi2d']}}</td>
+                    <td>{{$scores['weighted_score']['kpi2d']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi2d']}}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td style="text-align: left">Ammoniakuitstoot (in kg NH3/ha)</td>
+                    <td style="text-align: left">Fosfaatoverschot</td>
                     <td>{{$scores['year1']['kpi3']}}</td>
                     <td>{{$scores['year2']['kpi3']}}</td>
                     <td>{{$scores['year3']['kpi3']}}</td>
                     <td>{{$scores['avg']['kpi3']}}</td>
                     <td class="lightgreen">{{$scores['avg_tot']['kpi3']}}</td>
-                    <td>{{$scores['score']['kpi3']}}</td>
+                    <td>{{$scores['weighted_score']['kpi3']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi3']}}</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td style="text-align: left">Weidegang (uur/jaar)</td>
+                    <td style="text-align: left">Eiwit van eigen land</td>
                     <td>{{$scores['year1']['kpi4']}}</td>
                     <td>{{$scores['year2']['kpi4']}}</td>
                     <td>{{$scores['year3']['kpi4']}}</td>
                     <td>{{$scores['avg']['kpi4']}}</td>
                     <td class="lightgreen">{{$scores['avg_tot']['kpi4']}}</td>
-                    <td>{{$scores['score']['kpi4']}}</td>
+                    <td>{{$scores['weighted_score']['kpi4']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi4']}}</td>
                 </tr>
+
                 <tr>
-                    <td>5</td>
-                    <td style="text-align: left">Tankmelkureum (mg/100g)</td>
-                    <td>{{$scores['year1']['kpi5']}}</td>
-                    <td>{{$scores['year2']['kpi5']}}</td>
-                    <td>{{$scores['year3']['kpi5']}}</td>
-                    <td>{{$scores['avg']['kpi5']}}</td>
-                    <td class="lightgreen">{{$scores['avg_tot']['kpi5']}}</td>
-                    <td>{{$scores['score']['kpi5']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi5']}}</td>
+                    <td>5a</td>
+                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per ha)</td>
+                    <td>{{$scores['year1']['kpi5a']}}</td>
+                    <td>{{$scores['year2']['kpi5a']}}</td>
+                    <td>{{$scores['year3']['kpi5a']}}</td>
+                    <td>{{$scores['avg']['kpi5a']}}</td>
+                    <td rowspan="4" class="lightgreen">{{$scores['avg_tot']['kpi5b']}}</td>
+                    <td rowspan="4" >{{$scores['weighted_score']['kpi5b']}}</td>
+                    <td rowspan="4" class="lightgreen">{{$scores['score_tot']['kpi5b']}}</td>
+                </tr>
+                <tr>
+                    <td>5b</td>
+                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per ha)  incl. correctie veen</td>
+                    <td>{{$scores['year1']['kpi5b']}}</td>
+                    <td>{{$scores['year2']['kpi5b']}}</td>
+                    <td>{{$scores['year3']['kpi5b']}}</td>
+                    <td>{{$scores['avg']['kpi5b']}}</td>
+                </tr>
+                <tr>
+                    <td>5c</td>
+                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per kg fcpm)</td>
+                    <td>{{$scores['year1']['kpi5c']}}</td>
+                    <td>{{$scores['year2']['kpi5c']}}</td>
+                    <td>{{$scores['year3']['kpi5c']}}</td>
+                    <td>{{$scores['avg']['kpi5c']}}</td>
+                </tr>
+                <tr>
+                    <td>5d</td>
+                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per kg fcpm) incl. correctie veen</td>
+                    <td>{{$scores['year1']['kpi5d']}}</td>
+                    <td>{{$scores['year2']['kpi5d']}}</td>
+                    <td>{{$scores['year3']['kpi5d']}}</td>
+                    <td>{{$scores['avg']['kpi5d']}}</td>
                 </tr>
                 <tr>
                     <td>6a</td>
-                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per ha)</td>
+                    <td style="text-align: left">Energiebalans (opwekking)</td>
                     <td>{{$scores['year1']['kpi6a']}}</td>
                     <td>{{$scores['year2']['kpi6a']}}</td>
                     <td>{{$scores['year3']['kpi6a']}}</td>
                     <td>{{$scores['avg']['kpi6a']}}</td>
-                    <td rowspan="4" class="lightgreen">{{$scores['avg_tot']['kpi6b']}}</td>
-                    <td rowspan="4" >{{$scores['score']['kpi6b']}}</td>
-                    <td rowspan="4" class="lightgreen">{{$scores['score_tot']['kpi6b']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi6a']}}</td>
+                    <td>{{$scores['weighted_score']['kpi6a']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi6a']}}</td>
                 </tr>
                 <tr>
                     <td>6b</td>
-                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per ha)  incl. correctie veen</td>
+                    <td style="text-align: left">Energiebalans (verbruik per koe)</td>
                     <td>{{$scores['year1']['kpi6b']}}</td>
                     <td>{{$scores['year2']['kpi6b']}}</td>
                     <td>{{$scores['year3']['kpi6b']}}</td>
                     <td>{{$scores['avg']['kpi6b']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi6b']}}</td>
+                    <td>{{$scores['weighted_score']['kpi6b']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi6b']}}</td>
                 </tr>
                 <tr>
                     <td>6c</td>
-                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per kg fcpm)</td>
+                    <td style="text-align: left">Energiebalans (% hernieuwbare energie)</td>
                     <td>{{$scores['year1']['kpi6c']}}</td>
                     <td>{{$scores['year2']['kpi6c']}}</td>
                     <td>{{$scores['year3']['kpi6c']}}</td>
                     <td>{{$scores['avg']['kpi6c']}}</td>
-                </tr>
-                <tr>
-                    <td>6d</td>
-                    <td style="text-align: left">Broeikasgasemissie (in CO2eq. per kg fcpm) incl. correctie veen</td>
-                    <td>{{$scores['year1']['kpi6d']}}</td>
-                    <td>{{$scores['year2']['kpi6d']}}</td>
-                    <td>{{$scores['year3']['kpi6d']}}</td>
-                    <td>{{$scores['avg']['kpi6d']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi6c']}}</td>
+                    <td>{{$scores['weighted_score']['kpi6c']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi6c']}}</td>
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td style="text-align: left">Eiwit van eigen land</td>
-                    <td>{{$scores['year1']['kpi7']}}</td>
-                    <td>{{$scores['year2']['kpi7']}}</td>
-                    <td>{{$scores['year3']['kpi7']}}</td>
-                    <td>{{$scores['avg']['kpi7']}}</td>
-                    <td class="lightgreen">{{$scores['avg_tot']['kpi7']}}</td>
-                    <td>{{$scores['score']['kpi7']}}</td>
+                    <td style="text-align: left">Milieubelasting gewasbeschermingsmiddelen</td>
+                    <td colspan="4">{{$scores['avg']['kpi7']}}</td>
+                    <td class="lightgreen">-</td>
+                    <td>{{$scores['weighted_score']['kpi7']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi7']}}</td>
                 </tr>
                 <tr>
                     <td>8</td>
-                    <td style="text-align: left">Gewasbeschermingsmiddelen (chemische middelen)</td>
-                    <td colspan="4">{{$scores['avg']['kpi8']}}</td>
-                    <td class="lightgreen">-</td>
-                    <td>{{$scores['score']['kpi8']}}</td>
+                    <td style="text-align: left">Bodemorganische stof</td>
+                    <td>{{$scores['year1']['kpi8']}}</td>
+                    <td>{{$scores['year2']['kpi8']}}</td>
+                    <td>{{$scores['year3']['kpi8']}}</td>
+                    <td>{{$scores['avg']['kpi8']}}</td>
+                    <td class="lightgreen">{{$scores['avg_tot']['kpi8']}}</td>
+                    <td>{{$scores['weighted_score']['kpi8']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi8']}}</td>
                 </tr>
                 <tr>
@@ -319,89 +373,51 @@
                     <td>{{ is_numeric($scores['year3']['kpi9'] ?? null) ? $scores['year3']['kpi9'] . '%' : $scores['year3']['kpi9'] }}</td>
                     <td>{{$scores['avg']['kpi9'].'%'}}</td>
                     <td class="lightgreen">{{$scores['avg_tot']['kpi9'].'%'}}</td>
-                    <td>{{$scores['score']['kpi9']}}</td>
+                    <td>{{$scores['weighted_score']['kpi9']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi9']}}</td>
                 </tr>
                 <tr>
-                    <td>10</td>
-                    <td style="text-align: left">Extensief kruidenrijk grasland</td>
-                    <td colspan="4">{{number_format($scores['avg']['kpi10']* 100,1) .'%'}}</td>
-                    <td class="lightgreen">{{number_format($scores['avg_tot']['kpi10']* 100,1) .'%'}}</td>
-                    <td>{{$scores['score']['kpi10']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi10']}}</td>
-                </tr>
-                <tr>
                     <td>11</td>
-                    <td style="text-align: left">Natuur en Landschap</td>
+                    <td style="text-align: left">Extensief kruidenrijk grasland</td>
                     <td colspan="4">{{number_format($scores['avg']['kpi11']* 100,1) .'%'}}</td>
                     <td class="lightgreen">{{number_format($scores['avg_tot']['kpi11']* 100,1) .'%'}}</td>
-                    <td>{{$scores['score']['kpi11']}}</td>
+                    <td>{{$scores['weighted_score']['kpi11']}}</td>
                     <td class="lightgreen">{{$scores['score_tot']['kpi11']}}</td>
                 </tr>
                 <tr>
-                    <td>12</td>
+                    <td>12a</td>
+                    <td style="text-align: left">Agrarisch natuurbeheer</td>
+                    <td colspan="4">{{number_format($scores['avg']['kpi12a']* 100,1) .'%'}}</td>
+                    <td class="lightgreen">{{number_format($scores['avg_tot']['kpi12a']* 100,1) .'%'}}</td>
+                    <td>{{$scores['weighted_score']['kpi12a']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi12a']}}</td>
+                </tr>
+                <tr>
+                    <td>12b</td>
                     <td style="text-align: left">Groenblauwe dooradering</td>
-                    <td colspan="4">{{number_format($scores['avg']['kpi12']* 100,1) .'%'}}</td>
-                    <td class="lightgreen">{{number_format($scores['avg_tot']['kpi12']* 100,1) .'%'}}</td>
-                    <td>{{$scores['score']['kpi12']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi12']}}</td>
+                    <td colspan="4">{{number_format($scores['avg']['kpi12b']* 100,1) .'%'}}</td>
+                    <td class="lightgreen">{{number_format($scores['avg_tot']['kpi12b']* 100,1) .'%'}}</td>
+                    <td>{{$scores['weighted_score']['kpi12b']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi12b']}}</td>
                 </tr>
                 <tr>
-                    <td>13a</td>
-                    <td style="text-align: left">Energiebalans (opgewekt/verbruikt)*</td>
-                    <td>
-                        {{ is_numeric($scores['year1']['kpi13a'] ?? null)
-                            ? number_format($scores['year1']['kpi13a'] * 100, 1) . '%'
-                            : '–' }}
-                    </td>
-                    <td>
-                        {{ is_numeric($scores['year2']['kpi13a'] ?? null)
-                            ? number_format($scores['year2']['kpi13a'] * 100, 1) . '%'
-                            : '–' }}
-                    </td>
-                    <td>
-                        {{ is_numeric($scores['year3']['kpi13a'] ?? null)
-                            ? number_format($scores['year3']['kpi13a'] * 100, 1) . '%'
-                            : '–' }}
-                    </td>
-                    <td>
-                        {{ is_numeric($scores['avg']['kpi13a'] ?? null)
-                            ? number_format($scores['avg']['kpi13a'] * 100, 1) . '%'
-                            : '–' }}
-                    </td>
-                    <td class="lightgreen">{{number_format($scores['avg_tot']['kpi13a']* 100,1).'%'}}</td>
-                    <td>{{$scores['score']['kpi13a']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi13a']}}</td>
-                </tr>
-                <tr>
-                    <td>13b</td>
-                    <td style="text-align: left">Energieverbruik (KWH per koe per jaar)*</td>
-                    <td>{{$scores['year1']['kpi13b']}}</td>
-                    <td>{{$scores['year2']['kpi13b']}}</td>
-                    <td>{{$scores['year3']['kpi13b']}}</td>
-                    <td>{{$scores['avg']['kpi13b']}}</td>
-                    <td class="lightgreen">{{$scores['avg_tot']['kpi13b']}}</td>
-                    <td>{{$scores['score']['kpi13b']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi13b']}}</td>
+                    <td>13</td>
+                    <td style="text-align: left">Dierenwelzijn en diergezondheid</td>
+                    <td>{{YearMonths::showYearMonths($scores['year1']['kpi13'])}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['year2']['kpi13'])}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['year3']['kpi13'])}}</td>
+                    <td>{{YearMonths::showYearMonths($scores['avg']['kpi13'])}}</td>
+                    <td class="lightgreen">{{YearMonths::showYearMonths($scores['avg_tot']['kpi13'])}}</td>
+                    <td>{{$scores['weighted_score']['kpi13']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi13']}}</td>
                 </tr>
                 <tr>
                     <td>14</td>
-                    <td style="text-align: left">Levensduur (maanden)</td>
-                    <td>{{YearMonths::showYearMonths($scores['year1']['kpi14'])}}</td>
-                    <td>{{YearMonths::showYearMonths($scores['year2']['kpi14'])}}</td>
-                    <td>{{YearMonths::showYearMonths($scores['year3']['kpi14'])}}</td>
-                    <td>{{YearMonths::showYearMonths($scores['avg']['kpi14'])}}</td>
-                    <td class="lightgreen">{{YearMonths::showYearMonths($scores['avg_tot']['kpi14'])}}</td>
-                    <td>{{$scores['score']['kpi14']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi14']}}</td>
-                </tr>
-                <tr>
-                    <td>15</td>
                     <td style="text-align: left"> Sociaal-maatschappelijke activiteiten</td>
-                    <td colspan="4">{{$scores['avg']['kpi15']}}</td>
+                    <td colspan="4">{{$scores['avg']['kpi14']}}</td>
                     <td class="lightgreen">-</td>
-                    <td>{{$scores['score']['kpi15']}}</td>
-                    <td class="lightgreen">{{$scores['score_tot']['kpi15']}}</td>
+                    <td>{{$scores['weighted_score']['kpi14']}}</td>
+                    <td class="lightgreen">{{$scores['score_tot']['kpi14']}}</td>
                 </tr>
                 <tr>
                     <td colspan="7" style="border: 0; text-align: right">Totaal:</td>
@@ -415,7 +431,7 @@
                 </tr>
                 <tr>
                     <td style="border: 0;">&nbsp;</td>
-                    <td colspan="5" style="border: 0; text-align: left" class="disclaimer">Uitdraai op basis van de gegevens aangeleverd door u als melkveehouder, de Utrechtse agrarische collectieven en de gegevens uit de KringloopWijzer, op {{$date}}
+                    <td colspan="5" style="border: 0; text-align: left" class="disclaimer">Uitdraai op basis van de gegevens aangeleverd door u als melkveehouder, de agrarische collectieven en de gegevens uit de KringloopWijzer, op {{$date}}
                     </td>
                     <td colspan="3" style="border: 0;">&nbsp;</td>
                 </tr>
@@ -492,9 +508,18 @@
                     <td>{{$company_properties['kg_co2_per_ha']}}</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left">Grondsoort:</td>
-                    <td>{{$company_properties['grondsoort']}}</td>
+                    <td style="text-align: left">Stikstofbedrijfsoverschot:</td>
+                    <td>{{$company_properties['stikstofbedrijfsoverschot']}}</td>
                 </tr>
+                <tr>
+                    <td style="text-align: left">Bodembenutting stikstof:</td>
+                    <td>{{$company_properties['bodembenutting_stikstof']}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left">Bodembenutting fosfaat:</td>
+                    <td>{{$company_properties['bodembenutting_fosfaat']}}</td>
+                </tr>
+
             </table>
         </td>
     </tr>

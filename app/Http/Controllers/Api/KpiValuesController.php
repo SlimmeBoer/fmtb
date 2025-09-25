@@ -8,9 +8,9 @@ use App\Http\Requests\UpdateKpiValuesRequest;
 use App\Libraries\Monitor\KPICollector;
 use App\Libraries\Monitor\KPIScores;
 use App\Libraries\Monitor\KPITotals;
+use App\Models\Area;
 use App\Models\Company;
 use App\Models\Collective;
-use App\Models\CollectiveCompany;
 use App\Models\KpiValues;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -90,7 +90,7 @@ class KpiValuesController extends Controller
      */
     public function getscorescurrentcompany() : array
     {
-        $company = Company::where('brs',Auth::user()->brs)->first();
+        $company = Company::where('user_id',Auth::user()->id)->first();
 
         if (!$company) {
             return array("total" => ["score" => 0, "money" => 0]);
@@ -114,11 +114,8 @@ class KpiValuesController extends Controller
             $collective_id = Auth::user()->collectives()->first()->id;
         }
 
-        $companyIds = CollectiveCompany::where('collective_id', $collective_id)
-            ->pluck('company_id');
-
-        // Step 3: Get companies with klwDumps
-        $companies = Company::whereIn('id', $companyIds)
+        $companies = Collective::findOrFail($collective_id)
+            ->companies()
             ->has('klwDumps')
             ->get();
 
@@ -137,6 +134,38 @@ class KpiValuesController extends Controller
 
         $this->sortByPointsDesc($collectiveTotals);
         return $collectiveTotals;
+    }
+
+    public function getareascores($area_id) : array
+    {
+        $scores = new KPIScores();
+        $areaTotals = array();
+
+        // Gets data for a specific area by ID
+        if ($area_id == 0) {
+            $area_id = Auth::user()->areas()->first()->id;
+        }
+
+        $companies = Area::findOrFail($area_id)
+            ->companies()
+            ->has('klwDumps')
+            ->get();
+
+        foreach ($companies as $company)
+        {
+            $company_scores = $scores->getScores($company->id);
+            $companyArray = array($company->id => array (
+                'company_id' => $company->id,
+                'company_name' => $company->name,
+                'points' => $company_scores['total']['score'],
+                'money' => $company_scores['total']['money'],
+                'old_data'     => (bool) $company->old_data, // hier de boolean
+            ));
+            $areaTotals = array_merge($areaTotals, $companyArray);
+        }
+
+        $this->sortByPointsDesc($areaTotals);
+        return $areaTotals;
     }
 
 
@@ -191,13 +220,24 @@ class KpiValuesController extends Controller
         if ($collective_id == 0) {
             $collective_id = Auth::user()->collectives()->first()->id;
         }
-        return $totals->getTotals($collective_id);
+        return $totals->getTotalsCollective($collective_id);
+    }
+
+    public function totalsperkpiarea($area_id) : array
+    {
+        $totals = new KPITotals();
+
+        // Gets data for a specific collective by ID
+        if ($area_id == 0) {
+            $area_id = Auth::user()->areas()->first()->id;
+        }
+        return $totals->getTotalsArea($area_id);
     }
 
     public function totalsperkpi() : array
     {
         $totals = new KPITotals();
-        return $totals->getTotals(0);
+        return $totals->getTotalsCollective(0);
     }
 
 

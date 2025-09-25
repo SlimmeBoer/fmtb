@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->boolean('bio')->default(false);
             $table->boolean('data_compleet')->default(false);
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\AuthController;
 
 use App\Http\Controllers\Api\BbmAnlbPackageController;
@@ -53,6 +54,10 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/areas/index', [AreaController::class, 'index']);
+    Route::post('areas/update-weights', [AreaController::class, 'updateWeights']);
+    Route::get('areas/getbycompany/{company}', [AreaController::class, 'getByCompany']);
 
     Route::get('/companies/index', [CompanyController::class, 'index']);
     Route::get('/companies/anonymous', [CompanyController::class, 'anonymous']);
@@ -120,16 +125,20 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/kpi/getscores/{company}/', array(KpiValuesController::class, 'getscores'));
     Route::get('/kpi/getscorescurrentcompany', array(KpiValuesController::class, 'getscorescurrentcompany'));
     Route::get('/kpi/getcollectivescores/{collective}/', array(KpiValuesController::class, 'getcollectivescores'));
+    Route::get('/kpi/getareascores/{area}/', array(KpiValuesController::class, 'getareascores'));
     Route::get('/kpi/getallscores/', array(KpiValuesController::class, 'getallscores'));
     Route::get('/kpi/getallscoresanon/', array(KpiValuesController::class, 'getallscoresanon'));
     Route::get('/kpi/totalsperkpi/', array(KpiValuesController::class, 'totalsperkpi'));
     Route::get('/kpi/totalsperkpicollective/{collective}/', array(KpiValuesController::class, 'totalsperkpicollective'));
+    Route::get('/kpi/totalsperkpiarea/{area}/', array(KpiValuesController::class, 'totalsperkpiarea'));
 
     Route::get('/user/getcurrentrole', [UserController::class, 'getCurrentRole']);
     Route::get('/user/bylastname', [UserController::class, 'byLastName']);
     Route::get('/user/getusersincurrentcollective', [UserController::class, 'getUsersinCurrentCollective']);
     Route::get('/user/roles', [UserController::class, 'roles']);
+    Route::get('/user/getdropdown', [UserController::class, 'getDropDown']);
 
+    Route::apiResource('/areas', AreaController::class);
     Route::apiResource('/bbmcodes', BbmCodeController::class);
     Route::apiResource('/bbmkpi', BbmKpiController::class);
     Route::apiResource('/kpiscores', KpiScoreController::class);

@@ -102,8 +102,9 @@ export default function Admin_Users() {
                                 <TableCell>{t('users.header_id')}</TableCell>
                                 <TableCell>{t('users.header_full_name')}</TableCell>
                                 <TableCell>{t('users.header_email')}</TableCell>
-                                <TableCell>{t('users.header_brs')}</TableCell>
                                 <TableCell>{t('users.header_role')}</TableCell>
+                                <TableCell>{t('users.header_collective')}</TableCell>
+                                <TableCell>{t('users.header_area')}</TableCell>
                                 <TableCell>{t('users.header_actions')}</TableCell>
                             </TableRow>
                         </TableHead>
@@ -113,14 +114,15 @@ export default function Admin_Users() {
                                     key={u.id}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
-                                    <TableCell width="10%" component="th" scope="row">
+                                    <TableCell width="5%" component="th" scope="row">
                                         {u.id}
                                     </TableCell>
-                                    <TableCell width="25%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
+                                    <TableCell width="10%">{showFullName(u.first_name,u.middle_name,u.last_name)}</TableCell>
                                     <TableCell width="15%">{u.email}</TableCell>
-                                    <TableCell width="15%">{u.brs}</TableCell>
-                                    <TableCell width="15%">{u.role}</TableCell>
-                                    <TableCell width="20%">
+                                    <TableCell width="10%">{u.role}</TableCell>
+                                    <TableCell width="20%">{u.collectives.map(c => c.name).join(", ")}</TableCell>
+                                    <TableCell width="15%">{u.areas.map(a => a.name).join(", ")}</TableCell>
+                                    <TableCell width="10%">
                                         <IconButton onClick={() => handleClickOpen(u.id)} color="secondary" variant="outlined">
                                             <EditIcon/>
                                         </IconButton>
@@ -137,7 +139,7 @@ export default function Admin_Users() {
                 </TableContainer>}
                 <Dialog open={open}
                         PaperProps={{ style: {
-                                minHeight: '420px',
+                                minHeight: '600px;',
                                 minWidth: '580px',
                             }}}>
                     <UserForm id={user_id} onClose={closeHandler}/>

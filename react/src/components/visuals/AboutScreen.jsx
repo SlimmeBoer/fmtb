@@ -46,11 +46,11 @@ export default function AboutScreen() {
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 215,
-                                    width: 250,
+                                    width: 300,
+                                    pt: 7,
                                 }}
-                                alt="TNDB Logo"
-                                src="/images/logo_tndb.png"
+                                alt="SB Logo"
+                                src="/images/logo_sb.png"
                             />
                         </Grid>
                         <Grid size={{xs: 11, lg: 6}}>
@@ -63,8 +63,11 @@ export default function AboutScreen() {
                             <Typography component="h2" variant="body2" sx={{pt: 2}}>
                                 {t("about.description")}
                             </Typography>
-                            <Typography component="h2" variant="body2" sx={{pt: 2}}>
-                                {t("about.copyright")}
+                            <Typography component="h2" variant="body2" sx={{pt: 4}}>
+                                {t("about.disclaimer_1")}
+                            </Typography>
+                            <Typography component="h2" variant="body2" >
+                                {t("about.disclaimer_2")}
                             </Typography>
                         </Grid>
                         <Grid size={{xs: 1, lg: 1}}>

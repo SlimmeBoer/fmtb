@@ -17,6 +17,7 @@ import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import CropRotateIcon from "@mui/icons-material/CropRotate";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import NavigationIcon from "@mui/icons-material/Navigation";
 
 export default function BeheerderMenuContent() {
 
@@ -27,6 +28,7 @@ export default function BeheerderMenuContent() {
         {text: t("beheerder_menu.overview_total"), icon: <AnalyticsIcon/>, link: '/beheerder/scores/totaal'},
         {text: t("beheerder_menu.overview_collective"), icon: <AnalyticsIcon/>, link: '/beheerder/scores/collectief'},
         {text: t("beheerder_menu.overview_individual"), icon: <AnalyticsIcon/>, link: '/beheerder/scores/individueel'},
+        {text: t("beheerder_menu.overview_area"), icon: <AnalyticsIcon/>, link: '/beheerder/scores/gebied'},
         {text: t("beheerder_menu.confrontation_matrix"), icon: <ReportIcon/>, link: '/beheerder/matrix'},
     ];
 
@@ -41,6 +43,7 @@ export default function BeheerderMenuContent() {
         {text: t("beheerder_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/beheerder/settings/bbmkpis'},
         {text: t("beheerder_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/beheerder/settings/scangisanlb'},
         {text: t("beheerder_menu.kpi_criteria"), icon: <SettingsRoundedIcon/>, link: '/beheerder/settings/criteria'},
+        {text: t("beheerder_menu.area_weights"), icon: <NavigationIcon/>, link: '/beheerder/settings/areas'},
     ];
 
 

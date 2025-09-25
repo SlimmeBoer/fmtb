@@ -17,6 +17,7 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import CropRotateIcon from "@mui/icons-material/CropRotate";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import NavigationIcon from "@mui/icons-material/Navigation";
 
 export default function CollectiefMenuContent() {
 
@@ -40,6 +41,7 @@ export default function CollectiefMenuContent() {
         {text: t("collectief_menu.bbm_codes_kpis"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/bbmkpis'},
         {text: t("collectief_menu.scangis_anlb"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/scangisanlb'},
         {text: t("collectief_menu.kpi_criteria"), icon: <SettingsRoundedIcon/>, link: '/collectief/settings/criteria'},
+        {text: t("collectief_menu.area_weights"), icon: <NavigationIcon/>, link: '/collectief/settings/areas'},
     ];
 
     return (

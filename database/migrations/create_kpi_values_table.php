@@ -18,24 +18,27 @@ return new class extends Migration
             $table->integer("year");
             $table->float("kpi1a")->nullable();
             $table->float("kpi1b")->nullable();
-            $table->float("kpi2")->nullable();
+            $table->float("kpi2a")->nullable();
+            $table->float("kpi2b")->nullable();
+            $table->float("kpi2c")->nullable();
+            $table->float("kpi2d")->nullable();
             $table->float("kpi3")->nullable();
             $table->float("kpi4")->nullable();
-            $table->float("kpi5")->nullable();
+            $table->float("kpi5a")->nullable();
+            $table->float("kpi5b")->nullable();
+            $table->float("kpi5c")->nullable();
+            $table->float("kpi5d")->nullable();
             $table->float("kpi6a")->nullable();
             $table->float("kpi6b")->nullable();
             $table->float("kpi6c")->nullable();
-            $table->float("kpi6d")->nullable();
             $table->float("kpi7")->nullable();
             $table->float("kpi8")->nullable();
             $table->float("kpi9")->nullable();
-            $table->float("kpi10")->nullable();
             $table->float("kpi11")->nullable();
-            $table->float("kpi12")->nullable();
-            $table->float("kpi13a")->nullable();
-            $table->float("kpi13b")->nullable();
+            $table->float("kpi12a")->nullable();
+            $table->float("kpi12b")->nullable();
+            $table->float("kpi13")->nullable();
             $table->float("kpi14")->nullable();
-            $table->float("kpi15")->nullable();
         });
     }
 

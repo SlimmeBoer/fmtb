@@ -35,11 +35,17 @@ class Company extends Model
         'type',
         'bio',
         'data_compleet',
+        'user_id'
     ];
 
     public function collectives()
     {
         return $this->belongsToMany(Collective::class, 'collective_companies', 'company_id','collective_id');
+    }
+
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class, 'area_companies', 'company_id','area_id');
     }
 
     public function klwDumps()
@@ -50,6 +56,11 @@ class Company extends Model
     public function oldResultByBrs()
     {
         return $this->hasOne(OldResult::class, 'brs', 'brs');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected $appends = ['old_data']; // ← toevoegen

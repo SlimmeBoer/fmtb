@@ -70,6 +70,13 @@
     import Bedrijf_Unauthorized from "./views/bedrijf/Bedrijf_Unauthorized.jsx";
     import Admin_404 from "./views/admin/Admin_404.jsx";
     import Admin_Unauthorized from "./views/admin/Admin_Unauthorized.jsx";
+    import Admin_OverzichtGebied from "./views/admin/Admin_OverzichtGebied.jsx";
+    import Admin_AreaWeights from "./views/admin/Admin_AreaWeights.jsx";
+    import Provincie_AreaWeights from "./views/provincie/Provincie_AreaWeights.jsx";
+    import Beheerder_AreaWeights from "./views/beheerder/Beheerder_AreaWeights.jsx";
+    import Collectief_AreaWeights from "./views/collectief/Collectief_AreaWeights.jsx";
+    import Beheerder_OverzichtGebied from "./views/beheerder/Beheerder_OverzichtGebied.jsx";
+    import Provincie_OverzichtGebied from "./views/provincie/Provincie_OverzichtGebied.jsx";
 
     const router = createBrowserRouter([
         {
@@ -97,6 +104,14 @@
                         {
                             path: '/admin/overzicht/collectief/:id',
                             element: <Admin_OverzichtCollectief/>
+                        },
+                        {
+                            path: '/admin/overzicht/gebied',
+                            element: <Admin_OverzichtGebied/>
+                        },
+                        {
+                            path: '/admin/overzicht/gebied/:id',
+                            element: <Admin_OverzichtGebied/>
                         },
                         {
                             path: '/admin/overzicht/individueel',
@@ -133,6 +148,10 @@
                         {
                             path: '/admin/oldresults',
                             element: <Admin_OldResults />
+                        },
+                        {
+                            path: '/admin/settings/areas',
+                            element: <Admin_AreaWeights/>
                         },
                         {
                             path: '/admin/settings/bbmcodes',
@@ -219,12 +238,20 @@
                             element: <Provincie_OverzichtCollectief/>,
                         },
                         {
+                            path: '/provincie/scores/gebied',
+                            element: <Provincie_OverzichtGebied/>,
+                        },
+                        {
                             path: '/provincie/scores/individueel',
                             element: <Provincie_OverzichtIndividueel/>,
                         },
                         {
                             path: '/provincie/scores/individueel/:id',
                             element: <Provincie_OverzichtIndividueel/>
+                        },
+                        {
+                            path: '/provincie/settings/areas',
+                            element: <Provincie_AreaWeights/>
                         },
                         {
                             path: '/provincie/settings/bbmkpis',
@@ -277,6 +304,18 @@
                             element: <Beheerder_OverzichtCollectief/>,
                         },
                         {
+                            path: '/beheerder/scores/collectief/:id',
+                            element: <Beheerder_OverzichtCollectief/>,
+                        },
+                        {
+                            path: '/beheerder/scores/gebied',
+                            element: <Beheerder_OverzichtGebied/>,
+                        },
+                        {
+                            path: '/beheerder/scores/gebied/:id',
+                            element: <Beheerder_OverzichtGebied/>,
+                        },
+                        {
                             path: '/beheerder/scores/individueel',
                             element: <Beheerder_OverzichtIndividueel/>,
                         },
@@ -303,6 +342,10 @@
                         {
                             path: '/beheerder/gis/data',
                             element: <Beheerder_GISData/>,
+                        },
+                        {
+                            path: '/beheerder/settings/areas',
+                            element: <Beheerder_AreaWeights/>
                         },
                         {
                             path: '/beheerder/settings/bbmkpis',
@@ -373,6 +416,10 @@
                         {
                             path: '/collectief/gis/data',
                             element: <Collectief_GISData/>,
+                        },
+                        {
+                            path: '/collectief/settings/areas',
+                            element: <Collectief_AreaWeights/>
                         },
                         {
                             path: '/collectief/settings/bbmkpis',

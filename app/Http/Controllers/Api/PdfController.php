@@ -33,17 +33,21 @@ class PdfController extends Controller
         $data = [
             'title' => 'Paspoort FMTB',
             'company_data' => $company_data,
+            'collectieven_string' => $company_data->collectives()->pluck('name')->implode(', '),
+            'gebieden_string' => $company_data->areas()->pluck('name')->implode(', '),
             'company_properties' => $company_properties,
             'scores' => $scores,
             'date' => now()->format('d-m-Y'),
             'logos' => [
-                'umbb' => public_path('images/logo_umbb.png'),
-                'alblasserwaard' => public_path('images/logo_alblasserwaard.png'),
-                'eemland' => public_path('images/logo_eemland.png'),
-                'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
-                'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
-                'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
-                'provincie' => public_path('images/logo_provincie_utrecht.png'),
+                'provincie' => public_path('images/logo.png'),
+                'sudwestkust' => public_path('images/logo_sudwestkust.webp'),
+                'waadrane' => public_path('images/logo_waadrane.webp'),
+                'waddenvogels' => public_path('images/logo_waddenvogels.webp'),
+                'westergo' => public_path('images/logo_westergo.webp'),
+                'zuidoost' => public_path('images/logo_zuidoost.webp'),
+                'ilm' => public_path('images/logo_ilm.webp'),
+                'nfw' => public_path('images/logo_nfw.webp'),
+                'sb' => public_path('images/logo_sb.webp'),
                 ],
         ];
 
@@ -65,7 +69,7 @@ class PdfController extends Controller
      */
     public function generatePdfCurrentCompany()
     {
-        $company_data = Company::where('brs',Auth::user()->brs)->first();
+        $company_data = Company::where('user_id',Auth::user()->id)->first();
         $company_properties = CompanyProperties::where('company_id',$company_data->id)->first();
 
         $scores = new KPIScores();
@@ -78,16 +82,20 @@ class PdfController extends Controller
             'title' => 'Paspoort FMTB',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
+            'collectieven_string' => $company_data->collectives()->pluck('name')->implode(', '),
+            'gebieden_string' => $company_data->areas()->pluck('name')->implode(', '),
             'scores' => $scores,
             'date' => now()->format('d-m-Y'),
             'logos' => [
-                'umbb' => public_path('images/logo_umbb.png'),
-                'alblasserwaard' => public_path('images/logo_alblasserwaard.png'),
-                'eemland' => public_path('images/logo_eemland.png'),
-                'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
-                'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
-                'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
-                'provincie' => public_path('images/logo_provincie_utrecht.png'),
+                'provincie' => public_path('images/logo.png'),
+                'sudwestkust' => public_path('images/logo_sudwestkust.webp'),
+                'waadrane' => public_path('images/logo_waadrane.webp'),
+                'waddenvogels' => public_path('images/logo_waddenvogels.webp'),
+                'westergo' => public_path('images/logo_westergo.webp'),
+                'zuidoost' => public_path('images/logo_zuidoost.webp'),
+                'ilm' => public_path('images/logo_ilm.webp'),
+                'nfw' => public_path('images/logo_nfw.webp'),
+                'sb' => public_path('images/logo_sb.webp'),
             ],
         ];
 
@@ -110,7 +118,7 @@ class PdfController extends Controller
 */
     public function generatePdfCurrentCompanyConcept()
     {
-        $company_data = Company::where('brs',Auth::user()->brs)->first();
+        $company_data = Company::where('user_id',Auth::user()->id)->first();
         $company_properties = CompanyProperties::where('company_id',$company_data->id)->first();
 
         $scores = new KPIScores();
@@ -123,16 +131,20 @@ class PdfController extends Controller
             'title' => 'Conceptpaspoort FMTB',
             'company_data' => $company_data,
             'company_properties' => $company_properties,
+            'collectieven_string' => $company_data->collectives()->pluck('name')->implode(', '),
+            'gebieden_string' => $company_data->areas()->pluck('name')->implode(', '),
             'scores' => $scores,
             'date' => now()->format('d-m-Y'),
             'logos' => [
-                'umbb' => public_path('images/logo_umbb.png'),
-                'alblasserwaard' => public_path('images/logo_alblasserwaard.png'),
-                'eemland' => public_path('images/logo_eemland.png'),
-                'lopikerwaard' => public_path('images/logo_lopikerwaard.png'),
-                'rvv' => public_path('images/logo_rijn_vecht_venen.png'),
-                'utrecht_oost' => public_path('images/logo_utrecht_oost.png'),
-                'provincie' => public_path('images/logo_provincie_utrecht.png'),
+                'provincie' => public_path('images/logo.png'),
+                'sudwestkust' => public_path('images/logo_sudwestkust.webp'),
+                'waadrane' => public_path('images/logo_waadrane.webp'),
+                'waddenvogels' => public_path('images/logo_waddenvogels.webp'),
+                'westergo' => public_path('images/logo_westergo.webp'),
+                'zuidoost' => public_path('images/logo_zuidoost.webp'),
+                'ilm' => public_path('images/logo_ilm.webp'),
+                'nfw' => public_path('images/logo_nfw.webp'),
+                'sb' => public_path('images/logo_sb.webp'),
                 'watermark' => public_path('images/watermark_concept.png'),
             ],
         ];

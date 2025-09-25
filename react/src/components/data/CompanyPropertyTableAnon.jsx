@@ -50,6 +50,9 @@ export default function CompanyPropertyTableAnon(props) {
         g_co2_per_kg_meetmelk: '',
         kg_co2_per_ha: '',
         grondsoort: '',
+        stikstofbedrijfsoverschot: '',
+        bodembenutting_stikstof: '',
+        bodembenutting_fosfaat: '',
     };
 
     const fieldLabels = {
@@ -70,6 +73,9 @@ export default function CompanyPropertyTableAnon(props) {
         g_co2_per_kg_meetmelk: t("company_property_table.g_co2_per_kg_meetmelk"),
         kg_co2_per_ha: t("company_property_table.kg_co2_per_ha"),
         grondsoort: t("company_property_table.grondsoort"),
+        stikstofbedrijfsoverschot: t("company_property_table.stikstofbedrijfsoverschot"),
+        bodembenutting_stikstof: t("company_property_table.bodembenutting_stikstof"),
+        bodembenutting_fosfaat: t("company_property_table.bodembenutting_fosfaat"),
     };
     const fieldUnits = {
         opp_totaal: t("company_property_table_units.hectare"),
@@ -89,6 +95,9 @@ export default function CompanyPropertyTableAnon(props) {
         g_co2_per_kg_meetmelk: t("company_property_table_units.gram"),
         kg_co2_per_ha: t("company_property_table_units.kilogram"),
         grondsoort: t("company_property_table_units.nothing"),
+        stikstofbedrijfsoverschot: t("company_property_table_units.nothing"),
+        bodembenutting_stikstof: t("company_property_table_units.nothing"),
+        bodembenutting_fosfaat: t("company_property_table_units.nothing"),
     };
 
     const initialErrorState = Object.keys(initialFormState).reduce((acc, key) => {

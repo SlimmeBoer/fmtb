@@ -16,7 +16,6 @@ use App\Models\Setting;
 use App\Models\Signal;
 use App\Models\SystemLog;
 use App\Models\Collective;
-use App\Models\CollectiveCompany;
 use App\Models\CompanyProperties;
 use App\Models\KpiValues;
 use App\Models\User;
@@ -99,18 +98,10 @@ class CompanyController extends Controller
         $company->kvks = $kvk_string;
 
         // 3. Add collectieven
-        $collectief_companies = CollectiveCompany::where('company_id', $id)->get();
-        $collectieven_data = array();
-        foreach ($collectief_companies as $collectief_company) {
+        $company->collectieven = $company->collectives;
 
-            $collectief = Collective::where('id', $collectief_company->collective_id)->first();
-            $collectieven_data[] = array(
-                'id' => $collectief->id,
-                'name' => $collectief->name,
-            );
-        }
-
-        $company->collectieven = $collectieven_data;
+        // 3. Add collectieven
+        $company->gebieden = $company->areas;
 
         return $company;
     }
@@ -234,7 +225,7 @@ class CompanyController extends Controller
                 $kpivalues = KpiValues::where('company_id', $company->id)->get();
                 $action_set = false;
                 foreach ($kpivalues as $ukv) {
-                    if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set) {
+                    if (!$ukv->kpi11 && !$ukv->kpi12a && !$ukv->kpi12b && !$action_set) {
                         $actions[] = "NatuurKPI's zijn niet ingevuld.";
                         $action_set = true;
                     }
@@ -248,11 +239,11 @@ class CompanyController extends Controller
                 }
 
                 // 3. SMA's zijn niet ingevuld
-                if (($company_properties->website == 0 && $company_properties->ontvangstruimte == 0 &&
+                if (($company_properties->ontvangstruimte == 0 &&
                     $company_properties->winkel == 0 && $company_properties->educatie == 0 &&
                     $company_properties->meerjarige_monitoring == 0 && $company_properties->open_dagen == 0 &&
                     $company_properties->wandelpad == 0 && $company_properties->erkend_demobedrijf == 0 &&
-                    $company_properties->bed_and_breakfast == 0) && $company_properties->geen_sma == 0) {
+                    $company_properties->bedrijfsgebonden_recreatie == 0) && $company_properties->geen_sma == 0) {
 
                     $actions[] = "Sociaal-maatschappelijke activiteiten nog niet ingevuld.";
                 }
@@ -293,7 +284,7 @@ class CompanyController extends Controller
             $kpivalues = KpiValues::where('company_id', $company->id)->get();
             $action_set = false;
             foreach ($kpivalues as $ukv) {
-                if (!$ukv->kpi10 && !$ukv->kpi11 && !$ukv->kpi12 && !$action_set) {
+                if (!$ukv->kpi11 && !$ukv->kpi12a && !$ukv->kpi12b && !$action_set) {
                     $actions[] = "NatuurKPI's zijn niet ingevuld.";
                     $action_set = true;
                 }
@@ -307,11 +298,11 @@ class CompanyController extends Controller
             }
 
             // 3. SMA's zijn niet ingevuld
-            if (($company_properties->website == 0 && $company_properties->ontvangstruimte == 0 &&
+            if (($company_properties->ontvangstruimte == 0 &&
                 $company_properties->winkel == 0 && $company_properties->educatie == 0 &&
                 $company_properties->meerjarige_monitoring == 0 && $company_properties->open_dagen == 0 &&
                 $company_properties->wandelpad == 0 && $company_properties->erkend_demobedrijf == 0 &&
-                $company_properties->bed_and_breakfast == 0) && $company_properties->geen_sma == 0) {
+                $company_properties->bedrijfsgebonden_recreatie == 0) && $company_properties->geen_sma == 0) {
 
                 $actions[] = "Sociaal-maatschappelijke activiteiten nog niet ingevuld.";
             }
@@ -392,18 +383,18 @@ class CompanyController extends Controller
             }
 
             // 3. SMA's zijn niet ingevuld
-            if (($company_properties->website == 1 || $company_properties->ontvangstruimte == 1 ||
+            if (($company_properties->ontvangstruimte == 1 ||
                 $company_properties->winkel == 1 || $company_properties->educatie == 1 ||
                 $company_properties->meerjarige_monitoring == 1 || $company_properties->open_dagen == 1 ||
                 $company_properties->wandelpad == 1 || $company_properties->erkend_demobedrijf == 1 ||
-                $company_properties->bed_and_breakfast == 1) || $company_properties->geen_sma == 1) {
+                $company_properties->bedrijfsgebonden_recreatie == 1) || $company_properties->geen_sma == 1) {
                 $company_data["total_sma_completed"] += 1;
             }
 
             // 4. NatuurKPI's niet compleet.
             $kpivalues = KpiValues::where('company_id', $company->id)->orderBy('year', 'DESC')->first();
 
-            if ($kpivalues && ($kpivalues->kpi10 != 0 || $kpivalues->kpi11 != 0 || $kpivalues->kpi12 != 0)) {
+            if ($kpivalues && ($kpivalues->kpi11 != 0 || $kpivalues->kpi12a != 0 || $kpivalues->kpi12b != 0)) {
                 $company_data["total_kpi_completed"] += 1;
             }
 
@@ -472,16 +463,13 @@ class CompanyController extends Controller
         //1. Delete KPI-values for the corresponding company
         KpiValues::where('company_id', $company->id)->delete();
 
-        // 2. Remove all connections to collectives
-        CollectiveCompany::where('company_id', $company->id)->delete();
-
-        // 3. Remove all KVK-numbers associated to this company
+        // 2. Remove all KVK-numbers associated to this company
         KvkNumber::where('company_id', $company->id)->delete();
 
-        // 4. Delete company properties for the corresponding company
+        // 3. Delete company properties for the corresponding company
         CompanyProperties::where('company_id', $company->id)->delete();
 
-        // 5. Get all dumps for this company
+        // 4. Get all dumps for this company
         $dumps = KlwDump::where('company_id', $company->id)->get();
 
         foreach ($dumps as $dump) {
@@ -526,7 +514,7 @@ class CompanyController extends Controller
     public function getPublishedCompleted()
     {
         // Get company completion status
-        $company = Company::where('brs',Auth::user()->brs)->first();
+        $company = Company::where('user_id',Auth::user()->id)->first();
         $data_compleet = false;
         $company_id = 0;
 
@@ -550,7 +538,7 @@ class CompanyController extends Controller
      */
     public function saveData(Request $request) : Response
     {
-        $company = Company::where('brs',Auth::user()->brs)->first();
+        $company = Company::where('user_id',Auth::user()->id)->first();
 
         if (!$company) {
             return response('Bedrijf niet gevonden', 500);
@@ -590,11 +578,9 @@ class CompanyController extends Controller
         $userCollectiveIds = $user->collectives()->pluck('collectives.id');
 
         // Check if the company is linked to any of the user's collectives
-        $data = CollectiveCompany::where('company_id', $company->id)
-            ->whereIn('collective_id', $userCollectiveIds)
-            ->value('collective_id');
-
-        $result = ($data !== null);
+        $result = $company->collectives()
+            ->whereIn('collectives.id', $userCollectiveIds)
+            ->exists();
 
         return response()->json(['allowed' => $result]);
     }

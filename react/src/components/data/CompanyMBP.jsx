@@ -60,8 +60,6 @@ export default function CompanyMBP(props) {
         {value: 5, title: t("mbp.5"),},
         {value: 6, title: t("mbp.6"),},
         {value: 7, title: t("mbp.7"),},
-        {value: 8, title: t("mbp.8"),},
-        {value: 9, title: t("mbp.9"),},
     ];
 
     return (

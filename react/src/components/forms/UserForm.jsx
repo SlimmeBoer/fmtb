@@ -11,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import {resetErrorData, setErrorData} from "../../helpers/ErrorData.js";
 import CenteredLoading from "../visuals/CenteredLoading.jsx";
 import RolePicker from "./RolePicker.jsx";
+import CollectivePicker from "./CollectivePicker.jsx";
+import AreaPicker from "./AreaPicker.jsx";
 
 export default function UserForm(props) {
     const [loading, setLoading] = useState(false);
@@ -25,6 +27,8 @@ export default function UserForm(props) {
         password: '',
         password_confirmation: '',
         role_id: '',
+        area_id: '',
+        collective_id: '',
     })
     const [formErrors, setFormErrors] = useState({
         first_name: {errorstatus: false, helperText: ''},
@@ -35,12 +39,20 @@ export default function UserForm(props) {
         password: {errorstatus: false, helperText: ''},
         password_confirmation: {errorstatus: false, helperText: ''},
         role_id: {errorstatus: false, helperText: ''},
+        area_id: {errorstatus: false, helperText: ''},
+        collective_id: {errorstatus: false, helperText: ''},
     });
 
     const {t} = useTranslation();
 
-    const handleChange = (e) => {
+    const handleRoleChange = (e) => {
         setUser({...user, role_id: e.target.value}); // Change `id` state based on user input or actions
+    };
+    const handleAreaChange = (e) => {
+        setUser({...user, area_id: e.target.value}); // Change `id` state based on user input or actions
+    };
+    const handleCollectiveChange = (e) => {
+        setUser({...user, collective_id: e.target.value}); // Change `id` state based on user input or actions
     };
 
     if (props.id !== 0) {
@@ -138,12 +150,6 @@ export default function UserForm(props) {
                                            style={{width: 518}}
                                            error={formErrors.email.errorstatus}
                                            helperText={formErrors.email.helperText}/>
-                                <TextField value={user.brs}
-                                           onChange={ev => setUser({...user, brs: ev.target.value})}
-                                           label={t('user_form.brs')} variant="outlined" margin="dense"
-                                           style={{width: 518}}
-                                           error={formErrors.brs.errorstatus}
-                                           helperText={formErrors.brs.helperText}/>
                                 <TextField onChange={ev => setUser({...user, password: ev.target.value})}
                                            type="password"
                                            autoComplete="on"
@@ -159,7 +165,9 @@ export default function UserForm(props) {
                                            error={formErrors.password_confirmation.errorstatus}
                                            helperText={formErrors.password_confirmation.helperText}/>
 
-                                <RolePicker role={user.role_id} changeHandler={handleChange}/>
+                                <RolePicker role={user.role_id} changeHandler={handleRoleChange}/>
+                                <CollectivePicker collective={user.collective_id} changeHandler={handleCollectiveChange}/>
+                                <AreaPicker area={user.area_id} changeHandler={handleAreaChange}/>
                                 <br/>&nbsp;<br/>
                                 {user.id && (
                                     <Button onClick={() => setUser({...user, _method: 'put'})}

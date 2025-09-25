@@ -17,11 +17,10 @@ use App\Models\KvkNumber;
 use App\Models\RawFile;
 use App\Models\Signal;
 use App\Models\SystemLog;
-use App\Models\CollectiveCompany;
-use App\Models\CollectivePostalcode;
 use App\Models\CompanyProperties;
 use App\Models\KpiValues;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +72,7 @@ class KlwDumpController extends Controller
      */
     public function currentcompany()
     {
-        $company = Company::where('brs',Auth::user()->brs)->first();
+        $company = Company::where('user_id',Auth::user()->id)->first();
 
         if ($company)
         {
@@ -175,16 +174,13 @@ class KlwDumpController extends Controller
                 //1. Delete KPI-values for the corresponding company
                 KpiValues::where('company_id', $company->id)->delete();
 
-                // 2. Remove all connections to collectives
-                CollectiveCompany::where('company_id', $company->id)->delete();
-
-                // 3. Remove all KVK-numbers associated to this company
+                // 2. Remove all KVK-numbers associated to this company
                 KvkNumber::where('company_id', $company->id)->delete();
 
-                // 4. Delete company properties for the corresponding company
+                // 3. Delete company properties for the corresponding company
                 CompanyProperties::where('company_id', $company->id)->delete();
 
-                // 5. Log
+                // 4. Log
                 SystemLog::create(array(
                     'user_id' => Auth::user()->id,
                     'type' => 'DELETE',
@@ -222,6 +218,10 @@ class KlwDumpController extends Controller
                 // 1. Store the company as a new one (if it not exists yet)
                 $company = Company::firstOrNew(['ubn' => $companyData['ubn']]);
 
+                $targetUser = $request->filled('user_id')
+                    ? User::findOrFail((int) $request->input('user_id'))
+                    : auth()->user();
+
                 $company->name = $companyData['name'];
                 $company->address = $companyData['address'];
                 $company->postal_code = $companyData['postal_code'];
@@ -230,6 +230,7 @@ class KlwDumpController extends Controller
                 $company->brs = $companyData['brs'];
                 $company->type = $companyData['type'];
                 $company->bio = $companyData['bio'];
+                $company->user_id = $targetUser->id;
                 $company->save();
 
                 // Log
@@ -241,36 +242,32 @@ class KlwDumpController extends Controller
                     ));
                 }
 
-                // 2. Connect the company to an existing collective
-                $ucpc = CollectivePostalcode::where('postal_code', $company->postal_code)->first();
+                // 2. Connect the company to an existing collective (only if company did not exist)
+                $collective_id = optional(
+                    $targetUser?->collectives()->select('collectives.id')->first()
+                )->id ?? 99;
 
-                if ($ucpc) {
-                    $collective_id = $ucpc->collective_id;
-                }
-                else {
-                    $collective_id = 99;
-                }
-
-                try {
-                    $company_collective = CollectiveCompany::firstOrCreate(array(
-                        'company_id' => $company->id,
-                        'collective_id' => $collective_id,
-                    ));
-                } catch (\Illuminate\Database\QueryException $e) {
-                    // If a duplicate entry error occurs, retrieve the existing record
-                    $company_collective = CollectiveCompany::where(array(
-                        'company_id' => $company->id,
-                        'collective_id' => $collective_id,
-                    ))->first();
+                if (! $company->collectives()->whereKey($collective_id)->exists()) {
+                    $company->collectives()->attach($collective_id);
                 }
 
-                // 3. Save KVK-number as separate record
+                // 3. Connect the company to an existing area (only if company did not exist)
+                $area_id = optional(
+                    $targetUser?->areas()->select('areas.id')->first()
+                )->id ?? 99;
+
+                if (! $company->areas()->whereKey($area_id)->exists()) {
+                    $company->areas()->attach($area_id);
+                }
+
+
+                // 4. Save KVK-number as separate record
                 try {
                     $kvkNr = KvkNumber::firstOrCreate(array(
                         'kvk' => $klwParser->getKVK($file),
                         'company_id' => $company->id,
                     ));
-                } catch (\Illuminate\Database\QueryException $e) {
+                } catch (QueryException $e) {
                     // If a duplicate entry error occurs, retrieve the existing record
                     $kvkNr = KvkNumber::where(array(
                         'kvk' => $klwParser->getKVK($file),
@@ -282,7 +279,7 @@ class KlwDumpController extends Controller
                 $uniqueId = uniqid();
                 $newFileName = 'klw_' . $company->id . '_' . $uniqueId . '_' . $originalName;
 
-                // 4. Store the dump metadata
+                // 5. Store the dump metadata
                 $klwDump = KlwDump::firstOrCreate(array(
                     'company_id' => $company->id,
                     'year' => $klwParser->getYear($file),
@@ -290,13 +287,13 @@ class KlwDumpController extends Controller
                 $klwDump->filename = $newFileName;
                 $klwDump->save();
 
-                // 5. Store all fields and their values into the database.
+                // 6. Store all fields and their values into the database.
                 $fieldsParsed = $klwParser->importFields($file, $klwDump->id, $klwParser->getYear($file), $company->id, true);
 
-                // 6. Import signals
+                // 7. Import signals
                 $signalsParsed = $klwParser->importSignals($file, $klwDump->id, $klwParser->getYear($file), $company->id);
 
-                // 7. Log
+                // 8. Log
                 SystemLog::create(array(
                     'user_id' => Auth::user()->id,
                     'type' => 'CREATE',
@@ -365,40 +362,58 @@ class KlwDumpController extends Controller
      */
     public function dumpscollective()
     {
-        $user = User::where('id', Auth::id())
-            ->with([
-                // Voeg old_data toe op companies
-                'collectives.companies' => fn ($q) =>
-                $q->withExists(['oldResultByBrs as old_data']),
+        $authUser = auth()->user();
 
-                // Laad klwDumps + signals_count
-                'collectives.companies.klwDumps' => fn ($q) =>
-                $q->withCount('signals'),
-            ])
-            ->first();
+        // Pak de "eerste" collective van de ingelogde user
+        $firstCollective = $authUser?->collectives()->orderBy('id')->first();
 
-        if (!$user) {
-            return ['companies' => [], 'klw_dumps' => []];
+        if (!$firstCollective) {
+            // Geen collective bij ingelogde user: niets te matchen
+            return response()->json([
+                'users'    => collect(), // lege collectie voor consistentie
+                'klwDumps' => [],
+            ]);
         }
 
-        $companies = [];
+        $collectiveId = $firstCollective->id;
+
+        // Haal alleen users met rol 'bedrijf' binnen die óók in hetzelfde (eerste) collective zitten
+        $users = User::query()
+            ->role('bedrijf') // Spatie Laravel Permission
+            ->whereHas('collectives', function ($q) use ($collectiveId) {
+                $q->where('collectives.id', $collectiveId);
+            })
+            ->with([
+                'company' => function ($q) {
+                    $q->withExists(['oldResultByBrs as old_data'])
+                        ->with([
+                            'klwDumps' => fn ($dumps) => $dumps->withCount('signals'),
+                        ]);
+                },
+            ])
+            ->get();
+
+        // Flatten alle klwDumps (alleen voor users die wél een company hebben)
         $klwDumps = [];
 
-        foreach ($user->collectives as $collective) {
-            foreach ($collective->companies as $company) {
-                $companies[] = $company; // Collect company data
+        foreach ($users as $user) {
+            $company = $user->company; // kan null zijn
+            if (!$company) {
+                continue; // sla users zonder company over voor klwDumps
+            }
 
-                foreach ($company->klwDumps as $klwDump) {
-                    // Convert KlwDump to array and add only the signal count
-                    $klwDumps[] = array_merge($klwDump->toArray(), [
-                        'signal_count' => $klwDump->signals_count, // signals_count comes from withCount()
-                    ]);
-                }
+            foreach ($company->klwDumps as $klwDump) {
+                $klwDumps[] = array_merge($klwDump->toArray(), [
+                    'signal_count' => $klwDump->signals_count, // uit withCount()
+                    'user_id'      => $user->id,
+                    'company_id'   => $company->id,
+                    'old_data'     => (bool) $company->old_data,
+                ]);
             }
         }
 
         return response()->json([
-            'companies' => $companies,
+            'users'    => $users,
             'klwDumps' => $klwDumps,
         ]);
     }
@@ -409,29 +424,41 @@ class KlwDumpController extends Controller
      */
     public function getAllDumps()
     {
-        // Get all companies with their associated klwDumps and signal count
-        $companies = Company::query()
+        $users = User::query()
+            ->role('bedrijf') // alleen users met rol 'bedrijf'
             ->with([
-                'klwDumps' => fn ($q) => $q->withCount('signals'),
+                'company' => function ($q) {
+                    $q->withExists(['oldResultByBrs as old_data'])
+                        ->with([
+                            'klwDumps' => fn ($dumps) => $dumps->withCount('signals'),
+                        ]);
+                },
             ])
-            ->withExists(['oldResultByBrs as old_data'])
             ->get();
 
         $klwDumps = [];
 
-        // Extract klwDumps and include signal count
-        foreach ($companies as $company) {
+        foreach ($users as $user) {
+            $company = $user->company;
+            if (!$company) {
+                continue;
+            }
+
             foreach ($company->klwDumps as $klwDump) {
                 $klwDumps[] = array_merge($klwDump->toArray(), [
-                    'signal_count' => $klwDump->signals_count, // signals_count comes from withCount()
+                    'signal_count' => $klwDump->signals_count,
+                    'user_id'      => $user->id,
+                    'company_id'   => $company->id,
+                    'old_data'     => (bool) $company->old_data,
                 ]);
             }
         }
 
         return response()->json([
-            'companies' => $companies,
+            'users'    => $users,
             'klwDumps' => $klwDumps,
         ]);
     }
+
 
 }

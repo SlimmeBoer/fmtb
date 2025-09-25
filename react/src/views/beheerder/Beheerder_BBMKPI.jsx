@@ -30,17 +30,17 @@ export default function Beheerder_BBMKPI() {
             >
                 {/* KPI 10 */}
                 <Grid size={{xs: 12, md: 6, lg: 4}}>
-                    <BBMKPICard kpi={10} title={t('kpis.10')} bgcolor={'#fff2cc'} />
+                    <BBMKPICard kpi={"11"} title={t('kpis.11')} bgcolor={'#fff2cc'} />
                 </Grid>
 
                 {/* KPI 11 */}
                 <Grid size={{xs: 12, md: 6, lg: 4}}>
-                    <BBMKPICard kpi={11} title={t('kpis.11')} bgcolor={'#e2efda'} />
+                    <BBMKPICard kpi={"12a"} title={t('kpis.12a')} bgcolor={'#e2efda'} />
                 </Grid>
 
                 {/* KPI 12 */}
                 <Grid size={{xs: 12, md: 6, lg: 4}}>
-                    <BBMKPICard kpi={12} title={t('kpis.12')} bgcolor={'#ddebf7'} />
+                    <BBMKPICard kpi={"12b"} title={t('kpis.12b')} bgcolor={'#ddebf7'} />
                 </Grid>
             </Grid>
         </Box>

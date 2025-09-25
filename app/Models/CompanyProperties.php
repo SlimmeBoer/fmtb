@@ -21,7 +21,6 @@ class CompanyProperties extends Model
         'company_id',
         'year',
         'mbp',
-        'website',
         'ontvangstruimte',
         'winkel',
         'educatie',
@@ -29,7 +28,7 @@ class CompanyProperties extends Model
         'open_dagen',
         'wandelpad',
         'erkend_demobedrijf',
-        'bed_and_breakfast',
+        'bedrijfsgebonden_recreatie',
         'zorg',
         'geen_sma',
         'opp_totaal',
@@ -49,5 +48,9 @@ class CompanyProperties extends Model
         'g_co2_per_kg_meetmelk',
         'kg_co2_per_ha',
         'grondsoort',
+        'grondsoort_dominant',
+        'stikstofbedrijfsoverschot',
+        'bodembenutting_stikstof',
+        'bodembenutting_fosfaat',
     ];
 }

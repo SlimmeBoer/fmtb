@@ -23,7 +23,7 @@ class StoreBbmKpiRequest extends FormRequest
     {
         return [
             'code_id' => 'required|integer',
-            'kpi' => 'required|integer',
+            'kpi' => 'required|string',
         ];
     }
 }

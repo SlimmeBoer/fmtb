@@ -31,6 +31,7 @@ import OldDataUploader from "../forms/OldDataUploader.jsx";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import TrendDisplay from "./TrendDisplay.jsx";
+import AreaWeightPopup from "../visuals/AreaWeightPopup.jsx";
 
 export default function KPITable(props) {
     const [kpi, setKPI] = useState({});
@@ -104,22 +105,69 @@ export default function KPITable(props) {
             avg_col_2: data.avg_col.kpi1b,
             avg_tot_2: data.avg_tot.kpi1b,
             score: data.score.kpi1b,
+            score_weighted: data.weighted_score.kpi1b,
             score_col: data.score_col.kpi1b,
             score_tot: data.score_tot.kpi1b,
         },
         {
-            text: t("kpis.2"),
+            text: t("kpis.2a"),
             color: 'black',
             type: 'normal',
-            year1: data.year1.kpi2,
-            year2: data.year2.kpi2,
-            year3: data.year3.kpi2,
-            avg: data.avg.kpi2,
-            avg_col: data.avg_col.kpi2,
-            avg_tot: data.avg_tot.kpi2,
-            score: data.score.kpi2,
-            score_col: data.score_col.kpi2,
-            score_tot: data.score_tot.kpi2,
+            year1: data.year1.kpi2a,
+            year2: data.year2.kpi2a,
+            year3: data.year3.kpi2a,
+            avg: data.avg.kpi2a,
+            avg_col: data.avg_col.kpi2a,
+            avg_tot: data.avg_tot.kpi2a,
+            score: data.score.kpi2a,
+            score_weighted: data.weighted_score.kpi2a,
+            score_col: data.score_col.kpi2a,
+            score_tot: data.score_tot.kpi2a,
+        },
+        {
+            text: t("kpis.2b"),
+            color: 'black',
+            type: 'normal',
+            year1: data.year1.kpi2b,
+            year2: data.year2.kpi2b,
+            year3: data.year3.kpi2b,
+            avg: data.avg.kpi2b,
+            avg_col: data.avg_col.kpi2b,
+            avg_tot: data.avg_tot.kpi2b,
+            score: data.score.kpi2b,
+            score_weighted: data.weighted_score.kpi2b,
+            score_col: data.score_col.kpi2b,
+            score_tot: data.score_tot.kpi2b,
+        },
+        {
+            text: t("kpis.2c"),
+            color: 'black',
+            type: 'normal',
+            year1: data.year1.kpi2c,
+            year2: data.year2.kpi2c,
+            year3: data.year3.kpi2c,
+            avg: data.avg.kpi2c,
+            avg_col: data.avg_col.kpi2c,
+            avg_tot: data.avg_tot.kpi2c,
+            score: data.score.kpi2c,
+            score_weighted: data.weighted_score.kpi2c,
+            score_col: data.score_col.kpi2c,
+            score_tot: data.score_tot.kpi2c,
+        },
+        {
+            text: t("kpis.2d"),
+            color: 'black',
+            type: 'normal',
+            year1: data.year1.kpi2d,
+            year2: data.year2.kpi2d,
+            year3: data.year3.kpi2d,
+            avg: data.avg.kpi2d,
+            avg_col: data.avg_col.kpi2d,
+            avg_tot: data.avg_tot.kpi2d,
+            score: data.score.kpi2d,
+            score_weighted: data.weighted_score.kpi2d,
+            score_col: data.score_col.kpi2d,
+            score_tot: data.score_tot.kpi2a,
         },
         {
             text: t("kpis.3"),
@@ -132,6 +180,7 @@ export default function KPITable(props) {
             avg_col: data.avg_col.kpi3,
             avg_tot: data.avg_tot.kpi3,
             score: data.score.kpi3,
+            score_weighted: data.weighted_score.kpi3,
             score_col: data.score_col.kpi3,
             score_tot: data.score_tot.kpi3,
         },
@@ -146,65 +195,98 @@ export default function KPITable(props) {
             avg_col: data.avg_col.kpi4,
             avg_tot: data.avg_tot.kpi4,
             score: data.score.kpi4,
+            score_weighted: data.weighted_score.kpi4,
             score_col: data.score_col.kpi4,
             score_tot: data.score_tot.kpi4,
         },
         {
-            text: t("kpis.5"),
-            color: 'black',
-            type: 'normal',
-            year1: data.year1.kpi5,
-            year2: data.year2.kpi5,
-            year3: data.year3.kpi5,
-            avg: data.avg.kpi5,
-            avg_col: data.avg_col.kpi5,
-            avg_tot: data.avg_tot.kpi5,
-            score: data.score.kpi5,
-            score_col: data.score_col.kpi5,
-            score_tot: data.score_tot.kpi5,
-        },
-        {
-            text_1: t("kpis.6a"),
-            text_2: t("kpis.6b"),
-            text_3: t("kpis.6c"),
-            text_4: t("kpis.6d"),
+            text_1: t("kpis.5a"),
+            text_2: t("kpis.5b"),
+            text_3: t("kpis.5c"),
+            text_4: t("kpis.5d"),
             color_1: 'grey',
             color_2: 'black',
             color_3: 'grey',
             color_4: 'grey',
             type: 'quad',
-            year1_1: data.year1.kpi6a,
-            year2_1: data.year2.kpi6a,
-            year3_1: data.year3.kpi6a,
-            year1_2: data.year1.kpi6b,
-            year2_2: data.year2.kpi6b,
-            year3_2: data.year3.kpi6b,
-            year1_3: data.year1.kpi6c,
-            year2_3: data.year2.kpi6c,
-            year3_3: data.year3.kpi6c,
-            year1_4: data.year1.kpi6d,
-            year2_4: data.year2.kpi6d,
-            year3_4: data.year3.kpi6d,
-            avg_1: data.avg.kpi6a,
-            avg_col_1: data.avg_col.kpi6a,
-            avg_tot_1: data.avg_tot.kpi6a,
-            avg_2: data.avg.kpi6b,
-            avg_col_2: data.avg_col.kpi6b,
-            avg_tot_2: data.avg_tot.kpi6b,
-            avg_3: data.avg.kpi6c,
-            avg_col_3: data.avg_col.kpi6c,
-            avg_tot_3: data.avg_tot.kpi6c,
-            avg_4: data.avg.kpi6d,
-            avg_col_4: data.avg_col.kpi6d,
-            avg_tot_4: data.avg_tot.kpi6d,
+            year1_1: data.year1.kpi5a,
+            year2_1: data.year2.kpi5a,
+            year3_1: data.year3.kpi5a,
+            year1_2: data.year1.kpi5b,
+            year2_2: data.year2.kpi5b,
+            year3_2: data.year3.kpi5b,
+            year1_3: data.year1.kpi5c,
+            year2_3: data.year2.kpi5c,
+            year3_3: data.year3.kpi5c,
+            year1_4: data.year1.kpi5d,
+            year2_4: data.year2.kpi5d,
+            year3_4: data.year3.kpi5d,
+            avg_1: data.avg.kpi5a,
+            avg_col_1: data.avg_col.kpi5a,
+            avg_tot_1: data.avg_tot.kpi5a,
+            avg_2: data.avg.kpi5b,
+            avg_col_2: data.avg_col.kpi5b,
+            avg_tot_2: data.avg_tot.kpi5b,
+            avg_3: data.avg.kpi5c,
+            avg_col_3: data.avg_col.kpi5c,
+            avg_tot_3: data.avg_tot.kpi5c,
+            avg_4: data.avg.kpi5d,
+            avg_col_4: data.avg_col.kpi5d,
+            avg_tot_4: data.avg_tot.kpi5d,
+            score: data.score.kpi5b,
+            score_weighted: data.weighted_score.kpi5b,
+            score_col: data.score_col.kpi5b,
+            score_tot: data.score_tot.kpi5b,
+        },
+        {
+            text: t("kpis.6a"),
+            color: 'black',
+            type: 'normal',
+            year1: data.year1.kpi6a,
+            year2: data.year2.kpi6a,
+            year3: data.year3.kpi6a,
+            avg: data.avg.kpi6a,
+            avg_col: data.avg_col.kpi6a,
+            avg_tot: data.avg_tot.kpi6a,
+            score: data.score.kpi6a,
+            score_weighted: data.weighted_score.kpi6a,
+            score_col: data.score_col.kpi6a,
+            score_tot: data.score_tot.kpi6a,
+        },
+        {
+            text: t("kpis.6b"),
+            color: 'black',
+            type: 'normal',
+            year1: data.year1.kpi6b,
+            year2: data.year2.kpi6b,
+            year3: data.year3.kpi6b,
+            avg: data.avg.kpi6b,
+            avg_col: data.avg_col.kpi6b,
+            avg_tot: data.avg_tot.kpi6b,
             score: data.score.kpi6b,
+            score_weighted: data.weighted_score.kpi6b,
             score_col: data.score_col.kpi6b,
             score_tot: data.score_tot.kpi6b,
         },
         {
-            text: t("kpis.7"),
+            text: t("kpis.6c"),
             color: 'black',
             type: 'normal',
+            year1: data.year1.kpi6c,
+            year2: data.year2.kpi6c,
+            year3: data.year3.kpi6c,
+            avg: data.avg.kpi6c,
+            avg_col: data.avg_col.kpi6c,
+            avg_tot: data.avg_tot.kpi6c,
+            score: data.score.kpi6c,
+            score_weighted: data.weighted_score.kpi6c,
+            score_col: data.score_col.kpi6c,
+            score_tot: data.score_tot.kpi6c,
+        },
+        {
+            text: t("kpis.7"),
+            color: 'black',
+            type: '4-wide',
             year1: data.year1.kpi7,
             year2: data.year2.kpi7,
             year3: data.year3.kpi7,
@@ -212,13 +294,14 @@ export default function KPITable(props) {
             avg_col: data.avg_col.kpi7,
             avg_tot: data.avg_tot.kpi7,
             score: data.score.kpi7,
+            score_weighted: data.weighted_score.kpi7,
             score_col: data.score_col.kpi7,
             score_tot: data.score_tot.kpi7,
         },
         {
             text: t("kpis.8"),
             color: 'black',
-            type: '4-wide',
+            type: 'normal',
             year1: data.year1.kpi8,
             year2: data.year2.kpi8,
             year3: data.year3.kpi8,
@@ -226,6 +309,7 @@ export default function KPITable(props) {
             avg_col: data.avg_col.kpi8,
             avg_tot: data.avg_tot.kpi8,
             score: data.score.kpi8,
+            score_weighted: data.weighted_score.kpi8,
             score_col: data.score_col.kpi8,
             score_tot: data.score_tot.kpi8,
         },
@@ -240,22 +324,9 @@ export default function KPITable(props) {
             avg_col: data.avg_col.kpi9 + "%",
             avg_tot: data.avg_tot.kpi9 + "%",
             score: data.score.kpi9,
+            score_weighted: data.weighted_score.kpi9,
             score_col: data.score_col.kpi9,
             score_tot: data.score_tot.kpi9,
-        },
-        {
-            text: t("kpis.10"),
-            color: 'black',
-            type: "4-wide",
-            year1: parseFloat(data.year1.kpi10 * 100).toFixed(1) + "%",
-            year2: parseFloat(data.year2.kpi10 * 100).toFixed(1) + "%",
-            year3: parseFloat(data.year3.kpi10 * 100).toFixed(1) + "%",
-            avg: parseFloat(data.avg.kpi10 * 100).toFixed(1) + "%",
-            avg_col: parseFloat(data.avg_col.kpi10 * 100).toFixed(1) + "%",
-            avg_tot: parseFloat(data.avg_tot.kpi10 * 100).toFixed(1) + "%",
-            score: data.score.kpi10,
-            score_col: data.score_col.kpi10,
-            score_tot: data.score_tot.kpi10,
         },
         {
             text: t("kpis.11"),
@@ -268,72 +339,69 @@ export default function KPITable(props) {
             avg_col: parseFloat(data.avg_col.kpi11 * 100).toFixed(1) + "%",
             avg_tot: parseFloat(data.avg_tot.kpi11 * 100).toFixed(1) + "%",
             score: data.score.kpi11,
+            score_weighted: data.weighted_score.kpi11,
             score_col: data.score_col.kpi11,
             score_tot: data.score_tot.kpi11,
         },
         {
-            text: t("kpis.12"),
+            text: t("kpis.12a"),
             color: 'black',
             type: "4-wide",
-            year1: parseFloat(data.year1.kpi12 * 100).toFixed(1) + "%",
-            year2: parseFloat(data.year2.kpi12 * 100).toFixed(1) + "%",
-            year3: parseFloat(data.year3.kpi12 * 100).toFixed(1) + "%",
-            avg: parseFloat(data.avg.kpi12 * 100).toFixed(1) + "%",
-            avg_col: parseFloat(data.avg_col.kpi12 * 100).toFixed(1) + "%",
-            avg_tot: parseFloat(data.avg_tot.kpi12 * 100).toFixed(1) + "%",
-            score: data.score.kpi12,
-            score_col: data.score_col.kpi12,
-            score_tot: data.score_tot.kpi12,
+            year1: parseFloat(data.year1.kpi12a * 100).toFixed(1) + "%",
+            year2: parseFloat(data.year2.kpi12a * 100).toFixed(1) + "%",
+            year3: parseFloat(data.year3.kpi12a * 100).toFixed(1) + "%",
+            avg: parseFloat(data.avg.kpi12a * 100).toFixed(1) + "%",
+            avg_col: parseFloat(data.avg_col.kpi12a * 100).toFixed(1) + "%",
+            avg_tot: parseFloat(data.avg_tot.kpi12a * 100).toFixed(1) + "%",
+            score: data.score.kpi12a,
+            score_weighted: data.weighted_score.kpi12a,
+            score_col: data.score_col.kpi12a,
+            score_tot: data.score_tot.kpi12a,
         },
         {
-            text_1: t("kpis.13a"),
-            text_2: t("kpis.13b"),
-            type: 'double',
-            color_1: 'black',
-            color_2: 'black',
-            year1_1: parseFloat(data.year1.kpi13a * 100).toFixed(1) + "%",
-            year2_1: parseFloat(data.year2.kpi13a * 100).toFixed(1) + "%",
-            year3_1: parseFloat(data.year3.kpi13a * 100).toFixed(1) + "%",
-            year1_2: data.year1.kpi13b,
-            year2_2: data.year2.kpi13b,
-            year3_2: data.year3.kpi13b,
-            avg_1: parseFloat(data.avg.kpi13a * 100).toFixed(1) + "%",
-            avg_col_1: parseFloat(data.avg_col.kpi13a * 100).toFixed(1) + "%",
-            avg_tot_1: parseFloat(data.avg_tot.kpi13a * 100).toFixed(1) + "%",
-            avg_2: data.avg.kpi13b,
-            avg_col_2: data.avg_col.kpi13b,
-            avg_tot_2: data.avg_tot.kpi13b,
-            score: Math.max(data.score.kpi13a, data.score.kpi13b),
+            text: t("kpis.12b"),
+            color: 'black',
+            type: "4-wide",
+            year1: parseFloat(data.year1.kpi12b * 100).toFixed(1) + "%",
+            year2: parseFloat(data.year2.kpi12b * 100).toFixed(1) + "%",
+            year3: parseFloat(data.year3.kpi12b * 100).toFixed(1) + "%",
+            avg: parseFloat(data.avg.kpi12b * 100).toFixed(1) + "%",
+            avg_col: parseFloat(data.avg_col.kpi12b * 100).toFixed(1) + "%",
+            avg_tot: parseFloat(data.avg_tot.kpi12b * 100).toFixed(1) + "%",
+            score: data.score.kpi12b,
+            score_weighted: data.weighted_score.kpi12b,
+            score_col: data.score_col.kpi12b,
+            score_tot: data.score_tot.kpi12b,
+        },
+        {
+            text: t("kpis.13"),
+            color: 'black',
+            type: 'normal',
+            year1: showYearMonths(data.year1.kpi13),
+            year2: showYearMonths(data.year2.kpi13),
+            year3: showYearMonths(data.year3.kpi13),
+            avg: showYearMonths(data.avg.kpi13),
+            avg_col: showYearMonths(data.avg_col.kpi13),
+            avg_tot: showYearMonths(data.avg_tot.kpi13),
+            score: data.score.kpi13,
+            score_weighted: data.weighted_score.kpi13,
             score_col: data.score_col.kpi13,
             score_tot: data.score_tot.kpi13,
         },
         {
             text: t("kpis.14"),
             color: 'black',
-            type: 'normal',
-            year1: showYearMonths(data.year1.kpi14),
-            year2: showYearMonths(data.year2.kpi14),
-            year3: showYearMonths(data.year3.kpi14),
-            avg: showYearMonths(data.avg.kpi14),
-            avg_col: showYearMonths(data.avg_col.kpi14),
-            avg_tot: showYearMonths(data.avg_tot.kpi14),
-            score: data.score.kpi14,
-            score_col: data.score_col.kpi14,
-            score_tot: data.score_tot.kpi14,
-        },
-        {
-            text: t("kpis.15"),
-            color: 'black',
             type: '4-wide',
-            year1: data.year1.kpi15,
-            year2: data.year2.kpi15,
-            year3: data.year3.kpi15,
-            avg: data.avg.kpi15,
+            year1: data.year1.kpi14,
+            year2: data.year2.kpi14,
+            year3: data.year3.kpi14,
+            avg: data.avg.kpi14,
             avg_col: "-",
             avg_tot: "-",
-            score: data.score.kpi15,
-            score_col: data.score_col.kpi15,
-            score_tot: data.score_tot.kpi15,
+            score: data.score.kpi14,
+            score_weighted: data.weighted_score.kpi14,
+            score_col: data.score_col.kpi14,
+            score_tot: data.score_tot.kpi14,
         },
     ];
 
@@ -350,8 +418,8 @@ export default function KPITable(props) {
                         </Stack>
                         {loading && <CenteredLoading/>}
                         {!loading && !isObjectEmpty(kpi) &&
-                            <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={2900} cat3={2399}
-                                        cat2={1899} cat1={1399}
+                            <ScoreGauge score={kpi.total.score} text={kpi.total.score} maxScore={1000} cat3={750}
+                                        cat2={500} cat1={250}
                                         score_col={kpi.total_col.score}
                                         score_tot={kpi.total_tot.score}/>}
                     </Card>
@@ -366,8 +434,8 @@ export default function KPITable(props) {
                         </Stack>
                         {loading && <CenteredLoading/>}
                         {!loading && !isObjectEmpty(kpi) &&
-                            <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={5000}
-                                        cat3={3899} cat2={2399} cat1={1399}
+                            <ScoreGauge score={kpi.total.money} text={kpi.total.money} maxScore={1000}
+                                        cat3={750} cat2={500} cat1={250}
                                         score_col={kpi.total_col.money}
                                         score_tot={kpi.total_tot.money}/>}
 
@@ -407,20 +475,22 @@ export default function KPITable(props) {
                                     <TableHead>
                                         <TableRow key={"headrow"}>
                                             <TableCell sx={{width: 250}}> </TableCell>
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{kpi.year1.year}</TableCell>
 
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{kpi.year2.year}</TableCell>
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{kpi.year3.year}</TableCell>
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{t("kpi_table.average")}</TableCell>
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{t("kpi_table.comparison")}</TableCell>
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{t("kpi_table.points")}</TableCell>
-                                            <TableCell sx={{width: 60, border: 1}}
+                                            <TableCell sx={{width: 50, border: 1}}
+                                                       align="center">{t("kpi_table.points_weighted")}<AreaWeightPopup company={props.company}/></TableCell>
+                                            <TableCell sx={{width: 50, border: 1}}
                                                        align="center">{t("kpi_table.comparison")}</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -450,6 +520,9 @@ export default function KPITable(props) {
                                                             </TableCell>
                                                             <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
                                                                 {tab.score}
+                                                            </TableCell>
+                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                                {tab.score_weighted}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
                                                                 {t("kpi_table.collective_letter")}: {tab.score_col}<br/>
@@ -486,6 +559,10 @@ export default function KPITable(props) {
                                                                 <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={2}
                                                                            align="center">
                                                                     {tab.score}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={2}
+                                                                           align="center">
+                                                                    {tab.score_weighted}
                                                                 </TableCell>
                                                                 <TableCell sx={{border: 1}} rowSpan={2}
                                                                            align="center">
@@ -545,6 +622,10 @@ export default function KPITable(props) {
                                                                 <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={4}
                                                                            align="center">
                                                                     {tab.score}
+                                                                </TableCell>
+                                                                <TableCell sx={{border: 1, fontWeight: 'bold'}} rowSpan={4}
+                                                                           align="center">
+                                                                    {tab.score_weighted}
                                                                 </TableCell>
                                                                 <TableCell sx={{border: 1}} rowSpan={4}
                                                                            align="center">
@@ -637,6 +718,9 @@ export default function KPITable(props) {
                                                             </TableCell>
                                                             <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
                                                                 {tab.score}
+                                                            </TableCell>
+                                                            <TableCell sx={{border: 1, fontWeight: 'bold'}} align="center">
+                                                                {tab.score_weighted}
                                                             </TableCell>
                                                             <TableCell sx={{border: 1}} align="center">
                                                                 {t("kpi_table.collective_letter")}: {tab.score_col}<br/>

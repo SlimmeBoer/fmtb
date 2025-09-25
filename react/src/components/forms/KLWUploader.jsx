@@ -5,9 +5,11 @@ import axiosClient from "../../axios_client.js";
 import {useTranslation} from "react-i18next";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import UserPicker from "./UserPicker.jsx";
 
 const KLWUploader = () => {
     const [files, setFiles] = useState([]);
+    const [userid, setUserId] = useState([]);
     const [feedback, setFeedback] = useState({});
     const [saveFields, setSaveFields] = useState(true);
     const {t} = useTranslation();
@@ -34,6 +36,7 @@ const KLWUploader = () => {
         filesToUpload.forEach((file) => {
             const formData = new FormData();
             formData.append("file", file);
+            formData.append("user_id", userid);
             formData.append("saveFields", saveFields);
             formData.append("_method", "put");
 
@@ -69,12 +72,19 @@ const KLWUploader = () => {
         });
     };
 
+    const handleUserChange = (e) => {
+        setUserId(e.target.value); // Change `id` state based on user input or actions
+        console.log(e.target.value);
+    };
+
     const uploading = useMemo(() => {
         return Object.values(feedback).some((f) => f.status === "Uploading");
     }, [feedback]);
 
     return (
         <Box sx={{ width: "80%", mt: 4}}>
+            <UserPicker user={userid} changeHandler={handleUserChange}/>
+            <br />
             <Button
                 variant={uploading ? "outlined" : "contained"}
                 component="label"

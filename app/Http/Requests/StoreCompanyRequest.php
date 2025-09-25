@@ -35,7 +35,8 @@ class StoreCompanyRequest extends FormRequest
             'email' => 'max:50',
             'type' =>  'required|string|max:50',
             'bio' => 'required|boolean',
-            'data_compleet' => 'required|boolean'
+            'data_compleet' => 'required|boolean',
+            'user_id' => 'required|integer'
         ];
     }
 }
