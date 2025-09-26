@@ -33,7 +33,7 @@ export default function Admin_OverzichtTotaal() {
                     </Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
-                   <ExcelExportButton />
+                   &nbsp;
                 </Stack>
             </Stack>
             <Box>

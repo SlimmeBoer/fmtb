@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateAreaRequest;
 use App\Http\Resources\AreaResource;
 use App\Models\Area;
 use App\Models\Company;
+use App\Models\SystemLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AreaController extends Controller
 {
@@ -109,6 +111,13 @@ class AreaController extends Controller
                 $updated[] = $area->id;
             }
         }
+
+        // Log
+        SystemLog::create(array(
+            'user_id' => Auth::user()->id,
+            'type' => 'UPDATE WEIGHTS',
+            'message' => 'Gewichten bijgewerkt voor gebieden.',
+        ));
 
         return response()->json([
             'message' => 'Gewichten succesvol bijgewerkt',

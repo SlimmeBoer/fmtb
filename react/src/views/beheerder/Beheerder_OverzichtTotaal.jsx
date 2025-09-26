@@ -31,7 +31,7 @@ export default function Beheerder_OverzichtTotaal() {
                     </Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
-                    <ExcelExportButton />
+                    &nbsp;
                 </Stack>
             </Stack>
             <Box>

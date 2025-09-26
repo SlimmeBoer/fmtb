@@ -7,7 +7,7 @@
 <body style="background-color: #f4f4f4; padding: 30px; font-family: Arial, sans-serif;">
 <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 8px; padding: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;">
 
-    <img src="{{ asset('images/logo_umbb_small.png') }}" alt="UMDL logo" style="max-width: 300px; max-height: 300px; margin-bottom: 20px;">
+    <img src="{{ asset('images/logo.png') }}" alt="Provincie Fryslan logo" style="max-width: 300px; max-height: 300px; margin-bottom: 20px;">
 
     <h2 style="color: #333;">Wachtwoord resetten</h2>
 

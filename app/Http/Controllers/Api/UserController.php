@@ -10,7 +10,9 @@ use App\Models\SystemLog;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 
@@ -95,16 +97,32 @@ class UserController extends Controller
 
         // Assign collective
         if (array_key_exists('collective_id', $data)) {
-            $user->collectives()->sync(
-                $data['collective_id'] ? [$data['collective_id']] : []
-            );
+            $collectiveIds = array_filter(Arr::wrap($data['collective_id'])); // [] if null/empty
+
+            DB::transaction(function () use ($user, $collectiveIds) {
+                // Sync user areas
+                $user->collectives()->sync($collectiveIds);
+
+                // Sync company areas (if the user has a company)
+                if ($user->company) {
+                    $user->company->collectives()->sync($collectiveIds);
+                }
+            });
         }
 
         // Assign area
         if (array_key_exists('area_id', $data)) {
-            $user->areas()->sync(
-                $data['area_id'] ? [$data['area_id']] : []
-            );
+            $areaIds = array_filter(Arr::wrap($data['area_id'])); // [] if null/empty
+
+            DB::transaction(function () use ($user, $areaIds) {
+                // Sync user areas
+                $user->areas()->sync($areaIds);
+
+                // Sync company areas (if the user has a company)
+                if ($user->company) {
+                    $user->company->areas()->sync($areaIds);
+                }
+            });
         }
 
 
