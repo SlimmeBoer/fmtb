@@ -59,10 +59,8 @@ class CompanyPropertiesController extends Controller
      */
     public function update(UpdateCompanyPropertiesRequest $request, CompanyProperties $companyproperties)
     {
-        Log::info($companyproperties);
         $data = $request->validated();
 
-        Log::info($data);
         $companyproperties->update($data);
 
         $company = Company::where('id',$companyproperties->company_id)->first();

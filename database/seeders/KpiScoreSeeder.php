@@ -18,25 +18,30 @@ class KpiScoreSeeder extends Seeder
         KpiScore::factory()->create(['kpi' => '1', 'range' => '100-150', 'score' => '1']);
         KpiScore::factory()->create(['kpi' => '1', 'range' => '>150', 'score' => '0']);
 
-        KpiScore::factory()->create(['kpi' => '2a', 'range' => '<=40', 'score' => '5']);
-        KpiScore::factory()->create(['kpi' => '2a', 'range' => '40-50', 'score' => '2']);
-        KpiScore::factory()->create(['kpi' => '2a', 'range' => '50-60', 'score' => '1']);
-        KpiScore::factory()->create(['kpi' => '2a', 'range' => '>60', 'score' => '0']);
+        KpiScore::factory()->create(['kpi' => '2a', 'range' => '<15', 'score' => '5']);
+        KpiScore::factory()->create(['kpi' => '2a', 'range' => '15-18', 'score' => '2']);
+        KpiScore::factory()->create(['kpi' => '2a', 'range' => '18-20', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '2a', 'range' => '>20', 'score' => '0']);
 
-        KpiScore::factory()->create(['kpi' => '2b', 'range' => '<=150', 'score' => '5']);
-        KpiScore::factory()->create(['kpi' => '2b', 'range' => '150-155', 'score' => '2']);
-        KpiScore::factory()->create(['kpi' => '2b', 'range' => '155-160', 'score' => '1']);
-        KpiScore::factory()->create(['kpi' => '2b', 'range' => '>160', 'score' => '0']);
+        KpiScore::factory()->create(['kpi' => '2b', 'range' => '<6', 'score' => '5']);
+        KpiScore::factory()->create(['kpi' => '2b', 'range' => '6-8', 'score' => '2']);
+        KpiScore::factory()->create(['kpi' => '2b', 'range' => '8-10', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '2b', 'range' => '>10', 'score' => '0']);
 
         KpiScore::factory()->create(['kpi' => '2c', 'range' => '<=150', 'score' => '5']);
         KpiScore::factory()->create(['kpi' => '2c', 'range' => '150-155', 'score' => '2']);
         KpiScore::factory()->create(['kpi' => '2c', 'range' => '155-160', 'score' => '1']);
         KpiScore::factory()->create(['kpi' => '2c', 'range' => '>160', 'score' => '0']);
 
-        KpiScore::factory()->create(['kpi' => '2d', 'range' => '<=15', 'score' => '5']);
-        KpiScore::factory()->create(['kpi' => '2d', 'range' => '15-17', 'score' => '2']);
-        KpiScore::factory()->create(['kpi' => '2d', 'range' => '17-19', 'score' => '1']);
-        KpiScore::factory()->create(['kpi' => '2d', 'range' => '>19', 'score' => '0']);
+        KpiScore::factory()->create(['kpi' => '2d', 'range' => '<=150', 'score' => '5']);
+        KpiScore::factory()->create(['kpi' => '2d', 'range' => '150-155', 'score' => '2']);
+        KpiScore::factory()->create(['kpi' => '2d', 'range' => '155-160', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '2d', 'range' => '>160', 'score' => '0']);
+
+        KpiScore::factory()->create(['kpi' => '2e', 'range' => '<=15', 'score' => '5']);
+        KpiScore::factory()->create(['kpi' => '2e', 'range' => '15-17', 'score' => '2']);
+        KpiScore::factory()->create(['kpi' => '2e', 'range' => '17-19', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '2e', 'range' => '>19', 'score' => '0']);
 
         KpiScore::factory()->create(['kpi' => '3', 'range' => '<=-5', 'score' => '5']);
         KpiScore::factory()->create(['kpi' => '3', 'range' => '-5-0', 'score' => '2']);;
@@ -53,13 +58,15 @@ class KpiScoreSeeder extends Seeder
         KpiScore::factory()->create(['kpi' => '5', 'range' => '17000-19000', 'score' => '1']);
         KpiScore::factory()->create(['kpi' => '5', 'range' => '>19000', 'score' => '0']);
 
-        KpiScore::factory()->create(['kpi' => '6a', 'range' => '>1', 'score' => '5']);
-        KpiScore::factory()->create(['kpi' => '6a', 'range' => '0-1', 'score' => '2']);
-        KpiScore::factory()->create(['kpi' => '6a', 'range' => '<0', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '6a', 'range' => '<400', 'score' => '5']);
+        KpiScore::factory()->create(['kpi' => '6a', 'range' => '<500', 'score' => '2']);
+        KpiScore::factory()->create(['kpi' => '6a', 'range' => '<600', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '6a', 'range' => '600+', 'score' => '0']);
 
-        KpiScore::factory()->create(['kpi' => '6b', 'range' => '>1', 'score' => '5']);
-        KpiScore::factory()->create(['kpi' => '6b', 'range' => '0-1', 'score' => '2']);
-        KpiScore::factory()->create(['kpi' => '6b', 'range' => '<0', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '6b', 'range' => '>100%', 'score' => '5']);
+        KpiScore::factory()->create(['kpi' => '6b', 'range' => '>80%', 'score' => '2']);
+        KpiScore::factory()->create(['kpi' => '6b', 'range' => '>0%', 'score' => '1']);
+        KpiScore::factory()->create(['kpi' => '6b', 'range' => '0%', 'score' => '0']);
 
         KpiScore::factory()->create(['kpi' => '6c', 'range' => '>1', 'score' => '5']);
         KpiScore::factory()->create(['kpi' => '6c', 'range' => '0-1', 'score' => '2']);

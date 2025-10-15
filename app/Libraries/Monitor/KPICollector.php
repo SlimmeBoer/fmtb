@@ -23,6 +23,8 @@ class KPICollector
         "dzhm_nbodem_over" => 0.0,
         "verl_bodbal2_ha" => 0.0,
         "dzhm_nh3_bedrha" => 0.0,
+        "dzhm_nh3_landha" => 0.0,
+        "emnh3_stl_gve" => 0.0,
         "rants_geh_re" => 0.0,
         "weidmk_dgn" => 0.0,
         "weidmk_urn" => 0.0,
@@ -62,10 +64,11 @@ class KPICollector
         ));
         $kpivalues->kpi1a = $this->vars["dzhm_nbodem_over"];
         $kpivalues->kpi1b = $this->vars["dzhm_nbodem_over"] - (1.99 * $percentage_veen);
-        $kpivalues->kpi2a = $this->vars["dzhm_nh3_bedrha"];
-        $kpivalues->kpi2b = $this->vars["rants_geh_re"];
-        $kpivalues->kpi2c = $this->vars["ureum"];
-        $kpivalues->kpi2d = $this->vars["weidmk_dgn"] * $this->vars["weidmk_urn"];
+        $kpivalues->kpi2a = $this->vars["dzhm_nh3_landha"];
+        $kpivalues->kpi2b = $this->vars["emnh3_stl_gve"];
+        $kpivalues->kpi2c = $this->vars["rants_geh_re"];
+        $kpivalues->kpi2d = $this->vars["ureum"];
+        $kpivalues->kpi2e = $this->vars["weidmk_dgn"] * $this->vars["weidmk_urn"];
         $kpivalues->kpi3 = $this->vars["verl_bodbal2_ha"];
         $kpivalues->kpi4 = $this->vars["dzhm_eiwit_pcrants"];
 
@@ -82,24 +85,9 @@ class KPICollector
         } else {
             $kpivalues->kpi5b = ($this->vars["bkg_prod_fpcm"] * ($this->vars["dzhm_co2_melkprod"] - (3.5 * $percentage_veen))) / $opp_totaal / 1000;
         }
-        // Kpi 5c
-        if ($year === '2024') {
-            $kpivalues->kpi5c = $this->vars["dzhm_co2i_melkprod"];
-        } else {
-            $kpivalues->kpi5c = $this->vars["dzhm_co2_melkprod"];
-        }
 
-        // Kpi 5d
-        if ($year === '2024')
-        {
-            $kpivalues->kpi5d = $this->vars["dzhm_co2_melkprod"];
-        } else {
-            $kpivalues->kpi5d = $this->vars["dzhm_co2_melkprod"] - (3.5 * $percentage_veen);
-        }
-
-        $kpivalues->kpi6a = 0;
-        $kpivalues->kpi6b = $this->vars["enespec_elek_kwh"] / $this->vars["nkoe"];
-        $kpivalues->kpi6c = $this->vars["elek_prod_kwh"] / $this->vars["enespec_elek_kwh"];
+        $kpivalues->kpi6a = $this->vars["enespec_elek_kwh"] / $this->vars["nkoe"];
+        $kpivalues->kpi6b = $this->vars["elek_prod_kwh"] / $this->vars["enespec_elek_kwh"];
         $kpivalues->kpi7 = 0;
         $kpivalues->kpi8 = $this->vars["cgrond_bedr_eos"];
         $kpivalues->kpi9 = $this->vars["dzhm_blijgras_aand"];

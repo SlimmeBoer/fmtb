@@ -18,6 +18,7 @@ class Area extends Model
         'weight_kpi2b',
         'weight_kpi2c',
         'weight_kpi2d',
+        'weight_kpi2e',
         'weight_kpi3',
         'weight_kpi4',
         'weight_kpi5',

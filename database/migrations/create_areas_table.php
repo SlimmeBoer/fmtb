@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("weight_kpi2b")->nullable();
             $table->integer("weight_kpi2c")->nullable();
             $table->integer("weight_kpi2d")->nullable();
+            $table->integer("weight_kpi2e")->nullable();
             $table->integer("weight_kpi3")->nullable();
             $table->integer("weight_kpi4")->nullable();
             $table->integer("weight_kpi5")->nullable();

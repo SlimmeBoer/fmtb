@@ -157,7 +157,7 @@
         </tr>
         <tr class="header-row">
             <td class="logo">
-                <img style="padding: 4mm;" src="{{ $logos['provincie'] }}" alt="Logo" width="140">
+                <img style="padding: 20mm 4mm 4mm 4mm;" src="{{ $logos['provincie'] }}" alt="Logo" width="140">
             </td>
             <td class="info">
                 <h1>{{$title}}</h1>
@@ -201,7 +201,7 @@
                 </table>
             </td>
             <td class="logo-provincie">
-                <img style="padding: 4mm;" src="{{ $logos['provincie'] }}" alt="Logo" width="210">
+                &nbsp;
             </td>
         </tr>
     </table>
@@ -239,7 +239,7 @@
                     </tr>
                     <tr>
                         <td>2a</td>
-                        <td style="text-align: left">Ammoniakemissie</td>
+                        <td style="text-align: left">Ammoniakemissie (veld)</td>
                         <td>{{$scores['year1']['kpi2a']}}</td>
                         <td>{{$scores['year2']['kpi2a']}}</td>
                         <td>{{$scores['year3']['kpi2a']}}</td>
@@ -248,7 +248,7 @@
                     </tr>
                     <tr>
                         <td>2b</td>
-                        <td style="text-align: left">Ruw eiwit in rantsoen</td>
+                        <td style="text-align: left">Ammoniakemissie (stal)</td>
                         <td>{{$scores['year1']['kpi2b']}}</td>
                         <td>{{$scores['year2']['kpi2b']}}</td>
                         <td>{{$scores['year3']['kpi2b']}}</td>
@@ -257,7 +257,7 @@
                     </tr>
                     <tr>
                         <td>2c</td>
-                        <td style="text-align: left">Ureum</td>
+                        <td style="text-align: left">Ruw eiwit in rantsoen</td>
                         <td>{{$scores['year1']['kpi2c']}}</td>
                         <td>{{$scores['year2']['kpi2c']}}</td>
                         <td>{{$scores['year3']['kpi2c']}}</td>
@@ -266,12 +266,21 @@
                     </tr>
                     <tr>
                         <td>2d</td>
-                        <td style="text-align: left">Weidegang</td>
+                        <td style="text-align: left">Ureum</td>
                         <td>{{$scores['year1']['kpi2d']}}</td>
                         <td>{{$scores['year2']['kpi2d']}}</td>
                         <td>{{$scores['year3']['kpi2d']}}</td>
                         <td>{{$scores['avg']['kpi2d']}}</td>
                         <td>{{$scores['weighted_score']['kpi2d']}}</td>
+                    </tr>
+                    <tr>
+                        <td>2e</td>
+                        <td style="text-align: left">Weidegang</td>
+                        <td>{{$scores['year1']['kpi2e']}}</td>
+                        <td>{{$scores['year2']['kpi2e']}}</td>
+                        <td>{{$scores['year3']['kpi2e']}}</td>
+                        <td>{{$scores['avg']['kpi2e']}}</td>
+                        <td>{{$scores['weighted_score']['kpi2e']}}</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -298,7 +307,7 @@
                         <td>{{$scores['year2']['kpi5a']}}</td>
                         <td>{{$scores['year3']['kpi5a']}}</td>
                         <td>{{$scores['avg']['kpi5a']}}</td>
-                        <td rowspan="4">{{$scores['weighted_score']['kpi5b']}}</td>
+                        <td rowspan="2">{{$scores['weighted_score']['kpi5b']}}</td>
                     </tr>
                     <tr>
                         <td>5b</td>
@@ -309,48 +318,21 @@
                         <td>{{$scores['avg']['kpi5b']}}</td>
                     </tr>
                     <tr>
-                        <td>5c</td>
-                        <td style="text-align: left">Broeikasgasemissie (in CO2eq. per kg fcpm)</td>
-                        <td>{{$scores['year1']['kpi5c']}}</td>
-                        <td>{{$scores['year2']['kpi5c']}}</td>
-                        <td>{{$scores['year3']['kpi5c']}}</td>
-                        <td>{{$scores['avg']['kpi5c']}}</td>
-                    </tr>
-                    <tr>
-                        <td>5d</td>
-                        <td style="text-align: left">Broeikasgasemissie (in CO2eq. per kg fcpm) incl. correctie veen
-                        </td>
-                        <td>{{$scores['year1']['kpi5d']}}</td>
-                        <td>{{$scores['year2']['kpi5d']}}</td>
-                        <td>{{$scores['year3']['kpi5d']}}</td>
-                        <td>{{$scores['avg']['kpi5d']}}</td>
-                    </tr>
-                    <tr>
                         <td>6a</td>
                         <td style="text-align: left">Energiebalans (opwekking)</td>
                         <td>{{$scores['year1']['kpi6a']}}</td>
                         <td>{{$scores['year2']['kpi6a']}}</td>
                         <td>{{$scores['year3']['kpi6a']}}</td>
                         <td>{{$scores['avg']['kpi6a']}}</td>
-                        <td>{{$scores['weighted_score']['kpi6a']}}</td>
+                        <td rowspan="2">{{max($scores['weighted_score']['kpi6a'],$scores['weighted_score']['kpi6b'])}}</td>
                     </tr>
                     <tr>
                         <td>6b</td>
                         <td style="text-align: left">Energiebalans (verbruik per koe)</td>
-                        <td>{{$scores['year1']['kpi6b']}}</td>
-                        <td>{{$scores['year2']['kpi6b']}}</td>
-                        <td>{{$scores['year3']['kpi6b']}}</td>
-                        <td>{{$scores['avg']['kpi6b']}}</td>
-                        <td>{{$scores['weighted_score']['kpi6b']}}</td>
-                    </tr>
-                    <tr>
-                        <td>6c</td>
-                        <td style="text-align: left">Energiebalans (% hernieuwbare energie)</td>
-                        <td>{{$scores['year1']['kpi6c']}}</td>
-                        <td>{{$scores['year2']['kpi6c']}}</td>
-                        <td>{{$scores['year3']['kpi6c']}}</td>
-                        <td>{{$scores['avg']['kpi6c']}}</td>
-                        <td>{{$scores['weighted_score']['kpi6c']}}</td>
+                        <td>{{number_format($scores['year1']['kpi6b']* 100,1) .'%'}}</td>
+                        <td>{{number_format($scores['year2']['kpi6b']* 100,1) .'%'}}</td>
+                        <td>{{number_format($scores['year3']['kpi6b']* 100,1) .'%'}}</td>
+                        <td>{{number_format($scores['avg']['kpi6b']* 100,1) .'%'}}</td>
                     </tr>
                     <tr>
                         <td>7</td>
@@ -416,7 +398,7 @@
                     </tr>
                     <tr>
                         <td colspan="6" style="border: 0; text-align: right">In euro's:</td>
-                        <td style="border: 1px solid #000;">{{$scores['total']['money']}}</td>
+                        <td style="border: 1px solid #000;">*</td>
                     </tr>
                     <tr>
                         <td style="border: 0;">&nbsp;</td>
@@ -425,6 +407,13 @@
                             worden ontleend.
                         </td>
                         <td style="border: 0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 0;">&nbsp;</td>
+                        <td colspan="5" style="border: 0; text-align: left" class="disclaimer">* = Tijdens deze pilotfase wordt er een vaste vergoeding uitgekeerd aan alle deelnemers.
+                        </td>
+                        <td style="border: 0;">&nbsp;</td>
+
                     </tr>
                 </table>
             </td>

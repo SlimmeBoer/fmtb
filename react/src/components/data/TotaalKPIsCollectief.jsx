@@ -84,6 +84,15 @@ export default function TotaalKPIsCollectief(props) {
             boxplot_data_year3: data.kpi2d.year3,
         },
         {
+            text: t("kpis.2e"),
+            type: "normal",
+            barchart_data: data.kpi2e.scores,
+            boxplot_data: data.kpi2e.avgs,
+            boxplot_data_year1: data.kpi2e.year1,
+            boxplot_data_year2: data.kpi2e.year2,
+            boxplot_data_year3: data.kpi2e.year3,
+        },
+        {
             text: t("kpis.3"),
             type: "normal",
             barchart_data: data.kpi3.scores,
@@ -102,7 +111,7 @@ export default function TotaalKPIsCollectief(props) {
             boxplot_data_year3: data.kpi4.year3,
         },
         {
-            text: t("kpis.5b"),
+            text: t("kpis.5"),
             type: "normal",
             barchart_data: data.kpi5.scores,
             boxplot_data: data.kpi5.avgs,
@@ -127,15 +136,6 @@ export default function TotaalKPIsCollectief(props) {
             boxplot_data_year1: data.kpi6b.year1,
             boxplot_data_year2: data.kpi6b.year2,
             boxplot_data_year3: data.kpi6b.year3,
-        },
-        {
-            text: t("kpis.6c"),
-            type: "normal",
-            barchart_data: data.kpi6c.scores,
-            boxplot_data: data.kpi6c.avgs,
-            boxplot_data_year1: data.kpi6c.year1,
-            boxplot_data_year2: data.kpi6c.year2,
-            boxplot_data_year3: data.kpi6c.year3,
         },
         {
             text: t("kpis.7"),

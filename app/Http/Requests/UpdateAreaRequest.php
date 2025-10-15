@@ -29,6 +29,7 @@ class UpdateAreaRequest extends FormRequest
             'weight_kpi2b' => 'required|integer',
             'weight_kpi2c' => 'required|integer',
             'weight_kpi2d' => 'required|integer',
+            'weight_kpi2e' => 'required|integer',
             'weight_kpi3' => 'required|integer',
             'weight_kpi4' => 'required|integer',
             'weight_kpi5' => 'required|integer',

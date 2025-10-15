@@ -25,12 +25,12 @@ class KPITotals
             'kpi2b' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2b"])),
             'kpi2c' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2c"])),
             'kpi2d' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2d"])),
+            'kpi2e' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2e"])),
             'kpi3' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi3"])),
             'kpi4' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi4"])),
             'kpi5' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi5"])),
             'kpi6a' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi6a"])),
             'kpi6b' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi6b"])),
-            'kpi6c' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi6c"])),
             'kpi7' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi7"])),
             'kpi8' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi8"])),
             'kpi9' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi9"])),
@@ -60,12 +60,12 @@ class KPITotals
             $totals_array['kpi2b']['year1'][$company->name] = $company_scores['year1']['kpi2b'];
             $totals_array['kpi2c']['year1'][$company->name] = $company_scores['year1']['kpi2c'];
             $totals_array['kpi2d']['year1'][$company->name] = $company_scores['year1']['kpi2d'];
+            $totals_array['kpi2e']['year1'][$company->name] = $company_scores['year1']['kpi2e'];
             $totals_array['kpi3']['year1'][$company->name] = $company_scores['year1']['kpi3'];
             $totals_array['kpi4']['year1'][$company->name] = $company_scores['year1']['kpi4'];
             $totals_array['kpi5']['year1'][$company->name] = $company_scores['year1']['kpi5b'];
             $totals_array['kpi6a']['year1'][$company->name] = $company_scores['year1']['kpi6a'];
             $totals_array['kpi6b']['year1'][$company->name] = $company_scores['year1']['kpi6b'];
-            $totals_array['kpi6c']['year1'][$company->name] = $company_scores['year1']['kpi6c'];
             $totals_array['kpi8']['year1'][$company->name] = $company_scores['year1']['kpi8'];
             $totals_array['kpi9']['year1'][$company->name] = $company_scores['year1']['kpi9'];
             $totals_array['kpi11']['year1'][$company->name] = $company_scores['year1']['kpi11'];
@@ -78,12 +78,12 @@ class KPITotals
             $totals_array['kpi2b']['year2'][$company->name] = $company_scores['year2']['kpi2b'];
             $totals_array['kpi2c']['year2'][$company->name] = $company_scores['year2']['kpi2c'];
             $totals_array['kpi2d']['year2'][$company->name] = $company_scores['year2']['kpi2d'];
+            $totals_array['kpi2e']['year2'][$company->name] = $company_scores['year2']['kpi2e'];
             $totals_array['kpi3']['year2'][$company->name] = $company_scores['year2']['kpi3'];
             $totals_array['kpi4']['year2'][$company->name] = $company_scores['year2']['kpi4'];
             $totals_array['kpi5']['year2'][$company->name] = $company_scores['year2']['kpi5b'];
             $totals_array['kpi6a']['year2'][$company->name] = $company_scores['year2']['kpi6a'];
             $totals_array['kpi6b']['year2'][$company->name] = $company_scores['year2']['kpi6b'];
-            $totals_array['kpi6c']['year2'][$company->name] = $company_scores['year2']['kpi6c'];
             $totals_array['kpi8']['year2'][$company->name] = $company_scores['year2']['kpi8'];
             $totals_array['kpi9']['year2'][$company->name] = $company_scores['year2']['kpi9'];
             $totals_array['kpi11']['year2'][$company->name] = $company_scores['year2']['kpi11'];
@@ -96,12 +96,12 @@ class KPITotals
             $totals_array['kpi2b']['year3'][$company->name] = $company_scores['year3']['kpi2b'];
             $totals_array['kpi2c']['year3'][$company->name] = $company_scores['year3']['kpi2c'];
             $totals_array['kpi2d']['year3'][$company->name] = $company_scores['year3']['kpi2d'];
+            $totals_array['kpi2e']['year3'][$company->name] = $company_scores['year3']['kpi2e'];
             $totals_array['kpi3']['year3'][$company->name] = $company_scores['year3']['kpi3'];
             $totals_array['kpi4']['year3'][$company->name] = $company_scores['year3']['kpi4'];
             $totals_array['kpi5']['year3'][$company->name] = $company_scores['year3']['kpi5b'];
             $totals_array['kpi6a']['year3'][$company->name] = $company_scores['year3']['kpi6a'];
             $totals_array['kpi6b']['year3'][$company->name] = $company_scores['year3']['kpi6b'];
-            $totals_array['kpi6c']['year3'][$company->name] = $company_scores['year3']['kpi6c'];
             $totals_array['kpi8']['year3'][$company->name] = $company_scores['year3']['kpi8'];
             $totals_array['kpi9']['year3'][$company->name] = $company_scores['year3']['kpi9'];
             $totals_array['kpi11']['year3'][$company->name] = $company_scores['year3']['kpi11'];
@@ -114,12 +114,12 @@ class KPITotals
             $totals_array['kpi2b']['avgs'][$company->name] = $company_scores['avg']['kpi2b'];
             $totals_array['kpi2c']['avgs'][$company->name] = $company_scores['avg']['kpi2d'];
             $totals_array['kpi2d']['avgs'][$company->name] = $company_scores['avg']['kpi2d'];
+            $totals_array['kpi2e']['avgs'][$company->name] = $company_scores['avg']['kpi2e'];
             $totals_array['kpi3']['avgs'][$company->name] = $company_scores['avg']['kpi3'];
             $totals_array['kpi4']['avgs'][$company->name] = $company_scores['avg']['kpi4'];
             $totals_array['kpi5']['avgs'][$company->name] = $company_scores['avg']['kpi5b'];
             $totals_array['kpi6a']['avgs'][$company->name] = $company_scores['avg']['kpi6a'];
             $totals_array['kpi6b']['avgs'][$company->name] = $company_scores['avg']['kpi6b'];
-            $totals_array['kpi6c']['avgs'][$company->name] = $company_scores['avg']['kpi6c'];
             $totals_array['kpi7']['avgs'][$company->name] = $company_scores['avg']['kpi7'];
             $totals_array['kpi8']['avgs'][$company->name] = $company_scores['avg']['kpi8'];
             $totals_array['kpi9']['avgs'][$company->name] = $company_scores['avg']['kpi9'];
@@ -135,12 +135,12 @@ class KPITotals
             $totals_array['kpi2b']['scores'] = $this->addScore($totals_array['kpi2b']['scores'], $company_scores['score']['kpi2b']);
             $totals_array['kpi2c']['scores'] = $this->addScore($totals_array['kpi2c']['scores'], $company_scores['score']['kpi2c']);
             $totals_array['kpi2d']['scores'] = $this->addScore($totals_array['kpi2d']['scores'], $company_scores['score']['kpi2d']);
+            $totals_array['kpi2e']['scores'] = $this->addScore($totals_array['kpi2e']['scores'], $company_scores['score']['kpi2e']);
             $totals_array['kpi3']['scores'] = $this->addScore($totals_array['kpi3']['scores'], $company_scores['score']['kpi3']);
             $totals_array['kpi4']['scores'] = $this->addScore($totals_array['kpi4']['scores'], $company_scores['score']['kpi4']);
             $totals_array['kpi5']['scores'] = $this->addScore($totals_array['kpi5']['scores'], $company_scores['score']['kpi5b']);
             $totals_array['kpi6a']['scores'] = $this->addScore($totals_array['kpi6a']['scores'], $company_scores['score']['kpi6a']);
             $totals_array['kpi6b']['scores'] = $this->addScore($totals_array['kpi6b']['scores'], $company_scores['score']['kpi6b']);
-            $totals_array['kpi6c']['scores'] = $this->addScore($totals_array['kpi6c']['scores'], $company_scores['score']['kpi6c']);
             $totals_array['kpi7']['scores'] = $this->addScore($totals_array['kpi7']['scores'], $company_scores['score']['kpi7']);
             $totals_array['kpi8']['scores'] = $this->addScore($totals_array['kpi8']['scores'], $company_scores['score']['kpi8']);
             $totals_array['kpi9']['scores'] = $this->addScore($totals_array['kpi9']['scores'], $company_scores['score']['kpi9']);
@@ -166,12 +166,12 @@ class KPITotals
             'kpi2b' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2b"])),
             'kpi2c' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2c"])),
             'kpi2d' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2d"])),
+            'kpi2e' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi2e"])),
             'kpi3' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi3"])),
             'kpi4' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi4"])),
             'kpi5' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi5"])),
             'kpi6a' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi6a"])),
             'kpi6b' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi6b"])),
-            'kpi6c' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi6c"])),
             'kpi7' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi7"])),
             'kpi8' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi8"])),
             'kpi9' => array('year1' => array(), 'year2' => array(), 'year3' => array(), 'avgs' => array(), "scores" => $this->getSettingArray($settings["kpi_scores"]["kpi9"])),
@@ -202,12 +202,12 @@ class KPITotals
             $totals_array['kpi2b']['year1'][$company->name] = $company_scores['year1']['kpi2b'];
             $totals_array['kpi2c']['year1'][$company->name] = $company_scores['year1']['kpi2c'];
             $totals_array['kpi2d']['year1'][$company->name] = $company_scores['year1']['kpi2d'];
+            $totals_array['kpi2e']['year1'][$company->name] = $company_scores['year1']['kpi2e'];
             $totals_array['kpi3']['year1'][$company->name] = $company_scores['year1']['kpi3'];
             $totals_array['kpi4']['year1'][$company->name] = $company_scores['year1']['kpi4'];
             $totals_array['kpi5']['year1'][$company->name] = $company_scores['year1']['kpi5b'];
             $totals_array['kpi6a']['year1'][$company->name] = $company_scores['year1']['kpi6a'];
             $totals_array['kpi6b']['year1'][$company->name] = $company_scores['year1']['kpi6b'];
-            $totals_array['kpi6c']['year1'][$company->name] = $company_scores['year1']['kpi6c'];
             $totals_array['kpi8']['year1'][$company->name] = $company_scores['year1']['kpi8'];
             $totals_array['kpi9']['year1'][$company->name] = $company_scores['year1']['kpi9'];
             $totals_array['kpi11']['year1'][$company->name] = $company_scores['year1']['kpi11'];
@@ -220,12 +220,12 @@ class KPITotals
             $totals_array['kpi2b']['year2'][$company->name] = $company_scores['year2']['kpi2b'];
             $totals_array['kpi2c']['year2'][$company->name] = $company_scores['year2']['kpi2c'];
             $totals_array['kpi2d']['year2'][$company->name] = $company_scores['year2']['kpi2d'];
+            $totals_array['kpi2e']['year2'][$company->name] = $company_scores['year2']['kpi2e'];
             $totals_array['kpi3']['year2'][$company->name] = $company_scores['year2']['kpi3'];
             $totals_array['kpi4']['year2'][$company->name] = $company_scores['year2']['kpi4'];
             $totals_array['kpi5']['year2'][$company->name] = $company_scores['year2']['kpi5b'];
             $totals_array['kpi6a']['year2'][$company->name] = $company_scores['year2']['kpi6a'];
             $totals_array['kpi6b']['year2'][$company->name] = $company_scores['year2']['kpi6b'];
-            $totals_array['kpi6c']['year2'][$company->name] = $company_scores['year2']['kpi6c'];
             $totals_array['kpi8']['year2'][$company->name] = $company_scores['year2']['kpi8'];
             $totals_array['kpi9']['year2'][$company->name] = $company_scores['year2']['kpi9'];
             $totals_array['kpi11']['year2'][$company->name] = $company_scores['year2']['kpi11'];
@@ -238,12 +238,12 @@ class KPITotals
             $totals_array['kpi2b']['year3'][$company->name] = $company_scores['year3']['kpi2b'];
             $totals_array['kpi2c']['year3'][$company->name] = $company_scores['year3']['kpi2c'];
             $totals_array['kpi2d']['year3'][$company->name] = $company_scores['year3']['kpi2d'];
+            $totals_array['kpi2e']['year3'][$company->name] = $company_scores['year3']['kpi2e'];
             $totals_array['kpi3']['year3'][$company->name] = $company_scores['year3']['kpi3'];
             $totals_array['kpi4']['year3'][$company->name] = $company_scores['year3']['kpi4'];
             $totals_array['kpi5']['year3'][$company->name] = $company_scores['year3']['kpi5b'];
             $totals_array['kpi6a']['year3'][$company->name] = $company_scores['year3']['kpi6a'];
             $totals_array['kpi6b']['year3'][$company->name] = $company_scores['year3']['kpi6b'];
-            $totals_array['kpi6c']['year3'][$company->name] = $company_scores['year3']['kpi6c'];
             $totals_array['kpi8']['year3'][$company->name] = $company_scores['year3']['kpi8'];
             $totals_array['kpi9']['year3'][$company->name] = $company_scores['year3']['kpi9'];
             $totals_array['kpi11']['year3'][$company->name] = $company_scores['year3']['kpi11'];
@@ -256,12 +256,12 @@ class KPITotals
             $totals_array['kpi2b']['avgs'][$company->name] = $company_scores['avg']['kpi2b'];
             $totals_array['kpi2c']['avgs'][$company->name] = $company_scores['avg']['kpi2d'];
             $totals_array['kpi2d']['avgs'][$company->name] = $company_scores['avg']['kpi2d'];
+            $totals_array['kpi2e']['avgs'][$company->name] = $company_scores['avg']['kpi2e'];
             $totals_array['kpi3']['avgs'][$company->name] = $company_scores['avg']['kpi3'];
             $totals_array['kpi4']['avgs'][$company->name] = $company_scores['avg']['kpi4'];
             $totals_array['kpi5']['avgs'][$company->name] = $company_scores['avg']['kpi5b'];
             $totals_array['kpi6a']['avgs'][$company->name] = $company_scores['avg']['kpi6a'];
             $totals_array['kpi6b']['avgs'][$company->name] = $company_scores['avg']['kpi6b'];
-            $totals_array['kpi6c']['avgs'][$company->name] = $company_scores['avg']['kpi6c'];
             $totals_array['kpi7']['avgs'][$company->name] = $company_scores['avg']['kpi7'];
             $totals_array['kpi8']['avgs'][$company->name] = $company_scores['avg']['kpi8'];
             $totals_array['kpi9']['avgs'][$company->name] = $company_scores['avg']['kpi9'];
@@ -277,12 +277,12 @@ class KPITotals
             $totals_array['kpi2b']['scores'] = $this->addScore($totals_array['kpi2b']['scores'], $company_scores['score']['kpi2b']);
             $totals_array['kpi2c']['scores'] = $this->addScore($totals_array['kpi2c']['scores'], $company_scores['score']['kpi2c']);
             $totals_array['kpi2d']['scores'] = $this->addScore($totals_array['kpi2d']['scores'], $company_scores['score']['kpi2d']);
+            $totals_array['kpi2e']['scores'] = $this->addScore($totals_array['kpi2e']['scores'], $company_scores['score']['kpi2e']);
             $totals_array['kpi3']['scores'] = $this->addScore($totals_array['kpi3']['scores'], $company_scores['score']['kpi3']);
             $totals_array['kpi4']['scores'] = $this->addScore($totals_array['kpi4']['scores'], $company_scores['score']['kpi4']);
             $totals_array['kpi5']['scores'] = $this->addScore($totals_array['kpi5']['scores'], $company_scores['score']['kpi5b']);
             $totals_array['kpi6a']['scores'] = $this->addScore($totals_array['kpi6a']['scores'], $company_scores['score']['kpi6a']);
             $totals_array['kpi6b']['scores'] = $this->addScore($totals_array['kpi6b']['scores'], $company_scores['score']['kpi6b']);
-            $totals_array['kpi6c']['scores'] = $this->addScore($totals_array['kpi6c']['scores'], $company_scores['score']['kpi6c']);
             $totals_array['kpi7']['scores'] = $this->addScore($totals_array['kpi7']['scores'], $company_scores['score']['kpi7']);
             $totals_array['kpi8']['scores'] = $this->addScore($totals_array['kpi8']['scores'], $company_scores['score']['kpi8']);
             $totals_array['kpi9']['scores'] = $this->addScore($totals_array['kpi9']['scores'], $company_scores['score']['kpi9']);

@@ -35,6 +35,7 @@ export default function AreaEditor() {
             { key: "weight_kpi2b", label: t("kpis.2b") },
             { key: "weight_kpi2c", label: t("kpis.2c") },
             { key: "weight_kpi2d", label: t("kpis.2d") },
+            { key: "weight_kpi2e", label: t("kpis.2e") },
             { key: "weight_kpi3", label: t("kpis.3") },
             { key: "weight_kpi4", label: t("kpis.4") },
             { key: "weight_kpi5", label: t("kpis.5") },

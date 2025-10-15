@@ -24,6 +24,7 @@ class AreaResource extends JsonResource
             'weight_kpi2b' => $this->weight_kpi2b,
             'weight_kpi2c' => $this->weight_kpi2c,
             'weight_kpi2d' => $this->weight_kpi2d,
+            'weight_kpi2e' => $this->weight_kpi2e,
             'weight_kpi3' => $this->weight_kpi3,
             'weight_kpi4' => $this->weight_kpi4,
             'weight_kpi5' => $this->weight_kpi5,

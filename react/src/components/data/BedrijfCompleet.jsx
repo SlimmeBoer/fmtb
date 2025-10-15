@@ -19,9 +19,6 @@ const BedrijfCompleet = () => {
             <Typography variant="body2" sx={{mb: 3}}>
                 {t("company_dashboard.complete_explanation1")}
             </Typography>
-            <Typography variant="body2" sx={{mb: 3}}>
-                {t("company_dashboard.complete_explanation2")}
-            </Typography>
             <PdfButtonCompanyConcept />
         </Box>
     );
